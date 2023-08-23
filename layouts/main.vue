@@ -43,14 +43,11 @@
       </nav>
 
       <div>
-        <!-- <client-only placeholder="loading...">
+        <client-only placeholder="loading...">
           <Nuxt />
-        </client-only> -->
-
+        </client-only>
       </div>
     </div>
-
-
   </div>
 </template>
 
