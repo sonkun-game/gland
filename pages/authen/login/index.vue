@@ -57,7 +57,7 @@ export default {
 
             axios({
                 method: 'post',
-                url: 'http://103.142.26.40:8080/Total/api/signing',
+                url: 'http://103.142.26.40:8080/Spa/api-authen/signing',
                 responseType: 'json',
                 data: {
                     username: this.username,
