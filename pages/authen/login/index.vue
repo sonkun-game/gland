@@ -55,6 +55,7 @@ export default {
   },
   methods: {
     loginForm() {
+
       axios({
         method: 'post',
         url: 'http://103.142.26.40:8080/Spa/api-authen/signing',
@@ -69,17 +70,35 @@ export default {
         window.location = "../main/total/account/shop";
       });
     }
-  },
-  methods: {
-    loginForm() {
-      let url = process.env.API_URL + 'api-authen/signing';
-      let data = {
+  }
+},
+methods: {
+  loginForm() {
+    axios({
+      method: 'post',
+      url: 'http://103.142.26.40:8080/Spa/api-authen/signing',
+      responseType: 'json',
+      data: {
         username: this.username,
         password: this.password,
       }
-      sendPostApi(url, null, data);
-    }
+    }).then(function (response) {
+      localStorage.setItem("jwt", response.data.accessToken);
+      console.log(response);
+      window.location = "../main/total/account/shop";
+    });
   }
+},
+methods: {
+  loginForm() {
+    let url = process.env.API_URL + 'api-authen/signing';
+    let data = {
+      username: this.username,
+      password: this.password,
+    }
+    sendPostApi(url, null, data);
+  }
+}
 }
 </script>
 
