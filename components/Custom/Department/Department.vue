@@ -18,8 +18,10 @@
 <script>
 export default {
   name: "DepartmentVue",
-  data: {
+  data() {
+    return {
 
+    }
   },
   props: {
     status: "",
