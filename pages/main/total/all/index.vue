@@ -47,7 +47,7 @@ export default {
             },
             {
               id: "evidenceTab",
-              name: "Phân quyền",
+              name: "Phòng ban",
             }
 
           ],

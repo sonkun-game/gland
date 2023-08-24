@@ -1,7 +1,8 @@
 <template lang="">
   <div>
     <!-- Add account btn -->
-    <div class="mb-3">
+    <div class="flex">
+      <div class="mb-3 mr-2">
       <button data-modal-target="createMiss" data-modal-toggle="createMiss" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Tạo nhiệm vụ
       </button>
       <div id="createMiss" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -11,7 +12,7 @@
             <!-- Modal header -->
             <div class="flex items-start justify-between p-4 rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                   Quản lý tài khoản
+                   Quản lý nhiệm vụ
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="createMiss">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -83,6 +84,45 @@
       </div>
 
     </div>
+    <div>
+
+<!-- Modal toggle -->
+<button data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+  Phân quyền nhiệm vụ
+</button>
+
+<!-- Main modal -->
+<div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Phân quyền nhiệm vụ
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button data-modal-hide="defaultModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Đồng ý</button>
+                <button data-modal-hide="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Hủy bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+    </div>
     <div class="flex justify-between items-center">
       <h3 class="text-lg font-semibold">Tất cả nhiệm vụ</h3>
       <div class="mb-3">
@@ -133,7 +173,7 @@
                   STT
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  Chức vụ
+                  Nhiệm vụ
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Phòng ban
@@ -142,7 +182,10 @@
                   Mô tả
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  Phân quyền
+                 Ngày tạo
+                </th>
+                <th scope="col" class="px-6 py-3">
+                 Người tạo
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Thao tác
@@ -161,10 +204,13 @@
                   Hành chính nhân sự
                 </td>
                 <td class="px-6 py-4">
-
+                  demo
                 </td>
                 <td class="px-6 py-4">
-                  Thu chi hoạt động,Đề xuất thu chi,Thu hoạt động,Chi hoạt động,Nhiệm vụ kiểm soát nhân sự
+                  24/8
+                </td>
+                <td class="px-6 py-4">
+                  dang
                 </td>
                 <td class="px-6 py-4 flex">
                 <div>
@@ -174,10 +220,10 @@
             <!-- Main modal -->
                   <div id="editModalMission" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                   <div class="relative w-full max-w-3xl max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-            <div class="flex items-start justify-between p-4 rounded-t dark:border-gray-600">
+                <!-- Modal content -->
+                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex items-start justify-between p-4 rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                    Quản lý tài khoản
                 </h3>
@@ -187,9 +233,9 @@
                     </svg>
                     <span class="sr-only">Close modal</span>
                 </button>
-            </div>
-            <!-- Modal body -->
-            <div class="p-6 space-y-6">
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-6 space-y-6">
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <label for="user-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên đăng nhập * </label>
@@ -240,13 +286,13 @@
                   </select>
                 </div>
               </div>
-            </div>
-            <!-- Modal footer -->
-            <div class="flex items-center justify-end p-6 space-x-2 rounded-b dark:border-gray-600">
+                      </div>
+                        <!-- Modal footer -->
+                        <div class="flex items-center justify-end p-6 space-x-2 rounded-b dark:border-gray-600">
                 <button data-modal-hide="editModalMission" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tiếp tục</button>
                 <button data-modal-hide="editModalMission" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Hủy bỏ</button>
-            </div>
-        </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -276,11 +322,11 @@
 
             </div>
             <!-- Modal footer -->
-            <div class="flex items-center justify-end p-6 space-x-2 rounded-b dark:border-gray-600">
+                      <div class="flex items-center justify-end p-6 space-x-2 rounded-b dark:border-gray-600">
                 <button data-modal-hide="deleteMissModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tiếp tục</button>
                 <button data-modal-hide="deleteMissModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Hủy bỏ</button>
-            </div>
-        </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
