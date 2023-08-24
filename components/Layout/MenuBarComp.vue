@@ -94,8 +94,7 @@
                 <ModalHeader head="Thêm phòng ban mới" :modalId="department.id"></ModalHeader>
                 <!-- Modal body -->
                 <div>
-                  <InputField :id="department.nameID" label="Tên phòng ban" styleClass="p-8"
-                    placeholder="Nhập tên phòng ban"></InputField>
+                  <InputField label="Tên phòng ban" styleClass="p-8" placeholder="Nhập tên phòng ban"></InputField>
                 </div>
                 <!-- Modal footer -->
 
