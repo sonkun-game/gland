@@ -21,7 +21,7 @@ import Staff from '~/components/Pages/Main/Total/Account/Staff/Staff.vue';
 import PositionAuth from '~/components/Pages/Main/Total/Account/Staff/PositionAuth.vue';
 import StaffAuth from '~/components/Pages/Main/Total/Account/Staff/StaffAuth.vue';
 import { getStaffApi } from '~/static/staff/api'
-import {getAccountsFromApi} from "static/account/api";
+import { getAccountsFromApi } from "static/account/api";
 
 export default {
   name: 'AccountPage',
@@ -46,7 +46,7 @@ export default {
     status(newValue, oldValue) {
       console.log(`New value: ${newValue}, Old value: ${oldValue}`);
       // tớ sẽ gọi lại hàm get API với status mới
-      getStaffApi(newValue,"");
+      getStaffApi(newValue, "");
     }
   },
   methods: {
