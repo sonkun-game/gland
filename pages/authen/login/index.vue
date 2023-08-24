@@ -82,7 +82,7 @@ export default {
   //     sendPostApi(url, null, data);
   //   }
   // }
-}
+//}
 </script>
 
 <style scoped>

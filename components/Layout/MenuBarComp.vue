@@ -94,7 +94,7 @@
                 <ModalHeader head="Thêm phòng ban mới" :modalId="department.id"></ModalHeader>
                 <!-- Modal body -->
                 <div>
-                  <InputField label="Tên phòng ban" styleClass="p-8" placeholder="Nhập tên phòng ban"></InputField>
+                  <InputField :id="department.nameID" label="Tên phòng ban" styleClass="p-8" placeholder="Nhập tên phòng ban"></InputField>
                 </div>
                 <!-- Modal footer -->
 
@@ -193,6 +193,7 @@ export default {
       },
       department: {
         id: "createNewDepartmentModalID",
+        nameID: "createNewDepartmentNameID",
         showModalTemplate: "<i class='fa-solid fa-plus w-3 h-3'></i><span class='flex-1 ml-3 text-left whitespace-nowrap'>Thêm phòng ban</span>",
       },
       // Đây là phần load depa
@@ -244,9 +245,10 @@ export default {
       return host.includes("/main/");
     },
     addDepartment() {
+      var name = document.getElementById(this.department.nameID).value;
       this.loadedDepartment.push({
         icon: "fa-solid fa-address-card",
-        name: "Phòng ban",
+        name: name,
         link: "#B",
         id: "department-1" + this.common.listDepartmentKey,
       });
