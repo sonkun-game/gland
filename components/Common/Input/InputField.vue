@@ -17,7 +17,7 @@
     </template>
     <!-- Default Text Option -->
     <template v-else>
-      <label :for="id" class="text-normal float-left">{{ label }}</label>
+      <label :for="id" class="text-normal float-left py-2">{{ label }}</label>
       <input class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 "
         :placeholder="placeholder" :value="value" type="text" :id="id" :required="required" />
     </template>
@@ -30,8 +30,14 @@ export default {
   props: {
     id: "",
     styleClass: "",
-    label: "",
-    placeholder: "",
+    label: {
+      type: String,
+      default: "defaultLabel"
+    },
+    placeholder: {
+      type: String,
+      default: "input something..."
+    },
     selectOption: [],
     value: {
       type: String,

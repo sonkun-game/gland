@@ -17,6 +17,11 @@
         <span :style="titleStyle">{{ title }}</span>
       </button>
     </template>
+    <template v-else-if="type == 'html' && !isModalIdNullOrEmpty">
+      <button :data-modal-target="modalId" :data-modal-toggle="modalId" :class="customClass">
+        <div v-html="title"></div>
+      </button>
+    </template>
     <template v-else-if="!isModalIdNullOrEmpty">
       <PrimaryButton :title="title" :dataModalToggle="modalId" :dataModalTarget="modalId">
       </PrimaryButton>
@@ -34,7 +39,6 @@
 </template>
 
 <script>
-import {Modal} from 'flowbite';
 
 export default {
   name: "ShowModal",
