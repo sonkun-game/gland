@@ -14,7 +14,7 @@
         <div class="w-full p-5 text-gray-500 whitespace-nowrap group-hover:text-white">
           <div class="w-28 h-28 flex justify-center items-center bg-white rounded-full">
             <img class="w-full h-full rounded-full"
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+              src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
               alt="imgae" />
           </div>
           <div class="my-auto text-sm mt-2 text-center">
@@ -62,7 +62,7 @@
         <ul class="space-y-2 font-medium">
 
           <!-- display list menu -->
-          <li class="font-bold" v-for="(item, index) in menuList.total" :key="index">
+          <li class="font-bold" v-for="(item, index) in menuList.total" :key="'all-' + index">
             <a :href="item.link">
               <button type="button" class="menu-button flex items-center w-full p-3 transition duration-100 rounded-lg">
                 <i :class="item.icon" class="w-3 h-3"></i>
@@ -72,13 +72,42 @@
               </button>
             </a>
           </li>
+          <!-- Cần phải featch api list phòng ban ra đây -->
+          <div :key="common.listDepartmentKey">
+            <li class="font-bold" v-for="(item, index) in loadedDepartment" :key="'loadedDepartment-' + index">
+              <a :href="item.link">
+                <button type="button"
+                  class="menu-button-department flex items-center w-full p-3 transition duration-100 rounded-lg">
+                  <i :class="item.icon" class="w-3 h-3"></i>
+                  <span class="flex-1 ml-3 text-left whitespace-nowrap">
+                    {{ item.name }}
+                  </span>
+                </button>
+              </a>
+            </li>
+          </div>
           <li>
-            <button type="button" class="menu-button-add flex items-center w-full p-3 transition duration-100 rounded-lg">
-              <i class="fa-solid fa-plus w-3 h-3"></i>
-              <span class="flex-1 ml-3 text-left whitespace-nowrap">
-                Thêm phòng ban
-              </span>
-            </button>
+            <ShowModal :modalId="department.id" type="html"
+              customClass="menu-button-add flex items-center w-full p-3 transition duration-100 rounded-lg"
+              :title="department.showModalTemplate">
+              <ModalContainer :modalId="department.id">
+                <ModalHeader head="Thêm phòng ban mới" :modalId="department.id"></ModalHeader>
+                <!-- Modal body -->
+                <div>
+                  <InputField label="Tên phòng ban" styleClass="p-8" placeholder="Nhập tên phòng ban"></InputField>
+                </div>
+                <!-- Modal footer -->
+
+                <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
+                  <button :data-modal-hide="department.id"
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
+                    Hủy bỏ</button>
+
+                  <button :data-modal-hide="department.id" @click="addDepartment()"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
+                </div>
+              </ModalContainer>
+            </ShowModal>
           </li>
         </ul>
       </div>
@@ -86,14 +115,15 @@
   </aside>
 </template>
 
-<style scoped>
+<style>
 .menu-bar {
   position: relative;
   transition: 0.5s;
 }
 
 .menu-button,
-.menu-button-add {
+.menu-button-add,
+.menu-button-department {
   color: white;
   border-radius: 15px;
   padding: 4px
@@ -106,6 +136,11 @@
 
 .menu-button-add:hover {
   background-color: #E3A008;
+  color: white;
+}
+
+.menu-button-department:hover {
+  background-color: #84E1BC;
   color: white;
 }
 
@@ -153,6 +188,22 @@ export default {
   name: "MenuBarComp",
   data() {
     return {
+      common: {
+        listDepartmentKey: 11199
+      },
+      department: {
+        id: "createNewDepartmentModalID",
+        showModalTemplate: "<i class='fa-solid fa-plus w-3 h-3'></i><span class='flex-1 ml-3 text-left whitespace-nowrap'>Thêm phòng ban</span>",
+      },
+      // Đây là phần load depa
+      loadedDepartment: [
+        {
+          icon: "fa-solid fa-address-card",
+          name: "Phòng ban",
+          link: "#",
+          id: "department-1",
+        },
+      ],
       menuList: {
         total: [
           // Tổng
@@ -191,6 +242,15 @@ export default {
     isMainPage() {
       var host = this.$route.path
       return host.includes("/main/");
+    },
+    addDepartment() {
+      this.loadedDepartment.push({
+        icon: "fa-solid fa-address-card",
+        name: "Phòng ban",
+        link: "#B",
+        id: "department-1" + this.common.listDepartmentKey,
+      });
+      this.common.listDepartmentKey++;
     }
   }
 }
