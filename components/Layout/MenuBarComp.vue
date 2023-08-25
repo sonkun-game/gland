@@ -94,16 +94,20 @@
                 <ModalHeader head="Thêm phòng ban mới" :modalId="department.id"></ModalHeader>
                 <!-- Modal body -->
                 <div>
-                  <InputField :id="department.nameID" label="Tên phòng ban" styleClass="p-8"
-                    placeholder="Nhập tên phòng ban"></InputField>
+                  <select>
+                    <option>
+                      <i class="fa-solid fa-house"></i>
+                      <i class="fa-solid fa-person"></i>
+                      <i class="fa-solid fa-address-card"></i>
+                    </option>
+                  </select>
+                  <InputField :id="department.nameID" label="Tên phòng ban" styleClass="p-4" placeholder="Nhập tên phòng ban"></InputField>
                 </div>
                 <!-- Modal footer -->
-
                 <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
                   <button :data-modal-hide="department.id"
                     class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
                     Hủy bỏ</button>
-
                   <button :data-modal-hide="department.id" @click="addDepartment()"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
                 </div>
@@ -202,7 +206,7 @@ export default {
         {
           icon: "fa-solid fa-address-card",
           name: "Phòng ban",
-          link: "#",
+          link: "/main/total/departments",
           id: "department-1",
         },
       ],
@@ -247,10 +251,12 @@ export default {
     },
     addDepartment() {
       var name = document.getElementById(this.department.nameID).value;
+      var key = name.replace(/\s/g, "").toLowerCase();
+      let id = Math.floor(Math.random() * 100) + 1;
       this.loadedDepartment.push({
         icon: "fa-solid fa-address-card",
         name: name,
-        link: "#B",
+        link: "/main/total/departments/"+ key + "/" + id,
         id: "department-1" + this.common.listDepartmentKey,
       });
       this.common.listDepartmentKey++;
