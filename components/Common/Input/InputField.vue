@@ -36,7 +36,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: "input something..."
+      default: ""
     },
     selectOption: [],
     value: {

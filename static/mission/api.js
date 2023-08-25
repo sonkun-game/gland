@@ -1,6 +1,6 @@
 import axios from "axios";
-export async function getAllAccounts(pageNum, storeId) {
-  let url = process.env.API_URL + 'api-account/all?storeId=' + 1 + '&pageNum=' + 0;
+export async function getAllMission(storeId) {
+  let url = process.env.API_URL + 'api-mission/?storeId=' + 1;
   // if (pageNum != null)
   //   url = process.env.API_URL + 'api-account/all?storeId=' + 1 + '&pageNum=' + 0;
   // else url = process.env.API_URL + 'api-account?&storeId=' + 1;
