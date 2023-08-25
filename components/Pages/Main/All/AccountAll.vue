@@ -65,7 +65,6 @@
           <Cell styleClass="px-2 py-3">{{ item.username }}</Cell>
           <Cell styleClass="px-2 py-3">{{ item.username }}</Cell>
           <Cell styleClass="px-2 py-3">{{ item.email }}</Cell>
-          <Cell styleClass="px-2 py-3">{{ item.department }}</Cell>
           <Cell styleClass="px-2 py-3">{{ item.positionId }}</Cell>
           <Cell styleClass="px-2 py-3">{{ formatDate(item.createdAt) }}</Cell>
           <Cell styleClass="px-2 py-3"></Cell>
@@ -240,7 +239,6 @@ export default {
             { name: "Tên nhân viên" },
             { name: "Tài khoản" },
             { name: "Email" },
-            { name: "Phòng ban" },
             { name: "Vị trí" },
             { name: "Ngày tạo" },
             { name: "Người tạo" },

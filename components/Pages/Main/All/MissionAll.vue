@@ -146,8 +146,8 @@
       <h3 class="text-lg font-semibold">Tất cả nhiệm vụ</h3>
     </div>
     <!-- Table -->
-    <div class="">
-  <CrudTable style-class="w-full text-sm dark:text-gray-400">
+    <div>
+  <CrudTable style-class="w-full text-sm dark:text-gray-400" :totalPage="missionList.totalPage" :currentPage="1">
       <Thead>
         <Row styleClass="text-sm text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <Cell v-for="(item, index) in missionList.table.head" :key="index" styleClass="px-6 py-3 text-left"
@@ -290,12 +290,13 @@
   </div>
 </template>
 <script>
-import { getAllMission } from '../../../../static/mission/api';
+import { getAllMission, getAllMissionPaging } from '../../../../static/mission/api';
 import moment from "moment";
 export default {
   data() {
     return {
       missionList: {
+        totalPage: 0,
         table: {
           head: [
             { name: "STT" },
@@ -327,9 +328,17 @@ export default {
       return moment(date).format('DD/MM/YYYY HH:mm');
     }
   },
+  async mounted() {
+    let resp = await getAllMissionPaging();
+    this.missionList.totalPage = resp.totalPage;
+  },
   async created() {
+    console.log("created");
     var listForm = await getAllMission(this.storeId);
     this.missionList.table.body = listForm.value;
+
+
+
   }
 }
 </script>
