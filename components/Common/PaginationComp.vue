@@ -2,7 +2,8 @@
     <div class="flex flex-col items-center">
         <!-- Help text -->
         <span class="text-sm text-gray-700 dark:text-gray-400">
-            Showing <span class="font-semibold text-gray-900 dark:text-white">1</span> to <span
+            Showing
+            <span class="font-semibold text-gray-900 dark:text-white">1</span> to <span
                 class="font-semibold text-gray-900 dark:text-white">10</span> of <span
                 class="font-semibold text-gray-900 dark:text-white">100</span> Entries
         </span>

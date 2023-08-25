@@ -50,8 +50,8 @@
       </nav>
     </div>
     <!-- Table -->
-    <div class="relative overflow-x-auto mx-2 sm:rounded-lg">
-      <table class="w-full text-sm text-center text-gray-900 bg-gray-300 dark:text-gray-400 shadow-md">
+    <div class="relative overflow-x-hidden overflow-y-hidden mx-2 shadow-md sm:rounded-lg">
+      <table class="w-full text-sm text-left text-gray-900 bg-gray-300 dark:text-gray-400 shadow-md">
         <slot></slot>
       </table>
     </div>
