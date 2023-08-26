@@ -109,7 +109,18 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <div class="p-6 space-y-6">
+            <div class="px-6 py-2 space-y-6">
+              <div>
+                <label for="chooseDepartment" class="block text-sm font-semibold text-gray-900 dark:text-white">Chọn phòng ban</label>
+            <div class=" py-2">
+              <select id="chooseDepartment"
+                class="block w-full p-2  mb-6 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option v-for="(item, index) in missionList.departAllList" :key="index" :value="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+        </div>
               <div>
                 <details class="" open>
                   <summary class="">
@@ -161,7 +172,6 @@
           <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
           <Cell styleClass="px-2 py-3">{{ item.name }}</Cell>
           <Cell styleClass="px-2 py-3">{{ item.username }}</Cell>
-          <Cell styleClass="px-2 py-3">{{ item.email }}</Cell>
           <Cell styleClass="px-2 py-3">{{ formatDate(item.createdAt) }}</Cell>
           <Cell styleClass="px-2 py-3">{{ item.createdBy }}</Cell>
           <Cell styleClass="px-2 py-3 flex">
@@ -270,14 +280,14 @@
 </button>
 </div>
 <!-- Modal body -->
-<div class="p-6 space-y-6">
+          <div class="p-6 space-y-6">
 
-</div>
+          </div>
 <!-- Modal footer -->
       <div class="flex items-center justify-end p-6 space-x-2 rounded-b dark:border-gray-600">
-<button data-modal-hide="deleteMissModal" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Tiếp tục</button>
-<button data-modal-hide="deleteMissModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Hủy bỏ</button>
-        </div>
+        <button data-modal-hide="deleteMissModal" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Tiếp tục</button>
+        <button data-modal-hide="deleteMissModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Hủy bỏ</button>
+      </div>
       </div>
     </div>
   </div>
@@ -301,7 +311,6 @@ export default {
           head: [
             { name: "STT" },
             { name: "Nhiệm vụ" },
-            { name: "Phòng ban" },
             { name: "Mô tả" },
             { name: "Ngày tạo" },
             { name: "Người tạo" },
@@ -320,6 +329,11 @@ export default {
             },
           ],
         },
+        departAllList: [
+          {
+            name: "Hoạt động"
+          }
+        ],
       },
     }
   },
@@ -333,12 +347,8 @@ export default {
     this.missionList.totalPage = resp.totalPage;
   },
   async created() {
-    console.log("created");
     var listForm = await getAllMission(this.storeId);
     this.missionList.table.body = listForm.value;
-
-
-
   }
 }
 </script>

@@ -9,23 +9,58 @@
       <ModalHeader head="Quản lý tài khoản" :modalId="createAccount.id"></ModalHeader>
       <!-- Modal body -->
       <div class="grid grid-cols-2">
-        <InputField :id="createAccount.nameID" label="Tên đăng nhập *" styleClass="px-4"></InputField>
-        <InputField :id="createAccount.nameID" label="Mật khẩu *" styleClass="px-4"></InputField>
-        <InputField :id="createAccount.nameID" label="Họ tên *" styleClass="px-4"></InputField>
-        <InputField :id="createAccount.nameID" label="Số điện thoại" styleClass="px-4"></InputField>
-        <InputField :id="createAccount.nameID" label="Email" styleClass="px-4"></InputField>
-        <div class=" my-2">
-            <label for="departmentAllAcc" class="block pl-7 text-sm font-normal text-gray-900 dark:text-white">Phòng ban</label>
-            <div class="px-4 py-2">
+        <InputField id="editUsernameValue" label="Tên đăng nhập *" styleClass="px-4"></InputField>
+        <InputField id="editPasswordValue" label="Mật khẩu *" styleClass="px-4"></InputField>
+        <InputField id="editNameValue" label="Họ tên *" styleClass="px-4"></InputField>
+        <InputField id="editPhoneValue" label="Số điện thoại" styleClass="px-4"></InputField>
+        <InputField id="editEmailValue" label="Email" styleClass="px-4"></InputField>
+        <!-- Vị trị-chức vụ-trạng thái -->
+        <div class="my-2 ">
+            <label for="departmentAllAcc" class="block pl-7 text-sm font-semibold text-gray-900 dark:text-white">Phòng ban</label>
+            <div class="px-4 pt-2">
               <select id="departmentAllAcc"
-                class="block w-full p-2  mb-6 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
                 <option v-for="(item, index) in departAllList" :key="index" :value="item.id">
                   {{ item.name }}
                 </option>
               </select>
             </div>
         </div>
-        <!-- Vị trị-chức vụ-trạng thái -->
+        <div class="my-2">
+            <label for="positionAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Vị trí</label>
+            <div class="px-4 pt-2">
+              <select id="positionAllAcc"
+                class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
+                <option v-for="(item, index) in positionAllList" :key="index" :value="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+        </div>
+        <div class="my-2">
+            <label for="rollAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Chức vụ</label>
+            <div class="px-4 pt-2">
+              <select id="rollAllAcc"
+                class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
+                <option v-for="(item, index) in roleAllList" :key="index" :value="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+        </div>
+        <div class="my-2">
+            <label for="statusAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Trạng thái</label>
+            <div class="px-4 pt-2">
+              <select id="statusAllAcc"
+                class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
+                <option v-for="(item, index) in statusAllList" :key="index" :value="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+        </div>
+
+
       </div>
       <!-- Modal footer -->
 
@@ -34,7 +69,7 @@
           class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
           Hủy bỏ</button>
 
-        <button :data-modal-hide="createAccount.id"
+        <button :data-modal-hide="createAccount.id" @click="createAccountsAll(storeId)"
           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
       </div>
     </ModalContainer>
@@ -50,7 +85,7 @@
     <!-- Table -->
     <div>
       <div class="">
-  <CrudTable style-class="w-full text-sm dark:text-gray-400">
+  <CrudTable style-class="w-full text-sm dark:text-gray-400" :totalPage="accountsList.totalPage" :currentPage="1">
       <Thead>
         <Row styleClass="text-sm text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <Cell v-for="(item, index) in accountsList.table.head" :key="index" styleClass="px-6 py-3 text-left"
@@ -227,12 +262,13 @@
   </div>
 </template>
 <script>
-import { getAllAccounts } from '../../../../static/all/api';
+import { getAllAccounts, getAllAccountsPaging, createAccountsAll } from '../../../../static/all/api';
 import moment from "moment";
 export default {
   data() {
     return {
       accountsList: {
+        totalPage: 0,
         table: {
           head: [
             { name: "STT" },
@@ -265,6 +301,21 @@ export default {
           name: "Hoạt động"
         }
       ],
+      positionAllList: [
+        {
+          name: "Hoạt động"
+        }
+      ],
+      roleAllList: [
+        {
+          name: "Hoạt động"
+        }
+      ],
+      statusAllList: [
+        {
+          name: "Hoạt động"
+        }
+      ],
       createAccount: {
         id: "createAccountNameID",
         nameID: "createAccountNameID",
@@ -275,8 +326,16 @@ export default {
   methods: {
     formatDate(date) {
       return moment(date).format('DD/MM/YYYY HH:mm');
-    }
+    },
+    createAccountsAll(storeId) {
+      createAccountsAll(storeId);
+    },
   },
+  async mounted() {
+    let resp = await getAllAccountsPaging();
+    this.accountsList.totalPage = resp.totalPage;
+  },
+
   async created() {
     var listForm = await getAllAccounts(this.storeId, this.pageNum);
     this.accountsList.table.body = listForm.value;
