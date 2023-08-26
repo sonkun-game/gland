@@ -98,11 +98,11 @@
         <Row styleClass="bg-white border-b" v-for="(item, index) in accountsList.table.body" :key="index">
           <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
           <Cell styleClass="px-2 py-3">{{ item.username }}</Cell>
-          <Cell styleClass="px-2 py-3">{{ item.username }}</Cell>
+          <Cell styleClass="px-2 py-3">{{ item.fullName }}</Cell>
           <Cell styleClass="px-2 py-3">{{ item.email }}</Cell>
           <Cell styleClass="px-2 py-3">{{ item.positionId }}</Cell>
           <Cell styleClass="px-2 py-3">{{ formatDate(item.createdAt) }}</Cell>
-          <Cell styleClass="px-2 py-3"></Cell>
+          <Cell styleClass="px-2 py-3">{{ item.createdBy }}</Cell>
           <Cell styleClass="px-2 py-3 text-green-500">{{ item.status }}</Cell>
           <Cell styleClass="px-2 py-3 flex">
             <div>
@@ -267,6 +267,7 @@ import moment from "moment";
 export default {
   data() {
     return {
+      storeId:1,
       accountsList: {
         totalPage: 0,
         table: {
@@ -289,7 +290,7 @@ export default {
               department: "Marketing",
               local: "Media",
               byDay: "14/08/2023 08:56",
-              byUser: "dang",
+              createdBy: "dang",
               status: "Làm việc",
               edit: "btn here",
             },
