@@ -209,7 +209,7 @@ export default {
         table: {
           head: [
             { name: "STT" },
-            { name: "Nhiệm vụ" },
+            { name: "Phòng ban" },
             { name: "Mô tả" },
             { name: "Ngày tạo" },
             { name: "Người tạo" },

@@ -19,11 +19,16 @@
 
 
                 <div :id="'modal-' + item.id" v-if="item.type == 'dropdown'"
-                    class="absolute bg-white rounded-lg shadow-lg hidden" style="width: 250px"
+                    class="absolute bg-white rounded-lg shadow-xl hidden" style="width: 200px"
                     @mouseenter="showModal('modal-' + item.id)" @mouseleave="hideModal('modal-' + item.id)">
                     <ul>
-                        <li class="px-2 py-3 cursor-pointer hover:bg-blue-700 hover:text-white rounded-lg">Test 1</li>
-                        <li class="px-2 py-3 cursor-pointer hover:bg-blue-700 hover:text-white rounded-lg">Test 2</li>
+                        <li class="px-2 py-3 cursor-pointer hover:bg-blue-700 hover:text-white rounded-lg border-b">Nhiệm vụ
+                            giao bởi
+                            tôi
+                        </li>
+                        <li class="px-2 py-3 cursor-pointer hover:bg-blue-700 hover:text-white rounded-lg">Nhiệm vụ được
+                            giao
+                        </li>
                     </ul>
                 </div>
             </li>

@@ -34,7 +34,7 @@ export async function getAllAccountsPaging() {
     throw error;
   }
 }
-export async function createAccountsAll(storeId) {
+export async function createAccountsAll() {
   var username = document.getElementById("editUsernameValue").value;
   var password = document.getElementById("editPasswordValue").value;
   var name = document.getElementById("editNameValue").value;
@@ -49,7 +49,7 @@ export async function createAccountsAll(storeId) {
       password: password,
       name: name,
       phone: phone,
-      email: email
+      email: email,
     },
     headers: {
       'Content-Type': 'application/json',
