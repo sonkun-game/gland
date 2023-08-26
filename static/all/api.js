@@ -42,12 +42,13 @@ export async function createAccountsAll() {
   var email = document.getElementById("editEmailValue").value;
   axios({
     method: 'post',
-    url: 'http://103.142.26.40:8080/Spa/api-authen/register',
+    //url: 'http://103.142.26.40:8080/Spa/api-authen/register',
+    url: 'http://localhost:8082/api-authen/register?storeId='+storeId,
     responseType: 'json',
     data: {
       username: username,
       password: password,
-      name: name,
+      fullName: name,
       phone: phone,
       email: email,
     },
