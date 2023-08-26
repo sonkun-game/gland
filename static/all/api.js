@@ -43,7 +43,7 @@ export async function createAccountsAll() {
   axios({
     method: 'post',
     //url: 'http://103.142.26.40:8080/Spa/api-authen/register',
-    url: 'http://localhost:8082/api-authen/register?storeId='+storeId,
+    url: 'http://103.142.26.40:8080/api-authen/register?storeId=' + storeId,
     responseType: 'json',
     data: {
       username: username,
