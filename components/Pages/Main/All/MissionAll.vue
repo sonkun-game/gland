@@ -244,7 +244,17 @@
 <script>
 import {createMissionAll, getAllMission, getAllMissionPaging} from '../../../../static/mission/api';
 import moment from "moment";
+import {getAllDepartPaging} from "../../../../static/department/api";
 export default {
+  async fetch() {
+    try {
+      var response = await getAllMissionPaging(this.storeId)
+      this.missionList.table.body = response.value;
+      this.missionList.totalPage = response.totalPage;
+    } catch (error) {
+      console.error('Lỗi:', error);
+    }
+  },
   data() {
     return {
       storeId:1,
@@ -293,14 +303,14 @@ export default {
       createMissionAll(storeId);
     }
   },
-  async mounted() {
+  /*async mounted() {
     let resp = await getAllMissionPaging();
     this.missionList.totalPage = resp.totalPage;
   },
   async created() {
     var listForm = await getAllMission(this.storeId);
     this.missionList.table.body = listForm.value;
-  }
+  }*/
 }
 </script>
 <style lang="">
