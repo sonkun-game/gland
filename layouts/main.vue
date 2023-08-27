@@ -25,11 +25,10 @@
                   <h1 class="ml-2 py-2 font-medium text-base">Dang Nguyen</h1>
                 </div>
                 <div class="text-blue-700 hover:text-blue-800 mt-2">
-                  <a href="#">
-                    <a href="http://localhost:3000/authen/profile">Xem thông tin cá nhân</a>
-                  </a>
+                  <NuxtLink to="http://localhost:3000/authen/profile">
+                    Xem thông tin cá nhân
+                  </NuxtLink>
                 </div>
-
               </li>
               <li class="hover:bg-blue-300 p-2 rounded-lg">
                 <a class="font-medium text-base"><i class="fa-solid fa-right-from-bracket"></i> Đăng
@@ -43,7 +42,14 @@
       </nav>
 
       <div>
-        <client-only placeholder="loading...">
+        <client-only>
+          <template #placeholder>
+            <div class="w-screen h-screen fixed flex">
+              <div class="text-blue-500 text-4xl my-auto" style="margin-left: 30%">
+                <img class="w-64 h-64" src="~/static/img/loading.png" alt="loading..." />
+              </div>
+            </div>
+          </template>
           <Nuxt />
         </client-only>
       </div>
@@ -58,15 +64,13 @@ export default {
   name: 'mainLayout',
   components: { MenuBarCompVue },
   data() {
-    return {}
-  },
-  mounted() {
-
+    return {
+      isMenuOpen: false,
+    }
   },
   methods: {
     isMainPage() {
-      var host = window.location.host;
-      console.log(host);
+      var host = document.URL;
       return host.includes("/main/");
     },
   }
