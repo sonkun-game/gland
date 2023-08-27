@@ -52,7 +52,7 @@ export default {
               subList: [
                 {
                   id: "jobByMeId",
-                  name: "Nhiệm vụ bởi tôi"
+                  name: "Nhiệm vụ của tôi"
                 },
                 {
                   id: "jobByOtherId",
