@@ -267,7 +267,7 @@ import moment from "moment";
 export default {
   data() {
     return {
-      storeId:1,
+      storeId: 1,
       accountsList: {
         totalPage: 0,
         table: {

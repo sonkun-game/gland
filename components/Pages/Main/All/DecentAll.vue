@@ -202,6 +202,15 @@
 import { getAllDepartment, getAllDepartPaging } from '../../../../static/department/api';
 import moment from 'moment';
 export default {
+  async fetch() {
+    try {
+      var response = await getAllDepartPaging(this.storeId)
+      this.departList.table.body = response.value;
+      this.departList.totalPage = response.totalPage;
+    } catch (error) {
+      console.error('Lỗi:', error);
+    }
+  },
   data() {
     return {
       storeId:1,
@@ -236,10 +245,6 @@ export default {
     formatDate(date) {
       return moment(date).format('DD/MM/YYYY HH:mm');
     }
-  },
-  async mounted() {
-    let resp = await getAllDepartPaging();
-    this.departList.totalPage = resp.totalPage;
   },
   async created() {
     var listForm = await getAllDepartment(this.storeId);

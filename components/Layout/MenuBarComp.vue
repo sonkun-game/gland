@@ -267,7 +267,7 @@ export default {
       return host.includes("/main/");
     },
     fetchDpt() {
-      let url = process.env.API_URL + "api-department/all?storeId=1&pageNum=0";
+      let url = process.env.API_URL + "api-department?storeId=1";
       let resp = sendGetApi(url, null);
 
       resp.then((resp) => {
@@ -284,7 +284,6 @@ export default {
               link: "/main/total/departments/" + item.keyUUID,
               id: "department" + item.keyUUID,
               storeId: this.storeId,
-              createdBy: "datct",
               selected: false,
             });
           }

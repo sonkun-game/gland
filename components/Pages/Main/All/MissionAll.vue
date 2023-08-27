@@ -6,62 +6,12 @@
       <ShowModal :modalId="createMission.id" type="html"
     customClass="block text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-3 py-2 text-center"
     :title="createMission.showModalTemplate">
-    <ModalContainer :modalId="createMission.id" size="4xl">
-      <ModalHeader head="Quản lý tài khoản" :modalId="createMission.id"></ModalHeader>
+    <ModalContainer :modalId="createMission.id" size="2xl">
+      <ModalHeader head="Quản lý nhiệm vụ" :modalId="createMission.id"></ModalHeader>
       <!-- Modal body -->
-      <div class="grid grid-cols-2">
-        <InputField label="Tên đăng nhập *" styleClass="px-4"></InputField>
-        <InputField label="Mật khẩu *" styleClass="px-4"></InputField>
-        <InputField label="Họ tên *" styleClass="px-4"></InputField>
-        <InputField label="Số điện thoại" styleClass="px-4"></InputField>
-        <InputField label="Email" styleClass="px-4"></InputField>
-        <!-- Vị trị-chức vụ-trạng thái -->
-        <div class="my-2 ">
-            <label for="departmentAllAcc" class="block pl-7 text-sm font-semibold text-gray-900 dark:text-white">Phòng ban</label>
-            <div class="px-4 pt-2">
-              <select id="departmentAllAcc"
-                class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
-                <option v-for="(item, index) in departAllList" :key="index" :value="item.id">
-                  {{ item.name }}
-                </option>
-              </select>
-            </div>
-        </div>
-        <div class="my-2">
-            <label for="positionAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Vị trí</label>
-            <div class="px-4 pt-2">
-              <select id="positionAllAcc"
-                class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
-                <option v-for="(item, index) in positionAllList" :key="index" :value="item.id">
-                  {{ item.name }}
-                </option>
-              </select>
-            </div>
-        </div>
-        <div class="my-2">
-            <label for="rollAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Chức vụ</label>
-            <div class="px-4 pt-2">
-              <select id="rollAllAcc"
-                class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
-                <option v-for="(item, index) in roleAllList" :key="index" :value="item.id">
-                  {{ item.name }}
-                </option>
-              </select>
-            </div>
-        </div>
-        <div class="my-2">
-            <label for="statusAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Trạng thái</label>
-            <div class="px-4 pt-2">
-              <select id="statusAllAcc"
-                class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
-                <option v-for="(item, index) in statusAllList" :key="index" :value="item.id">
-                  {{ item.name }}
-                </option>
-              </select>
-            </div>
-        </div>
-
-
+      <div>
+        <InputField id="all_mission_txtName" label="Tên nhiệm vụ" styleClass="px-4"></InputField>
+        <InputField id="all_mission_txtDes" styleClass="px-4" label="Mô tả" typeInput="textarea"></InputField>
       </div>
       <!-- Modal footer -->
 
@@ -70,7 +20,7 @@
           class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
           Hủy bỏ</button>
 
-        <button :data-modal-hide="createMission.id"
+        <button :data-modal-hide="createMission.id" @click="createMissionFunct(storeId)"
           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
       </div>
     </ModalContainer>
@@ -292,7 +242,7 @@
   </div>
 </template>
 <script>
-import { getAllMission, getAllMissionPaging } from '../../../../static/mission/api';
+import {createMissionAll, getAllMission, getAllMissionPaging} from '../../../../static/mission/api';
 import moment from "moment";
 export default {
   data() {
@@ -338,6 +288,9 @@ export default {
   methods: {
     formatDate(date) {
       return moment(date).format('DD/MM/YYYY HH:mm');
+    },
+    createMissionFunct(storeId){
+      createMissionAll(storeId);
     }
   },
   async mounted() {
