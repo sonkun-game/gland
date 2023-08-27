@@ -1,4 +1,6 @@
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
+
 export async function getAllMission(storeId) {
   let url = process.env.API_URL + 'api-mission/?storeId=' + 1;
   // if (pageNum != null)
@@ -21,8 +23,8 @@ export async function getAllMission(storeId) {
   }
 }
 
-export async function getAllMissionPaging() {
-  let url = "http://103.142.26.40:8080/Spa/api-mission/all?storeId=1&pageNum=0";
+export async function getAllMissionPaging(storeId) {
+  let url = "http://103.142.26.40:8080/Spa/api-mission/all?pageNum=0&storeId=" + storeId;
   try {
     const response = await axios.get(url, {
       headers: {
@@ -37,16 +39,20 @@ export async function getAllMissionPaging() {
     throw error;
   }
 }
+
 export async function createMissionAll(storeId) {
-  var name = document.getElementById("missionNameValue").value;
-  var description = document.getElementById("desMissionValue").value;
+  var name = document.getElementById("all_mission_txtName").value;
+  var description = document.getElementById("all_mission_txtDes").value;
+  var keyUUID = uuidv4();
   axios({
     method: 'post',
     url: 'http://103.142.26.40:8080/Spa/api-mission/create?storeId=' + storeId,
     responseType: 'json',
     data: {
       name: name,
-      description: description
+      storeId: storeId,
+      description: description,
+      keyUUID: keyUUID
     },
     headers: {
       'Content-Type': 'application/json',
