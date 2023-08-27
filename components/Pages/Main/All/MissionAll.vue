@@ -14,12 +14,10 @@
               <InputField id="all_mission_txtDes" styleClass="px-4" label="Mô tả" typeInput="textarea"></InputField>
             </div>
             <!-- Modal footer -->
-
             <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
               <button :data-modal-hide="createMission.id"
                 class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
                 Hủy bỏ</button>
-
               <button :data-modal-hide="createMission.id" @click="createMissionFunct(storeId)"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
             </div>
@@ -28,61 +26,57 @@
       </div>
       <div>
         <!-- Modal toggle -->
-        <ShowModal :modalId="authenMission.id" type="custom" :title="authenMission.showModalTemplate" @modal-toggle="loadMissionToSelect()"
-          customClass="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          <ModalContainer :modalId="authenMission.id" size="3xl">
+        <ShowModal :modalId="authenMission.id" type="custom" :title="authenMission.showModalTemplate"
+          @modal-toggle="loadMissionAuthenModal()"
+          customClass="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center">
+          <ModalContainer :modalId="authenMission.id" size="2xl">
             <ModalHeader head="Phân quyền nhiệm vụ" :modalId="authenMission.id"></ModalHeader>
-            <div class="px-6 pt-2 space-y-6">
-              <div>
+            <div class="px-6 pt-2 space-y-6 flex justify-between">
+              <div class="w-50 mb-8">
+                <details class="" open>
+                  <summary class="">
+                    <InputField typeInput="checkbox" label="Tổng" id="mission-all"></InputField>
+                  </summary>
+                  <InputField label="Tài khoản" id="mission-account" styleClass="px-5 py-2" typeInput="checkbox">
+                  </InputField>
+                  <InputField label="Nhiệm vụ" id="mission-mission" styleClass="px-5 py-2" typeInput="checkbox">
+                  </InputField>
+                  <InputField label="Phòng ban" id="mission-department" styleClass="px-5 py-2" typeInput="checkbox">
+                  </InputField>
+                </details>
+                <details v-for="(item, index) in authenMission.loadedDepartment"
+                  :key="'loadedDepartmentMission-' + index">
+                  <summary>
+                    <InputField typeInput="checkbox" :label="item.name" :id="'missionModalDepartment' + index" />
+                  </summary>
+                  <InputField label="Tài khoản" :id="'missionModalAccount' + index" styleClass="px-5 py-2" typeInput="checkbox" />
+                  <InputField label="Nhiệm vụ" :id="'missionModalMission' + index" styleClass="px-5 py-2" typeInput="checkbox" />
+                </details>
+              </div>
+              <div class="w-50 h-full">
                 <label for="chooseDepartment" class="block text-sm font-semibold text-gray-900 dark:text-white">Chọn
                   nhiệm vụ</label>
                 <div class="pt-2" :key="authenMission.authenMissionKey">
                   <select id="chooseDepartment"
                     class="block w-52 p-2 mb-6 text-xs text-gray-900 border border-white rounded-lg bg-gray-50 dark:text-white">
-                    <option class="text-xs" v-for="(item, index) in authenMission.departAllList" :key="index" :value="item.id">
+                    <option class="text-xs" v-for="(item, index) in authenMission.missionAllList" :key="index"
+                      :value="item.id">
                       <p class="p-2"> {{ item.name }} </p>
                     </option>
                   </select>
                 </div>
-              </div>
-              <div>
-                <details class="" open>
-                  <summary class="">
-                    <input id="checkbox-all" type="checkbox" value=""
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="checkbox-all"
-                      class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tổng</label>
-                  </summary>
-                  <p class="px-5 py-2">
-                    <input id="checkbox-accounts" type="checkbox" value=""
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="checkbox-accounts" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tài
-                      khoản</label>
-                  </p>
-                  <p class="px-5 py-2">
-                    <input id="checkbox-mission" type="checkbox" value=""
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="checkbox-mission" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nhiệm
-                      vụ</label>
-                  </p>
-                  <p class="px-5 py-2">
-                    <input id="checkbox-decent" type="checkbox" value=""
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="checkbox-decent" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Phòng
-                      ban</label>
-                  </p>
-                </details>
+                <!-- Modal footer -->
+                <div class="absolute bottom-0 flex items-center justify-end p-2 space-x-2 rounded-b dark:border-gray-600">
+                  <button type="button"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center">Đồng
+                    ý</button>
+                  <button type="button"
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 hover:text-gray-900 focus:z-10">Hủy
+                    bỏ</button>
+                </div>
               </div>
             </div>
-            <!-- Modal footer -->
-            <div class="flex items-center justify-end p-6 space-x-2 rounded-b dark:border-gray-600">
-              <button type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Đồng
-                ý</button>
-              <button type="button"
-                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Hủy
-                bỏ</button>
-            </div>
+
           </ModalContainer>
         </ShowModal>
       </div>
@@ -177,7 +171,7 @@
                             <select id="department"
                               class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                               <option selected></option>
-                              <option value="">demo</option>
+                              <option>demo</option>
                             </select>
                           </div>
                           <div>
@@ -186,7 +180,7 @@
                             <select id="localtion"
                               class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                               <option selected></option>
-                              <option value="">demo</option>
+                              <option>demo</option>
                             </select>
                           </div>
                           <div>
@@ -195,7 +189,7 @@
                             <select id="position"
                               class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                               <option selected></option>
-                              <option value="">demo</option>
+                              <option>demo</option>
                             </select>
                           </div>
                           <div>
@@ -204,7 +198,7 @@
                             <select id="status"
                               class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                               <option selected></option>
-                              <option value="">demo</option>
+                              <option>demo</option>
                             </select>
                           </div>
                         </div>
@@ -275,6 +269,7 @@
 </template>
 <script>
 import { createMissionAll, getAllMission, getAllMissionPaging } from '../../../../static/mission/api';
+import { sendGetApi } from '../../../../plugins/api';
 import moment from "moment";
 export default {
   data() {
@@ -316,10 +311,21 @@ export default {
         id: "authenMissionNameID",
         showModalTemplate: "Phân quyền nhiệm vụ",
         authenMissionKey: 11649,
-        departAllList: [
+        missionAllList: [
           {
             name: "Nhiệm vụ Media",
           }
+        ],
+        // Đây là phần load depaments
+        loadedDepartment: [
+          {
+            selected: false,
+            icon: "fa-solid fa-address-card",
+            name: "Phòng ban",
+            link: "/main/total/departments",
+            id: "department-1",
+            storeId: 1,
+          },
         ],
       }
     };
@@ -331,9 +337,34 @@ export default {
     async createMissionFunct(storeId) {
       const data = await createMissionAll(storeId, this.missionList.table.body);
     },
-    async loadMissionToSelect() {
+    async loadMissionAuthenModal() {
+      // get mission list
       var missionList = await getAllMission(this.storeId);
-      this.authenMission.departAllList = missionList.value;
+      this.authenMission.missionAllList = missionList.value;
+
+      // get Department
+      let url = process.env.API_URL + "api-department?storeId=" + this.storeId;
+      let resp = sendGetApi(url, null);
+
+      resp.then((resp) => {
+        let data = resp.value;
+        let convertFeArr = [];
+        data.forEach(item => {
+            convertFeArr.push({
+              icon: "fa-solid fa-address-card",
+              name: item.name,
+              link: "/main/total/departments/" + item.keyUUID,
+              id: "department" + item.keyUUID,
+              storeId: this.storeId,
+              selected: false,
+            });
+        });
+
+        // set dât
+        this.authenMission.loadedDepartment = convertFeArr;
+      });
+
+
       this.authenMission.authenMissionKey++;
     }
   },
@@ -347,6 +378,3 @@ export default {
   },
 }
 </script>
-<style lang="">
-
-</style>

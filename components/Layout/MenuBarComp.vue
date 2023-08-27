@@ -74,7 +74,6 @@
           </li>
           <!-- Phân trang cho loadedDepartment -->
           <li>
-
           </li>
           <!-- Cần phải featch api list phòng ban ra đây -->
           <div :key="common.listDepartmentKey">
