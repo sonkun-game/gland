@@ -119,10 +119,6 @@
 </template>
 
 <style>
-select {
-  font-family: 'FontAwesome', 'Times New Roman', Times, serif
-}
-
 .menu-bar {
   position: relative;
   transition: 0.5s;

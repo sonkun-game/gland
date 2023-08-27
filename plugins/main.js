@@ -12,10 +12,12 @@ Vue.component('ProfileInfo',ProfileInfo);
 // Tab Component
 import TabListHeader from '../components/Common/Tab/TabListHeader.vue';
 import TabItem from '../components/Common/Tab/TabItem.vue';
+import SubTabItem from '../components/Common/Tab/SubTabItem.vue';
 import TabContainer from '../components/Common/Tab/TabContainer.vue';
 
 Vue.component('TabListHeader',TabListHeader);
 Vue.component('TabItem',TabItem);
+Vue.component('SubTabItem',SubTabItem);
 Vue.component('TabContainer',TabContainer);
 
 // Button
