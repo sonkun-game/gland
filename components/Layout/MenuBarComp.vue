@@ -146,10 +146,21 @@ select {
   color: white;
 }
 
-.menu-button-department:hover {
-  background-color: #84E1BC;
-  color: white;
+@media (prefers-color-scheme: light) {
+  .menu-button-department:hover {
+    background-color: #84E1BC;
+    color: white;
+  }
 }
+
+@media (prefers-color-scheme: dark) {
+  .menu-button-department:hover {
+    background-color: #84E1BC;
+    color: white;
+  }
+}
+
+
 
 .start {
   left: -256px;
@@ -210,6 +221,7 @@ export default {
       // Đây là phần load depaments
       loadedDepartment: [
         {
+          selected: false,
           icon: "fa-solid fa-address-card",
           name: "Phòng ban",
           link: "/main/total/departments",
@@ -265,54 +277,48 @@ export default {
       resp.then((resp) => {
         let data = resp.value;
         let convertFeArr = [];
-
         // Phần này nếu về sau chuẩn hóa api thì có thể bỏ đi
         data.forEach(item => {
-          let key = Common.getKeyFromText(item.name, 5)
-          let code = uuidv4();
-          convertFeArr.push({
-            icon: "fa-solid fa-address-card",
-            name: item.name,
-            link: "/main/total/departments/" + key + "/" + code,
-            id: "department" + key + code,
-            storeId: this.storeId,
-            createdBy: "datct"
-          });
+          if (!item.keyUUID) {
+            alert("KeyUUID không tồn tại !");
+          } else {
+            convertFeArr.push({
+              icon: "fa-solid fa-address-card",
+              name: item.name,
+              link: "/main/total/departments/" + item.keyUUID,
+              id: "department" + item.keyUUID,
+              storeId: this.storeId,
+              createdBy: "datct",
+              selected: false,
+            });
+          }
+
         });
 
         // set dât
         this.loadedDepartment = convertFeArr;
       });
     },
-    createDepartment(data) {
-      if (data) {
-
-      } else {
-        alert("createDepartment:data is Null")
-      }
-    },
     addDepartment() {
       let name = document.getElementById(this.department.nameID).value;
-      let key = Common.getKeyFromText(name, 5)
-      let code = uuidv4();
+      let keyUUID = uuidv4();
 
       let data = {
         icon: "fa-solid fa-address-card", // icon phòng ban
         name: name, // tên phòng ban
-        link: "/main/total/departments/" + key + "/" + code, // link try cập phòng ban
-        id: "department" + key + code, //id của phòng ban gen ra tránh trùng
+        link: "/main/total/departments/" + keyUUID, // link try cập phòng ban
+        id: "department" + keyUUID, //id của phòng ban gen ra tránh trùng
         storeId: this.storeId, // thông tin store
         createdBy: "datct" // người tạo
       }
-
       // create api to database
       let url = process.env.API_URL + "api-department/create";
       sendPostApi(url, null, {
         name: name,
         storeId: 1,
-        createdBy: "datct"
+        createdBy: "datct",
+        keyUUID: keyUUID,
       });
-
 
       this.loadedDepartment.push(data);
       this.common.listDepartmentKey++;

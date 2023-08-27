@@ -44,7 +44,6 @@ export default {
             {
               id: "detailInfoTab",
               name: "Nhiệm vụ",
-              type: "dropdown"
             },
             {
               id: "evidenceTab",
