@@ -11,7 +11,7 @@
       </select>
     </template>
     <template v-else-if="typeInput == 'textarea'">
-      <label :for="id" class="text-normal float-left">{{ label }}</label>
+      <label :for="id" class="text-sm font-semibold float-left">{{ label }}</label>
       <textarea class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5" :id="id"
         :placeholder="placeholder" :value="value"></textarea>
     </template>

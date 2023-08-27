@@ -37,3 +37,24 @@ export async function getAllMissionPaging() {
     throw error;
   }
 }
+export async function createMissionAll(storeId) {
+  var name = document.getElementById("missionNameValue").value;
+  var description = document.getElementById("desMissionValue").value;
+  axios({
+    method: 'post',
+    url: 'http://103.142.26.40:8080/Spa/api-mission/create?storeId=' + storeId,
+    responseType: 'json',
+    data: {
+      name: name,
+      description: description
+    },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+    }
+  }).then(function (response) {
+    console.log(response);
+    alert(response.data.message);
+    location.reload()
+  });
+}
