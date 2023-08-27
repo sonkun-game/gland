@@ -76,7 +76,6 @@
                 </div>
               </div>
             </div>
-
           </ModalContainer>
         </ShowModal>
       </div>
@@ -345,7 +344,6 @@ export default {
       // get Department
       let url = process.env.API_URL + "api-department?storeId=" + this.storeId;
       let resp = sendGetApi(url, null);
-
       resp.then((resp) => {
         let data = resp.value;
         let convertFeArr = [];
@@ -359,12 +357,9 @@ export default {
               selected: false,
             });
         });
-
         // set dât
         this.authenMission.loadedDepartment = convertFeArr;
       });
-
-
       this.authenMission.authenMissionKey++;
     }
   },
