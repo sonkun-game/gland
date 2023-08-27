@@ -23,7 +23,7 @@
                     @mouseenter="showModal('modal-' + item.id)" @mouseleave="hideModal('modal-' + item.id)">
                     
                     <ul v-if="item.subList !== null">
-                        <li class="px-2 py-2 cursor-pointer hover:bg-blue-700 hover:text-white" v-for="(subItem,subIndex) in item.subList">
+                        <li class="px-2 py-2 cursor-pointer hover:bg-blue-700 hover:text-white" v-for="(subItem,subIndex) in item.subList" :key="'subModal' + subIndex">
                             <button class="p-3" :id="toTab(subItem.id)" type="button" role="tab"
                                 :data-tabs-target="toId(subItem.id)" :aria-controls="subItem.id" aria-selected="false">
                                 {{ subItem.name }}
