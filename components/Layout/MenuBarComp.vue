@@ -192,6 +192,7 @@ div {
 import { getShopsFromApi } from "static/shop/api";
 import { sendGetApi, sendPostApi } from "../../plugins/api";
 import { Common } from "../../plugins/common";
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: "MenuBarComp",
@@ -258,7 +259,7 @@ export default {
       return host.includes("/main/");
     },
     fetchDpt() {
-      let url = process.env.API_URL + "api-department?storeId=1";
+      let url = process.env.API_URL + "api-department/all?storeId=1&pageNum=0";
       let resp = sendGetApi(url, null);
 
       resp.then((resp) => {
@@ -268,7 +269,7 @@ export default {
         // Phần này nếu về sau chuẩn hóa api thì có thể bỏ đi
         data.forEach(item => {
           let key = Common.getKeyFromText(item.name, 5)
-          let code = Common.getRandomKey();
+          let code = uuidv4();
           convertFeArr.push({
             icon: "fa-solid fa-address-card",
             name: item.name,
@@ -293,7 +294,7 @@ export default {
     addDepartment() {
       let name = document.getElementById(this.department.nameID).value;
       let key = Common.getKeyFromText(name, 5)
-      let code = Common.getRandomKey();
+      let code = uuidv4();
 
       let data = {
         icon: "fa-solid fa-address-card", // icon phòng ban
