@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div>
     <div class="flex mb-4">
     <div>
@@ -204,6 +204,7 @@ import moment from 'moment';
 export default {
   data() {
     return {
+      storeId:1,
       departList: {
         totalPage: 0,
         table: {
