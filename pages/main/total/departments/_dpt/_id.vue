@@ -10,10 +10,10 @@
         mission - {{ id }} - {{ dpt }}
       </TabItem>
       <SubTabItem :id="data.tabList.list[1].subList[0].id" labelledby="jobByMe">
-        Công việc của tôi
+        1 - Công việc tạo bởi tôi
       </SubTabItem>
       <SubTabItem :id="data.tabList.list[1].subList[1].id" labelledby="jobByOther">
-        Công việc được giao
+        2 - Công việc được giao
       </SubTabItem>
     </TabContainer>
   </div>
