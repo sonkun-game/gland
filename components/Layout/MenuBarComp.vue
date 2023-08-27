@@ -72,13 +72,17 @@
               </button>
             </a>
           </li>
+          <!-- Phân trang cho loadedDepartment -->
+          <li>
+
+          </li>
           <!-- Cần phải featch api list phòng ban ra đây -->
           <div :key="common.listDepartmentKey">
             <li class="font-bold" v-for="(item, index) in loadedDepartment" :key="'loadedDepartment-' + index">
               <a :href="item.link">
-                <button type="button"
+                <button type="button" :id="item.id"
                   class="menu-button-department flex items-center w-full p-3 transition duration-100 rounded-lg">
-                  <i :class="item.icon" class="w-3 h-3"></i>
+                  <i class="w-3 h-3 fa-solid fa-address-card"></i>
                   <span class="flex-1 ml-3 text-left whitespace-nowrap">
                     {{ item.name }}
                   </span>
@@ -94,15 +98,14 @@
                 <ModalHeader head="Thêm phòng ban mới" :modalId="department.id"></ModalHeader>
                 <!-- Modal body -->
                 <div>
-                  <InputField :id="department.nameID" label="Tên phòng ban" styleClass="p-8" placeholder="Nhập tên phòng ban"></InputField>
+                  <InputField :id="department.nameID" label="Tên phòng ban" styleClass="p-4"
+                    placeholder="Nhập tên phòng ban"></InputField>
                 </div>
                 <!-- Modal footer -->
-
                 <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
                   <button :data-modal-hide="department.id"
                     class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
                     Hủy bỏ</button>
-
                   <button :data-modal-hide="department.id" @click="addDepartment()"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
                 </div>
@@ -116,6 +119,10 @@
 </template>
 
 <style>
+select {
+  font-family: 'FontAwesome', 'Times New Roman', Times, serif
+}
+
 .menu-bar {
   position: relative;
   transition: 0.5s;
@@ -183,25 +190,29 @@ div {
 
 <script>
 import { getShopsFromApi } from "static/shop/api";
+import { sendGetApi, sendPostApi } from "../../plugins/api";
+import { Common } from "../../plugins/common";
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: "MenuBarComp",
   data() {
     return {
       common: {
-        listDepartmentKey: 11199
+        listDepartmentKey: 11199,
+        storeId: 1,
       },
       department: {
         id: "createNewDepartmentModalID",
         nameID: "createNewDepartmentNameID",
         showModalTemplate: "<i class='fa-solid fa-plus w-3 h-3'></i><span class='flex-1 ml-3 text-left whitespace-nowrap'>Thêm phòng ban</span>",
       },
-      // Đây là phần load depa
+      // Đây là phần load depaments
       loadedDepartment: [
         {
           icon: "fa-solid fa-address-card",
           name: "Phòng ban",
-          link: "#",
+          link: "/main/total/departments",
           id: "department-1",
         },
       ],
@@ -229,6 +240,9 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.fetchDpt();
+  },
   methods: {
     openMenu: () => {
       var pos = $("#menu-side-bar").position();
@@ -244,14 +258,63 @@ export default {
       var host = this.$route.path
       return host.includes("/main/");
     },
-    addDepartment() {
-      var name = document.getElementById(this.department.nameID).value;
-      this.loadedDepartment.push({
-        icon: "fa-solid fa-address-card",
-        name: name,
-        link: "#B",
-        id: "department-1" + this.common.listDepartmentKey,
+    fetchDpt() {
+      let url = process.env.API_URL + "api-department/all?storeId=1&pageNum=0";
+      let resp = sendGetApi(url, null);
+
+      resp.then((resp) => {
+        let data = resp.value;
+        let convertFeArr = [];
+
+        // Phần này nếu về sau chuẩn hóa api thì có thể bỏ đi
+        data.forEach(item => {
+          let key = Common.getKeyFromText(item.name, 5)
+          let code = uuidv4();
+          convertFeArr.push({
+            icon: "fa-solid fa-address-card",
+            name: item.name,
+            link: "/main/total/departments/" + key + "/" + code,
+            id: "department" + key + code,
+            storeId: this.storeId,
+            createdBy: "datct"
+          });
+        });
+
+        // set dât
+        this.loadedDepartment = convertFeArr;
       });
+    },
+    createDepartment(data) {
+      if (data) {
+
+      } else {
+        alert("createDepartment:data is Null")
+      }
+    },
+    addDepartment() {
+      let name = document.getElementById(this.department.nameID).value;
+      let key = Common.getKeyFromText(name, 5)
+      let code = uuidv4();
+
+      let data = {
+        icon: "fa-solid fa-address-card", // icon phòng ban
+        name: name, // tên phòng ban
+        link: "/main/total/departments/" + key + "/" + code, // link try cập phòng ban
+        id: "department" + key + code, //id của phòng ban gen ra tránh trùng
+        storeId: this.storeId, // thông tin store
+        createdBy: "datct" // người tạo
+      }
+
+      // create api to database
+      let url = process.env.API_URL + "api-department/create";
+      sendPostApi(url, null, {
+        name: name,
+        storeId: 1,
+        createdBy: "datct"
+      });
+
+
+      this.loadedDepartment.push(data);
       this.common.listDepartmentKey++;
     }
   }

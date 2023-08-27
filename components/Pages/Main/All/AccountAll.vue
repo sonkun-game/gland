@@ -69,7 +69,7 @@
           class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
           Hủy bỏ</button>
 
-        <button :data-modal-hide="createAccount.id" @click="createAccountsAll(storeId)"
+        <button :data-modal-hide="createAccount.id" @click="createAccountsAll()"
           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
       </div>
     </ModalContainer>
@@ -111,7 +111,7 @@
               </button>
             <div data-popover id="popover-edit" role="tooltip" class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400  dark:bg-gray-800">
             <div class="px-3 py-2">
-<p>Chỉnh sửa</p>
+                <p>Chỉnh sửa</p>
             </div>
             <div data-popper-arrow></div>
           </div>
@@ -120,20 +120,20 @@
                 <div class="relative w-full max-w-3xl max-h-full">
                   <!-- Modal content -->
                   <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-<!-- Modal header -->
-<div class="flex items-start justify-between p-4 rounded-t ">
-<h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 rounded-t ">
+                      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
  Quản lý tài khoản
-</h3>
-<button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center  " data-modal-hide="editModal">
+                      </h3>
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center  " data-modal-hide="editModal">
   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
   </svg>
   <span class="sr-only">Close modal</span>
-</button>
-</div>
-<!-- Modal body -->
-<div class="p-6 space-y-6">
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-6">
 <div class="grid grid-cols-2 gap-4">
 <div>
 <label for="user-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên đăng nhập * </label>
@@ -184,12 +184,12 @@
 </select>
 </div>
 </div>
-</div>
-<!-- Modal footer -->
-<div class="flex items-center justify-end p-6 space-x-2 rounded-b ">
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex items-center justify-end p-6 space-x-2 rounded-b ">
 <button data-modal-hide="editModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Tiếp tục</button>
 <button data-modal-hide="editModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900  ">Hủy bỏ</button>
-</div>
+                    </div>
                   </div>
                 </div>
             </div>
@@ -328,8 +328,8 @@ export default {
     formatDate(date) {
       return moment(date).format('DD/MM/YYYY HH:mm');
     },
-    createAccountsAll(storeId) {
-      createAccountsAll(storeId);
+    createAccountsAll() {
+      createAccountsAll();
     },
   },
   async mounted() {
