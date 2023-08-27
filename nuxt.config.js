@@ -53,9 +53,16 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "~/plugins/main.js",
+    { src: '~/plugins/main.js', mode: 'client' },
     { src: '~/plugins/api.js', mode: 'client' },
+    { src: '~/plugins/common.js', mode: 'client' },
   ],
+
+  loading: {
+    color: 'blue',
+    height: '5px',
+    continuous: true 
+  },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -69,7 +76,10 @@ export default {
   modules: [],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    // Disable source maps
+    devtools: false
+  },
 
   env: {
     API_URL: 'http://103.142.26.40:8080/Spa/',

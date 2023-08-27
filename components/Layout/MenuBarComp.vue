@@ -72,13 +72,17 @@
               </button>
             </a>
           </li>
+          <!-- Phân trang cho loadedDepartment -->
+          <li>
+
+          </li>
           <!-- Cần phải featch api list phòng ban ra đây -->
           <div :key="common.listDepartmentKey">
             <li class="font-bold" v-for="(item, index) in loadedDepartment" :key="'loadedDepartment-' + index">
               <a :href="item.link">
-                <button type="button"
+                <button type="button" :id="item.id"
                   class="menu-button-department flex items-center w-full p-3 transition duration-100 rounded-lg">
-                  <i :class="item.icon" class="w-3 h-3"></i>
+                  <i class="w-3 h-3 fa-solid fa-address-card"></i>
                   <span class="flex-1 ml-3 text-left whitespace-nowrap">
                     {{ item.name }}
                   </span>
@@ -94,13 +98,6 @@
                 <ModalHeader head="Thêm phòng ban mới" :modalId="department.id"></ModalHeader>
                 <!-- Modal body -->
                 <div>
-                  <select>
-                    <option>
-                      <i class="fa-solid fa-house"></i>
-                      <i class="fa-solid fa-person"></i>
-                      <i class="fa-solid fa-address-card"></i>
-                    </option>
-                  </select>
                   <InputField :id="department.nameID" label="Tên phòng ban" styleClass="p-4"
                     placeholder="Nhập tên phòng ban"></InputField>
                 </div>
@@ -145,10 +142,21 @@
   color: white;
 }
 
-.menu-button-department:hover {
-  background-color: #84E1BC;
-  color: white;
+@media (prefers-color-scheme: light) {
+  .menu-button-department:hover {
+    background-color: #84E1BC;
+    color: white;
+  }
 }
+
+@media (prefers-color-scheme: dark) {
+  .menu-button-department:hover {
+    background-color: #84E1BC;
+    color: white;
+  }
+}
+
+
 
 .start {
   left: -256px;
@@ -189,22 +197,27 @@ div {
 
 <script>
 import { getShopsFromApi } from "static/shop/api";
+import { sendGetApi, sendPostApi } from "../../plugins/api";
+import { Common } from "../../plugins/common";
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: "MenuBarComp",
   data() {
     return {
       common: {
-        listDepartmentKey: 11199
+        listDepartmentKey: 11199,
+        storeId: 1,
       },
       department: {
         id: "createNewDepartmentModalID",
         nameID: "createNewDepartmentNameID",
         showModalTemplate: "<i class='fa-solid fa-plus w-3 h-3'></i><span class='flex-1 ml-3 text-left whitespace-nowrap'>Thêm phòng ban</span>",
       },
-      // Đây là phần load depa
+      // Đây là phần load depaments
       loadedDepartment: [
         {
+          selected: false,
           icon: "fa-solid fa-address-card",
           name: "Phòng ban",
           link: "/main/total/departments",
@@ -235,6 +248,9 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.fetchDpt();
+  },
   methods: {
     openMenu: () => {
       var pos = $("#menu-side-bar").position();
@@ -250,16 +266,57 @@ export default {
       var host = this.$route.path
       return host.includes("/main/");
     },
-    addDepartment() {
-      var name = document.getElementById(this.department.nameID).value;
-      var key = name.replace(/\s/g, "").toLowerCase();
-      let id = Math.floor(Math.random() * 100) + 1;
-      this.loadedDepartment.push({
-        icon: "fa-solid fa-address-card",
-        name: name,
-        link: "/main/total/departments/" + key + "/" + id,
-        id: "department-1" + this.common.listDepartmentKey,
+    fetchDpt() {
+      let url = process.env.API_URL + "api-department/all?storeId=1&pageNum=0";
+      let resp = sendGetApi(url, null);
+
+      resp.then((resp) => {
+        let data = resp.value;
+        let convertFeArr = [];
+        // Phần này nếu về sau chuẩn hóa api thì có thể bỏ đi
+        data.forEach(item => {
+          if (!item.keyUUID) {
+            alert("KeyUUID không tồn tại !");
+          } else {
+            convertFeArr.push({
+              icon: "fa-solid fa-address-card",
+              name: item.name,
+              link: "/main/total/departments/" + item.keyUUID,
+              id: "department" + item.keyUUID,
+              storeId: this.storeId,
+              createdBy: "datct",
+              selected: false,
+            });
+          }
+
+        });
+
+        // set dât
+        this.loadedDepartment = convertFeArr;
       });
+    },
+    addDepartment() {
+      let name = document.getElementById(this.department.nameID).value;
+      let keyUUID = uuidv4();
+
+      let data = {
+        icon: "fa-solid fa-address-card", // icon phòng ban
+        name: name, // tên phòng ban
+        link: "/main/total/departments/" + keyUUID, // link try cập phòng ban
+        id: "department" + keyUUID, //id của phòng ban gen ra tránh trùng
+        storeId: this.storeId, // thông tin store
+        createdBy: "datct" // người tạo
+      }
+      // create api to database
+      let url = process.env.API_URL + "api-department/create";
+      sendPostApi(url, null, {
+        name: name,
+        storeId: 1,
+        createdBy: "datct",
+        keyUUID: keyUUID,
+      });
+
+      this.loadedDepartment.push(data);
       this.common.listDepartmentKey++;
     }
   }

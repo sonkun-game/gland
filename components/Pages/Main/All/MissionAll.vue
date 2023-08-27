@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div>
     <!-- Add account btn -->
     <div class="flex">
@@ -247,6 +247,7 @@ import moment from "moment";
 export default {
   data() {
     return {
+      storeId:1,
       missionList: {
         totalPage: 0,
         table: {

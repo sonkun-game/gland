@@ -37,6 +37,7 @@ export const sendGetApi = async function (url, header) {
             const response = await axios.get(url, {
                 headers: defaultData.header
             });
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);

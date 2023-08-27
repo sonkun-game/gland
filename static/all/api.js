@@ -34,7 +34,7 @@ export async function getAllAccountsPaging() {
     throw error;
   }
 }
-export async function createAccountsAll() {
+export async function createAccountsAll(storeId) {
   var username = document.getElementById("editUsernameValue").value;
   var password = document.getElementById("editPasswordValue").value;
   var name = document.getElementById("editNameValue").value;
@@ -43,7 +43,7 @@ export async function createAccountsAll() {
   axios({
     method: 'post',
     //url: 'http://103.142.26.40:8080/Spa/api-authen/register',
-    url: 'http://103.142.26.40:8080/api-authen/register?storeId=' + storeId,
+    url: 'http://103.142.26.40:8080/Spa/api-authen/register?storeId=' + storeId,
     responseType: 'json',
     data: {
       username: username,

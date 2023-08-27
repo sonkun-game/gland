@@ -5,9 +5,16 @@
       <TabItem :id="data.tabList.list[0].id" labelledby="account">
         account - {{ id }} - {{ dpt }}
       </TabItem>
+      <!-- Nhiệm vụ của tôi-->
       <TabItem :id="data.tabList.list[1].id" labelledby="mission">
         mission - {{ id }} - {{ dpt }}
       </TabItem>
+      <SubTabItem :id="data.tabList.list[1].subList[0].id" labelledby="jobByMe">
+        1 - Công việc tạo bởi tôi
+      </SubTabItem>
+      <SubTabItem :id="data.tabList.list[1].subList[1].id" labelledby="jobByOther">
+        2 - Công việc được giao
+      </SubTabItem>
     </TabContainer>
   </div>
 </template>
@@ -35,7 +42,18 @@ export default {
             },
             {
               id: "detailInfoTab",
-              name: "Nhiệm vụ"
+              name: "Nhiệm vụ",
+              type: "dropdown",
+              subList: [
+                {
+                  id: "jobByMeId",
+                  name: "Nhiệm vụ bởi tôi"
+                },
+                {
+                  id: "jobByOtherId",
+                  name: "Nhiệm vụ được giao"
+                }
+              ]
             },
           ],
         },
