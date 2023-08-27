@@ -276,9 +276,6 @@
 <script>
 import { createMissionAll, getAllMission, getAllMissionPaging } from '../../../../static/mission/api';
 import moment from "moment";
-import ShowModal from '../../../Common/Button/ShowModal.vue';
-import ModalContainer from '../../../Common/Modal/ModalContainer.vue';
-import ModalHeader from '../../../Common/Modal/ModalHeader.vue';
 export default {
   data() {
     return {
@@ -348,7 +345,6 @@ export default {
     var listForm = await getAllMission(this.storeId);
     this.missionList.table.body = listForm.value;
   },
-  components: { ShowModal, ModalContainer, ModalHeader }
 }
 </script>
 <style lang="">
