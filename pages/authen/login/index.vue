@@ -72,17 +72,6 @@ export default {
         }
     }
   }
-  // methods: {
-  //   loginForm() {
-  //     let url = process.env.API_URL + 'api-authen/signing';
-  //     let data = {
-  //       username: this.username,
-  //       password: this.password,
-  //     }
-  //     sendPostApi(url, null, data);
-  //   }
-  // }
-//}
 </script>
 
 <style scoped>
