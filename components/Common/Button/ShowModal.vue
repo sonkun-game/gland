@@ -14,7 +14,7 @@
       </a>
     </template>
     <template v-else-if="type == 'custom' && !isModalIdNullOrEmpty">
-      <button :data-modal-target="modalId" :data-modal-toggle="modalId" :class="customClass">
+      <button :data-modal-target="modalId" :data-modal-toggle="modalId" :class="customClass" @click="toggleModal()">
         <span :style="titleStyle">{{ title }}</span>
       </button>
     </template>
@@ -30,7 +30,7 @@
       </button>
     </template>
     <template v-else-if="!isModalIdNullOrEmpty">
-      <PrimaryButton :title="title" :dataModalToggle="modalId" :dataModalTarget="modalId">
+      <PrimaryButton :title="title" :dataModalToggle="modalId" :dataModalTarget="modalId" @click="toggleModal()">
       </PrimaryButton>
     </template>
     <template v-else>
@@ -90,10 +90,15 @@ export default {
     toggleModal() {
       var modal = document.getElementById(`${this.modalId}`);
       if (modal.classList.contains('hidden')) {
-        modal.classList.remove("hidden")
+        modal.classList.remove("hidden");
+        this.isShowing = true;
+        this.$emit("modal-toggle", this.isShowing);
       } else {
-        modal.classList.add("hidden")
+        modal.classList.add("hidden");
+        this.isShowing = false;
+        this.$emit("modal-toggle", this.isShowing);
       }
+      console.log("ShowModal:" + this.modalId + " is Showing : " + this.isShowing);
     }
   }
 }

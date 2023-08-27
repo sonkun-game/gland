@@ -1,12 +1,9 @@
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
+import { sendPostApi } from "../../plugins/api";
 
 export async function getAllMission(storeId) {
   let url = process.env.API_URL + 'api-mission/?storeId=' + 1;
-  // if (pageNum != null)
-  //   url = process.env.API_URL + 'api-account/all?storeId=' + 1 + '&pageNum=' + 0;
-  // else url = process.env.API_URL + 'api-account?&storeId=' + 1;
-
   try {
     const response = await axios.get(url, {
       headers: {
@@ -40,28 +37,24 @@ export async function getAllMissionPaging() {
   }
 }
 
-export async function createMissionAll(storeId) {
+export async function createMissionAll(storeId, misionTable) {
   var name = document.getElementById("all_mission_txtName").value;
   var description = document.getElementById("all_mission_txtDes").value;
-  var keyUUID= uuidv4();
-  axios({
+  var keyUUID = uuidv4();
+  var url = 'http://103.142.26.40:8080/Spa/api-mission/create?storeId=' + storeId;
 
-    method: 'post',
-    url: 'http://103.142.26.40:8080/Spa/api-mission/create?storeId=' + storeId,
-    responseType: 'json',
-    data: {
-      name: name,
-      storeId: storeId,
-      description: description,
-      keyUUID: keyUUID
-    },
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem("jwt")
-    }
-  }).then(function (response) {
-    console.log(response);
-    alert(response.data.message);
-    location.reload()
-  });
+  let data = {
+    name: name,
+    storeId: storeId,
+    description: description,
+    keyUUID: keyUUID
+  }
+
+  sendPostApi(url, null ,data);
+
+  if(misionTable) {
+    misionTable.unshift(data);
+  }
+ 
+  return misionTable;
 }

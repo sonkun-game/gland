@@ -31,5 +31,5 @@ export const Common = {
             return key.substring(0,length)
         }
         return key;
-    }
+    },
 } 

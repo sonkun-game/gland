@@ -57,19 +57,19 @@ export const sendGetApi = async function (url, header) {
 export const sendPostApi = async function (url, header, data) {
 
     const test = validateAPI(url, header);
-    if(test.check) {
+    if (test.check) {
         axios({
             method: 'post',
             url: url ? url : defaultData.url,
             responseType: 'json',
             data: data,
             headers: defaultData.header
-          }).then(function (response) {
+        }).then(function (response) {
             console.log(response);
             return response;
-          }).catch((error) => {
+        }).catch((error) => {
             console.error(error)
-          });
+        });
     } else {
         console.error(test.message)
     }
@@ -83,18 +83,18 @@ export const sendPostApi = async function (url, header, data) {
 export const sendPutApi = async function (url, header) {
 
     const test = validateAPI(url, header);
-    if(test.check) {
+    if (test.check) {
         axios({
             method: 'put',
             url: url ? url : defaultData.url,
             responseType: 'json',
             headers: defaultData.header
-          }).then(function (response) {
+        }).then(function (response) {
             console.log(response);
             return response;
-          }).catch((error) => {
+        }).catch((error) => {
             console.error(error)
-          });
+        });
     } else {
         console.error(test.message)
     }
@@ -106,26 +106,26 @@ export const sendPutApi = async function (url, header) {
 
 export const sendDeleteApi = async function (url, header) {
 
-  const test = validateAPI(url, header);
-  if(test.check) {
-      axios({
-          method: 'delete',
-          url: url ? url : defaultData.url,
-          responseType: 'json',
-          headers: defaultData.header
+    const test = validateAPI(url, header);
+    if (test.check) {
+        axios({
+            method: 'delete',
+            url: url ? url : defaultData.url,
+            responseType: 'json',
+            headers: defaultData.header
         }).then(function (response) {
-          console.log(response);
-          return response;
+            console.log(response);
+            return response;
         }).catch((error) => {
-          console.error(error)
+            console.error(error)
         });
-  } else {
-      console.error(test.message)
-  }
-  return {
-      status: "fail",
-      message: test.message
-  };
+    } else {
+        console.error(test.message)
+    }
+    return {
+        status: "fail",
+        message: test.message
+    };
 };
 
 
