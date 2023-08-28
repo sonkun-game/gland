@@ -67,7 +67,7 @@
                         thái
                         này</span>
                     </div>
-                    <CloseOrSave modalId="deleteStatus" onSave="" type="red">
+                    <CloseOrSave modalId="deleteStatus" type="red">
                     </CloseOrSave>
                   </ModalContainer>
                 </ShowModal>
