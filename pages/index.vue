@@ -1,6 +1,6 @@
 <template>
   <div class="flex item-center justify-center">
-    <img class="h-96" alt="no image" src="~/assets/img/4207.jpg" />
+    <img class="w-full h-full opacity-50" alt="no image" src="~/assets/img/test2.jpg" />
   </div>
 </template>
 
