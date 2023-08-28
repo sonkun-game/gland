@@ -21,10 +21,11 @@
                 <div :id="'modal-' + item.id" v-if="item.type == 'dropdown' && item.subList !== undefined"
                     class="absolute bg-white rounded-lg shadow-xl hidden" style="width: 200px"
                     @mouseenter="showModal('modal-' + item.id)" @mouseleave="hideModal('modal-' + item.id)">
-                    
+
                     <ul v-if="item.subList !== null">
-                        <li class="px-2 py-2 cursor-pointer hover:bg-blue-700 hover:text-white" v-for="(subItem,subIndex) in item.subList" :key="'subModal' + subIndex">
-                            <button class="p-3" :id="toTab(subItem.id)" type="button" role="tab"
+                        <li class="px-2 cursor-pointer hover:bg-blue-700 rounded-lg"
+                            v-for="(subItem, subIndex) in item.subList" :key="'subModal' + subIndex">
+                            <button class="p-3 hover:text-white" :id="toTab(subItem.id)" type="button" role="tab"
                                 :data-tabs-target="toId(subItem.id)" :aria-controls="subItem.id" aria-selected="false">
                                 {{ subItem.name }}
                             </button>
@@ -68,7 +69,7 @@ export default {
         },
         showModal(id) {
             let el = document.getElementById(id);
-            if(el) {
+            if (el) {
                 el.classList.remove("hidden");
             } else {
                 console.error("ShowModal::showModal : element not found !")
@@ -76,7 +77,7 @@ export default {
         },
         hideModal(id) {
             let el = document.getElementById(id);
-            if(el) {
+            if (el) {
                 el.classList.add("hidden");
             } else {
                 console.error("hideModal::showModal : element not found !")

@@ -270,7 +270,17 @@
 import { createMissionAll, getAllMission, getAllMissionPaging } from '../../../../static/mission/api';
 import { sendGetApi } from '../../../../plugins/api';
 import moment from "moment";
+import { getAllDepartPaging } from "../../../../static/department/api";
 export default {
+  async fetch() {
+    try {
+      var response = await getAllMissionPaging(this.storeId)
+      this.missionList.table.body = response.value;
+      this.missionList.totalPage = response.totalPage;
+    } catch (error) {
+      console.error('Lỗi:', error);
+    }
+  },
   data() {
     return {
       missionAllKey: 1178,
@@ -363,13 +373,9 @@ export default {
       this.authenMission.authenMissionKey++;
     }
   },
-  async mounted() {
-    let resp = await getAllMissionPaging();
-    this.missionList.totalPage = resp.totalPage;
-  },
   async created() {
     var listForm = await getAllMission(this.storeId);
     this.missionList.table.body = listForm.value;
-  },
+  }
 }
 </script>
