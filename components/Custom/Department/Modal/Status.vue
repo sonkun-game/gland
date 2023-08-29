@@ -24,14 +24,14 @@
 
       <!-- Phần hiển thị dữ liệu bảng -->
       <CrudTable style-class="w-full text-sm text-center text-gray-500">
-        <Thead>
+        <thead>
           <Row styleClass="text-sm text-gray-900 bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3 text-center" cellType="title">
               {{ item.name }}
             </Cell>
           </Row>
-        </Thead>
-        <Tbody>
+        </thead>
+        <tbody>
           <Row styleClass="bg-white border-b" v-for="(item, index) in table.body" :key="index"
             :id="'editStatusConfigRow' + index">
             <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>

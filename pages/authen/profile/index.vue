@@ -14,14 +14,14 @@
           <div class="flex mt-4 space-x-3 md:mt-6">
 
             <!-- Modal toggle -->
-            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
+            <button data-modal-target="editAuthenModal" data-modal-toggle="editAuthenModal"
               class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="button">
               Chỉnh sửa thông tin
             </button>
 
             <!-- Main modal -->
-            <div id="defaultModal" tabindex="-1" aria-hidden="true"
+            <div id="editAuthenModal" tabindex="-1" aria-hidden="true"
               class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
               <div class="relative w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
@@ -33,7 +33,7 @@
                     </h3>
                     <button type="button"
                       class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                      data-modal-hide="defaultModal">
+                      data-modal-hide="editAuthenModal">
                       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -71,10 +71,10 @@
                   </div>
                   <!-- Modal footer -->
                   <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
-                    <button data-modal-hide="defaultModal" type="button"
+                    <button data-modal-hide="editAuthenModal" type="button"
                       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cập
                       nhật</button>
-                    <button data-modal-hide="defaultModal" type="button"
+                    <button data-modal-hide="editAuthenModal" type="button"
                       class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Hủy
                       bỏ</button>
                   </div>
@@ -108,13 +108,13 @@
           :body="['Tên tài khoản: dangnguyen', 'Mật khẩu: *************']">
           <div>
             <!-- Modal toggle -->
-            <button data-modal-target="editModal" data-modal-toggle="editModal"
+            <button data-modal-target="changePasswordModal" data-modal-toggle="changePasswordModal"
               class="block text-blue-700 bg-white hover:bg-blue-800 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               type="button">
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
             <!-- Main modal -->
-            <div id="editModal" tabindex="-1" aria-hidden="true"
+            <div id="changePasswordModal" tabindex="-1" aria-hidden="true"
               class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
               <div class="relative w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
@@ -126,7 +126,7 @@
                     </h3>
                     <button type="button"
                       class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                      data-modal-hide="editModal">
+                      data-modal-hide="changePasswordModal">
                       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -159,10 +159,10 @@
                   </div>
                   <!-- Modal footer -->
                   <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
-                    <button data-modal-hide="defaultModal" type="button"
+                    <button data-modal-hide="changePasswordModal" type="button"
                       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cập
                       nhật</button>
-                    <button data-modal-hide="defaultModal" type="button"
+                    <button data-modal-hide="changePasswordModal" type="button"
                       class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Hủy
                       bỏ</button>
                   </div>

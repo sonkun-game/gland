@@ -60,15 +60,15 @@
     <!-- Table -->
     <div class="">
   <CrudTable style-class="w-full text-sm dark:text-gray-400" :totalPage="departList.totalPage" :currentPage="1">
-      <Thead>
+      <thead>
         <Row styleClass="text-sm text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <Cell v-for="(item, index) in departList.table.head" :key="index" styleClass="px-6 py-3 text-left"
             cellType="title">
             {{ item.name }}
           </Cell>
         </Row>
-      </Thead>
-      <Tbody>
+      </thead>
+      <tbody>
         <Row styleClass="bg-white border-b" v-for="(item, index) in departList.table.body" :key="index">
           <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
           <Cell styleClass="px-2 py-3">{{ item.name }}</Cell>

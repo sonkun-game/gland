@@ -7,8 +7,8 @@
 export const Common = {
     /**
      * Get 1 chuỗi key tránh bị trùng lặp ID,...
-     * @param {*} length 
-     * @returns 
+     * @param {*} length
+     * @returns
      */
     getRandomKey(length=8) {
         let randomNumber = Math.floor(Math.random() * 10000) + 1;
@@ -22,7 +22,7 @@ export const Common = {
     },
     /**
      * Xóa unicode, lowercase, xóa space, trả về dộ dài theo y/c
-     * @param {*} length 
+     * @param {*} length
      */
     getKeyFromText(key="",length=6) {
         key = key.replace(/\s/g, "");
@@ -32,4 +32,14 @@ export const Common = {
         }
         return key;
     },
-} 
+    /**
+     * get đường link các trang, dùng để redirect khi bấm vào link,...
+     * @param {*} url
+     * @returns
+     */
+    baseUrl(url) {
+      let protocol = window.location.protocol;
+      let host = window.location.host;
+      return protocol + "//" + host + url;
+    }
+}

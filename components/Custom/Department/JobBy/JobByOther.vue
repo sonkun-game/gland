@@ -13,19 +13,19 @@
         5</span>
     </div>
     <CrudTable style-class="w-full text-sm text-left text-gray-500">
-      <Thead>
+      <thead>
         <Row styleClass="text-xs text-gray-900 bg-gray-300">
           <Cell v-for="(item, index) in jobByOther.table.head" :key="index" styleClass="px-6 py-3 text-center"
             cellType="title">
             {{ item.name }}
           </Cell>
         </Row>
-      </Thead>
-      <Tbody>
+      </thead>
+      <tbody>
         <Row styleClass="bg-white border-b" v-for="(item, index) in jobByOther.table.body" :key="index">
           <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
           <Cell styleClass="px-6 py-4">
-            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="link link-info">{{ item.code
+            <button data-modal-target="codeDetailModal" data-modal-toggle="codeDetailModal" class="link link-info">{{ item.code
             }}</button>
           </Cell>
           <Cell styleClass="px-6 py-4">{{ item.info }}</Cell>

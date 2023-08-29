@@ -41,14 +41,10 @@ Vue.component('ConfirmModal',ConfirmModal);
 // Table Component
 import Cell from '../components/Common/Table/Cell.vue';
 import Row from '../components/Common/Table/Row.vue';
-import Thead from '../components/Common/Table/Thead.vue';
-import Tbody from '../components/Common/Table/Tbody.vue';
 import CrudTable from '../components/Custom/Table/CrudTable.vue';
 
 Vue.component('Cell',Cell);
 Vue.component('Row',Row);
-Vue.component('Thead',Thead);
-Vue.component('Tbody',Tbody);
 Vue.component('CrudTable',CrudTable);
 
 // Input
