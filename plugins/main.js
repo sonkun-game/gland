@@ -1,9 +1,7 @@
 import Vue from 'vue';
-import PrimaryButton from '../components/Common/Button/PrimaryButtonComp.vue';
-import SelectVue from '../components/Common/Select/Select.vue';
 
+import SelectVue from '../components/Common/Select/Select.vue';
 Vue.component('SelectVue',SelectVue);
-Vue.component('PrimaryButton',PrimaryButton);
 
 // Text
 import ProfileInfo from '../components/Common/Info/ProfileInfo.vue';
@@ -49,7 +47,5 @@ Vue.component('CrudTable',CrudTable);
 
 // Input
 import InputField from '../components/Common/Input/InputField.vue'
-import CheckBox from '../components/Common/Input/CheckBox.vue'
 
 Vue.component('InputField',InputField);
-Vue.component('CheckBox',CheckBox);

@@ -30,8 +30,12 @@
       </button>
     </template>
     <template v-else-if="!isModalIdNullOrEmpty">
-      <PrimaryButton :title="title" :dataModalToggle="modalId" :dataModalTarget="modalId" @click="toggleModal()">
-      </PrimaryButton>
+      <div class="w-100 flex justify-end mb-3.5">
+        <button type="button" :data-modal-target="modalId" :data-modal-toggle="modalId"
+          class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-2">
+          {{ title }}
+        </button>
+      </div>
     </template>
     <template v-else>
       <p class="text-red-500">
