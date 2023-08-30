@@ -25,9 +25,9 @@
                   <h1 class="ml-2 py-2 font-medium text-base">Dang Nguyen</h1>
                 </div>
                 <div class="text-blue-700 hover:text-blue-800 mt-2">
-                  <NuxtLink to="http://localhost:3000/authen/profile">
+                  <a :href="authenURL">
                     Xem thông tin cá nhân
-                  </NuxtLink>
+                  </a>
                 </div>
               </li>
               <li class="hover:bg-blue-300 p-2 rounded-lg">
@@ -66,7 +66,14 @@ export default {
   data() {
     return {
       isMenuOpen: false,
+      authenURL: "",
     }
+  },
+  mounted() {
+    console.log("test");
+    let protocol = window.location.protocol;
+    let host = window.location.host;
+    this.authenURL = protocol + "//" + host + "/authen/profile";
   },
   methods: {
     isMainPage() {
