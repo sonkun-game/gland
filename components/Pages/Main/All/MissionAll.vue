@@ -49,8 +49,10 @@
                   <summary>
                     <InputField typeInput="checkbox" :label="item.name" :id="'missionModalDepartment' + index" />
                   </summary>
-                  <InputField label="Tài khoản" :id="'missionModalAccount' + index" styleClass="px-5 py-2" typeInput="checkbox" />
-                  <InputField label="Nhiệm vụ" :id="'missionModalMission' + index" styleClass="px-5 py-2" typeInput="checkbox" />
+                  <InputField label="Tài khoản" :id="'missionModalAccount' + index" styleClass="px-5 py-2"
+                    typeInput="checkbox" />
+                  <InputField label="Nhiệm vụ" :id="'missionModalMission' + index" styleClass="px-5 py-2"
+                    typeInput="checkbox" />
                 </details>
               </div>
               <div class="w-50 h-full">
@@ -68,10 +70,10 @@
                 <!-- Modal footer -->
                 <div class="absolute bottom-0 flex items-center justify-end p-2 space-x-2 rounded-b dark:border-gray-600">
                   <button type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center">Đồng
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2 text-center">Đồng
                     ý</button>
                   <button type="button"
-                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 hover:text-gray-900 focus:z-10">Hủy
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 hover:text-gray-900 focus:z-10">Hủy
                     bỏ</button>
                 </div>
               </div>
@@ -358,14 +360,14 @@ export default {
         let data = resp.value;
         let convertFeArr = [];
         data.forEach(item => {
-            convertFeArr.push({
-              icon: "fa-solid fa-address-card",
-              name: item.name,
-              link: "/main/total/departments/" + item.keyUUID,
-              id: "department" + item.keyUUID,
-              storeId: this.storeId,
-              selected: false,
-            });
+          convertFeArr.push({
+            icon: "fa-solid fa-address-card",
+            name: item.name,
+            link: "/main/total/departments/" + item.keyUUID,
+            id: "department" + item.keyUUID,
+            storeId: this.storeId,
+            selected: false,
+          });
         });
         // set dât
         this.authenMission.loadedDepartment = convertFeArr;
