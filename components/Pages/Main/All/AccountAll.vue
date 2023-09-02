@@ -1,5 +1,82 @@
 <template>
   <div>
+    <div>
+      <ShowModal :modalId="createAccount.id" type="html"
+        customClass="block text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-3 py-2 text-center"
+        :title="createAccount.showModalTemplate">
+        <ModalContainer :modalId="createAccount.id" size="4xl">
+          <ModalHeader head="Quản lý tài khoản" :modalId="createAccount.id"></ModalHeader>
+          <!-- Modal body -->
+          <div class="grid grid-cols-2">
+            <InputField id="editUsernameValue" label="Tên đăng nhập *" styleClass="px-4"></InputField>
+            <InputField id="editPasswordValue" label="Mật khẩu *" styleClass="px-4"></InputField>
+            <InputField id="editNameValue" label="Họ tên *" styleClass="px-4"></InputField>
+            <InputField id="editPhoneValue" label="Số điện thoại" styleClass="px-4"></InputField>
+            <InputField id="editEmailValue" label="Email" styleClass="px-4"></InputField>
+            <!-- Vị trị-chức vụ-trạng thái -->
+            <div class="my-2">
+              <label for="departmentAllAcc" class="block pl-7 text-sm font-semibold text-gray-900 dark:text-white">Phòng
+                ban</label>
+              <div class="px-4 pt-2">
+                <select id="departmentAllAcc"
+                  class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
+                  <option v-for="(item, index) in departAllList" :key="index" :value="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="my-2">
+              <label for="positionAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Vị
+                trí</label>
+              <div class="px-4 pt-2">
+                <select id="positionAllAcc"
+                  class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
+                  <option v-for="(item, index) in positionAllList" :key="index" :value="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="my-2">
+              <label for="rollAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Chức vụ</label>
+              <div class="px-4 pt-2">
+                <select id="rollAllAcc" class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
+                  <option v-for="(item, index) in roleAllList" :key="index" :value="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="my-2">
+              <label for="statusAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Trạng
+                thái</label>
+              <div class="px-4 pt-2">
+                <select id="statusAllAcc"
+                  class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
+                  <option v-for="(item, index) in statusAllList" :key="index" :value="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+
+          <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
+            <button :data-modal-hide="createAccount.id"
+              class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
+              Hủy bỏ
+            </button>
+
+            <button :data-modal-hide="createAccount.id" @click="createAccountsAll(storeId)"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              Lưu
+            </button>
+          </div>
+        </ModalContainer>
+      </ShowModal>
+    </div>
     <!-- Searchbar -->
     <div class="flex items-center">
       <div class="flex items-center justify-between">
@@ -306,7 +383,7 @@ export default {
       createAccount: {
         id: "createAccountNameID",
         nameID: "createAccountNameID",
-        showModalTemplate: "<i class='fa-solid fa-user w-3 h-3'></i>",
+        showModalTemplate: "Tạo tài khoản",
       },
       createMission: {
         id: "createMissionNameID",

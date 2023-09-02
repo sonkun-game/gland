@@ -11,7 +11,7 @@
         <MissionAll />
       </TabItem>
       <TabItem :id="data.tabList.list[2].id" labelledby="staff">
-        <!-- Phân quyền -->
+        <!-- Phòng ban-->
         <DecentAll />
       </TabItem>
     </TabContainer>
