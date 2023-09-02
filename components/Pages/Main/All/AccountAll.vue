@@ -316,18 +316,14 @@
         </CrudTable>
       </div>
     </div>
-    <SettingBtn></SettingBtn>
 
   </div>
 </template>
 <script>
-import SettingBtn from '../SettingButton/SettingBtn.vue';
 import { getAllAccounts, getAllAccountsPaging, createAccountsAll } from '../../../../static/all/api';
 import moment from "moment";
 export default {
-  components: {
-    SettingBtn
-  },
+
   data() {
     return {
       storeId: 1,

@@ -33,6 +33,17 @@
                     </ul>
                 </div>
             </li>
+            <li class="search m-2">
+                <input type="search" placeholder="Tìm kiếm bằng tên - tài khoản "
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:border-blue-500 block w-64 p-2">
+            </li>
+            <li class="setting">
+                <!-- Setting -->
+                <button class="p-3 hover:text-white" :id="toTab('setting')" type="button" role="tab"
+                    :data-tabs-target="toId('setting')" aria-controls="setting" aria-selected="false">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+            </li>
         </ul>
     </div>
 </template>

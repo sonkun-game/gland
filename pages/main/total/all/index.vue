@@ -14,6 +14,9 @@
         <!-- Phòng ban-->
         <DecentAll />
       </TabItem>
+      <TabItem :id="setting" labelledby="staff">
+        <SettingVue />
+      </TabItem>
     </TabContainer>
   </div>
 </template>
@@ -48,7 +51,8 @@ export default {
             {
               id: "evidenceTab",
               name: "Phòng ban",
-            }
+            },
+
 
           ],
         },
