@@ -19,7 +19,7 @@ export async function getAllAccounts(pageNum, storeId) {
   }
 }
 export async function getAllAccountsPaging() {
-  let url = "http://103.142.26.40:8080/Spa/api-account/all?storeId=1&pageNum=0";
+  let url = "https://103.142.26.40:8445/Spa/api-account/all?storeId=1&pageNum=0";
   try {
     const response = await axios.get(url, {
       headers: {
@@ -42,7 +42,7 @@ export async function createAccountsAll(storeId) {
   var email = document.getElementById("editEmailValue").value;
   axios({
     method: 'post',
-    url: 'http://103.142.26.40:8080/Spa/api-authen/register?storeId=' + storeId,
+    url: 'https://103.142.26.40:8445/Spa/api-authen/register?storeId=' + storeId,
     responseType: 'json',
     data: {
       username: username,
