@@ -61,7 +61,7 @@ export default {
   loading: {
     color: 'blue',
     height: '5px',
-    continuous: true 
+    continuous: true
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -82,8 +82,8 @@ export default {
   },
 
   env: {
-    API_URL: 'http://103.142.26.40:8080/Spa/',
-    API_TOTAL: 'http://103.142.26.40:8080/Total/',
+    API_URL: 'https://103.142.26.40:8445/Spa/',
+    API_TOTAL: 'https://103.142.26.40:8445/Total/',
     API_JWT: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjkwOTUzNzI2LCJleHAiOjE3NTE0MzM3MjZ9.pvVOd6xKmwSYalPlO9SUyumsWJeimJaENY5X3a15wCHcqfqseImWXCE0DHRqdpMvPLX8iRUUCaUILG-iiCG6Yw'
   },
 }

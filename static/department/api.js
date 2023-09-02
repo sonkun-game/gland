@@ -19,7 +19,7 @@ export async function getAllDepartment(storeId) {
   }
 }
 export async function getAllDepartPaging() {
-  let url = "http://103.142.26.40:8080/Spa/api-department/all?storeId=1&pageNum=0";
+  let url = "https://103.142.26.40:8445/Spa/api-department/all?storeId=1&pageNum=0";
   try {
     const response = await axios.get(url, {
       headers: {

@@ -21,7 +21,7 @@ export async function getAllMission(storeId) {
 }
 
 export async function getAllMissionPaging(storeId) {
-  let url = "http://103.142.26.40:8080/Spa/api-mission/all?pageNum=0&storeId=" + storeId;
+  let url = "https://103.142.26.40:8445/Spa/api-mission/all?pageNum=0&storeId=" + storeId;
   try {
     const response = await axios.get(url, {
       headers: {
@@ -41,7 +41,7 @@ export async function createMissionAll(storeId, misionTable) {
   var name = document.getElementById("all_mission_txtName").value;
   var description = document.getElementById("all_mission_txtDes").value;
   var keyUUID = uuidv4();
-  var url = 'http://103.142.26.40:8080/Spa/api-mission/create?storeId=' + storeId;
+  var url = 'https://103.142.26.40:8445/Spa/api-mission/create?storeId=' + storeId;
 
   let data = {
     name: name,
