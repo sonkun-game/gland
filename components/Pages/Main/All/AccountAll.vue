@@ -78,14 +78,14 @@
       </ShowModal>
     </div>
     <!-- Searchbar -->
-    <div class="flex items-center">
+    <!-- <div class="flex items-center">
       <div class="flex items-center justify-between">
         <div class="my-3 w-96">
           <input type="search" placeholder="Tìm kiếm bằng tên - tài khoản" id="default-input"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2">
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Table -->
     <div>
       <div class="">
@@ -316,14 +316,17 @@
         </CrudTable>
       </div>
     </div>
-
+    <Setting />
   </div>
 </template>
 <script>
+import Setting from '../Department/Setting.vue';
 import { getAllAccounts, getAllAccountsPaging, createAccountsAll } from '../../../../static/all/api';
 import moment from "moment";
 export default {
-
+  components: {
+    Setting
+  },
   data() {
     return {
       storeId: 1,
