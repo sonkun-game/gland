@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <!-- Add account btn -->
     <div>
       <ShowModal :modalId="createAccount.id" type="html"
@@ -315,11 +316,17 @@
         </CrudTable>
       </div>
     </div>
+    <!-- Setting btn -->
+    <Setting />
   </div>
 </template>
 <script>
 import moment from "moment";
+import Setting from "./Setting.vue";
 export default {
+  components: {
+    Setting
+  },
   data() {
     return {
       storeId: 1,

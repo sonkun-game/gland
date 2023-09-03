@@ -316,17 +316,14 @@
         </CrudTable>
       </div>
     </div>
-    <Setting />
+
   </div>
 </template>
 <script>
-import Setting from '../Department/Setting.vue';
+
 import { getAllAccounts, getAllAccountsPaging, createAccountsAll } from '../../../../static/all/api';
 import moment from "moment";
 export default {
-  components: {
-    Setting
-  },
   data() {
     return {
       storeId: 1,
