@@ -99,10 +99,10 @@
         <tbody :key="missionAllKey">
           <Row styleClass="bg-white border-b" v-for="(item, index) in missionList.table.body" :key="index">
             <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
-            <Cell styleClass="px-2 py-3">{{ item.name }}</Cell>
-            <Cell styleClass="px-2 py-3">{{ item.username }}</Cell>
-            <Cell styleClass="px-2 py-3">{{ formatDate(item.createdAt) }}</Cell>
-            <Cell styleClass="px-2 py-3">{{ item.createdBy }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.missionName }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.departName }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ formatDate(item.missionCreatedDate) }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.missionCreatedBy }}</Cell>
             <Cell styleClass="px-2 py-3 flex">
               <div>
                 <button data-modal-target="editModalMission" data-modal-toggle="editModalMission"
@@ -293,7 +293,7 @@ export default {
           head: [
             { name: "STT" },
             { name: "Nhiệm vụ" },
-            { name: "Mô tả" },
+            { name: "Phòng ban" },
             { name: "Ngày tạo" },
             { name: "Người tạo" },
             { name: "Thao tác" },
