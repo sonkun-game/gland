@@ -101,10 +101,10 @@
           <tbody v-if="accountsList.table.head.length >= 9">
             <Row styleClass="bg-white border-b" v-for="(item, index) in accountsList.table.body" :key="index">
               <Cell styleClass="px-4 py-3" v-if="accountsList.table.head[0].show">{{ index + 1 }}</Cell>
-              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[1].show">{{ item.username }}</Cell>
-              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[2].show">{{ item.fullName }}</Cell>
+              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[1].show">{{ item.fullName }}</Cell>
+              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[2].show">{{ item.username }}</Cell>
               <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[3].show">{{ item.email }}</Cell>
-              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[4].show">{{ item.positionId }}</Cell>
+              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[4].show">{{ item.position }}</Cell>
               <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[5].show">{{ formatDate(item.createdAt) }}</Cell>
               <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[6].show">{{ item.createdBy }}</Cell>
               <Cell styleClass="px-2 py-3 text-green-500" v-if="accountsList.table.head[7].show">{{ item.status }}</Cell>
