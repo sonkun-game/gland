@@ -25,8 +25,11 @@
         <Row styleClass="bg-white border-b" v-for="(item, index) in jobByOther.table.body" :key="index">
           <Cell styleClass="px-6 py-4" v-if="jobByOther.table.head[0].show">{{ index + 1 }}</Cell>
           <Cell styleClass="px-6 py-4" v-if="jobByOther.table.head[1].show">
-            <button data-modal-target="codeDetailModal" data-modal-toggle="codeDetailModal" class="link link-info">{{ item.code
-            }}</button>
+            <button data-modal-target="codeDetailModal" data-modal-toggle="codeDetailModal" class="link link-info">
+              {{ item.code }}
+            </button>
+            <ModalContainer modalId="codeDetailModal">
+            </ModalContainer>
           </Cell>
           <Cell styleClass="px-6 py-4" v-if="jobByOther.table.head[2].show">{{ item.info }}</Cell>
           <Cell styleClass="px-6 py-4" v-if="jobByOther.table.head[3].show">{{ item.target }}</Cell>

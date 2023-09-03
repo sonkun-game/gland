@@ -1,8 +1,11 @@
+import Cookies from 'js-cookie';
+
 /**
  * Phần này sử dụng để lưu các hàm js sử dụng lại
  * tác giả: Sơn
  * ngày : 26/08
  */
+
 
 export const Common = {
   /**
@@ -48,4 +51,10 @@ export const Common = {
     }
     return ''
   },
+  /**
+   * 
+   */
+  setCookie(name, value, option) {
+    Cookies.set(name, value, { expires: option.expires, path: option.path });
+  }
 }
