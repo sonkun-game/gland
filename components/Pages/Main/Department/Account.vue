@@ -15,8 +15,9 @@
             <InputField id="editNameValue" label="Họ tên *" styleClass="px-4"></InputField>
             <InputField id="editPhoneValue" label="Số điện thoại" styleClass="px-4"></InputField>
             <InputField id="editEmailValue" label="Email" styleClass="px-4"></InputField>
+            <InputField id="editPositionValue" label="Vị trí" styleClass="px-4"></InputField>
             <!-- Vị trị-chức vụ-trạng thái -->
-            <div class="my-2 ">
+<!--            <div class="my-2 ">
               <label for="departmentAllAcc" class="block pl-7 text-sm font-semibold text-gray-900 dark:text-white">Phòng
                 ban</label>
               <div class="px-4 pt-2">
@@ -39,8 +40,8 @@
                   </option>
                 </select>
               </div>
-            </div>
-            <div class="my-2">
+            </div>-->
+<!--            <div class="my-2">
               <label for="rollAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Chức vụ</label>
               <div class="px-4 pt-2">
                 <select id="rollAllAcc" class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
@@ -49,8 +50,8 @@
                   </option>
                 </select>
               </div>
-            </div>
-            <div class="my-2">
+            </div>-->
+<!--            <div class="my-2">
               <label for="statusAllAcc" class="block pl-7 text-sm font-medium text-gray-900 dark:text-white">Trạng
                 thái</label>
               <div class="px-4 pt-2">
@@ -61,7 +62,7 @@
                   </option>
                 </select>
               </div>
-            </div>
+            </div>-->
 
 
           </div>
@@ -101,10 +102,10 @@
           <tbody>
             <Row styleClass="bg-white border-b" v-for="(item, index) in accountsList.table.body" :key="index">
               <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
+              <Cell styleClass="px-2 py-3">{{ item.fullName}}</Cell>
               <Cell styleClass="px-2 py-3">{{ item.username }}</Cell>
-              <Cell styleClass="px-2 py-3">{{ item.fullName }}</Cell>
               <Cell styleClass="px-2 py-3">{{ item.email }}</Cell>
-              <Cell styleClass="px-2 py-3">{{ item.positionId }}</Cell>
+              <Cell styleClass="px-2 py-3">{{ item.position }}</Cell>
               <Cell styleClass="px-2 py-3">{{ formatDate(item.createdAt) }}</Cell>
               <Cell styleClass="px-2 py-3">{{ item.createdBy }}</Cell>
               <Cell styleClass="px-2 py-3 text-green-500">{{ item.status }}</Cell>
@@ -323,13 +324,28 @@
 <script>
 import moment from "moment";
 import Setting from "./Setting.vue";
+import {
+  createAccountsForDepartment,
+  getAllAccountsPagingForDepartment
+} from "../../../../static/department/api_account";
+import {getAllMissionPaging} from "../../../../static/mission/api";
 export default {
   components: {
     Setting
   },
+  async fetch() {
+    try {
+      var response = await getAllAccountsPagingForDepartment(this.storeId, this.pageNum,this.$route.params.dpt)
+      this.accountsList.table.body = response.value;
+      this.accountsList.totalPage = response.totalPage;
+    } catch (error) {
+      console.error('Lỗi:', error);
+    }
+  },
   data() {
     return {
       storeId: 1,
+      pageNum: 0,
       accountsList: {
         totalPage: 0,
         table: {
@@ -345,7 +361,7 @@ export default {
             { name: "Thao tác" },
           ],
           body: [
-            {
+            /*{
               name: "edit gland",
               account: "editgland",
               mail: "user@gmail.com",
@@ -355,7 +371,7 @@ export default {
               createdBy: "dang",
               status: "Làm việc",
               edit: "btn here",
-            },
+            },*/
           ],
         },
       },
@@ -391,7 +407,7 @@ export default {
       return moment(date).format('DD/MM/YYYY HH:mm');
     },
     createAccountsAll(storeId) {
-
+      createAccountsForDepartment(storeId,this.$route.params.dpt)
     },
   },
   async mounted() {

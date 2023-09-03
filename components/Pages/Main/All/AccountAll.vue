@@ -101,10 +101,10 @@
           <tbody>
             <Row styleClass="bg-white border-b" v-for="(item, index) in accountsList.table.body" :key="index">
               <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
-              <Cell styleClass="px-2 py-3">{{ item.username }}</Cell>
               <Cell styleClass="px-2 py-3">{{ item.fullName }}</Cell>
+              <Cell styleClass="px-2 py-3">{{ item.username }}</Cell>
               <Cell styleClass="px-2 py-3">{{ item.email }}</Cell>
-              <Cell styleClass="px-2 py-3">{{ item.positionId }}</Cell>
+              <Cell styleClass="px-2 py-3">{{ item.position }}</Cell>
               <Cell styleClass="px-2 py-3">{{ formatDate(item.createdAt) }}</Cell>
               <Cell styleClass="px-2 py-3">{{ item.createdBy }}</Cell>
               <Cell styleClass="px-2 py-3 text-green-500">{{ item.status }}</Cell>
