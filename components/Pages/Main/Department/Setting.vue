@@ -1,4 +1,4 @@
-<template lang="">
+<template>
 
 <div data-dial-init class="fixed top-32 right-10 group">
     <button type="button" data-dial-trigger="click" data-dial-toggle="speed-dial-menu-top-right" aria-controls="speed-dial-menu-top-right" aria-expanded="false" class="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800">
