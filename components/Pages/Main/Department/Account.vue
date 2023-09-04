@@ -320,7 +320,6 @@
 </template>
 <script>
 import moment from "moment";
-import Setting from "./Setting.vue";
 import {
   createAccountsForDepartment,
   getAllAccountsPagingForDepartment
@@ -329,7 +328,6 @@ import {getAllMissionPaging} from "../../../../static/mission/api";
 
 export default {
   components: {
-    Setting
   },
   async fetch() {
     try {
