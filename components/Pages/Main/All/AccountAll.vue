@@ -1,20 +1,18 @@
 <template>
   <div>
     <!-- Add account btn -->
-    <div>
+    <!-- <div>
       <ShowModal :modalId="createAccount.id" type="html"
         customClass="block text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-3 py-2 text-center"
         :title="createAccount.showModalTemplate">
         <ModalContainer :modalId="createAccount.id" size="4xl">
           <ModalHeader head="Quản lý tài khoản" :modalId="createAccount.id"></ModalHeader>
-          <!-- Modal body -->
           <div class="grid grid-cols-2">
             <InputField id="editUsernameValue" label="Tên đăng nhập *" styleClass="px-4"></InputField>
             <InputField id="editPasswordValue" label="Mật khẩu *" styleClass="px-4"></InputField>
             <InputField id="editNameValue" label="Họ tên *" styleClass="px-4"></InputField>
             <InputField id="editPhoneValue" label="Số điện thoại" styleClass="px-4"></InputField>
             <InputField id="editEmailValue" label="Email" styleClass="px-4"></InputField>
-            <!-- Vị trị-chức vụ-trạng thái -->
             <div class="my-2 ">
               <label for="departmentAllAcc" class="block pl-7 text-sm font-semibold text-gray-900 dark:text-white">Phòng
                 ban</label>
@@ -64,7 +62,6 @@
 
 
           </div>
-          <!-- Modal footer -->
 
           <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
             <button :data-modal-hide="createAccount.id"
@@ -76,7 +73,7 @@
           </div>
         </ModalContainer>
       </ShowModal>
-    </div>
+    </div> -->
 
     <!-- Searchbar -->
     <div class="flex items-center justify-between">

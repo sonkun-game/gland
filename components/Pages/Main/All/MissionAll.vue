@@ -1,19 +1,19 @@
 <template>
   <div>
     <!-- Add account btn -->
-    <div class="flex">
+    <!-- <div class="flex">
       <div class="mr-2 pb-3">
         <ShowModal :modalId="createMission.id" type="html"
           customClass="block text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-3 py-2 text-center"
           :title="createMission.showModalTemplate">
           <ModalContainer :modalId="createMission.id" size="2xl">
             <ModalHeader head="Quản lý nhiệm vụ" :modalId="createMission.id"></ModalHeader>
-            <!-- Modal body -->
+
             <div>
               <InputField id="all_mission_txtName" label="Tên nhiệm vụ" styleClass="px-4"></InputField>
               <InputField id="all_mission_txtDes" styleClass="px-4" label="Mô tả" typeInput="textarea"></InputField>
             </div>
-            <!-- Modal footer -->
+
             <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
               <button :data-modal-hide="createMission.id"
                 class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
@@ -25,7 +25,7 @@
         </ShowModal>
       </div>
       <div>
-        <!-- Modal toggle -->
+
         <ShowModal :modalId="authenMission.id" type="custom" :title="authenMission.showModalTemplate"
           @modal-toggle="loadMissionAuthenModal()"
           customClass="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center">
@@ -65,7 +65,7 @@
                     </option>
                   </select>
                 </div>
-                <!-- Modal footer -->
+
                 <div class="absolute bottom-0 flex items-center justify-end p-2 space-x-2 rounded-b dark:border-gray-600">
                   <button type="button"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center">Đồng
@@ -79,7 +79,7 @@
           </ModalContainer>
         </ShowModal>
       </div>
-    </div>
+    </div> -->
     <div class="flex justify-between items-center">
       <h3 class="text-lg font-semibold">Tất cả nhiệm vụ</h3>
     </div>
@@ -358,14 +358,14 @@ export default {
         let data = resp.value;
         let convertFeArr = [];
         data.forEach(item => {
-            convertFeArr.push({
-              icon: "fa-solid fa-address-card",
-              name: item.name,
-              link: "/main/total/departments/" + item.keyUUID,
-              id: "department" + item.keyUUID,
-              storeId: this.storeId,
-              selected: false,
-            });
+          convertFeArr.push({
+            icon: "fa-solid fa-address-card",
+            name: item.name,
+            link: "/main/total/departments/" + item.keyUUID,
+            id: "department" + item.keyUUID,
+            storeId: this.storeId,
+            selected: false,
+          });
         });
         // set dât
         this.authenMission.loadedDepartment = convertFeArr;
