@@ -6,7 +6,7 @@
         <!-- account - {{ id }} - {{ dpt }} -->
         <Account></Account>
       </TabItem>
-      <!-- Nhiệm vụ của tôi-->
+      <!-- Công việc của tôi-->
       <TabItem :id="data.tabList.list[1].id" labelledby="mission">
         <!-- mission - {{ id }} - {{ dpt }} -->
         <Mission></Mission>
@@ -57,11 +57,11 @@ export default {
               subList: [
                 {
                   id: "jobByMeId",
-                  name: "Nhiệm vụ của tôi"
+                  name: "Công việc của tôi"
                 },
                 {
                   id: "jobByOtherId",
-                  name: "Nhiệm vụ được giao"
+                  name: "Công việc được giao"
                 }
               ]
             },

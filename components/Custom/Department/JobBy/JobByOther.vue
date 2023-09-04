@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <h3 class="text-lg font-semibold pb-3">Nhiệm vụ được giao</h3>
+    <h3 class="text-lg font-semibold pb-3">Công việc được giao</h3>
     <div class="flex mb-2">
       <span
         class="cursor-pointer rounded-lg p-1 mr-4 hover:text-blue-700 hover:bg-gray-300 active:bg-blue-700 active:text-white">Tất
@@ -12,8 +12,8 @@
         class="cursor-pointer rounded-lg p-1 mr-4 hover:text-blue-700 hover:bg-gray-300 active:bg-blue-700 active:text-white">Hủy
         5</span>
     </div>
-    <CrudTable style-class="w-full text-sm text-left text-gray-500" 
-              :table="jobByOther.table"  
+    <CrudTable style-class="w-full text-sm text-left text-gray-500"
+              :table="jobByOther.table"
               :cookiesName="cookiesName"
               @show-or-hide-column="handleShowOrHideColumn">
       <thead>
