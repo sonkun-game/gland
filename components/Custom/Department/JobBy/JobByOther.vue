@@ -12,7 +12,10 @@
         class="cursor-pointer rounded-lg p-1 mr-4 hover:text-blue-700 hover:bg-gray-300 active:bg-blue-700 active:text-white">Hủy
         5</span>
     </div>
-    <CrudTable style-class="w-full text-sm text-left text-gray-500" :table="jobByOther.table"  @show-or-hide-column="handleShowOrHideColumn">
+    <CrudTable style-class="w-full text-sm text-left text-gray-500" 
+              :table="jobByOther.table"  
+              :cookiesName="cookiesName"
+              @show-or-hide-column="handleShowOrHideColumn">
       <thead>
         <Row styleClass="text-xs text-gray-900 bg-gray-300">
           <Cell v-for="(item, index) in jobByOther.table.head" :key="index" styleClass="px-6 py-3 text-center"
@@ -50,7 +53,14 @@
   </div>
 </template>
 <script>
+import { Common } from '../../../../plugins/common';
+
 export default {
+  computed: {
+    cookiesName() {
+      return "JBO" + this.missionId;
+    }
+  },
   data() {
     return {
       jobByOther: {
@@ -81,9 +91,33 @@ export default {
       }
     }
   },
+  props: {
+    missionId: {
+      type: String,
+      default: ""
+    }
+  },
   methods: {
     handleShowOrHideColumn(data) {
       this.jobByOther.table.head[data.index].show = data.show;
+      let value = Common.getTableShowColumn(this.jobByOther.table.head);
+      Common.setCookie(this.cookiesName, value, { expires: 365, path: "/main/total/departments/" })
+    },
+  },
+  mounted() {
+    let cookie = Common.getCookie(this.cookiesName);
+    if (cookie == undefined) {
+      let value = Common.getTableShowColumn(this.jobByOther.table.head);
+      Common.setCookie(this.cookiesName, value, { expires: 365, path: "/main/total/departments/" })
+    } else {
+      var arr = cookie.split("").map(Number);
+      arr.forEach((element, index) => {
+        if (element === 1) {
+          this.jobByOther.table.head[index].show = true;
+        } else {
+          this.jobByOther.table.head[index].show = false;
+        }
+      });
     }
   }
 }

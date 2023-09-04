@@ -36,7 +36,11 @@
         class="cursor-pointer rounded-lg p-1 mr-4 hover:text-blue-700 hover:bg-gray-300 active:bg-blue-700 active:text-white">Hủy
         5</span>
     </div>
-    <CrudTable style-class="w-full text-sm text-left text-gray-500" :table="jobByMe.table"  @show-or-hide-column="handleShowOrHideColumn">
+    <CrudTable 
+          style-class="w-full text-sm text-left text-gray-500" 
+          :table="jobByMe.table"  
+          :cookiesName="cookiesName"
+          @show-or-hide-column="handleShowOrHideColumn">
       <thead>
         <Row styleClass="text-xs text-gray-900 bg-gray-300">
           <Cell v-for="(item, index) in jobByMe.table.head" :key="index" styleClass="px-6 py-3 text-center"
@@ -74,14 +78,21 @@
   </div>
 </template>
 <script>
+import { Common } from '../../../../plugins/common';
 import Job from '../Modal/Job.vue';
 import Service from '../Modal/Service.vue';
 import Type from '../Modal/Type.vue';
 import Target from '../Modal/Target.vue';
 import Status from '../Modal/Status.vue';
+
 export default {
   components: {
     Status, Job, Service, Type, Target
+  },
+  computed: {
+    cookiesName() {
+      return "JBM" + this.missionId;
+    }
   },
   data() {
     return {
@@ -113,9 +124,33 @@ export default {
       }
     }
   },
+  props: {
+    missionId: {
+      type: String,
+      default: ""
+    }
+  },
   methods: {
     handleShowOrHideColumn(data) {
       this.jobByMe.table.head[data.index].show = data.show;
+      let value = Common.getTableShowColumn(this.jobByMe.table.head);
+      Common.setCookie(this.cookiesName, value, { expires: 365, path: "/main/total/departments/" })
+    },
+  },
+  mounted() {
+    let cookie = Common.getCookie(this.cookiesName);
+    if (cookie == undefined) {
+      let value = Common.getTableShowColumn(this.jobByMe.table.head);
+      Common.setCookie(this.cookiesName, value, { expires: 365, path: "/main/total/departments/" })
+    } else {
+      var arr = cookie.split("").map(Number);
+      arr.forEach((element, index) => {
+        if (element === 1) {
+          this.jobByMe.table.head[index].show = true;
+        } else {
+          this.jobByMe.table.head[index].show = false;
+        }
+      });
     }
   }
 }

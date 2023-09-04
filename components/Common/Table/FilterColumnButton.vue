@@ -6,14 +6,13 @@
             class="hover_blue w-8 h-8 rounded-lg text-center shadow">
             <i class="fa-solid fa-filter"></i>
         </button>
-
         <!-- Modal Container -->
         <ModalContainer :modalId="modalId" size="lg">
             <ModalHeader :modalId="modalId" head="Hiển thị cột"></ModalHeader>
             <div class="p-4 flex flex-wrap">
                 <div v-for="(item, index) in table.head" :key="index">
                     <InputField styleClass="w-52" :inputIndex="index" typeInput="checkbox" :label="item.name"
-                        id="mission-all" :isCheck="true" @click-checkbox="handleShowOrHideColumn"></InputField>
+                        id="mission-all" :isCheck="item.show" @click-checkbox="handleShowOrHideColumn"></InputField>
                 </div>
             </div>
         </ModalContainer>
@@ -22,6 +21,7 @@
 
 <script>
 import { v4 as uuidv4 } from 'uuid';
+import { Common } from '../../../plugins/common';
 
 export default {
     name: "FilterColumnButtonComponent",
@@ -34,12 +34,29 @@ export default {
         return {}
     },
     props: {
-        table: {}
+        table: {},
+        cookiesName: "",
     },
     methods: {
         handleShowOrHideColumn(data) {
             this.$emit("show-or-hide-column", data)
         }
+    },
+    created() {
+        if(this.cookiesName !== '') {
+            let cookie = Common.getCookie(this.cookiesName);
+            if (cookie) {
+                var arr = cookie.split("").map(Number);
+                arr.forEach((element, index) => {
+                    if (element === 1) {
+                        this.table.head[index].show = true;
+                    } else {
+                        this.table.head[index].show = false;
+                    }
+                });
+            }
+        }
+
     }
 }
 </script>

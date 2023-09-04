@@ -3,7 +3,7 @@
     <div class="flex justify-betweeen items-center mr-2 my-2">
 
       <!-- Show Button Table-->
-      <FilterColumnButton :table="table" @show-or-hide-column="handleShowOrHideColumn"></FilterColumnButton>
+      <FilterColumnButton :table="table" @show-or-hide-column="handleShowOrHideColumn" :cookiesName="cookiesName"></FilterColumnButton>
 
       <div class="grow"></div>
       <!-- Help text -->
@@ -47,6 +47,10 @@ export default {
       type: Number,
       default: 1
     },
+    cookiesName: {
+      type: String,
+      default: ""
+    }
   },
   methods: {
     handleShowOrHideColumn(data) {

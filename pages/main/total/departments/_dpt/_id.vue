@@ -12,10 +12,10 @@
         <Mission></Mission>
       </TabItem>
       <SubTabItem :id="data.tabList.list[1].subList[0].id" labelledby="jobByMe">
-        <JobByMe></JobByMe>
+        <JobByMe :missionId="dpt"></JobByMe>
       </SubTabItem>
       <SubTabItem :id="data.tabList.list[1].subList[1].id" labelledby="jobByOther">
-        <JobByOther></JobByOther>
+        <JobByOther :missionId="dpt"></JobByOther>
       </SubTabItem>
     </TabContainer>
   </div>

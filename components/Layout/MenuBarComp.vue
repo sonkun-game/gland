@@ -1,9 +1,7 @@
 
 <template>
   <!-- Menu Side Bar -->
-  <aside id="menu-side-bar" class="menu-bar w-0 h-screen bg-blue-700 rounded-tr-2xl rounded-br-2xl"
-    :class="{ 'end': isMainPage(), 'start': !isMainPage() }">
-
+  <aside id="menu-side-bar" class="menu-bar w-0 h-screen bg-blue-500 rounded-tr-2xl rounded-br-2xl end">
     <button @click="openMenu()" class="w-10 absolute top-3 left-64 z-10 px-2">
       <i class="fa-solid fa-bars text-lg"></i>
     </button>
@@ -60,11 +58,12 @@
     <div id="layout-menu-body">
       <div class="overflow-auto px-2 py-4 overflow-y-auto no-scrollbar" style="max-height: 56vh;">
         <ul class="space-y-2 font-medium">
-
           <!-- display list menu -->
           <li class="font-bold" v-for="(item, index) in menuList.total" :key="'all-' + index">
             <a :href="item.link">
-              <button type="button" class="menu-button flex items-center w-full p-3 transition duration-100 rounded-lg">
+              <button type="button" 
+                :class="{'menu-button-active' : mainPage}"
+                class="menu-button flex items-center w-full p-3 transition duration-100 rounded-lg">
                 <i :class="item.icon" class="w-3 h-3"></i>
                 <span class="flex-1 ml-3 text-left whitespace-nowrap">
                   {{ item.name }}
@@ -72,14 +71,13 @@
               </button>
             </a>
           </li>
-          <!-- Phân trang cho loadedDepartment -->
           <li>
           </li>
-          <!-- Cần phải featch api list phòng ban ra đây -->
           <div :key="common.listDepartmentKey">
             <li class="font-bold" v-for="(item, index) in loadedDepartment" :key="'loadedDepartment-' + index">
               <a :href="item.link">
                 <button type="button" :id="item.id"
+                  :class="{'menu-active' : item.selected}"
                   class="menu-button-department flex items-center w-full p-3 transition duration-100 rounded-lg">
                   <i class="w-3 h-3 fa-solid fa-address-card"></i>
                   <span class="flex-1 ml-3 text-left whitespace-nowrap">
@@ -93,7 +91,7 @@
             <ShowModal :modalId="department.id" type="html"
               customClass="menu-button-add flex items-center w-full p-3 transition duration-100 rounded-lg"
               :title="department.showModalTemplate">
-              <ModalContainer :modalId="department.id">
+              <ModalContainer :modalId="department.id" class="hidden">
                 <ModalHeader head="Thêm phòng ban mới" :modalId="department.id"></ModalHeader>
                 <!-- Modal body -->
                 <div>
@@ -131,7 +129,17 @@
   padding: 4px
 }
 
+.menu-active {
+  background-color: #84E1BC;
+  color: white;
+}
+
 .menu-button:hover {
+  color: rgb(29 78 216);
+  background-color: white;
+}
+
+.menu-button-active {
   color: rgb(29 78 216);
   background-color: white;
 }
@@ -202,6 +210,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: "MenuBarComp",
+  computed: {
+    mainPage() {
+      return this.isMainPage();
+    }
+  },
   data() {
     return {
       common: {
@@ -263,16 +276,16 @@ export default {
     },
     isMainPage() {
       var host = this.$route.path
-      return host.includes("/main/");
+      return host.includes("/main/total/all");
     },
     fetchDpt() {
       let url = process.env.API_URL + "api-department?storeId=1";
       let resp = sendGetApi(url, null);
+      let path = window.location.pathname;
 
       resp.then((resp) => {
         let data = resp.value;
         let convertFeArr = [];
-        // Phần này nếu về sau chuẩn hóa api thì có thể bỏ đi
         data.forEach(item => {
           if (!item.keyUUID) {
             alert("KeyUUID không tồn tại !");
@@ -283,7 +296,7 @@ export default {
               link: "/main/total/departments/" + item.keyUUID,
               id: "department" + item.keyUUID,
               storeId: this.storeId,
-              selected: false,
+              selected: path.includes(item.keyUUID),
             });
           }
 
