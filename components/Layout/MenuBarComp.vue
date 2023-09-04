@@ -1,7 +1,7 @@
 
 <template>
   <!-- Menu Side Bar -->
-  <aside id="menu-side-bar" class="menu-bar w-0 h-screen bg-blue-500 rounded-tr-2xl rounded-br-2xl end">
+  <aside id="menu-side-bar" class="menu-bar w-0 h-screen bg-blue-700 rounded-tr-2xl rounded-br-2xl end">
     <button @click="openMenu()" class="w-10 absolute top-3 left-64 z-10 px-2">
       <i class="fa-solid fa-bars text-lg"></i>
     </button>
@@ -61,8 +61,7 @@
           <!-- display list menu -->
           <li class="font-bold" v-for="(item, index) in menuList.total" :key="'all-' + index">
             <a :href="item.link">
-              <button type="button" 
-                :class="{'menu-button-active' : mainPage}"
+              <button type="button" :class="{ 'menu-button-active': mainPage }"
                 class="menu-button flex items-center w-full p-3 transition duration-100 rounded-lg">
                 <i :class="item.icon" class="w-3 h-3"></i>
                 <span class="flex-1 ml-3 text-left whitespace-nowrap">
@@ -76,8 +75,7 @@
           <div :key="common.listDepartmentKey">
             <li class="font-bold" v-for="(item, index) in loadedDepartment" :key="'loadedDepartment-' + index">
               <a :href="item.link">
-                <button type="button" :id="item.id"
-                  :class="{'menu-active' : item.selected}"
+                <button type="button" :id="item.id" :class="{ 'menu-active': item.selected }"
                   class="menu-button-department flex items-center w-full p-3 transition duration-100 rounded-lg">
                   <i class="w-3 h-3 fa-solid fa-address-card"></i>
                   <span class="flex-1 ml-3 text-left whitespace-nowrap">
