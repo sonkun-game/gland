@@ -23,7 +23,7 @@
       </ShowModal>
 
       <!-- Phần hiển thị dữ liệu bảng -->
-      <CrudTable style-class="w-full text-sm text-center text-gray-500">
+      <CrudTable style-class="w-full text-sm text-center text-gray-500" :totalPage="table.totalPage" :currentPage="1">
         <thead>
           <Row styleClass="text-sm text-gray-900 bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3 text-center" cellType="title">
@@ -35,7 +35,7 @@
           <Row styleClass="bg-white border-b" v-for="(item, index) in table.body" :key="index"
             :id="'editStatusConfigRow' + index">
             <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
-            <Cell styleClass="px-6 py-4">{{ item.createAt }}</Cell>
+            <Cell styleClass="px-6 py-4">{{ item.createdAt }}</Cell>
             <Cell styleClass="px-6 py-4">{{ item.createdBy }}</Cell>
             <Cell styleClass="px-6 py-4" :id="'editStatusConfig' + index">{{ item.name }}</Cell>
             <Cell styleClass="px-6 py-4" cellType="status" :status="item.status ? '1' : '0'"></Cell>
@@ -89,7 +89,7 @@ export default {
       try {
         var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1)
         this.table.body = response.value;
-        this.totalPage = response.totalPage;
+        this.table.totalPage = response.totalPage;
       } catch (error) {
         this.table.body =[]
       }
@@ -97,6 +97,7 @@ export default {
     data() {
     return {
       table: {
+        totalPage: 0,
         // Ngày tạo	Người tạo	Tên	Trạng thái	Thao tác
         head: [
           { name: "STT" },
@@ -110,8 +111,7 @@ export default {
       },
       storeId: 1,
       pageNum: 0,
-      createdBy: '',
-      totalPage:0
+      createdBy: ''
     }
   },
   props: {
@@ -120,10 +120,9 @@ export default {
   methods:{
     async createConfig() {
       await createConfigForDepartment(1, this.$route.params.dpt);
-
-      var configList =await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1)
-      this.table.body = configList.value;
-      this.totalPage = configList.totalPage;
+      var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1)
+      this.table.body = response.value;
+      this.table.totalPage = response.totalPage;
     }
   }
 }

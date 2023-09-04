@@ -14,7 +14,6 @@ export async function getAllConfigPagingForDepart(department, pageNum, type) {
     return resp;
   } catch (error) {
     console.error('Error fetching data:', error);
-    return [];
   }
 }
 
