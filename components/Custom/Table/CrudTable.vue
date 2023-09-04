@@ -2,7 +2,8 @@
   <div class="rounded-lg">
     <div class="flex justify-betweeen items-center mr-2 my-2">
       <!-- Show Button Table-->
-      <FilterColumnButton :table="table" @show-or-hide-column="handleShowOrHideColumn" :cookiesName="cookiesName"></FilterColumnButton>
+      <FilterColumnButton :table="table" @show-or-hide-column="handleShowOrHideColumn" :cookiesName="cookiesName">
+      </FilterColumnButton>
 
       <div class="grow"></div>
       <!-- Help text -->
@@ -40,7 +41,7 @@ export default {
     },
     totalPage: {
       type: Number,
-      default: 8
+      default: 0
     },
     currentPage: {
       type: Number,
