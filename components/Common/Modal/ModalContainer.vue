@@ -28,11 +28,9 @@ export default {
     max-height: 95vh;
     overflow-y: auto;
 }
-
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
-
 .no-scrollbar {
     -ms-overflow-style: none;
     /* IE and Edge */

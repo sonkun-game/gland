@@ -87,9 +87,8 @@
     </div>
     <!-- Table -->
     <div>
-      <div class="">
-        <CrudTable style-class="w-full text-sm dark:text-gray-400" :totalPage="accountsList.totalPage" :currentPage="1"
-          :table="accountsList.table" @show-or-hide-column="handleShowOrHideColumn">
+      <div>
+        <CrudTable style-class="w-full text-sm dark:text-gray-400" :totalPage="accountsList.totalPage" :currentPage="1">
           <thead>
             <Row styleClass="text-sm text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <Cell v-for="(item, index) in accountsList.table.head" :key="index" styleClass="px-6 py-3 text-left"
@@ -100,15 +99,15 @@
           </thead>
           <tbody v-if="accountsList.table.head.length >= 9">
             <Row styleClass="bg-white border-b" v-for="(item, index) in accountsList.table.body" :key="index">
-              <Cell styleClass="px-4 py-3" v-if="accountsList.table.head[0].show">{{ index + 1 }}</Cell>
-              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[1].show">{{ item.fullName }}</Cell>
-              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[2].show">{{ item.username }}</Cell>
-              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[3].show">{{ item.email }}</Cell>
-              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[4].show">{{ item.position }}</Cell>
-              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[5].show">{{ formatDate(item.createdAt) }}</Cell>
-              <Cell styleClass="px-2 py-3" v-if="accountsList.table.head[6].show">{{ item.createdBy }}</Cell>
-              <Cell styleClass="px-2 py-3 text-green-500" v-if="accountsList.table.head[7].show">{{ item.status }}</Cell>
-              <Cell styleClass="px-2 py-3 flex" v-if="accountsList.table.head[8].show">
+              <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
+              <Cell styleClass="px-2 py-3">{{ item.fullName }}</Cell>
+              <Cell styleClass="px-2 py-3">{{ item.username }}</Cell>
+              <Cell styleClass="px-2 py-3">{{ item.email }}</Cell>
+              <Cell styleClass="px-2 py-3">{{ item.position }}</Cell>
+              <Cell styleClass="px-2 py-3">{{ formatDate(item.createdAt) }}</Cell>
+              <Cell styleClass="px-2 py-3">{{ item.createdBy }}</Cell>
+              <Cell styleClass="px-2 py-3 text-green-500">{{ item.status }}</Cell>
+              <Cell styleClass="px-2 py-3 flex">
                 <div>
                   <button data-popover-target="popover-edit" data-modal-target="editModal" data-modal-toggle="editModal"
                     class="block w-8 mr-2 text-blue-700 bg-blue-100 hover:bg-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center"
@@ -269,8 +268,8 @@
                         <!-- Modal body -->
                         <div class="p-6 space-y-6">
                           <div>
-                            <details class="" open>
-                              <summary class="">
+                            <details open>
+                              <summary>
                                 <input id="checkbox-all" type="checkbox" value=""
                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded   ">
                                 <label for="checkbox-all"
@@ -415,9 +414,6 @@ export default {
     createAccountsAll(storeId) {
       createAccountsAll(storeId);
     },
-    handleShowOrHideColumn(data) {
-      this.accountsList.table.head[data.index].show = data.show;
-    }
   },
   async mounted() {
     let resp = await getAllAccountsPaging();
@@ -430,6 +426,3 @@ export default {
   }
 }
 </script>
-<style lang="">
-
-</style>

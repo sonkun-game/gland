@@ -44,13 +44,15 @@
       <div>
         <client-only>
           <template #placeholder>
-            <div class="w-screen h-screen fixed flex">
+            <div class="w-screen h-screen fixed flex overflow-hidden">
               <div class="text-blue-500 text-4xl my-auto" style="margin-left: 30%">
                 <img class="w-64 h-64" src="~/static/img/loading.png" alt="loading..." />
               </div>
             </div>
           </template>
-          <Nuxt />
+          <div class="w-screen nuxt_container no-scrollbar overflow-scroll">
+            <Nuxt />
+          </div>
         </client-only>
       </div>
     </div>
@@ -92,10 +94,20 @@ span {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 14px;
 }
-
 .drop_down_style {
   position: absolute;
   right: 25px;
   top: 65px;
+}
+.nuxt_container {
+  height: 93vh;
+}.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 </style>
