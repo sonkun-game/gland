@@ -50,7 +50,7 @@
               </div>
             </div>
           </template>
-          <div class="w-screen nuxt_container no-scrollbar overflow-scroll">
+          <div class="w-full nuxt_container no-scrollbar overflow-scroll">
             <Nuxt />
           </div>
         </client-only>
