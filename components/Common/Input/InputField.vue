@@ -16,7 +16,7 @@
         :placeholder="placeholder" :value="value"></textarea>
     </template>
     <template v-else-if="typeInput == 'checkbox'">
-      <input :id="id" type="checkbox" :value="value"
+      <input :id="id" type="checkbox" :checked="isChecked" @change="toggleCheckBoxInput()"
         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
       <label :for="id" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ label }}</label>
     </template>
@@ -32,9 +32,31 @@
 <script>
 export default {
   name: "InputFieldComponent",
+  data() {
+    return {
+      isChecked: false,
+    }
+  },
+  computed: {
+    isCheckBoxChecked: {
+      get() {
+        return this.isChecked;
+      },
+      set(value) {
+        this.isChecked = Boolean(value);
+      }
+    },
+  },
+  mounted() {
+    this.isCheckBoxChecked = this.isCheck;
+  },
   props: {
     id: "",
     styleClass: "",
+    isCheck: {
+      type: Boolean,
+      default: false
+    },
     label: {
       type: String,
       default: "defaultLabel"
@@ -55,6 +77,20 @@ export default {
     required: {
       type: Boolean,
       default: false
+    },
+    inputIndex: {
+      type: Number,
+      default: 1
+    }
+  },
+  methods: {
+    toggleCheckBoxInput() {
+      this.isChecked = !this.isChecked;
+      let data = {
+        show: this.isChecked,
+        index: this.inputIndex 
+      }
+      this.$emit("click-checkbox", data);
     }
   }
 }

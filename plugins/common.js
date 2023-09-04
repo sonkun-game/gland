@@ -1,12 +1,15 @@
+
+import Cookies from 'js-cookie';
 /**
  * Phần này sử dụng để lưu các hàm js sử dụng lại
  * tác giả: Sơn
- * ngày : 26/08
+ * ngày : 26/08/2023
  */
+
 
 export const Common = {
   /**
-   * Get 1 chuỗi key tránh bị trùng lặp ID,...
+   * Get 1 chuỗi key tránh bị trùng lặp ID,... Hiện tại có thể sử dụng uuid thay thế
    * @param {*} length
    * @returns
    */
@@ -48,4 +51,29 @@ export const Common = {
     }
     return ''
   },
+  /**
+   * trả về đoạn chuỗi 1110111 dựa theo thuộc tính show = true|false của table
+   * đối với show = true thì sẽ trả về 1 còn lại là 0
+   */
+  getTableShowColumn(tableHead) {
+    var data = "";
+    tableHead.forEach(item => {
+      if (item.show) {
+        data = data.concat("1");
+      } else {
+        data = data.concat("2");
+      }
+    });
+    return data;
+  },
+
+  /**
+  * 
+  */
+  setCookie(name, value, option) {
+    Cookies.set(name, value, { expires: option.expires, path: option.path });
+  },
+  getCookie(name) {
+    return Cookies.get(name)
+  }
 }

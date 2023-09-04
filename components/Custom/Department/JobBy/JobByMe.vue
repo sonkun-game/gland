@@ -36,71 +36,84 @@
         class="cursor-pointer rounded-lg p-1 mr-4 hover:text-blue-700 hover:bg-gray-300 active:bg-blue-700 active:text-white">Hủy
         5</span>
     </div>
-    <CrudTable style-class="w-full text-sm text-left text-gray-500">
+    <CrudTable 
+          style-class="w-full text-sm text-left text-gray-500" 
+          :table="jobByMe.table"  
+          :cookiesName="cookiesName"
+          @show-or-hide-column="handleShowOrHideColumn">
       <thead>
         <Row styleClass="text-xs text-gray-900 bg-gray-300">
           <Cell v-for="(item, index) in jobByMe.table.head" :key="index" styleClass="px-6 py-3 text-center"
-            cellType="title">
+          :class="{ 'hidden': !item.show }" cellType="title">
             {{ item.name }}
           </Cell>
         </Row>
       </thead>
       <tbody>
         <Row styleClass="bg-white border-b" v-for="(item, index) in jobByMe.table.body" :key="index">
-          <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
-          <Cell styleClass="px-6 py-4">
-            <button data-modal-target="codeDetailModal" data-modal-toggle="codeDetailModal" class="link link-info">{{ item.code
-            }}</button>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[0].show">{{ index + 1 }}</Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[1].show">
+            <button data-modal-target="codeDetailModal" data-modal-toggle="codeDetailModal" class="link link-info">
+              {{ item.code }}
+            </button>
+            <ModalContainer modalId="codeDetailModal">
+            </ModalContainer>
           </Cell>
-          <Cell styleClass="px-6 py-4">{{ item.info }}</Cell>
-          <Cell styleClass="px-6 py-4">{{ item.target }}</Cell>
-          <Cell styleClass="px-6 py-4">{{ item.jobType }}</Cell>
-          <Cell styleClass="px-6 py-4">{{ item.serviceType }}</Cell>
-          <Cell styleClass="px-6 py-4">{{ item.service }}</Cell>
-          <Cell styleClass="px-6 py-4">{{ item.creator }}</Cell>
-          <Cell styleClass="px-6 py-4">{{ item.deleveriedTo }}</Cell>
-          <Cell styleClass="px-6 py-4">{{ item.result }}</Cell>
-          <Cell styleClass="px-6 py-4">{{ item.deadline }}</Cell>
-          <Cell styleClass="px-6 py-4 text-green-400">{{ item.in }}</Cell>
-          <Cell styleClass="px-6 py-4 text-red-400">{{ item.out }}</Cell>
-          <Cell styleClass="px-6 py-4">{{ item.status }}</Cell>
-          <Cell styleClass="px-6 py-4 "></Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[2].show">{{ item.info }}</Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[3].show">{{ item.target }}</Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[4].show">{{ item.jobType }}</Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[5].show">{{ item.serviceType }}</Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[6].show">{{ item.service }}</Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[7].show">{{ item.creator }}</Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[8].show">{{ item.deleveriedTo }}</Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[9].show">{{ item.result }}</Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[10].show">{{ item.deadline }}</Cell>
+          <Cell styleClass="px-6 py-4 text-green-400" v-if="jobByMe.table.head[11].show">{{ item.in }}</Cell>
+          <Cell styleClass="px-6 py-4 text-red-400" v-if="jobByMe.table.head[12].show">{{ item.out }}</Cell>
+          <Cell styleClass="px-6 py-4" v-if="jobByMe.table.head[13].show">{{ item.status }}</Cell>
+          <Cell styleClass="px-6 py-4 " v-if="jobByMe.table.head[14].show"></Cell>
         </Row>
       </tbody>
     </CrudTable>
   </div>
 </template>
 <script>
+import { Common } from '../../../../plugins/common';
 import Job from '../Modal/Job.vue';
 import Service from '../Modal/Service.vue';
 import Type from '../Modal/Type.vue';
 import Target from '../Modal/Target.vue';
 import Status from '../Modal/Status.vue';
+
 export default {
   components: {
     Status, Job, Service, Type, Target
+  },
+  computed: {
+    cookiesName() {
+      return "JBM" + this.missionId;
+    }
   },
   data() {
     return {
       jobByMe: {
         table: {
           head: [
-            // STT	Mã nguồn	Tên/Thông tin	Đối tượng	Loại công việc	Loại hình dịch vụ	Hình thức dịch vụ	Người tạo	Giao cho	K/q công việc	Deadline	Thu	Chi	Trạng thái	Thao tác
-            { name: "STT" },
-            { name: "Mã nguồn" },
-            { name: "Tên/Thông tin" },
-            { name: "Đối tượng" },
-            { name: "Loại công việc" },
-            { name: "Loại hình dịch vụ" },
-            { name: "Hình thức dịch vụ" },
-            { name: "Người tạo" },
-            { name: "Giao cho" },
-            { name: "K/q công việc" },
-            { name: "Deadline" },
-            { name: "Thu" },
-            { name: "Chi" },
-            { name: "Trạng thái" },
-            { name: "Thao tác" },
+            { name: "STT", show: true, },
+            { name: "Mã nguồn", show: true, },
+            { name: "Tên/Thông tin", show: true, },
+            { name: "Đối tượng", show: true, },
+            { name: "Loại công việc", show: true, },
+            { name: "Loại hình dịch vụ", show: true, },
+            { name: "Hình thức dịch vụ", show: true, },
+            { name: "Người tạo", show: true, },
+            { name: "Giao cho", show: true, },
+            { name: "K/q công việc", show: true, },
+            { name: "Deadline", show: true, },
+            { name: "Thu", show: true, },
+            { name: "Chi", show: true, },
+            { name: "Trạng thái", show: true, },
+            { name: "Thao tác", show: true, },
           ],
           body: [
             {
@@ -109,6 +122,35 @@ export default {
           ],
         },
       }
+    }
+  },
+  props: {
+    missionId: {
+      type: String,
+      default: ""
+    }
+  },
+  methods: {
+    handleShowOrHideColumn(data) {
+      this.jobByMe.table.head[data.index].show = data.show;
+      let value = Common.getTableShowColumn(this.jobByMe.table.head);
+      Common.setCookie(this.cookiesName, value, { expires: 365, path: "/main/total/departments/" })
+    },
+  },
+  mounted() {
+    let cookie = Common.getCookie(this.cookiesName);
+    if (cookie == undefined) {
+      let value = Common.getTableShowColumn(this.jobByMe.table.head);
+      Common.setCookie(this.cookiesName, value, { expires: 365, path: "/main/total/departments/" })
+    } else {
+      var arr = cookie.split("").map(Number);
+      arr.forEach((element, index) => {
+        if (element === 1) {
+          this.jobByMe.table.head[index].show = true;
+        } else {
+          this.jobByMe.table.head[index].show = false;
+        }
+      });
     }
   }
 }

@@ -1,6 +1,11 @@
 <template>
   <div class="rounded-lg">
-    <div class="flex justify-end items-end mr-2 my-2">
+    <div class="flex justify-betweeen items-center mr-2 my-2">
+
+      <!-- Show Button Table-->
+      <FilterColumnButton :table="table" @show-or-hide-column="handleShowOrHideColumn" :cookiesName="cookiesName"></FilterColumnButton>
+
+      <div class="grow"></div>
       <!-- Help text -->
       <Pagination :totalPage="totalPage" :currentPage="currentPage"></Pagination>
     </div>
@@ -17,6 +22,7 @@
 <script>
 import Cell from '../../Common/Table/Cell.vue';
 import Row from '../../Common/Table/Row.vue';
+import FilterColumnButton from '../../Common/Table/FilterColumnButton.vue';
 import Pagination from '../../Common/PaginationComp.vue';
 
 export default {
@@ -24,6 +30,7 @@ export default {
   components: {
     Cell,
     Row,
+    FilterColumnButton,
     Pagination
   },
   props: {
@@ -40,6 +47,15 @@ export default {
       type: Number,
       default: 1
     },
+    cookiesName: {
+      type: String,
+      default: ""
+    }
+  },
+  methods: {
+    handleShowOrHideColumn(data) {
+      this.$emit("show-or-hide-column", data)
+    }
   }
 }
 </script>

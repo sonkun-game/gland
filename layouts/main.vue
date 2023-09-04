@@ -70,7 +70,6 @@ export default {
     }
   },
   mounted() {
-    console.log("test");
     let protocol = window.location.protocol;
     let host = window.location.host;
     this.authenURL = protocol + "//" + host + "/authen/profile";
