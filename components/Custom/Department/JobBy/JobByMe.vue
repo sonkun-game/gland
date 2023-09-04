@@ -1,7 +1,7 @@
 <template lang="">
   <div>
     <div>
-      <h3 class="text-lg font-semibold pb-3">Nhiệm vụ của tôi</h3>
+      <h3 class="text-lg font-semibold pb-3">Công việc của tôi</h3>
     <div class="flex mb-2 justify-between pt-2">
       <ShowModal type="button" customClass="pr-4 cursor-pointer" modalId="configStatus" title="Cấu hình trạng thái">
         <Status modalId="configStatus"></Status>
@@ -36,9 +36,9 @@
         class="cursor-pointer rounded-lg p-1 mr-4 hover:text-blue-700 hover:bg-gray-300 active:bg-blue-700 active:text-white">Hủy
         5</span>
     </div>
-    <CrudTable 
-          style-class="w-full text-sm text-left text-gray-500" 
-          :table="jobByMe.table"  
+    <CrudTable
+          style-class="w-full text-sm text-left text-gray-500"
+          :table="jobByMe.table"
           :cookiesName="cookiesName"
           @show-or-hide-column="handleShowOrHideColumn">
       <thead>
