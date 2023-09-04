@@ -33,6 +33,10 @@
                     </ul>
                 </div>
             </li>
+            <li class="search m-2">
+                <input type="search" placeholder="Tìm kiếm bằng tên - tài khoản "
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:border-blue-500 block w-80 p-2">
+            </li>
         </ul>
     </div>
 </template>
