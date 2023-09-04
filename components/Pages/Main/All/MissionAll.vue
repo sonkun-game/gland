@@ -33,8 +33,8 @@
             <ModalHeader head="Phân quyền nhiệm vụ" :modalId="authenMission.id"></ModalHeader>
             <div class="px-6 pt-2 space-y-6 flex justify-between">
               <div class="w-50 mb-8">
-                <details class="" open>
-                  <summary class="">
+                <details open>
+                  <summary>
                     <InputField typeInput="checkbox" label="Tổng" id="mission-all"></InputField>
                   </summary>
                   <InputField label="Tài khoản" id="mission-account" styleClass="px-5 py-2" typeInput="checkbox">

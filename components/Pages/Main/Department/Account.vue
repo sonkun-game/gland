@@ -88,7 +88,7 @@
     </div>
     <!-- Table -->
     <div>
-      <div class="">
+      <div>
         <CrudTable style-class="w-full text-sm dark:text-gray-400" :totalPage="accountsList.totalPage" :currentPage="1">
           <thead>
             <Row styleClass="text-sm text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -269,8 +269,8 @@
                         <!-- Modal body -->
                         <div class="p-6 space-y-6">
                           <div>
-                            <details class="" open>
-                              <summary class="">
+                            <details  open>
+                              <summary >
                                 <input id="checkbox-all" type="checkbox" value=""
                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded   ">
                                 <label for="checkbox-all"

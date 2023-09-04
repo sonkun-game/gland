@@ -24,8 +24,8 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
               <div>
-                <details class="" open>
-                  <summary class="">
+                <details open>
+                  <summary>
                       <input id="checkbox-all" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                       <label for="checkbox-all" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tổng</label>
                   </summary>
@@ -58,7 +58,7 @@
       <h3 class="text-lg font-semibold">Tất cả phòng ban</h3>
     </div>
     <!-- Table -->
-    <div class="">
+    <div >
   <CrudTable style-class="w-full text-sm dark:text-gray-400" :totalPage="departList.totalPage" :currentPage="1">
       <thead>
         <Row styleClass="text-sm text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
