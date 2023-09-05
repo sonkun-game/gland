@@ -12,11 +12,12 @@
           <ModalHeader head="Cấu hình trạng thái" modalId="createStatusMission"></ModalHeader>
           <InputField styleClass="p-4" id="editValue" label="" placeholder="Tên trạng thái">
           </InputField>
+          <!-- sửa như tương tự nhé 1:48 05/09/2023 -->
           <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
-            <button :data-modal-hide="modalId"
+            <button data-modal-hide="createStatusMission"
               class="text-gray-500 bg-white hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
               Hủy bỏ</button>
-            <button :data-modal-hide="modalId" type="button" @click="createConfig()"
+            <button data-modal-hide="createStatusMission" type="button" @click="createConfig()"
               class="btn btn-info text-white bg-blue-700 hover:bg-blue-800 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
           </div>
         </ModalContainer>
@@ -31,7 +32,7 @@
             </Cell>
           </Row>
         </thead>
-        <tbody>
+        <tbody :key="statusTableKey">
           <Row styleClass="bg-white border-b" v-for="(item, index) in table.body" :key="index"
             :id="'editStatusConfigRow' + index">
             <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
@@ -109,6 +110,7 @@ export default {
         ],
         body: []
       },
+      statusTableKey: 199,
       storeId: 1,
       pageNum: 0,
       createdBy: ''
@@ -119,10 +121,13 @@ export default {
   },
   methods: {
     async createConfig() {
-      await createConfigForDepartment(1, this.$route.params.dpt);
-      var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1)
-      this.table.body = response.value;
-      this.table.totalPage = response.totalPage;
+      var data = await createConfigForDepartment(1, this.$route.params.dpt).then((res) => {
+        const response = getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1).then((config) => {
+          this.table.body = config.value;
+          this.table.totalPage = config.totalPage;
+          this.statusTableKey++;
+        });
+      });
     }
   }
 }

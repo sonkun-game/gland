@@ -29,10 +29,10 @@
           </div>
           <!-- Phần dưới này là nút close and save-->
           <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
-            <button :data-modal-hide="modalId"
+            <button data-modal-hide="configJobMission"
               class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
               Hủy bỏ</button>
-            <button :data-modal-hide="modalId" type="button" @click="createConfig()"
+            <button data-modal-hide="configJobMission" type="button" @click="createConfig()"
               class="btn btn-info text-white bg-blue-700 hover:bg-blue-800 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
           </div>
         </ModalContainer>
@@ -48,7 +48,7 @@
             </Cell>
           </Row>
         </thead>
-        <tbody>
+        <tbody :key="jobTableKey">
           <Row styleClass="bg-white border-b" v-for="(item, index) in table.body" :key="index"
             :id="'editJobConfigRow' + index">
             <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
@@ -124,6 +124,7 @@ export default {
           }
         ]
       },
+      jobTableKey: 299,
       pageNum: 0,
       storeId: 1,
       createdBy: ''
@@ -134,10 +135,13 @@ export default {
   },
   methods: {
     async createConfig() {
-      await createConfigForDepartment(2, this.$route.params.dpt);
-      var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 2)
-      this.table.body = response.value;
-      this.table.totalPage = response.totalPage;
+      var data = await createConfigForDepartment(2, this.$route.params.dpt).then((res) => {
+        const response = getAllConfigPagingForDepart(this.$route.params.dpt, 0, 2).then((config) => {
+          this.table.body = config.value;
+          this.table.totalPage = config.totalPage;
+          this.jobTableKey++;
+        });
+      });
     }
   }
 }

@@ -22,7 +22,7 @@ export async function createConfigForDepartment(type, departmentKey) {
   var hours = document.getElementById("editJobHourValue").value;
   var days = document.getElementById("editJobDaysValue").value;
 
-  axios({
+  return axios({
     method: 'post',
     url: 'https://103.142.26.40:8445/Spa/config-api/create',
     responseType: 'json',
@@ -37,7 +37,5 @@ export async function createConfigForDepartment(type, departmentKey) {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("jwt")
     }
-  }).then(async function (response) {
-    //console.log(response);
   });
 }
