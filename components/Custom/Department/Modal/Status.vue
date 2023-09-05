@@ -12,18 +12,19 @@
           <ModalHeader head="Cấu hình trạng thái" modalId="createStatusMission"></ModalHeader>
           <InputField styleClass="p-4" id="editValue" label="" placeholder="Tên trạng thái">
           </InputField>
+          <!-- sửa như tương tự nhé 1:48 05/09/2023 -->
           <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
-            <button :data-modal-hide="modalId"
+            <button data-modal-hide="createStatusMission"
               class="text-gray-500 bg-white hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
               Hủy bỏ</button>
-            <button :data-modal-hide="modalId" type="button"
+            <button data-modal-hide="createStatusMission" type="button" @click="createConfig()"
               class="btn btn-info text-white bg-blue-700 hover:bg-blue-800 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
           </div>
         </ModalContainer>
       </ShowModal>
 
       <!-- Phần hiển thị dữ liệu bảng -->
-      <CrudTable style-class="w-full text-sm text-center text-gray-500">
+      <CrudTable style-class="w-full text-sm text-center text-gray-500" :totalPage="table.totalPage" :currentPage="1">
         <thead>
           <Row styleClass="text-sm text-gray-900 bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3 text-center" cellType="title">
@@ -31,14 +32,14 @@
             </Cell>
           </Row>
         </thead>
-        <tbody>
+        <tbody :key="statusTableKey">
           <Row styleClass="bg-white border-b" v-for="(item, index) in table.body" :key="index"
             :id="'editStatusConfigRow' + index">
             <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
-            <Cell styleClass="px-6 py-4">{{ item.createAt }}</Cell>
+            <Cell styleClass="px-6 py-4">{{ item.createdAt }}</Cell>
             <Cell styleClass="px-6 py-4">{{ item.createdBy }}</Cell>
             <Cell styleClass="px-6 py-4" :id="'editStatusConfig' + index">{{ item.name }}</Cell>
-            <Cell styleClass="px-6 py-4" cellType="status" :status="item.status ? '1' : '0'"></Cell>
+            <Cell styleClass="px-6 py-4 text-green-500" cellType="status" :status="item.status ? '1' : '0'"></Cell>
             <Cell styleClass="px-6 py-4 ">
               <div class="m-auto flex justify-center">
                 <!-- edit Modal -->
@@ -81,11 +82,23 @@
 </template>
 
 <script>
+import { createConfigForDepartment, getAllConfigPagingForDepart } from "../../../../static/configuration/api";
+
 export default {
   name: "MissionStatus",
+  async fetch() {
+    try {
+      var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1)
+      this.table.body = response.value;
+      this.table.totalPage = response.totalPage;
+    } catch (error) {
+      this.table.body = []
+    }
+  },
   data() {
     return {
       table: {
+        totalPage: 0,
         // Ngày tạo	Người tạo	Tên	Trạng thái	Thao tác
         head: [
           { name: "STT" },
@@ -95,12 +108,9 @@ export default {
           { name: "Trạng thái" },
           { name: "Thao tác" },
         ],
-        body: [
-          {
-
-          }
-        ]
+        body: []
       },
+      statusTableKey: 199,
       storeId: 1,
       pageNum: 0,
       createdBy: ''
@@ -109,6 +119,17 @@ export default {
   props: {
     modalId: ""
   },
+  methods: {
+    async createConfig() {
+      var data = await createConfigForDepartment(1, this.$route.params.dpt).then((res) => {
+        const response = getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1).then((config) => {
+          this.table.body = config.value;
+          this.table.totalPage = config.totalPage;
+          this.statusTableKey++;
+        });
+      });
+    }
+  }
 }
 </script>
 

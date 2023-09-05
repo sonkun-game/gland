@@ -11,8 +11,11 @@
         <MissionAll />
       </TabItem>
       <TabItem :id="data.tabList.list[2].id" labelledby="staff">
-        <!-- Phân quyền -->
+        <!-- Phòng ban-->
         <DecentAll />
+      </TabItem>
+      <TabItem :id="setting" labelledby="staff">
+        <SettingVue />
       </TabItem>
     </TabContainer>
   </div>
@@ -48,7 +51,8 @@ export default {
             {
               id: "evidenceTab",
               name: "Phòng ban",
-            }
+            },
+
 
           ],
         },

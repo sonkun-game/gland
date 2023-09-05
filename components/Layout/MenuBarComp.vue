@@ -1,7 +1,8 @@
 
 <template>
   <!-- Menu Side Bar -->
-  <aside id="menu-side-bar" class="menu-bar w-0 h-screen bg-blue-500 rounded-tr-2xl rounded-br-2xl end">
+  <aside id="menu-side-bar"
+    class="menu-bar w-0 h-screen bg-gradient-to-b from-cyan-500 to-blue-500 rounded-tr-2xl rounded-br-2xl end">
     <button @click="openMenu()" class="w-10 absolute top-3 left-64 z-10 px-2">
       <i class="fa-solid fa-bars text-lg"></i>
     </button>
@@ -28,7 +29,7 @@
       <div>
         <div class="flex items-center justify-center">
           <button id="dropdownChangeStore" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
-            class="text-white bg-blue-700 hover:bg-yellow-400 focus:outline-none  font-medium rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
+            class="text-white hover:bg-yellow-400 focus:outline-none  font-medium rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
             type="button">Đổi cửa hàng <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -61,8 +62,7 @@
           <!-- display list menu -->
           <li class="font-bold" v-for="(item, index) in menuList.total" :key="'all-' + index">
             <a :href="item.link">
-              <button type="button" 
-                :class="{'menu-button-active' : mainPage}"
+              <button type="button" :class="{ 'menu-button-active': mainPage }"
                 class="menu-button flex items-center w-full p-3 transition duration-100 rounded-lg">
                 <i :class="item.icon" class="w-3 h-3"></i>
                 <span class="flex-1 ml-3 text-left whitespace-nowrap">
@@ -76,8 +76,7 @@
           <div :key="common.listDepartmentKey">
             <li class="font-bold" v-for="(item, index) in loadedDepartment" :key="'loadedDepartment-' + index">
               <a :href="item.link">
-                <button type="button" :id="item.id"
-                  :class="{'menu-active' : item.selected}"
+                <button type="button" :id="item.id" :class="{ 'menu-active': item.selected }"
                   class="menu-button-department flex items-center w-full p-3 transition duration-100 rounded-lg">
                   <i class="w-3 h-3 fa-solid fa-address-card"></i>
                   <span class="flex-1 ml-3 text-left whitespace-nowrap">
