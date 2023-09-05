@@ -1,7 +1,8 @@
 
 <template>
   <!-- Menu Side Bar -->
-  <aside id="menu-side-bar" class="menu-bar w-0 h-screen bg-blue-700 rounded-tr-2xl rounded-br-2xl end">
+  <aside id="menu-side-bar"
+    class="menu-bar w-0 h-screen bg-gradient-to-b from-cyan-500 to-blue-500 rounded-tr-2xl rounded-br-2xl end">
     <button @click="openMenu()" class="w-10 absolute top-3 left-64 z-10 px-2">
       <i class="fa-solid fa-bars text-lg"></i>
     </button>
