@@ -49,8 +49,10 @@
                   <summary>
                     <InputField typeInput="checkbox" :label="item.name" :id="'missionModalDepartment' + index" />
                   </summary>
-                  <InputField label="Tài khoản" :id="'missionModalAccount' + index" styleClass="px-5 py-2" typeInput="checkbox" />
-                  <InputField label="Nhiệm vụ" :id="'missionModalMission' + index" styleClass="px-5 py-2" typeInput="checkbox" />
+                  <InputField label="Tài khoản" :id="'missionModalAccount' + index" styleClass="px-5 py-2"
+                    typeInput="checkbox" />
+                  <InputField label="Nhiệm vụ" :id="'missionModalMission' + index" styleClass="px-5 py-2"
+                    typeInput="checkbox" />
                 </details>
               </div>
               <div class="w-50 h-full">
@@ -97,10 +99,13 @@
         <tbody :key="missionAllKey">
           <Row styleClass="bg-white border-b" v-for="(item, index) in missionList.table.body" :key="index">
             <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.codeMission }}</Cell>
             <Cell styleClass="px-2 py-3">{{ item.missionName }}</Cell>
-            <Cell styleClass="px-2 py-3">{{ item.description }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.giveMission }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.deadline }}</Cell>
+            <!-- <Cell styleClass="px-2 py-3">{{ item.description }}</Cell>
             <Cell styleClass="px-2 py-3">{{ formatDate(item.missionCreatedDate) }}</Cell>
-            <Cell styleClass="px-2 py-3">{{ item.missionCreatedBy }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.missionCreatedBy }}</Cell> -->
             <Cell styleClass="px-2 py-3 flex">
               <div>
                 <button data-modal-target="editModalMission" data-modal-toggle="editModalMission"
@@ -269,7 +274,7 @@
 <script>
 
 import moment from "moment";
-import {getAllMissionPagingForDepart} from "../../../../static/department/api_mission";
+import { getAllMissionPagingForDepart } from "../../../../static/department/api_mission";
 export default {
   async fetch() {
     try {
@@ -289,10 +294,13 @@ export default {
         table: {
           head: [
             { name: "STT" },
+            { name: "Mã nhiệm vụ" },
             { name: "Nhiệm vụ" },
-            { name: "Mô tả" },
-            { name: "Ngày tạo" },
-            { name: "Người tạo" },
+            { name: "GIao cho" },
+            { name: "Deadline" },
+            // { name: "Mô tả" },
+            // { name: "Ngày tạo" },
+            // { name: "Người tạo" },
             { name: "Thao tác" },
           ],
           body: [],
