@@ -45,6 +45,7 @@ export default {
         tabList: {
           id: "myTab",
           dataTabsToggle: "accountTab",
+          hasSetting: true,
           list: [
             {
               id: "infoTab",

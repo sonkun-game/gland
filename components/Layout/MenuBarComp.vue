@@ -27,7 +27,7 @@
       </div>
       <div>
         <div class="flex items-center justify-center">
-          <button id="dropdownChangeStore" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
+          <button id="dropdownChangeStore" data-dropdown-toggle="configDropdown" data-dropdown-trigger="hover"
             class="text-white bg-blue-700 hover:bg-yellow-400 focus:outline-none  font-medium rounded-xl text-sm px-5 py-2.5 text-center inline-flex items-center"
             type="button">Đổi cửa hàng <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -35,7 +35,7 @@
                 d="m1 1 4 4 4-4" />
             </svg></button>
           <!-- Dropdown menu -->
-          <div id="dropdownHover"
+          <div id="configDropdown"
             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-52 dark:bg-gray-700">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownChangeStore">
               <li>

@@ -33,14 +33,50 @@
                     </ul>
                 </div>
             </li>
+
+            <!-- Setting button -->
+            <li v-if="data.hasSetting">
+                <button 
+                    @click="toggleConfig()"
+                    type="button"
+                    class="p-3 rounded-lg config-btn" :class="{'active':isConfigClicked}">
+                    <i class="fa-solid fa-wrench"></i>
+                </button>
+                <div
+                    :class="{'hidden': !isConfigClicked}"
+                    class="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                        <li>
+                            <a href="#"
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </li>
         </ul>
     </div>
 </template>
 
-<script>
+<style scoped>
+.config-btn.active {
+    color: white;
+    background-color: rgb(29 78 216);
+}
+</style>
 
+<script>
 export default {
     name: "TabListHeaderComponent",
+    data() {
+        return {
+            isConfigClicked: false,
+        }
+    },
     props: {
         data: {
             id: {
@@ -57,7 +93,11 @@ export default {
                     id: "staff",
                     name: ""
                 }
-            ]
+            ],
+            hasSetting: {
+                type: Boolean,
+                default: false
+            },
         }
     },
     methods: {
@@ -82,6 +122,10 @@ export default {
             } else {
                 console.error("hideModal::showModal : element not found !")
             }
+        },
+        toggleConfig() {
+            console.log("toggleConfig");
+            this.isConfigClicked = !this.isConfigClicked;
         },
     }
 }
