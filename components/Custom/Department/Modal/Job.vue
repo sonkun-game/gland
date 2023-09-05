@@ -7,7 +7,7 @@
         customClass="btn btn-info btn-normal bg-blue-700 hover:bg-blue-800 border-none text-white m-4" title="Tạo mới">
         <ModalContainer modalId="configJobMission" size="lg">
           <ModalHeader head="Cấu hình công việc" modalId="configJobMission"></ModalHeader>
-          <InputField styleClass="px-4 py-3" id="editJobValue" label="Tên công việc" placeholder="Tên công việc">
+          <InputField styleClass="px-4 py-3" id="editValue" label="Tên công việc" placeholder="Tên công việc">
           </InputField>
           <InputField styleClass="px-4 py-3" id="editJobDaysValue" label="Ngày" placeholder="">
           </InputField>
@@ -32,14 +32,15 @@
             <button :data-modal-hide="modalId"
               class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
               Hủy bỏ</button>
-            <button :data-modal-hide="modalId" type="button"
+            <button :data-modal-hide="modalId" type="button" @click="createConfig()"
               class="btn btn-info text-white bg-blue-700 hover:bg-blue-800 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
           </div>
         </ModalContainer>
       </ShowModal>
 
 
-      <CrudTable style-class="w-full text-sm text-center mx-2 text-gray-500">
+      <CrudTable style-class="w-full text-sm text-center mx-2 text-gray-500" :totalPage="table.totalPage"
+        :currentPage="1">
         <thead>
           <Row styleClass="text-sm text-gray-900 bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3 text-center" cellType="title">
@@ -48,14 +49,15 @@
           </Row>
         </thead>
         <tbody>
-          <Row styleClass="bg-white border-b" v-for="(item, index) in table.body" :key="index">
+          <Row styleClass="bg-white border-b" v-for="(item, index) in table.body" :key="index"
+            :id="'editJobConfigRow' + index">
             <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
             <Cell styleClass="px-6 py-4">{{ item.createdAt }}</Cell>
-            <Cell styleClass="px-6 py-4">{{ item.creator }}</Cell>
-            <Cell styleClass="px-6 py-4">{{ item.name }}</Cell>
+            <Cell styleClass="px-6 py-4">{{ item.createdBy }}</Cell>
+            <Cell styleClass="px-6 py-4" :id="'editJobConfig' + index">{{ item.name }}</Cell>
             <Cell styleClass="px-6 py-4">{{ item.days }}</Cell>
-            <Cell styleClass="px-6 py-4">{{ item.hour }}</Cell>
-            <Cell styleClass="px-6 py-4" cellType="status" :status="item.status ? '1' : '0'"></Cell>
+            <Cell styleClass="px-6 py-4">{{ item.hours }}</Cell>
+            <Cell styleClass="px-6 py-4 text-green-500" cellType="status" :status="item.status ? '1' : '0'"></Cell>
             <Cell styleClass="px-6 py-4 ">
               <div class="m-auto flex justify-center">
                 <ShowModal modalId="createJobMission" iconClass="fa-regular fa-pen-to-square">
@@ -86,8 +88,18 @@
 </template>
 
 <script>
+import { createConfigForDepartment, getAllConfigPagingForDepart } from "../../../../static/configuration/api";
 export default {
   name: "MissionJob",
+  async fetch() {
+    try {
+      var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 2)
+      this.table.body = response.value;
+      this.table.totalPage = response.totalPage;
+    } catch (error) {
+      this.table.body = []
+    }
+  },
   data() {
     return {
       statusList: [
@@ -95,6 +107,7 @@ export default {
       ],
       // Ngày tạo	Người tạo	Công việc	Ngày	Giờ	Trạng thái	Thao tác
       table: {
+        totalPage: 0,
         head: [
           { name: "STT" },
           { name: "Ngày tạo" },
@@ -112,12 +125,21 @@ export default {
         ]
       },
       pageNum: 0,
-      storeId: 1
+      storeId: 1,
+      createdBy: ''
     }
   },
   props: {
     modalId: ""
   },
+  methods: {
+    async createConfig() {
+      await createConfigForDepartment(2, this.$route.params.dpt);
+      var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 2)
+      this.table.body = response.value;
+      this.table.totalPage = response.totalPage;
+    }
+  }
 }
 </script>
 

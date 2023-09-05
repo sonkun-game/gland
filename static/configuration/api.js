@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export async function getAllConfigPagingForDepart(department, pageNum, type) {
-  let url = "https://103.142.26.40:8445/Spa/config-api/all?pageNum=" + pageNum+"&department="+department;
-  if(type!=null) url+= "&type="+type;
+  let url = "https://103.142.26.40:8445/Spa/config-api/all?pageNum=" + pageNum + "&department=" + department;
+  if (type != null) url += "&type=" + type;
   try {
     const response = await axios.get(url, {
       headers: {

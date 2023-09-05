@@ -38,7 +38,7 @@
             <Cell styleClass="px-6 py-4">{{ item.createdAt }}</Cell>
             <Cell styleClass="px-6 py-4">{{ item.createdBy }}</Cell>
             <Cell styleClass="px-6 py-4" :id="'editStatusConfig' + index">{{ item.name }}</Cell>
-            <Cell styleClass="px-6 py-4" cellType="status" :status="item.status ? '1' : '0'"></Cell>
+            <Cell styleClass="px-6 py-4 text-green-500" cellType="status" :status="item.status ? '1' : '0'"></Cell>
             <Cell styleClass="px-6 py-4 ">
               <div class="m-auto flex justify-center">
                 <!-- edit Modal -->
@@ -81,20 +81,20 @@
 </template>
 
 <script>
-import {createConfigForDepartment, getAllConfigPagingForDepart} from "../../../../static/configuration/api";
+import { createConfigForDepartment, getAllConfigPagingForDepart } from "../../../../static/configuration/api";
 
 export default {
   name: "MissionStatus",
-    async fetch() {
-      try {
-        var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1)
-        this.table.body = response.value;
-        this.table.totalPage = response.totalPage;
-      } catch (error) {
-        this.table.body =[]
-      }
-    },
-    data() {
+  async fetch() {
+    try {
+      var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1)
+      this.table.body = response.value;
+      this.table.totalPage = response.totalPage;
+    } catch (error) {
+      this.table.body = []
+    }
+  },
+  data() {
     return {
       table: {
         totalPage: 0,
@@ -117,7 +117,7 @@ export default {
   props: {
     modalId: ""
   },
-  methods:{
+  methods: {
     async createConfig() {
       await createConfigForDepartment(1, this.$route.params.dpt);
       var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1)
