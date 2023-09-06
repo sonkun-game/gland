@@ -101,9 +101,10 @@
             <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
             <!-- Mã nhiệm vụ -->
             <Cell styleClass="px-4 py-3">
-              <button data-modal-target="codeMission" data-modal-toggle="codeMission" class="link link-info">MD37
+              <button :data-modal-target="'codeMission' + index" :data-modal-toggle="'codeMission' + index"
+                class="link link-info">MD34
               </button>
-              <div id="codeMission" tabindex="-1" aria-hidden="true"
+              <div :id="'codeMission' + index" tabindex="-1" aria-hidden="true"
                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative w-full max-w-6xl h-auto">
 
@@ -294,6 +295,7 @@
             </Cell>
             <Cell styleClass="px-2 py-3">{{ item.missionName }}</Cell>
             <Cell styleClass="px-2 py-3">{{ item.giveMission }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.priority }}</Cell>
             <Cell styleClass="px-2 py-3">{{ item.deadline }}</Cell>
             <!-- <Cell styleClass="px-2 py-3">{{ item.description }}</Cell>
             <Cell styleClass="px-2 py-3">{{ formatDate(item.missionCreatedDate) }}</Cell>
@@ -488,7 +490,8 @@ export default {
             { name: "STT" },
             { name: "Mã nhiệm vụ" },
             { name: "Nhiệm vụ" },
-            { name: "GIao cho" },
+            { name: "Giao cho" },
+            { name: "Độ ưu tiên" },
             { name: "Deadline" },
             // { name: "Mô tả" },
             // { name: "Ngày tạo" },
