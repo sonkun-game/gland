@@ -24,8 +24,8 @@
           </ModalContainer>
         </ShowModal>
       </div>
-      <div>
-        <!-- Modal toggle -->
+      <!-- Phân quyền nhiệm vụ -->
+      <!-- <div>
         <ShowModal :modalId="authenMission.id" type="custom" :title="authenMission.showModalTemplate"
           @modal-toggle="loadMissionAuthenModal()"
           customClass="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center">
@@ -67,7 +67,7 @@
                     </option>
                   </select>
                 </div>
-                <!-- Modal footer -->
+
                 <div class="absolute bottom-0 flex items-center justify-end p-2 space-x-2 rounded-b dark:border-gray-600">
                   <button type="button"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center">Đồng
@@ -80,7 +80,7 @@
             </div>
           </ModalContainer>
         </ShowModal>
-      </div>
+      </div> -->
     </div>
     <div class="flex justify-between items-center">
       <h3 class="text-lg font-semibold">Tất cả nhiệm vụ</h3>
@@ -101,21 +101,17 @@
             <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
             <!-- Mã nhiệm vụ -->
             <Cell styleClass="px-4 py-3">
-              <button :data-modal-target="'codeMission' + index" :data-modal-toggle="'codeMission' + index"
-                class="link link-info">MD34
+              <button type="button" @click="toggleModal('codeMission' + index)" class="link link-info">MD34
               </button>
-              <div :id="'codeMission' + index" tabindex="-1" aria-hidden="true"
-                class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                <div class="relative w-full max-w-6xl h-auto">
-
-                  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 overflow-y-auto">
-
+              <div :id="'codeMission' + index" tabindex="-1"
+                class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full hidden">
+                <div class="relative w-full max-w-6xl h-auto m-auto">
+                  <div class="relative bg-white rounded-lg shadow overflow-y-auto">
                     <div class="flex items-start justify-between p-4 rounded-t dark:border-gray-600">
                       <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        <span class="text-blue-700">MD37</span>
+                        /<span class="text-blue-700">MD34</span>
                       </h3>
                       <div class="flex item-center">
-
                         <div class="flex">
                           <button
                             class="block w-8 mr-2 text-blue-700 bg-blue-100 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-sm rounded-lg text-xs px-2 py-1.5 text-center"
@@ -146,28 +142,15 @@
 
                       </div>
                     </div>
-
+                    <!-- Chi tiết -->
                     <div class="p-3 space-y-3">
-                      <div class="flex items-center">
-                        <div class="flex mr-60">
-                          <div class="w-80">
-                            <input placeholder="Tên/Thông tin" type="text" id="default-input"
-                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          </div>
-                        </div>
-                        <div class="w-52">
-                          <select
-                            class="bg-white border-1 border-blue-700 text-blue-700 text-sm font-semibold rounded-lg block w-full p-2.5">
-                            <option class="text-gray-700" selected>Trạng thái</option>
-                            <option class="text-gray-700" value="">Demo</option>
-                            <option class="text-gray-700" value="">Demo</option>
-                            <option class="text-gray-700" value="">Demo</option>
-                            <option class="text-gray-700" value="">Demo</option>
-                          </select>
-                        </div>
-                      </div>
                       <div class="flex justify-between">
                         <div class="text-left ">
+                          <div>
+                            <button type="button"
+                              class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Tạo
+                              nhiệm vụ</button>
+                          </div>
                           <h3 class="text-base my-3 font-semibold text-gray-700 dark:text-white">Ngày bắt đầu: 14/8/2023
                           </h3>
                           <div class="flex items-center mb-3">
@@ -191,7 +174,7 @@
                             <input type="text" id="small-input"
                               class="block w-full p-2.5 mb-6 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs">
                           </div>
-                          <div class="">
+                          <div class="mb-3">
                             <label for="message"
                               class="block mb-2 text-base font-semibold text-gray-700 dark:text-white">Ghi
                               chú</label>
@@ -201,7 +184,15 @@
                           </div>
                         </div>
                         <div class="w-50 h-auto max-h-[420px] overflow-y-auto">
+                          <div class="w-52 pb-4">
+                            <select
+                              class="bg-white border-1 border-blue-700 text-blue-700 text-sm font-semibold rounded-lg block w-full p-2.5">
+                              <option class="text-gray-700" selected>Trạng thái</option>
+                              <option class="text-gray-700" value="">Demo</option>
+                            </select>
+                          </div>
                           <div class="border-1 rounded-lg">
+
                             <div class="text-left border-b text-lg font-semibold text-gray-700">
 
                               <div class="ml-3 py-2">Chi tiết</div>
@@ -234,7 +225,7 @@
                                   <option value="">demo</option>
                                 </select>
                               </div>
-                              <div>
+                              <!-- <div>
                                 <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                   Dịch vụ</label>
                                 <select id="type"
@@ -243,7 +234,7 @@
                                   <option value="">demo</option>
                                   <option value="">demo</option>
                                 </select>
-                              </div>
+                              </div> -->
                               <div>
                                 <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                   Loại công việc</label>
@@ -254,17 +245,7 @@
                                   <option value="">demo</option>
                                 </select>
                               </div>
-                              <div>
-                                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                  Nhân viên</label>
-                                <select id="type"
-                                  class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 ">
-                                  <option selected></option>
-                                  <option value="">demo</option>
-                                  <option value="">demo</option>
-                                </select>
-                              </div>
-                              <div>
+                              <!-- <div>
                                 <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                   Hình thức</label>
                                 <select id="type"
@@ -273,19 +254,43 @@
                                   <option value="">demo</option>
                                   <option value="">demo</option>
                                 </select>
-                              </div>
+                              </div> -->
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-
+                    <!-- Child issues: Nhiệm vụ con :V -->
+                    <div class="px-3 max-w-xl w-auto">
+                      <label for="progress" class="block mb-2 text-base font-semibold text-gray-700 dark:text-white">Tiến
+                        độ công
+                        việc</label>
+                      <div id="progress" class="p-3 mb-2 text-sm text-blue-800 rounded-lg bg-blue-50 " role="alert">
+                        <div class="flex justify-between">
+                          <span class="font-medium">Demo task</span>
+                          <div>
+                            <i class="fa-solid fa-equals text-yellow-300 font-bold text-base mr-2"></i>
+                            <span class="text-green-200 font-medium bg-green-500 rounded px-1.5">Hoàn thành</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="progress" class="p-3 mb-2 text-sm text-blue-800 rounded-lg bg-blue-50 " role="alert">
+                        <div class="flex justify-between">
+                          <span class="font-medium">Demo task 1</span>
+                          <div>
+                            <i class="fa-solid fa-equals text-yellow-300 font-bold text-base mr-2"></i>
+                            <span class="text-yellow-200 font-medium bg-yellow-500 rounded px-1.5">Đang tiến
+                              hành</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div
                       class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
-                      <button data-modal-hide="defaultModal" type="button"
+                      <button @click="toggleModal('codeMission' + index)" type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Đồng
                         ý</button>
-                      <button data-modal-hide="defaultModal" type="button"
+                      <button @click="toggleModal('codeMission' + index)" type="button"
                         class="text-gray-500 bg-white hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Hủy
                         bỏ</button>
                     </div>
@@ -533,6 +538,14 @@ export default {
   methods: {
     formatDate(date) {
       return moment(date).format('DD/MM/YYYY HH:mm');
+    },
+    toggleModal(id) {
+      var modal = document.getElementById(`${id}`);
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove("hidden");
+      } else {
+        modal.classList.add("hidden");
+      }
     },
     async createMissionFunct(storeId) {
 
