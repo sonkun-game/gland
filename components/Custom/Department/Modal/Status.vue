@@ -88,7 +88,7 @@ export default {
   name: "MissionStatus",
   async fetch() {
     try {
-      var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1)
+      var response = await getAllConfigPagingForDepart(this.$route.query.id, 0, 1)
       this.table.body = response.value;
       this.table.totalPage = response.totalPage;
     } catch (error) {
@@ -121,8 +121,8 @@ export default {
   },
   methods: {
     async createConfig() {
-      var data = await createConfigForDepartment(1, this.$route.params.dpt).then((res) => {
-        const response = getAllConfigPagingForDepart(this.$route.params.dpt, 0, 1).then((config) => {
+      var data = await createConfigForDepartment(1, this.$route.query.id).then((res) => {
+        const response = getAllConfigPagingForDepart(this.$route.query.id, 0, 1).then((config) => {
           this.table.body = config.value;
           this.table.totalPage = config.totalPage;
           this.statusTableKey++;

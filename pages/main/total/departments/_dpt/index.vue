@@ -8,7 +8,6 @@
       </TabItem>
       <!-- Công việc của tôi-->
       <TabItem :id="data.tabList.list[1].id" labelledby="mission">
-        <!-- mission - {{ id }} - {{ dpt }} -->
         <Mission></Mission>
       </TabItem>
       <SubTabItem :id="data.tabList.list[1].subList[0].id" labelledby="jobByMe">

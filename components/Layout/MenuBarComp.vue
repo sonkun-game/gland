@@ -292,7 +292,7 @@ export default {
             convertFeArr.push({
               icon: "fa-solid fa-address-card",
               name: item.name,
-              link: "/main/total/departments/" + item.keyUUID,
+              link: "/main/total/departments?id=" + item.keyUUID,
               id: "department" + item.keyUUID,
               storeId: this.storeId,
               selected: path.includes(item.keyUUID),
@@ -312,7 +312,7 @@ export default {
       let data = {
         icon: "fa-solid fa-address-card", // icon phòng ban
         name: name, // tên phòng ban
-        link: "/main/total/departments/" + keyUUID, // link try cập phòng ban
+        link: "/main/total/departments?id=" + keyUUID, // link try cập phòng ban
         id: "department" + keyUUID, //id của phòng ban gen ra tránh trùng
         storeId: this.storeId, // thông tin store
         createdBy: "datct" // người tạo

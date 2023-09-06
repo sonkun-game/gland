@@ -101,14 +101,14 @@ export default {
     handleShowOrHideColumn(data) {
       this.jobByOther.table.head[data.index].show = data.show;
       let value = Common.getTableShowColumn(this.jobByOther.table.head);
-      Common.setCookie(this.cookiesName, value, { expires: 365, path: "/main/total/departments/" })
+      Common.setCookie(this.cookiesName, value, { expires: 365, path: "/main/total/departments" })
     },
   },
   mounted() {
     let cookie = Common.getCookie(this.cookiesName);
     if (cookie == undefined) {
       let value = Common.getTableShowColumn(this.jobByOther.table.head);
-      Common.setCookie(this.cookiesName, value, { expires: 365, path: "/main/total/departments/" })
+      Common.setCookie(this.cookiesName, value, { expires: 365, path: "/main/total/departments" })
     } else {
       var arr = cookie.split("").map(Number);
       arr.forEach((element, index) => {
