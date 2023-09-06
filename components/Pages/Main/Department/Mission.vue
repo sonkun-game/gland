@@ -100,7 +100,7 @@
           <Row styleClass="bg-white border-b" v-for="(item, index) in missionList.table.body" :key="index">
             <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
             <!-- Mã nhiệm vụ -->
-            <Cell styleClass="px-2 py-3">
+            <Cell styleClass="px-4 py-3">
               <button data-modal-target="codeMission" data-modal-toggle="codeMission" class="link link-info">MD37
               </button>
               <div id="codeMission" tabindex="-1" aria-hidden="true"
