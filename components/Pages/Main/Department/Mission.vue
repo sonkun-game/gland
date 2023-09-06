@@ -149,7 +149,7 @@
                           <div>
                             <button type="button"
                               class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Tạo
-                              nhiệm vụ</button>
+                              công việc</button>
                           </div>
                           <h3 class="text-base my-3 font-semibold text-gray-700 dark:text-white">Ngày bắt đầu: 14/8/2023
                           </h3>
@@ -266,21 +266,30 @@
                         độ công
                         việc</label>
                       <div id="progress" class="p-3 mb-2 text-sm text-blue-800 rounded-lg bg-blue-50 " role="alert">
-                        <div class="flex justify-between">
-                          <span class="font-medium">Demo task</span>
+                        <div class="flex justify-between items-center">
                           <div>
+                            <span class="text-blue-500 mr-2">MD34</span>
+                            <span class="font-medium">Demo task</span>
+                          </div>
+                          <div class="flex">
                             <i class="fa-solid fa-equals text-yellow-300 font-bold text-base mr-2"></i>
-                            <span class="text-green-200 font-medium bg-green-500 rounded px-1.5">Hoàn thành</span>
+                            <div class="text-green-200 px-4 py-1 font-medium bg-green-500 rounded w-32">
+                              Hoàn thành
+                            </div>
                           </div>
                         </div>
                       </div>
                       <div id="progress" class="p-3 mb-2 text-sm text-blue-800 rounded-lg bg-blue-50 " role="alert">
-                        <div class="flex justify-between">
-                          <span class="font-medium">Demo task 1</span>
+                        <div class="flex justify-between items-center">
                           <div>
+                            <span class="text-blue-500 mr-2">MD35</span>
+                            <span class="font-medium">Demo task 1</span>
+                          </div>
+                          <div class="flex">
                             <i class="fa-solid fa-equals text-yellow-300 font-bold text-base mr-2"></i>
-                            <span class="text-yellow-200 font-medium bg-yellow-500 rounded px-1.5">Đang tiến
-                              hành</span>
+                            <div class="text-yellow-200 px-2.5 py-1 font-medium bg-yellow-500 rounded w-32">
+                              Đang tiến hành
+                            </div>
                           </div>
                         </div>
                       </div>
