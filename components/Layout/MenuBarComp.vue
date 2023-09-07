@@ -280,7 +280,7 @@ export default {
     fetchDpt() {
       let url = process.env.API_URL + "api-department?storeId=1";
       let resp = sendGetApi(url, null);
-      let path = window.location.pathname;
+      let path = window.location.href;
 
       resp.then((resp) => {
         let data = resp.value;
