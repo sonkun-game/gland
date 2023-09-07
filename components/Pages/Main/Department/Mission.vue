@@ -10,8 +10,33 @@
             <ModalHeader head="Quản lý nhiệm vụ" :modalId="createMission.id"></ModalHeader>
             <!-- Modal body -->
             <div>
-              <InputField id="all_mission_txtName" label="Tên nhiệm vụ" styleClass="px-4"></InputField>
+              <InputField id="all_mission_txtName" label="Tên nhiệm vụ" styleClass="px-4 py-2"></InputField>
+              <div class="px-4 py-2">
+                <label for="give" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Giao cho</label>
+                <select id="give" class="block w-full p-2 text-xs text-gray-900 border border-gray-300 rounded-lg">
+                  <option selected></option>
+                  <option value="">demo</option>
+                  <option value="">demo</option>
+                </select>
+                <div class="flex justify-between py-2">
+                  <h3 class="text-sm my-3 font-semibold text-gray-700 dark:text-white">Ngày bắt đầu: 14/8/2023
+                  </h3>
+                  <div class="flex items-center">
+                    <h3 class="text-sm mr-2 font-semibold text-gray-700 dark:text-white">Ngày kết thúc:</h3>
+                    <div class="relative max-w-xs">
+                      <input datepicker type="date"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2"
+                        placeholder="Chọn ngày">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+
+              </div>
               <InputField id="all_mission_txtDes" styleClass="px-4" label="Mô tả" typeInput="textarea"></InputField>
+
             </div>
             <!-- Modal footer -->
             <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
@@ -101,7 +126,7 @@
             <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
             <!-- Mã nhiệm vụ -->
             <Cell styleClass="px-4 py-3">
-              <button type="button" @click="toggleModal('codeMission' + index)" class="link link-info">GL{{item.id}}
+              <button type="button" @click="toggleModal('codeMission' + index)" class="link link-info">GL{{ item.id }}
               </button>
               <div :id="'codeMission' + index" tabindex="-1"
                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full hidden">
@@ -156,14 +181,7 @@
                           <div class="flex items-center mb-3">
                             <h3 class="text-base mr-2 font-semibold text-gray-700 dark:text-white">Ngày kết thúc:</h3>
                             <div class="relative max-w-xs">
-                              <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                  <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                                </svg>
-                              </div>
-                              <input datepicker type="text"
+                              <input datepicker type="date"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5"
                                 placeholder="Chọn ngày">
                             </div>
@@ -474,7 +492,7 @@
 
 import moment from "moment";
 import { getAllMissionPagingForDepart } from "../../../../static/department/api_mission";
-import {createTaskForDepartment, getTaskListPaging} from "../../../../static/task/api";
+import { createTaskForDepartment, getTaskListPaging } from "../../../../static/task/api";
 export default {
   async fetch() {
     try {
