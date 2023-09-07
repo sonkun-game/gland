@@ -98,13 +98,12 @@
         </div>
       </div>
       <div class="pl-8">
-        <ProfileInfo title="Thông tin cơ bản" color="red"
+        <ProfileInfo title="Thông tin cơ bản" color="blue"
           :body="['Họ tên: Nguyen Dang', 'Ngày sinh: 1x - 1x-19xx', 'Giới tính: Nam']">
         </ProfileInfo>
-        <ProfileInfo title="Mô tả" color="cyan"
-          :body="['Phòng ban: Marketing', 'Ngày tạo: 1x - 1x-19xx', 'Vị trí: ADs']">
+        <ProfileInfo title="Mô tả" color="blue" :body="['Phòng ban: Marketing', 'Ngày tạo: 1x - 1x-19xx', 'Vị trí: ADs']">
         </ProfileInfo>
-        <ProfileInfo title="Tài khoản và bảo mật"  color="yellow"
+        <ProfileInfo title="Tài khoản và bảo mật" color="blue"
           :body="['Tên tài khoản: dangnguyen', 'Mật khẩu: *************']">
           <div>
             <!-- Modal toggle -->

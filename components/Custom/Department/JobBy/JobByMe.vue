@@ -42,7 +42,7 @@
           :cookiesName="cookiesName"
           @show-or-hide-column="handleShowOrHideColumn">
       <thead>
-        <Row styleClass="text-xs text-gray-900 bg-gray-300">
+        <Row styleClass="text-sm text-gray-900 bg-gray-100">
           <Cell v-for="(item, index) in jobByMe.table.head" :key="index" styleClass="px-6 py-3 text-center"
           :class="{ 'hidden': !item.show }" cellType="title">
             {{ item.name }}

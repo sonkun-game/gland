@@ -99,10 +99,10 @@
         <tbody :key="missionAllKey">
           <Row styleClass="bg-white border-b" v-for="(item, index) in missionList.table.body" :key="index">
             <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
-            <Cell styleClass="px-2 py-3">{{ item.missionName }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.name }}</Cell>
             <Cell styleClass="px-2 py-3">{{ item.departName }}</Cell>
-            <Cell styleClass="px-2 py-3">{{ formatDate(item.missionCreatedDate) }}</Cell>
-            <Cell styleClass="px-2 py-3">{{ item.missionCreatedBy }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ formatDate(item.deadline) }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.createdBy }}</Cell>
             <Cell styleClass="px-2 py-3 flex">
               <div>
                 <button data-modal-target="editModalMission" data-modal-toggle="editModalMission"
@@ -273,10 +273,11 @@ import { createMissionAll, getAllMission, getAllMissionPaging } from '../../../.
 import { sendGetApi } from '../../../../plugins/api';
 import moment from "moment";
 import { getAllDepartPaging } from "../../../../static/department/api";
+import {getTaskListPaging} from "../../../../static/task/api";
 export default {
   async fetch() {
     try {
-      var response = await getAllMissionPaging(this.storeId)
+      var response = await getTaskListPaging(null, this.pageNum, null, null);
       this.missionList.table.body = response.value;
       this.missionList.totalPage = response.totalPage;
     } catch (error) {
@@ -285,6 +286,7 @@ export default {
   },
   data() {
     return {
+      pageNum:0,
       missionAllKey: 1178,
       storeId: 1,
       missionList: {
