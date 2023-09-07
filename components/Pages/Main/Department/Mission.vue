@@ -101,7 +101,7 @@
             <Cell styleClass="px-4 py-3">{{ index + 1 }}</Cell>
             <!-- Mã nhiệm vụ -->
             <Cell styleClass="px-4 py-3">
-              <button type="button" @click="toggleModal('codeMission' + index)" class="link link-info">MD34
+              <button type="button" @click="toggleModal('codeMission' + index)" class="link link-info">GL{{item.id}}
               </button>
               <div :id="'codeMission' + index" tabindex="-1"
                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full hidden">
@@ -109,7 +109,7 @@
                   <div class="relative bg-white rounded-lg shadow overflow-y-auto">
                     <div class="flex items-start justify-between p-4 rounded-t dark:border-gray-600">
                       <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        /<span class="text-blue-700">MD34</span>
+                        Nhiệm vụ/<span class="text-blue-700">MD34</span>
                       </h3>
                       <div class="flex item-center">
                         <div class="flex">
@@ -307,8 +307,8 @@
                 </div>
               </div>
             </Cell>
-            <Cell styleClass="px-2 py-3">{{ item.missionName }}</Cell>
-            <Cell styleClass="px-2 py-3">{{ item.giveMission }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.name }}</Cell>
+            <Cell styleClass="px-2 py-3">{{ item.assignee }}</Cell>
             <Cell styleClass="px-2 py-3">{{ item.priority }}</Cell>
             <Cell styleClass="px-2 py-3">{{ item.deadline }}</Cell>
             <!-- <Cell styleClass="px-2 py-3">{{ item.description }}</Cell>
@@ -483,10 +483,11 @@
 
 import moment from "moment";
 import { getAllMissionPagingForDepart } from "../../../../static/department/api_mission";
+import {createTaskForDepartment, getTaskListPaging} from "../../../../static/task/api";
 export default {
   async fetch() {
     try {
-      var response = await getAllMissionPagingForDepart(this.storeId, this.$route.params.dpt)
+      var response = await getTaskListPaging(this.$route.params.dpt, this.pageNum, null, null);
       this.missionList.table.body = response.value;
       this.missionList.totalPage = response.totalPage;
     } catch (error) {
@@ -495,6 +496,7 @@ export default {
   },
   data() {
     return {
+      pageNum: 0,
       missionAllKey: 1178,
       storeId: 1,
       missionList: {
@@ -556,8 +558,10 @@ export default {
         modal.classList.add("hidden");
       }
     },
-    async createMissionFunct(storeId) {
-
+    async createMissionFunct() {
+      var response = await createTaskForDepartment(this.$route.params.dpt)
+      this.missionList.table.body = response.data.value;
+      this.missionList.totalPage = response.data.totalPage;
     },
     async loadMissionAuthenModal() {
 

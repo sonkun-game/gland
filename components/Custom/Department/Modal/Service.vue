@@ -75,7 +75,7 @@ export default {
   name: "MarketingServicePage",
   async fetch() {
     try {
-      var response = await getAllConfigPagingForDepart(this.$route.params.dpt, 0, 3)
+      var response = await getAllConfigPagingForDepart(this.$route.query.id, 0, 3)
       this.table.body = response.value;
       this.table.totalPage = response.totalPage;
     } catch (error) {
@@ -110,8 +110,8 @@ export default {
   },
   methods: {
     async createConfig() {
-      var data = await createConfigForDepartment(3, this.$route.params.dpt).then((res) => {
-        const response = getAllConfigPagingForDepart(this.$route.params.dpt, 0, 3).then((config) => {
+      var data = await createConfigForDepartment(3, this.$route.query.id).then((res) => {
+        const response = getAllConfigPagingForDepart(this.$route.query.id, 0, 3).then((config) => {
           this.table.body = config.value;
           this.table.totalPage = config.totalPage;
           this.serviceTableKey++;
