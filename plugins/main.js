@@ -21,9 +21,13 @@ Vue.component('TabContainer',TabContainer);
 // Button
 import XButton from '../components/Common/Button/XButton.vue'
 import CloseOrSave from '../components/Common/Modal/CloseOrSave.vue';
+import Dropdown from '../components/Common/Button/Dropdown.vue';
+import Collapse from '../components/Common/Button/Collapse.vue'
 
 Vue.component('CloseOrSave',CloseOrSave);
 Vue.component('XButton',XButton);
+Vue.component('Dropdown',Dropdown);
+Vue.component('Collapse',Collapse);
 
 // Modal
 import ModalContainer from '../components/Common/Modal/ModalContainer.vue';
