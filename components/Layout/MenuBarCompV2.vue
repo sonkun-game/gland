@@ -2,8 +2,10 @@
 <template>
   <!-- Menu Side Bar -->
   <aside id="menu-side-bar" class="menu-bar w-0 h-screen border-r-2 border-gray-800 end">
-    <button @click="openMenu()" class="w-10 absolute top-3 left-80 z-10 px-2 text-white">
-      <i class="fa-solid fa-bars text-lg"></i>
+    <button type="button" @click="openMenu(); common.isClose = !common.isClose"
+      class="w-10 absolute top-3 left-80 z-10 px-2 text-white">
+      <i v-if="common.isClose" class="fa-solid fa-arrow-right"></i>
+      <i v-else class="fa-solid fa-arrow-left"></i>
     </button>
     <div id="layout-menu-body">
       <div class="overflow-auto px-2 py-4 overflow-y-auto no-scrollbar" style="max-height: 56vh;">
@@ -11,11 +13,11 @@
 
           <li v-for="(item, index) in menuList.total" :key="'menuList-total' + index">
             <Collapse :name="item.name">
-              <button v-for="(subItem, subIndex) in item.subList" :key="'subList' + subIndex"
-                class="menu-button-department flex items-center w-full p-3 transition duration-100 rounded-lg">
+              <a v-for="(subItem, subIndex) in item.subList" :key="'subList' + subIndex" :href="subItem.link"
+                class="menu-button-department flex items-center w-full transition duration-100 rounded-lg">
                 <i :class="subItem.icon"></i>
                 <span class="flex-1 ml-3 text-left whitespace-nowrap"> {{ subItem.name }}</span>
-              </button>
+              </a>
             </Collapse>
           </li>
 
@@ -86,12 +88,14 @@
 .menu-button-department {
   color: white;
   border-radius: 15px;
-  padding: 4px
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 24px
 }
 
 .menu-active {
-  background-color: #84E1BC;
-  color: white;
+  color: rgb(29 78 216);
+  ;
 }
 
 .menu-button:hover {
@@ -171,6 +175,9 @@ export default {
   computed: {
     mainPage() {
       return this.isMainPage();
+    },
+    urlPage() {
+      return window.location.path;
     }
   },
   data() {
@@ -178,19 +185,19 @@ export default {
       common: {
         listDepartmentKey: 11199,
         storeId: 1,
+        isClose: false,
       },
       department: {
         id: "createNewDepartmentModalID",
         nameID: "createNewDepartmentNameID",
         showModalTemplate: "<i class='fa-solid fa-plus w-3 h-3'></i><span class='flex-1 ml-3 text-left whitespace-nowrap'>Thêm phòng ban</span>",
       },
-      // Đây là phần load depaments
       loadedDepartment: [
         {
           selected: false,
           icon: "fa-solid fa-address-card",
           name: "Phòng ban",
-          link: "/main/total/departments",
+          link: "/main_v2/total/staff",
           id: "department-1",
         },
       ],
@@ -200,20 +207,22 @@ export default {
           {
             icon: "fa-solid fa-lock",
             name: "Tổng",
-            link: "/main/total/all",
+            link: "/main_v2/total/staff",
             id: "dropdown-menu-1",
             subList: [
               {
                 id: "people",
                 name: "Nhân sự",
                 icon: "fa-regular fa-user",
-                link: ""
+                link: "/main_v2/total/staff",
+                selected: false,
               },
               {
                 id: "people",
                 name: "Phòng ban",
                 icon: "fa-solid fa-house",
-                link: ""
+                link: "/main_v2/total/department",
+                selected: false,
               },
             ],
           },
@@ -233,10 +242,11 @@ export default {
     }
   },
   mounted() {
-    this.fetchDpt();
+    // this.fetchDpt();
   },
   methods: {
     openMenu: () => {
+      console.log(this);
       var pos = $("#menu-side-bar").position();
       if (pos.left <= -302) {
         $("#menu-side-bar").css({ left: 0 });
