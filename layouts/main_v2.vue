@@ -4,13 +4,14 @@
         <nav class="w-100 h-15 px-4 py-2 flex justify-end bg-gray-900 text-white">
             <div class="flex items-center w-100 justify-between">
                 <div class="text-lg bold title xl">Gland</div>
+                <Dropdown :list="shopList" iconClass="fa-solid fa-shop pr-4"></Dropdown>
                 <div class="grow"></div>
                 <i class="fa-solid fa-bell p-2"></i>
                 <div class="p-2">
                     <i class="fa-solid fa-coins"></i>
                     <span>2,000,000</span>
                 </div>
-                <details class="font-semibold cursor-pointer">
+                <details class="font-semibold cursor-pointer z-10">
                     <summary class="m-1 btn"><img src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
                             class="w-8 h-8 inline rounded-full bg-red-200" /></summary>
                     <ul class="drop_down_style p-2 shadow menu rounded-lg dropdown-content z-[1] bg-white rounded-box w-64">
@@ -70,6 +71,16 @@ export default {
         return {
             isMenuOpen: false,
             authenURL: "",
+            shopList: [
+                {
+                    link: "#shop1",
+                    name: "Spa"
+                },
+                {
+                    link: "#shop1",
+                    name: "Gland"
+                },
+            ]
         }
     },
     mounted() {
@@ -121,9 +132,7 @@ div.title {
 
 .no-scrollbar {
     -ms-overflow-style: none;
-    /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */
 }
 </style>
   

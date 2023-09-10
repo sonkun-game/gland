@@ -1,7 +1,10 @@
 
 <template>
     <div class="flex items-start justify-between p-4 rounded">
-        <div class="text-xl font-semibold text-gray-900 dark:text-white">
+        <div class="text-xl font-semibold text-white" v-if="isDark">
+            {{ head }}
+        </div>
+        <div class="text-xl font-semibold text-gray-900" v-else>
             {{ head }}
         </div>
         <XButton :modalId="modalId" @close-modal="closeModal"></XButton>
@@ -14,6 +17,7 @@ export default {
     props: {
         head: "",
         modalId: "",
+        isDark: false,
     },
     methods: {
         closeModal() {

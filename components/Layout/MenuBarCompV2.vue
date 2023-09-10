@@ -7,14 +7,14 @@
       <i v-if="common.isClose" class="fa-solid fa-arrow-right"></i>
       <i v-else class="fa-solid fa-arrow-left"></i>
     </button>
+
     <div id="layout-menu-body">
       <div class="overflow-auto px-2 py-4 overflow-y-auto no-scrollbar" style="max-height: 56vh;">
         <ul class="space-y-2 font-medium">
-
           <li v-for="(item, index) in menuList.total" :key="'menuList-total' + index">
             <Collapse :name="item.name">
               <a v-for="(subItem, subIndex) in item.subList" :key="'subList' + subIndex" :href="subItem.link"
-                class="menu-button-department flex items-center w-full transition duration-100 rounded-lg">
+                class="menu-button-department flex items-center w-full transition duration-100 rounded-lg" :class="{'menu-active':urlPageV2.includes(subItem.link)}">
                 <i :class="subItem.icon"></i>
                 <span class="flex-1 ml-3 text-left whitespace-nowrap"> {{ subItem.name }}</span>
               </a>
@@ -95,7 +95,7 @@
 
 .menu-active {
   color: rgb(29 78 216);
-  ;
+  background-color: #ffffff0d;
 }
 
 .menu-button:hover {
@@ -178,6 +178,9 @@ export default {
     },
     urlPage() {
       return window.location.path;
+    },
+    urlPageV2() {
+      return this.$route.path;
     }
   },
   data() {

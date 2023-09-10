@@ -22,9 +22,16 @@
     </template>
     <!-- Default Text Option -->
     <template v-else>
-      <label :for="id" class="text-sm font-semibold float-left py-2">{{ label }}</label>
-      <input class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 "
-        :placeholder="placeholder" :value="value" type="text" :id="id" :required="required" />
+      <div v-if="isDark">
+        <label :for="id" class="text-sm font-semibold float-left py-2 text-white">{{ label }}</label>
+        <input class="bg-transparent text-gray-300 text-sm rounded-lg block w-full p-1.5 "
+          :placeholder="placeholder" :value="value" type="text" :id="id" :required="required" />
+      </div>
+      <div v-else>
+        <label :for="id" class="text-sm font-semibold float-left py-2">{{ label }}</label>
+        <input class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 "
+          :placeholder="placeholder" :value="value" type="text" :id="id" :required="required" />
+      </div>
     </template>
   </div>
 </template>
@@ -81,6 +88,10 @@ export default {
     inputIndex: {
       type: Number,
       default: 1
+    },
+    isDark: {
+      type: Boolean,
+      default: false,
     }
   },
   methods: {
@@ -88,7 +99,7 @@ export default {
       this.isChecked = !this.isChecked;
       let data = {
         show: this.isChecked,
-        index: this.inputIndex 
+        index: this.inputIndex
       }
       this.$emit("click-checkbox", data);
     }

@@ -2,7 +2,21 @@
     <div class="p-8 text-white">
         <nav class="flex justify-between">
             <h1 class="font-bold text-4xl">Phòng ban</h1>
-            <button class="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold">Tạo phòng ban</button>
+            <ShowModal modalId="createDepartmentBtnId" type="custom"
+                customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold"
+                title="Tạo phòng ban">
+                <ModalContainer modalId="createDepartmentBtnId" size="xl" :isDark="true">
+                    <ModalHeader :isDark="true" class="bg-gray-900" head="Tạo phòng ban" modalId="createDepartmentBtnId"></ModalHeader>
+                    <InputField :isDark="true" styleClass="p-2" id="staffName" label="Tên nhân viên"  placeholder="Tên phòng ban" />
+                <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
+                    <button data-modal-hide="createDepartmentBtnId"
+                    class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
+                    Hủy bỏ</button>
+                    <button data-modal-hide="createDepartmentBtnId" type="button"
+                    class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
+                </div>
+                </ModalContainer>
+            </ShowModal>
         </nav>
 
         <CrudTable style-class="w-full text-sm text-left text-gray-500">
