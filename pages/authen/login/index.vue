@@ -58,7 +58,7 @@ export default {
 
             axios({
                 method: 'post',
-                url: 'https://103.142.26.40:8445/Spa/api-authen/signing',
+                url: 'https://103.142.26.40:8445/gland/api-authen/signing',
                 responseType: 'json',
                 data: {
                     username: this.username,
@@ -67,7 +67,7 @@ export default {
             }).then(function (response) {
                 localStorage.setItem("jwt", response.data.accessToken);
                 console.log(response);
-                window.location = "../main/total/account/shop";
+                window.location = "../main_v2/total/staff";
             });
         }
     }
