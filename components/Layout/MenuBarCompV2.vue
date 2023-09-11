@@ -199,6 +199,8 @@ export default {
         nameID: "createNewDepartmentNameID",
         showModalTemplate: "<i class='fa-solid fa-plus w-3 h-3'></i><span class='flex-1 ml-3 text-left whitespace-nowrap'>Thêm phòng ban</span>",
       },
+      storeId: 1,
+      pageNum: 0,
       loadedDepartment: [
         // {
         //   selected: false,
@@ -285,7 +287,8 @@ export default {
       return host.includes("/main/total/all");
     },
     fetchDpt() {
-      let url = process.env.API_URL + "api-department?storeId=1";
+      // let url = process.env.API_URL + "api-department?storeId=1";
+      let url = "https://103.142.26.40:8445/gland/api-department/all?storeId=" + this.storeId + "&pageNum=" + this.pageNum;
       let resp = sendGetApi(url, null);
       let path = window.location.href;
 
@@ -294,34 +297,29 @@ export default {
         let convertFeArr = [];
         data.forEach(item => {
           let subkeyId = uuidv4();
-          if (!item.keyUUID) {
-            alert("KeyUUID không tồn tại !");
-          } else {
-            convertFeArr.push({
-              selected: false,
-              icon: "fa-solid fa-address-card",
-              name: item.name,
-              link: "/main/total/departments?id=" + item.keyUUID,
-              id: "department" + item.keyUUID,
-              subList: [
-                {
-                  id: "people" + subkeyId,
-                  name: "Nhân sự",
-                  icon: "fa-regular fa-user",
-                  link: "/main_v2/total/staff",
-                  selected: false,
-                },
-                {
-                  id: "script" + subkeyId,
-                  name: "Kịch bản",
-                  icon: "fa-solid fa-scroll",
-                  link: "/main_v2/total/department",
-                  selected: false,
-                },
-              ],
-            });
-          }
-
+          convertFeArr.push({
+            selected: false,
+            icon: "fa-solid fa-address-card",
+            name: item.name,
+            link: "/main/total/departments?id=" + item.id,
+            id: "department" + item.id,
+            subList: [
+              {
+                id: "people" + subkeyId,
+                name: "Nhân sự",
+                icon: "fa-regular fa-user",
+                link: "/main_v2/total/staff",
+                selected: false,
+              },
+              {
+                id: "script" + subkeyId,
+                name: "Kịch bản",
+                icon: "fa-solid fa-scroll",
+                link: "/main_v2/total/department",
+                selected: false,
+              },
+            ],
+          });
         });
 
         // set dât
