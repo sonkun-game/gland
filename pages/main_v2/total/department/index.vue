@@ -133,6 +133,7 @@ export default {
       var response = await createDepartmentsAll(this.storeId);
       this.table.body = response.data.value;
       this.totalPage = response.data.totalPage;
+      window.location.reload()
     }
   }
 }
