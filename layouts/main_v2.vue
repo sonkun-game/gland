@@ -4,7 +4,7 @@
         <nav class="w-100 h-15 px-4 py-2 flex justify-end bg-gray-900 text-white">
             <div class="flex items-center w-100 justify-between">
                 <div class="text-lg bold title xl">Gland</div>
-                <Dropdown :list="shopList" iconClass="fa-solid fa-shop pr-4"></Dropdown>
+                <!-- <Dropdown :list="shopList" iconClass="fa-solid fa-shop pr-4"></Dropdown> -->
                 <div class="grow"></div>
                 <i class="fa-solid fa-bell p-2"></i>
                 <div class="p-2">

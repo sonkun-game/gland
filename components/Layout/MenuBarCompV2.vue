@@ -9,29 +9,30 @@
     </button>
 
     <div id="layout-menu-body">
-      <div class="overflow-auto px-2 py-4 overflow-y-auto no-scrollbar" style="max-height: 56vh;">
+      <div class="overflow-auto px-2 py-4 overflow-y-auto no-scrollbar" style="max-height: 91vh;">
         <ul class="space-y-2 font-medium">
-          <li v-for="(item, index) in menuList.total" :key="'menuList-total' + index">
+
+          <li v-for="(item, index) in leftSideBar" :key="'menuList-total' + index">
             <Collapse :name="item.name">
               <a v-for="(subItem, subIndex) in item.subList" :key="'subList' + subIndex" :href="subItem.link"
-                class="menu-button-department flex items-center w-full transition duration-100 rounded-lg" :class="{'menu-active':urlPageV2.includes(subItem.link)}">
+                class="menu-button-department flex items-center w-full transition duration-100 rounded-lg"
+                :class="{ 'menu-active': (urlPageV2.includes(subItem.link) && item.isTotal) }">
                 <i :class="subItem.icon"></i>
                 <span class="flex-1 ml-3 text-left whitespace-nowrap"> {{ subItem.name }}</span>
               </a>
             </Collapse>
           </li>
 
-          <!-- display list menu -->
-          <!-- <li class="font-bold" v-for="(item, index) in menuList.total" :key="'all-' + index">
-            <a :href="item.link">
-              <button type="button" :class="{ 'menu-button-active': mainPage }"
-                class="menu-button flex items-center w-full p-3 transition duration-100 rounded-lg">
-                <i :class="item.icon" class="w-3 h-3"></i>
-                <span class="flex-1 ml-3 text-left whitespace-nowrap">
-                  {{ item.name }}
-                </span>
-              </button>
-            </a>
+
+          <!-- <li v-for="(item, index) in loadedDepartment" :key="'menuList-department' + index">
+            <Collapse :name="item.name">
+              <a v-for="(subItem, subIndex) in item.subList" :key="subItem.id" :href="subItem.link"
+                class="menu-button-department flex items-center w-full transition duration-100 rounded-lg"
+                :class="{ 'menu-active': subItem.selected }">
+                <i :class="subItem.icon"></i>
+                <span class="flex-1 ml-3 text-left whitespace-nowrap"> {{ subItem.name }}</span>
+              </a>
+            </Collapse>
           </li> -->
 
           <!-- <div :key="common.listDepartmentKey">
@@ -181,6 +182,9 @@ export default {
     },
     urlPageV2() {
       return this.$route.path;
+    },
+    leftSideBar() {
+      return this.menuList.total.concat(this.loadedDepartment);
     }
   },
   data() {
@@ -196,13 +200,29 @@ export default {
         showModalTemplate: "<i class='fa-solid fa-plus w-3 h-3'></i><span class='flex-1 ml-3 text-left whitespace-nowrap'>Thêm phòng ban</span>",
       },
       loadedDepartment: [
-        {
-          selected: false,
-          icon: "fa-solid fa-address-card",
-          name: "Phòng ban",
-          link: "/main_v2/total/staff",
-          id: "department-1",
-        },
+        // {
+        //   selected: false,
+        //   icon: "fa-solid fa-address-card",
+        //   name: "Phòng ban",
+        //   link: "/main_v2/total/staff",
+        //   id: "department-1",
+        //   subList: [
+        //     {
+        //       id: "people",
+        //       name: "Nhân sự",
+        //       icon: "fa-regular fa-user",
+        //       link: "/main_v2/total/staff",
+        //       selected: false,
+        //     },
+        //     {
+        //       id: "script",
+        //       name: "Kịch bản",
+        //       icon: "fa-solid fa-scroll",
+        //       link: "/main_v2/total/department",
+        //       selected: false,
+        //     },
+        //   ],
+        // },
       ],
       menuList: {
         total: [
@@ -212,6 +232,7 @@ export default {
             name: "Tổng",
             link: "/main_v2/total/staff",
             id: "dropdown-menu-1",
+            isTotal: true,
             subList: [
               {
                 id: "people",
@@ -245,7 +266,7 @@ export default {
     }
   },
   mounted() {
-    // this.fetchDpt();
+    this.fetchDpt();
   },
   methods: {
     openMenu: () => {
@@ -272,16 +293,32 @@ export default {
         let data = resp.value;
         let convertFeArr = [];
         data.forEach(item => {
+          let subkeyId = uuidv4();
           if (!item.keyUUID) {
             alert("KeyUUID không tồn tại !");
           } else {
             convertFeArr.push({
+              selected: false,
               icon: "fa-solid fa-address-card",
               name: item.name,
               link: "/main/total/departments?id=" + item.keyUUID,
               id: "department" + item.keyUUID,
-              storeId: this.storeId,
-              selected: path.includes(item.keyUUID),
+              subList: [
+                {
+                  id: "people" + subkeyId,
+                  name: "Nhân sự",
+                  icon: "fa-regular fa-user",
+                  link: "/main_v2/total/staff",
+                  selected: false,
+                },
+                {
+                  id: "script" + subkeyId,
+                  name: "Kịch bản",
+                  icon: "fa-solid fa-scroll",
+                  link: "/main_v2/total/department",
+                  selected: false,
+                },
+              ],
             });
           }
 

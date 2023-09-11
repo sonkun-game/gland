@@ -33,12 +33,7 @@ export default {
     props: {
         label: "",
         iconClass: "",
-        list: [
-            {
-                link: "",
-                name: ""
-            }
-        ]
+        list: []
     }
 }
 </script>
