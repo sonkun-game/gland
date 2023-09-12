@@ -13,64 +13,15 @@
         <ul class="space-y-2 font-medium">
 
           <li v-for="(item, index) in leftSideBar" :key="'menuList-total' + index">
-            <Collapse :name="item.name">
+            <Collapse :name="item.name" :isHidden="item.selected !== undefined ? item.selected : true">
               <a v-for="(subItem, subIndex) in item.subList" :key="'subList' + subIndex" :href="subItem.link"
                 class="menu-button-department flex items-center w-full transition duration-100 rounded-lg"
-                :class="{ 'menu-active': (urlPageV2.includes(subItem.link) && item.isTotal) }">
+                :class="{ 'menu-active': (urlPageV2.includes(subItem.link) && item.isTotal) || subItem.selected }">
                 <i :class="subItem.icon"></i>
                 <span class="flex-1 ml-3 text-left whitespace-nowrap"> {{ subItem.name }}</span>
               </a>
             </Collapse>
           </li>
-
-
-          <!-- <li v-for="(item, index) in loadedDepartment" :key="'menuList-department' + index">
-            <Collapse :name="item.name">
-              <a v-for="(subItem, subIndex) in item.subList" :key="subItem.id" :href="subItem.link"
-                class="menu-button-department flex items-center w-full transition duration-100 rounded-lg"
-                :class="{ 'menu-active': subItem.selected }">
-                <i :class="subItem.icon"></i>
-                <span class="flex-1 ml-3 text-left whitespace-nowrap"> {{ subItem.name }}</span>
-              </a>
-            </Collapse>
-          </li> -->
-
-          <!-- <div :key="common.listDepartmentKey">
-            <li class="font-bold" v-for="(item, index) in loadedDepartment" :key="'loadedDepartment-' + index">
-              <a :href="item.link">
-                <button type="button" :id="item.id" :class="{ 'menu-active': item.selected }"
-                  class="menu-button-department flex items-center w-full p-3 transition duration-100 rounded-lg">
-                  <i class="w-3 h-3 fa-solid fa-address-card"></i>
-                  <span class="flex-1 ml-3 text-left whitespace-nowrap">
-                    {{ item.name }}
-                  </span>
-                </button>
-              </a>
-            </li>
-          </div> -->
-
-
-          <!-- <li>
-            <ShowModal :modalId="department.id" type="html"
-              customClass="menu-button-add flex items-center w-full p-3 transition duration-100 rounded-lg"
-              :title="department.showModalTemplate">
-              <ModalContainer :modalId="department.id" class="hidden">
-                <ModalHeader head="Thêm phòng ban mới" :modalId="department.id"></ModalHeader>
-                <div>
-                  <InputField :id="department.nameID" label="Tên phòng ban" styleClass="p-4"
-                    placeholder="Nhập tên phòng ban"></InputField>
-                </div>
-                <div class="flex justify-end items-center p-6 space-x-2 border-gray-200 rounded-b dark:border-gray-600">
-                  <button :data-modal-hide="department.id"
-                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900">
-                    Hủy bỏ</button>
-                  <button :data-modal-hide="department.id" @click="addDepartment()"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
-                </div>
-              </ModalContainer>
-            </ShowModal>
-          </li> -->
-
 
         </ul>
       </div>
@@ -201,31 +152,7 @@ export default {
       },
       storeId: 1,
       pageNum: 0,
-      loadedDepartment: [
-        // {
-        //   selected: false,
-        //   icon: "fa-solid fa-address-card",
-        //   name: "Phòng ban",
-        //   link: "/main_v2/total/staff",
-        //   id: "department-1",
-        //   subList: [
-        //     {
-        //       id: "people",
-        //       name: "Nhân sự",
-        //       icon: "fa-regular fa-user",
-        //       link: "/main_v2/total/staff",
-        //       selected: false,
-        //     },
-        //     {
-        //       id: "script",
-        //       name: "Kịch bản",
-        //       icon: "fa-solid fa-scroll",
-        //       link: "/main_v2/total/department",
-        //       selected: false,
-        //     },
-        //   ],
-        // },
-      ],
+      loadedDepartment: [],
       menuList: {
         total: [
           // Tổng
@@ -244,7 +171,7 @@ export default {
                 selected: false,
               },
               {
-                id: "people",
+                id: "department",
                 name: "Phòng ban",
                 icon: "fa-solid fa-house",
                 link: "/main_v2/total/department",
@@ -297,8 +224,11 @@ export default {
         let convertFeArr = [];
         data.forEach(item => {
           let subkeyId = uuidv4();
+          let checkPeople = path.includes("people?id=" + item.id); 
+          let checkScript = path.includes("script?id=" + item.id); 
+
           convertFeArr.push({
-            selected: false,
+            selected: checkPeople || checkScript,
             icon: "fa-solid fa-address-card",
             name: item.name,
             link: "/main/total/departments?id=" + item.id,
@@ -308,15 +238,15 @@ export default {
                 id: "people" + subkeyId,
                 name: "Nhân sự",
                 icon: "fa-regular fa-user",
-                link: "/main_v2/total/staff",
-                selected: false,
+                link: "/main_v2/total/list-department/people?id=" + item.id,
+                selected: checkPeople,
               },
               {
                 id: "script" + subkeyId,
                 name: "Kịch bản",
                 icon: "fa-solid fa-scroll",
-                link: "/main_v2/total/department",
-                selected: false,
+                link: "/main_v2/total/list-department/script?id=" + item.id,
+                selected: checkScript,
               },
             ],
           });

@@ -7,7 +7,7 @@
                 <i class="fa-solid fa-chevron-down w-4 h-4 focus:ring-4 focus:outline-none focus:ring-blue-300"></i>
             </button>
         </h2>
-        <div :id="'collapse-body' + collapseKey" class="hidden">
+        <div :id="'collapse-body' + collapseKey" :class="{'hidden':!isHidden}">
             <slot></slot>
         </div>
     </div>
@@ -26,6 +26,10 @@ export default {
     props: {
         name: "",
         list: [],
+        isHidden: {
+            type: Boolean,
+            default: true,
+        }
     },
     methods: {
         toggleCollapse() {
