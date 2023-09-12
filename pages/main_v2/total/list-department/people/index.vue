@@ -38,7 +38,7 @@
             <tbody>
                 <Row styleClass="bg-gray-900 border-b text-white" v-for="(item, index) in table.body" :key="index">
                     <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
-                    <Cell styleClass="px-6 py-4">{{ item.name }}</Cell>
+                    <Cell styleClass="px-6 py-4">{{ item.username }}</Cell>
                     <Cell styleClass="px-6 py-4">{{ item.createdBy }}</Cell>
                     <Cell styleClass="px-6 py-4">{{ item.createdAt }}</Cell>
                     <Cell styleClass="px-2 py-3 flex">
@@ -89,14 +89,26 @@
 </template>
 
 <script>
+import {getAllStaffsPaging} from "../../../../../static/account/staff";
+
 export default {
     name: "ListDepartmentPeoplePageV2",
     layout: "main_v2",
+  async fetch() {
+    try {
+      var response = await getAllStaffsPaging(this.storeId, this.pageNum, this.id);
+      this.table.body = response.value;
+      this.totalPage = response.totalPage;
+    } catch (error) {
+      console.error('Lỗi:', error);
+    }
+  },
     data() {
         return {
             id: this.$route.query.id,
             storeId: 1,
             pageNum: 0,
+            totalPage:0,
             table: {
                 head: [
                     {
@@ -104,7 +116,7 @@ export default {
                         show: true,
                     },
                     {
-                        name: "Tên phòng ban",
+                        name: "Tên nhân sự",
                         show: true,
                     },
                     {
