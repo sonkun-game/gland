@@ -19,7 +19,7 @@ export async function getAllStaffsPaging(storeId, pageNum, departmentId) {
 }
 
 
-export async function createStaffsAll(storeId) {
+export async function createStaffsAll(storeId, departmentId) {
   var username = document.getElementById("staffName").value;
   var password = document.getElementById("staffPassword").value;
   /*var name = document.getElementById("editNameValue").value;
@@ -34,6 +34,7 @@ export async function createStaffsAll(storeId) {
       username: username,
       password: password,
       email: email,
+      departmentId: departmentId,
       storeId: storeId
     },
     headers: {

@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import {getAllStaffsPaging} from "../../../../../static/account/staff";
+import {createStaffsAll, getAllStaffsPaging} from "../../../../../static/account/staff";
 
 export default {
     name: "ListDepartmentPeoplePageV2",
@@ -137,7 +137,11 @@ export default {
         }
     },
     methods: {
-
+      async createStaff() {
+        var response = await createStaffsAll(this.storeId, this.id);
+        this.table.body = response.data.value;
+        this.totalPage = response.data.totalPage;
+      }
     }
 }
 </script>
