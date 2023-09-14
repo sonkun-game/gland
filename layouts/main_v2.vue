@@ -130,6 +130,7 @@ export default {
       localStorage.setItem('theme', 'dark')
     }
     this.theme = localStorage.getItem("theme");
+    this.$store.dispatch('updateTheme', this.theme);
    
   },
   methods: {
@@ -140,6 +141,8 @@ export default {
     setTheme(mode) {
       localStorage.setItem('theme',mode);
       this.theme = localStorage.getItem("theme");
+      console.log("updateTheme");
+      this.$store.dispatch('updateTheme', mode);
     },
   }
 }

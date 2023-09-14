@@ -1,7 +1,7 @@
 <template>
     <div class="p-8 text-white">
         <nav class="flex justify-between">
-            <h1 class="font-bold text-4xl">Kịch bản</h1>
+            <h1 class="font-bold text-4xl" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">Kịch bản</h1>
             <ShowModal modalId="createScriptBtnId" type="custom"
                 customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold" title="Tạo Kịch Bản">
                 <ModalContainer modalId="createScriptBtnId" size="xl" :isDark="true">
@@ -22,7 +22,7 @@
 
         <CrudTable style-class="w-full text-sm text-left text-gray-500">
             <thead>
-                <Row styleClass="text-sm text-gray-900 text-white" style="background-color: #1d2432;">
+                <Row :theme="theme">
                     <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3"
                         :class="{ 'hidden': !item.show }" cellType="title">
                         {{ item.name }}
@@ -30,7 +30,7 @@
                 </Row>
             </thead>
             <tbody>
-                <Row styleClass="bg-gray-900 border-b text-white" v-for="(item, index) in table.body" :key="index">
+                <Row :theme="theme" v-for="(item, index) in table.body" :key="index">
                     <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
                     <Cell styleClass="px-6 py-4">{{ item.name }}</Cell>
                     <Cell styleClass="px-6 py-4">{{ item.createdBy }}</Cell>
@@ -88,6 +88,16 @@ export default {
     name: "ListDepartmentScriptPageV2",
     layout: "main_v2",
     async fetch() {
+    },
+    computed: {
+        theme: {
+            get() {
+                return this.$store.state.theme;
+            },
+            set(newValue) {
+                this.theme = newValue;
+            },
+        }
     },
     data() {
         return {

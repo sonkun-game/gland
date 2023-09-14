@@ -1,5 +1,5 @@
 <template>
-    <tr :class="styleClass">
+    <tr class="border-b" :class="{'bg-gray-900 text-white':theme==='dark','bg-gray-50 text-gray-900':theme==='light'}">
       <slot></slot>
     </tr>
 </template>
@@ -8,7 +8,8 @@
 export default {
   name: "RowComponent",
   props: {
-    styleClass: String
+    styleClass: String,
+    theme: String
   }
 }
 </script>

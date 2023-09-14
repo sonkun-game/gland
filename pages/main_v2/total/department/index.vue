@@ -1,27 +1,28 @@
 <template>
     <div class="p-8 text-white">
         <nav class="flex justify-between">
-            <h1 class="font-bold text-4xl">Phòng ban</h1>
+            <h1 class="font-bold text-4xl" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">Phòng ban</h1>
             <ShowModal modalId="createDepartmentBtnId" type="custom"
-                customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold"
-                title="Tạo phòng ban">
+                customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold" title="Tạo phòng ban">
                 <ModalContainer modalId="createDepartmentBtnId" size="xl" :isDark="true">
-                    <ModalHeader :isDark="true" class="bg-gray-900" head="Tạo phòng ban" modalId="createDepartmentBtnId"></ModalHeader>
-                    <InputField :isDark="true" styleClass="p-2" id="departmentName" label="Tên nhân viên"  placeholder="Tên phòng ban" />
-                <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
-                    <button data-modal-hide="createDepartmentBtnId"
-                    class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
-                    Hủy bỏ</button>
-                    <button data-modal-hide="createDepartmentBtnId" type="button" @click="createDepartment()"
-                    class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
-                </div>
+                    <ModalHeader :isDark="true" class="bg-gray-900" head="Tạo phòng ban" modalId="createDepartmentBtnId">
+                    </ModalHeader>
+                    <InputField :isDark="true" styleClass="p-2" id="departmentName" label="Tên nhân viên"
+                        placeholder="Tên phòng ban" />
+                    <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
+                        <button data-modal-hide="createDepartmentBtnId"
+                            class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
+                            Hủy bỏ</button>
+                        <button data-modal-hide="createDepartmentBtnId" type="button" @click="createDepartment()"
+                            class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
+                    </div>
                 </ModalContainer>
             </ShowModal>
         </nav>
 
-        <CrudTable style-class="w-full text-sm text-left text-gray-500">
+        <CrudTable style-class="w-full text-sm text-left">
             <thead>
-                <Row styleClass="text-sm text-gray-900 text-white" style="background-color: #1d2432;">
+                <Row :theme="theme">
                     <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3"
                         :class="{ 'hidden': !item.show }" cellType="title">
                         {{ item.name }}
@@ -29,7 +30,7 @@
                 </Row>
             </thead>
             <tbody>
-                <Row styleClass="bg-gray-900 border-b text-white" v-for="(item, index) in table.body" :key="index">
+                <Row :theme="theme" v-for="(item, index) in table.body" :key="index">
                     <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
                     <Cell styleClass="px-6 py-4">{{ item.name }}</Cell>
                     <Cell styleClass="px-6 py-4">{{ item.createdBy }}</Cell>
@@ -82,26 +83,36 @@
 </template>
 
 <script>
-import {createStaffsAll, getAllStaffsPaging} from "../../../../static/account/staff";
-import {createDepartmentsAll, getAllDepartPagingV2} from "../../../../static/department/department-v2";
+import { createStaffsAll, getAllStaffsPaging } from "../../../../static/account/staff";
+import { createDepartmentsAll, getAllDepartPagingV2 } from "../../../../static/department/department-v2";
 
 export default {
     name: "DepartmentPageV2",
     layout: "main_v2",
-  async fetch() {
-    try {
-      var response = await getAllDepartPagingV2(this.storeId, this.pageNum);
-      this.table.body = response.value;
-      this.totalPage = response.totalPage;
-    } catch (error) {
-      console.error('Lỗi:', error);
-    }
-  },
+    async fetch() {
+        try {
+            var response = await getAllDepartPagingV2(this.storeId, this.pageNum);
+            this.table.body = response.value;
+            this.totalPage = response.totalPage;
+        } catch (error) {
+            console.error('Lỗi:', error);
+        }
+    },
+    computed: {
+        theme: {
+            get() {
+                return this.$store.state.theme;
+            },
+            set(newValue) {
+                this.theme = newValue;
+            },
+        }
+    },
     data() {
         return {
-          storeId:1,
-          pageNum:0,
-          table: {
+            storeId: 1,
+            pageNum: 0,
+            table: {
                 head: [
                     {
                         name: "STT",
@@ -125,17 +136,17 @@ export default {
                     },
                 ],
                 body: [],
-          },
+            },
         }
     },
-  methods:{
-    async createDepartment() {
-      var response = await createDepartmentsAll(this.storeId);
-      this.table.body = response.data.value;
-      this.totalPage = response.data.totalPage;
-      window.location.reload()
+    methods: {
+        async createDepartment() {
+            var response = await createDepartmentsAll(this.storeId);
+            this.table.body = response.data.value;
+            this.totalPage = response.data.totalPage;
+            window.location.reload()
+        }
     }
-  }
 }
 </script>
 
