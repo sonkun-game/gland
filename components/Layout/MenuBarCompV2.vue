@@ -3,15 +3,14 @@
   <!-- Menu Side Bar -->
   <aside id="menu-side-bar" class="menu-bar w-0 h-screen border-r-2 border-gray-800 end">
     <button type="button" @click="openMenu(); common.isClose = !common.isClose"
-      class="w-10 absolute top-3 left-80 z-10 px-2 text-white">
+      class="w-10 absolute top-3 left-80 z-10 px-2" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">
       <i v-if="common.isClose" class="fa-solid fa-arrow-right"></i>
       <i v-else class="fa-solid fa-arrow-left"></i>
     </button>
 
     <div id="layout-menu-body">
       <div class="overflow-auto px-2 py-4 overflow-y-auto no-scrollbar" style="max-height: 91vh;">
-        <ul class="space-y-2 font-medium">
-
+        <ul class="space-y-2 font-medium" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">
           <li v-for="(item, index) in leftSideBar" :key="'menuList-total' + index">
             <Collapse :name="item.name" :isHidden="item.selected !== undefined ? item.selected : true">
               <a v-for="(subItem, subIndex) in item.subList" :key="'subList' + subIndex" :href="subItem.link"
@@ -38,7 +37,6 @@
 .menu-button,
 .menu-button-add,
 .menu-button-department {
-  color: white;
   border-radius: 15px;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -136,6 +134,12 @@ export default {
     },
     leftSideBar() {
       return this.menuList.total.concat(this.loadedDepartment);
+    }
+  },
+  props: {
+    theme: {
+      type: String,
+      default: ""
     }
   },
   data() {

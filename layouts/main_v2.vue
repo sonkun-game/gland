@@ -1,28 +1,31 @@
 
 <template>
-  <div class="bg-gland">
-    <nav class="w-100 h-15 px-4 py-2 flex justify-end bg-gray-900 text-white">
+  <div :class="{'bg-gland':theme==='dark','bg-gray-50':theme==='light'}">
+
+    <!-- bg-gray-900 text-white -->
+    <nav class="w-100 h-15 px-4 py-2 flex justify-end text-white shadow" :class="{'bg-gray-900':theme==='dark','bg-white':theme==='light'}">
       <div class="flex items-center w-100 justify-between">
-        <div class="text-lg bold title xl">Gland</div>
+        <div class="text-lg bold title xl" :class="{'text-gray-900':theme==='light'}">Gland</div>
         <!-- <Dropdown :list="shopList" iconClass="fa-solid fa-shop pr-4"></Dropdown> -->
         <div class="grow"></div>
-        <i class="fa-solid fa-bell p-2"></i>
-        <div class="p-2">
+        <i class="fa-solid fa-bell p-2" :class="{'text-gray-900':theme==='light'}"></i>
+        <div class="p-2" :class="{'text-gray-900':theme==='light'}">
           <i class="fa-solid fa-coins"></i>
           <span>2,000,000</span>
         </div>
         <details class="font-semibold cursor-pointer z-10">
           <summary class="m-1 btn"><img src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
               class="w-8 h-8 inline rounded-full bg-red-200" /></summary>
-          <ul class="drop_down_style p-2 shadow menu rounded-lg dropdown-content z-[1] bg-gray-900 rounded-box w-64">
-            <li class="block max-w-sm p-2 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          <ul class="drop_down_style p-2 shadow menu rounded-lg dropdown-content z-[1] rounded-box w-64" :class="{'bg-gray-900':theme==='dark','bg-gray-50':theme==='light'}">
+            <li class="block max-w-sm p-2 rounded-lg">
               <div class="flex pb-2">
                 <img class="w-10 h-10 rounded-full" src="https://tecdn.b-cdn.net/img/new/avatars/2.webp" alt="">
-                <h1 class="ml-2 py-2 font-medium text-base">Dang Nguyen</h1>
+                <h1 class="ml-2 py-2 font-medium text-base" :class="{ 'text-white': theme === 'dark', 'text-gray-900': theme === 'light' }">Dang Nguyen</h1>
               </div>
               <div class="mt-2 flex w-full justify-between text-xl p-2">
-                <button class="btn btn-outline p-2 mode-button" data-tooltip-target="tooltip-light">
-                  <i class="fa-solid fa-sun"></i>
+                <button class="btn btn-outline p-2 mode-button" :class="{ 'active': theme === 'light' }" @click="setTheme('light')"
+                  data-tooltip-target="tooltip-light">
+                  <i class="fa-solid fa-sun" :class="{ 'text-white': theme === 'dark', 'text-gray-900': theme === 'light' }"></i>
                 </button>
                 <div id="tooltip-light" role="tooltip"
                   class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -30,8 +33,9 @@
                   <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
 
-                <button class="btn btn-outline p-2 mode-button" data-tooltip-target="tooltip-dark">
-                  <i class="fa-solid fa-moon"></i>
+                <button class="btn btn-outline p-2 mode-button" :class="{ 'active': theme === 'dark'}" @click="setTheme('dark')"
+                  data-tooltip-target="tooltip-dark">
+                  <i class="fa-solid fa-moon" :class="{ 'text-white':theme==='dark','text-gray-900':theme==='light'}"></i>
                 </button>
                 <div id="tooltip-dark" role="tooltip"
                   class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -39,8 +43,9 @@
                   <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
 
-                <button class="btn btn-outline p-2 mode-button" data-tooltip-target="tooltip-sys">
-                  <i class="fa-solid fa-display"></i>
+                <button class="btn btn-outline p-2 mode-button" :class="{ 'active': theme === 'sys' }" @click="setTheme('sys')"
+                  data-tooltip-target="tooltip-sys">
+                  <i class="fa-solid fa-display" :class="{ 'text-white':theme==='dark','text-gray-900':theme==='light'}"></i>
                 </button>
                 <div id="tooltip-sys" role="tooltip"
                   class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -55,8 +60,10 @@
               </div>
             </li>
             <li class="hover:bg-blue-300 p-2 rounded-lg">
-              <a class="font-medium text-base"><i class="fa-solid fa-right-from-bracket"></i> Đăng
-                xuất</a>
+              <a class="font-medium text-base" :class="{ 'text-white': theme === 'dark', 'text-gray-900': theme === 'light' }">
+                <i class="fa-solid fa-right-from-bracket"></i> 
+                <span>Đăng xuất</span>
+              </a>
             </li>
           </ul>
         </details>
@@ -65,7 +72,7 @@
 
     <div class="flex">
       <!-- Menu Bar -->
-      <MenuBarCompV2Vue></MenuBarCompV2Vue>
+      <MenuBarCompV2Vue :theme="theme"></MenuBarCompV2Vue>
       <!-- Main Bar -->
       <div class="custom-bar w-100 grow">
         <div>
@@ -97,6 +104,7 @@ export default {
     return {
       isMenuOpen: false,
       authenURL: "",
+      theme: "",
       shopList: [
         {
           link: "#shop1",
@@ -113,11 +121,25 @@ export default {
     let protocol = window.location.protocol;
     let host = window.location.host;
     this.authenURL = protocol + "//" + host + "/authen/profile";
+
+    // set theme
+    let theme = localStorage.getItem("theme");
+    if (theme) {
+      console.log("theme : ", theme);
+    } else {
+      localStorage.setItem('theme', 'dark')
+    }
+    this.theme = localStorage.getItem("theme");
+   
   },
   methods: {
     isMainPage() {
       var host = document.URL;
       return host.includes("/main/");
+    },
+    setTheme(mode) {
+      localStorage.setItem('theme',mode);
+      this.theme = localStorage.getItem("theme");
     },
   }
 }
@@ -166,7 +188,12 @@ div.title {
   height: 100%;
 }
 
+.mode-button.active {
+  background-color: #ffffff0d;
+  color: #60a5fa;
+}
+
+
 .mode-button:hover {
   background-color: #ffffff0d;
-}
-</style>
+}</style>
