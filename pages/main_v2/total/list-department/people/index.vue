@@ -26,7 +26,7 @@
             </ShowModal>
         </nav>
 
-        <CrudTable style-class="w-full text-sm text-left text-gray-500">
+        <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left text-gray-500">
             <thead>
                 <Row :theme="theme">
                     <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3"
@@ -117,7 +117,7 @@ export default {
         return {
             id: this.$route.query.id,
             storeId: 1,
-            pageNum: 0,
+            pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
             totalPage:0,
             table: {
                 head: [
