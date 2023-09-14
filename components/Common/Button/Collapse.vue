@@ -2,7 +2,7 @@
 <template>
     <div>
         <h2 :id="'collapse-' + collapseKey" @click="toggleCollapse()">
-            <button class="flex items-center w-full p-3 transition duration-100 rounded-lg justify-between text-white">
+            <button class="flex items-center w-full p-3 transition duration-100 rounded-lg justify-between">
                 <span>{{ name }}</span>
                 <i class="fa-solid fa-chevron-down w-4 h-4 focus:ring-4 focus:outline-none focus:ring-blue-300"></i>
             </button>
