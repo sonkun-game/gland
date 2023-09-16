@@ -4,10 +4,10 @@
             <h1 class="font-bold text-4xl" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">Phòng ban</h1>
             <ShowModal modalId="createDepartmentBtnId" type="custom"
                 customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold" title="Tạo phòng ban">
-                <ModalContainer modalId="createDepartmentBtnId" size="xl" :isDark="true">
-                    <ModalHeader :isDark="true" class="bg-gray-900" head="Tạo phòng ban" modalId="createDepartmentBtnId">
+                <ModalContainer modalId="createDepartmentBtnId" size="xl" :isDark="theme==='dark'">
+                    <ModalHeader :isDark="theme==='dark'" head="Tạo phòng ban" modalId="createDepartmentBtnId">
                     </ModalHeader>
-                    <InputField :isDark="true" styleClass="p-2" id="departmentName" label="Tên nhân viên"
+                    <InputField :isDark="theme==='dark'" styleClass="p-2" id="departmentName" label="Tên nhân viên"
                         placeholder="Tên phòng ban" />
                     <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
                         <button data-modal-hide="createDepartmentBtnId"

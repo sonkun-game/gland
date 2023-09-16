@@ -1,6 +1,6 @@
 
 <template>
-    <div class="flex items-start justify-between p-4 rounded">
+    <div class="flex items-start justify-between p-4 rounded" :class="{'bg-gray-900':isDark, 'bg-white':!isDark}">
         <div class="text-xl font-semibold text-white" v-if="isDark">
             {{ head }}
         </div>

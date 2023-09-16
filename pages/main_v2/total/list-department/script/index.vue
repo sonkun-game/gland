@@ -4,10 +4,10 @@
             <h1 class="font-bold text-4xl" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">Kịch bản</h1>
             <ShowModal modalId="createScriptBtnId" type="custom"
                 customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold" title="Tạo Kịch Bản">
-                <ModalContainer modalId="createScriptBtnId" size="xl" :isDark="true">
-                    <ModalHeader :isDark="true" class="bg-gray-900" head="Tạo phòng ban" modalId="createScriptBtnId">
+                <ModalContainer modalId="createScriptBtnId" size="xl" :isDark="theme==='dark'">
+                    <ModalHeader :isDark="theme==='dark'" head="Tạo phòng ban" modalId="createScriptBtnId">
                     </ModalHeader>
-                    <InputField :isDark="true" styleClass="p-2" id="scriptName" label="Tên kịch bản"
+                    <InputField :isDark="theme==='dark'" styleClass="p-2" id="scriptName" label="Tên kịch bản"
                         placeholder="Tên kịch bản" />
                     <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
                         <button data-modal-hide="createScriptBtnId"
@@ -78,7 +78,6 @@
                 </Row>
             </tbody>
         </CrudTable>
-
     </div>
 </template>
 

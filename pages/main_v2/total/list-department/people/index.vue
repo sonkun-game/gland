@@ -6,13 +6,13 @@
             <ShowModal modalId="createStaffBtnId" type="custom"
                 customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold"
                 title="Tạo nhân sự">
-                <ModalContainer modalId="createStaffBtnId" size="xl" :isDark="true">
-                    <ModalHeader :isDark="true" class="bg-gray-900" head="Tạo nhân sự" modalId="createStaffBtnId"></ModalHeader>
+                <ModalContainer modalId="createStaffBtnId" size="xl" :isDark="theme==='dark'">
+                    <ModalHeader :isDark="theme==='dark'" head="Tạo nhân sự" modalId="createStaffBtnId"></ModalHeader>
                     <div class="flex flex-wrap">
-                        <InputField :isDark="true" styleClass="p-2 w-50" id="staffName" label="Tên tài khoản"  placeholder="Tên nhân viên" />
-                        <InputField :isDark="true" styleClass="p-2 w-50" id="staffEmail" label="Email" placeholder="Email nhân viên" />
-                        <InputField :isDark="true" styleClass="p-2 w-50" id="staffScript" label="Kịch bản" placeholder="Kịch bản" />
-                        <InputField :isDark="true" styleClass="p-2 w-50" id="staffPassword" label="Mật khẩu"  placeholder="Password" />
+                        <InputField :isDark="theme==='dark'" styleClass="p-2 w-50" id="staffName" label="Tên tài khoản"  placeholder="Tên nhân viên" />
+                        <InputField :isDark="theme==='dark'" styleClass="p-2 w-50" id="staffEmail" label="Email" placeholder="Email nhân viên" />
+                        <InputField :isDark="theme==='dark'" styleClass="p-2 w-50" id="staffScript" label="Kịch bản" placeholder="Kịch bản" />
+                        <InputField :isDark="theme==='dark'" styleClass="p-2 w-50" id="staffPassword" label="Mật khẩu"  placeholder="Password" />
                     </div>
 
                 <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
