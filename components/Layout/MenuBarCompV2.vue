@@ -248,11 +248,12 @@ export default {
       resp.then((resp) => {
         let data = resp.value;
         let convertFeArr = [];
-        data.forEach(item => {
+        data.forEach((item, index) => {
           let subkeyId = uuidv4();
           let checkPeople = path.includes("people?id=" + item.id);
           let checkScript = path.includes("script?id=" + item.id);
 
+          // push array
           convertFeArr.push({
             selected: checkPeople || checkScript,
             icon: "fa-solid fa-address-card",
@@ -276,6 +277,21 @@ export default {
               },
             ],
           });
+
+          if(item.scripts) {
+            // item.scripts
+            item.scripts.forEach(script => {
+              convertFeArr[index].subList.push({
+                id: script.id,
+                name: script.name,
+                icon: "fa-solid fa-list-check",
+                link: "#",
+                departmentId: script.departmentId,
+                department: script.department
+              })
+            })
+            
+          }
         });
 
         // set dât

@@ -143,6 +143,7 @@ export default {
           var response = await createScript(this.id);
           this.table.body = response.data.value;
           this.totalPage = response.data.totalPage;
+          this.$store.dispatch('updateIncreMenuKey');
         }
     }
 }
