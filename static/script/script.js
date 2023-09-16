@@ -5,7 +5,7 @@ export async function createScript(departmentId) {
 
   return axios({
     method: 'post',
-    url: 'https://103.142.26.40:8445/gland/api-script/create',
+    url: 'https://103.142.26.40:8445/gland/api-script/create?storeId=1',
     responseType: 'json',
     data: {
       name: scriptName,

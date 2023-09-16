@@ -83,7 +83,7 @@
 
 <script>
 
-import {createScript, getAllScripts} from "../../../../../static/script";
+import {createScript, getAllScripts} from "../../../../../static/script/script";
 export default {
     name: "ListDepartmentScriptPageV2",
     layout: "main_v2",
