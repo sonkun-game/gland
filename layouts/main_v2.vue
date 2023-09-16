@@ -141,8 +141,11 @@ export default {
     setTheme(mode) {
       localStorage.setItem('theme',mode);
       this.theme = localStorage.getItem("theme");
-      console.log("updateTheme");
       this.$store.dispatch('updateTheme', mode);
+    },
+    refreshMenuList() {
+      console.log("refresh menu --");
+      this.$refs.menu.fetchDpt();
     },
   }
 }

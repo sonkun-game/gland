@@ -7,7 +7,7 @@
                 <ModalContainer modalId="createDepartmentBtnId" size="xl" :isDark="theme==='dark'">
                     <ModalHeader :isDark="theme==='dark'" head="Tạo phòng ban" modalId="createDepartmentBtnId">
                     </ModalHeader>
-                    <InputField :isDark="theme==='dark'" styleClass="p-2" id="departmentName" label="Tên nhân viên"
+                    <InputField :isDark="theme==='dark'" styleClass="p-2" id="departmentName" label="Tên phòng ban"
                         placeholder="Tên phòng ban" />
                     <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
                         <button data-modal-hide="createDepartmentBtnId"
@@ -142,10 +142,11 @@ export default {
     },
     methods: {
         async createDepartment() {
+            console.log("createDepartment --");
             var response = await createDepartmentsAll(this.storeId);
             this.table.body = response.data.value;
             this.totalPage = response.data.totalPage;
-            window.location.reload()
+            this.$store.dispatch('updateIncreMenuKey');
         }
     }
 }

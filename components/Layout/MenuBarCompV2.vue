@@ -1,16 +1,18 @@
 
 <template>
   <!-- Menu Side Bar -->
-  <aside id="menu-side-bar" class="menu-bar w-0 h-screen end" :class="{'border-r-2 border-gray-800':theme==='dark','shadow':theme==='light'}">
+  <aside id="menu-side-bar" class="menu-bar w-0 h-screen end"
+    :class="{ 'border-r-2 border-gray-800': theme === 'dark', 'shadow': theme === 'light' }">
     <button type="button" @click="openMenu(); common.isClose = !common.isClose"
-      class="w-10 absolute top-3 left-60 z-10 px-2" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">
+      class="w-10 absolute top-3 left-60 z-10 px-2"
+      :class="{ 'text-white': theme === 'dark', 'text-gray-900': theme === 'light' }">
       <i v-if="common.isClose" class="fa-solid fa-arrow-right"></i>
       <i v-else class="fa-solid fa-arrow-left"></i>
     </button>
 
     <div id="layout-menu-body">
       <div class="overflow-auto px-2 py-4 overflow-y-auto no-scrollbar" style="max-height: 91vh;">
-        <ul class="space-y-2 font-medium" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">
+        <ul class="space-y-2 font-medium" :key="menuKey" :class="{ 'text-white': theme === 'dark', 'text-gray-900': theme === 'light' }">
           <li v-for="(item, index) in leftSideBar" :key="'menuList-total' + index">
             <Collapse :name="item.name" :isShow="true">
               <a v-for="(subItem, subIndex) in item.subList" :key="'subList' + subIndex" :href="subItem.link"
@@ -132,9 +134,22 @@ export default {
     urlPageV2() {
       return this.$route.path;
     },
-    leftSideBar() {
-      return this.menuList.total.concat(this.loadedDepartment);
-    }
+    leftSideBar: {
+      get() {
+        return this.menuList.total.concat(this.loadedDepartment);
+      },
+      set(newValue) {
+        this.this.menuList.total = newValue;
+      }
+    },
+    menuKey: {
+      get() {
+        return this.$store.state.menuKey;
+      },
+      set(newValue) {
+        this.menuKey = newValue;
+      }
+    },
   },
   props: {
     theme: {
@@ -198,6 +213,12 @@ export default {
       ],
     }
   },
+  watch: {
+    // khi thay đổi giá trị menu key, thì sẽ tự động update lại thanh menu
+    menuKey() {
+      this.fetchDpt();
+    }
+  },
   mounted() {
     this.fetchDpt();
   },
@@ -218,6 +239,7 @@ export default {
       return host.includes("/main/total/all");
     },
     fetchDpt() {
+      console.log("fetch Dpt --");
       // let url = process.env.API_URL + "api-department?storeId=1";
       let url = "https://103.142.26.40:8445/gland/api-department/all?storeId=" + this.storeId + "&pageNum=" + this.pageNum;
       let resp = sendGetApi(url, null);
@@ -228,8 +250,8 @@ export default {
         let convertFeArr = [];
         data.forEach(item => {
           let subkeyId = uuidv4();
-          let checkPeople = path.includes("people?id=" + item.id); 
-          let checkScript = path.includes("script?id=" + item.id); 
+          let checkPeople = path.includes("people?id=" + item.id);
+          let checkScript = path.includes("script?id=" + item.id);
 
           convertFeArr.push({
             selected: checkPeople || checkScript,
