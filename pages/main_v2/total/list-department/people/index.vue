@@ -26,7 +26,7 @@
             </ShowModal>
         </nav>
 
-        <CrudTable style-class="w-full text-sm text-left text-gray-500">
+        <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left text-gray-500">
             <thead>
                 <Row :theme="theme">
                     <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3"
@@ -38,7 +38,7 @@
             <tbody>
                 <Row :theme="theme" v-for="(item, index) in table.body" :key="index">
                     <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
-                    <Cell styleClass="px-6 py-4">{{ item.name }}</Cell>
+                    <Cell styleClass="px-6 py-4">{{ item.username }}</Cell>
                     <Cell styleClass="px-6 py-4">{{ item.createdBy }}</Cell>
                     <Cell styleClass="px-6 py-4">{{ item.createdAt }}</Cell>
                     <Cell styleClass="px-2 py-3 flex">
@@ -89,6 +89,8 @@
 </template>
 
 <script>
+import {createStaffsAll, getAllStaffsPaging} from "../../../../../static/account/staff";
+
 export default {
     name: "ListDepartmentPeoplePageV2",
     layout: "main_v2",
@@ -102,11 +104,21 @@ export default {
             },
         }
     },
+  async fetch() {
+    try {
+      var response = await getAllStaffsPaging(this.storeId, this.pageNum, this.id);
+      this.table.body = response.value;
+      this.totalPage = response.totalPage;
+    } catch (error) {
+      console.error('Lỗi:', error);
+    }
+  },
     data() {
         return {
             id: this.$route.query.id,
             storeId: 1,
-            pageNum: 0,
+            pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
+            totalPage:0,
             table: {
                 head: [
                     {
@@ -114,7 +126,7 @@ export default {
                         show: true,
                     },
                     {
-                        name: "Tên phòng ban",
+                        name: "Tên nhân sự",
                         show: true,
                     },
                     {
@@ -135,7 +147,11 @@ export default {
         }
     },
     methods: {
-
+      async createStaff() {
+        var response = await createStaffsAll(this.storeId, this.id);
+        this.table.body = response.data.value;
+        this.totalPage = response.data.totalPage;
+      }
     }
 }
 </script>

@@ -7,8 +7,8 @@
                 <ModalContainer modalId="createScriptBtnId" size="xl" :isDark="true">
                     <ModalHeader :isDark="true" class="bg-gray-900" head="Tạo phòng ban" modalId="createScriptBtnId">
                     </ModalHeader>
-                    <InputField :isDark="true" styleClass="p-2" id="departmentName" label="Tên nhân viên"
-                        placeholder="Tên phòng ban" />
+                    <InputField :isDark="true" styleClass="p-2" id="scriptName" label="Tên kịch bản"
+                        placeholder="Tên kịch bản" />
                     <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
                         <button data-modal-hide="createScriptBtnId"
                             class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
@@ -20,7 +20,7 @@
             </ShowModal>
         </nav>
 
-        <CrudTable style-class="w-full text-sm text-left text-gray-500">
+        <CrudTable :totalPage="totalPage" :currentPage="currentPage" style-class="w-full text-sm text-left text-gray-500">
             <thead>
                 <Row :theme="theme">
                     <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3"
@@ -84,10 +84,18 @@
 
 <script>
 
+import {createScript, getAllScripts} from "../../../../../static/script";
 export default {
     name: "ListDepartmentScriptPageV2",
     layout: "main_v2",
     async fetch() {
+      try {
+        var response = await getAllScripts(this.pageNum, this.id);
+        this.table.body = response.value;
+        this.totalPage = response.totalPage;
+      } catch (error) {
+        console.error('Lỗi:', error);
+      }
     },
     computed: {
         theme: {
@@ -103,7 +111,7 @@ export default {
         return {
             id: this.$route.query.id,
             storeId: 1,
-            pageNum: 0,
+          pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
             table: {
                 head: [
                     {
@@ -133,7 +141,9 @@ export default {
     },
     methods: {
         async createScript() {
-            
+          var response = await createScript(this.id);
+          this.table.body = response.data.value;
+          this.totalPage = response.data.totalPage;
         }
     }
 }

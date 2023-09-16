@@ -16,7 +16,7 @@
                 </li>
                 <template>
                     <li v-for="item in totalPage" :key="item">
-                        <a href="#" aria-current="page"
+                        <a :href="'?pageNum=' + (item-1)" aria-current="page" @click=""
                             class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{{
                                 item }}</a>
                     </li>

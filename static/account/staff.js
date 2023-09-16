@@ -1,8 +1,9 @@
 import axios from "axios";
 
-export async function getAllStaffsPaging(storeId, pageNum) {
+export async function getAllStaffsPaging(storeId, pageNum, departmentId) {
   let url = "https://103.142.26.40:8445/gland/api-account/all?storeId="+storeId+"&pageNum="+pageNum;
-  try {
+  if(departmentId!= null) url+="&departmentId="+departmentId;
+    try {
     const response = await axios.get(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -18,7 +19,7 @@ export async function getAllStaffsPaging(storeId, pageNum) {
 }
 
 
-export async function createStaffsAll(storeId) {
+export async function createStaffsAll(storeId, departmentId) {
   var username = document.getElementById("staffName").value;
   var password = document.getElementById("staffPassword").value;
   /*var name = document.getElementById("editNameValue").value;
@@ -33,6 +34,7 @@ export async function createStaffsAll(storeId) {
       username: username,
       password: password,
       email: email,
+      departmentId: departmentId,
       storeId: storeId
     },
     headers: {
