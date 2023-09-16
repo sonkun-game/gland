@@ -1,9 +1,9 @@
 
 <template>
   <!-- Menu Side Bar -->
-  <aside id="menu-side-bar" class="menu-bar w-0 h-screen border-r-2 border-gray-800 end">
+  <aside id="menu-side-bar" class="menu-bar w-0 h-screen end" :class="{'border-r-2 border-gray-800':theme==='dark','shadow':theme==='light'}">
     <button type="button" @click="openMenu(); common.isClose = !common.isClose"
-      class="w-10 absolute top-3 left-80 z-10 px-2" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">
+      class="w-10 absolute top-3 left-60 z-10 px-2" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">
       <i v-if="common.isClose" class="fa-solid fa-arrow-right"></i>
       <i v-else class="fa-solid fa-arrow-left"></i>
     </button>
@@ -12,7 +12,7 @@
       <div class="overflow-auto px-2 py-4 overflow-y-auto no-scrollbar" style="max-height: 91vh;">
         <ul class="space-y-2 font-medium" :class="{'text-white':theme==='dark','text-gray-900':theme==='light'}">
           <li v-for="(item, index) in leftSideBar" :key="'menuList-total' + index">
-            <Collapse :name="item.name" :isHidden="item.selected !== undefined ? item.selected : true">
+            <Collapse :name="item.name" :isShow="true">
               <a v-for="(subItem, subIndex) in item.subList" :key="'subList' + subIndex" :href="subItem.link"
                 class="menu-button-department flex items-center w-full transition duration-100 rounded-lg"
                 :class="{ 'menu-active': (urlPageV2.includes(subItem.link) && item.isTotal) || subItem.selected }">
@@ -78,13 +78,13 @@
 
 
 .start {
-  left: -20rem;
+  left: -15rem;
   min-width: 0;
 }
 
 .end {
   left: 0;
-  min-width: 20rem;
+  min-width: 15rem;
 }
 
 div,
@@ -205,11 +205,11 @@ export default {
     openMenu: () => {
       console.log(this);
       var pos = $("#menu-side-bar").position();
-      if (pos.left <= -302) {
+      if (pos.left <= -240) {
         $("#menu-side-bar").css({ left: 0 });
-        $("#menu-side-bar").css("min-width", "20rem");
+        $("#menu-side-bar").css("min-width", "15rem");
       } else {
-        $("#menu-side-bar").css({ left: -320 });
+        $("#menu-side-bar").css({ left: -240 });
         $("#menu-side-bar").css("min-width", "0");
       }
     },
