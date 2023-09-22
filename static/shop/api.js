@@ -3,7 +3,7 @@ export async function getShopsFromApi(status, name) {
   console.log("getShopsFromApi is being commented !!")
   if (false) {
     try {
-      const response = await axios.get('https://103.142.26.40:8445/Total/api-store/all?status=' + status + '&name=' + name, {
+      const response = await axios.get('https://api.gland84.io.vn:8447/Total/api-store/all?status=' + status + '&name=' + name, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem("jwt")
@@ -20,7 +20,7 @@ export async function getShopsFromApi(status, name) {
 export async function createShop(name, address, phone, status) {
   axios({
     method: 'post',
-    url: 'https://103.142.26.40:8445/Total/api-store/create',
+    url: 'https://api.gland84.io.vn:8447/Total/api-store/create',
     responseType: 'json',
     data: {
       name: name,
@@ -42,7 +42,7 @@ export async function createShop(name, address, phone, status) {
 export async function editShop(name, address, phone, status, id) {
   axios({
     method: 'put',
-    url: 'https://103.142.26.40:8445/Total/api-store/edit/' + id,
+    url: 'https://api.gland84.io.vn:8447/Total/api-store/edit/' + id,
     responseType: 'json',
     data: {
       name: name,

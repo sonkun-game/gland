@@ -241,7 +241,7 @@ export default {
     fetchDpt() {
       console.log("fetch Dpt --");
       // let url = process.env.API_URL + "api-department?storeId=1";
-      let url = "https://103.142.26.40:8445/gland/api-department/all?storeId=" + this.storeId + "&pageNum=" + this.pageNum;
+      let url = "https://api.gland84.io.vn:8447/gland/api-department/all?storeId=" + this.storeId + "&pageNum=" + this.pageNum;
       let resp = sendGetApi(url, null);
       let path = window.location.href;
 
@@ -290,7 +290,7 @@ export default {
                 department: script.department
               })
             })
-            
+
           }
         });
 

@@ -5,7 +5,7 @@ export async function createScript(departmentId) {
 
   return axios({
     method: 'post',
-    url: 'https://103.142.26.40:8445/gland/api-script/create?storeId=1',
+    url: 'https://api.gland84.io.vn:8447/gland/api-script/create?storeId=1',
     responseType: 'json',
     data: {
       name: scriptName,
@@ -19,7 +19,7 @@ export async function createScript(departmentId) {
 }
 
 export async function getAllScripts(pageNum, departmentId) {
-  let url = "https://103.142.26.40:8445/gland/api-script/all?departmentId="+departmentId+"&pageNum="+pageNum;
+  let url = "https://api.gland84.io.vn:8447/gland/api-script/all?departmentId="+departmentId+"&pageNum="+pageNum;
   try {
     const response = await axios.get(url, {
       headers: {

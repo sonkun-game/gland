@@ -52,7 +52,7 @@ export async function createTaskForDepartment(departmentKey) {
 
   return axios({
     method: 'post',
-    url: 'https://103.142.26.40:8445/Spa/task-api/create',
+    url: 'https://api.gland84.io.vn:8447/Spa/task-api/create',
     responseType: 'json',
     data: {
       name: name,

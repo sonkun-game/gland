@@ -1,4 +1,6 @@
 export default {
+  target: 'static',
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'gland',
@@ -85,8 +87,8 @@ export default {
   },
 
   env: {
-    API_URL: 'https://103.142.26.40:8445/Spa/',
-    API_TOTAL: 'https://103.142.26.40:8445/Total/',
+    API_URL: 'https://api.gland84.io.vn:8447/Spa/',
+    API_TOTAL: 'https://api.gland84.io.vn:8447/Total/',
     API_JWT: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjkwOTUzNzI2LCJleHAiOjE3NTE0MzM3MjZ9.pvVOd6xKmwSYalPlO9SUyumsWJeimJaENY5X3a15wCHcqfqseImWXCE0DHRqdpMvPLX8iRUUCaUILG-iiCG6Yw'
   },
 }
