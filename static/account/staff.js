@@ -22,8 +22,6 @@ export async function getAllStaffsPaging(storeId, pageNum, departmentId) {
 export async function createStaffsAll(storeId, departmentId) {
   var username = document.getElementById("staffName").value;
   var password = document.getElementById("staffPassword").value;
-  /*var name = document.getElementById("editNameValue").value;
-  var phone = document.getElementById("editPhoneValue").value;*/
   var email = document.getElementById("staffEmail").value;
 
   return axios({
