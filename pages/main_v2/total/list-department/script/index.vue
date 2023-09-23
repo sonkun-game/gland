@@ -5,7 +5,7 @@
             <ShowModal modalId="createScriptBtnId" type="custom"
                 customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold" title="Tạo Kịch Bản">
                 <ModalContainer modalId="createScriptBtnId" size="xl" :isDark="theme==='dark'">
-                    <ModalHeader :isDark="theme==='dark'" head="Tạo phòng ban" modalId="createScriptBtnId">
+                    <ModalHeader :isDark="theme==='dark'" head="Tạo kịch bản" modalId="createScriptBtnId">
                     </ModalHeader>
                     <InputField :isDark="theme==='dark'" styleClass="p-2" id="scriptName" label="Tên kịch bản"
                         placeholder="Tên kịch bản" />
