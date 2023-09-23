@@ -160,46 +160,36 @@ span {
   font-family: Inter, sans-serif;
   font-size: 14px;
 }
-
 div.title {
   font-size: 20px;
   font-weight: 600;
 }
-
 .bg-gland {
   background-color: #030712;
 }
-
 .drop_down_style {
   position: absolute;
   right: 25px;
   top: 65px;
 }
-
 .nuxt_container {
   height: 93vh;
 }
-
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
 .mode-button {
   width: 100%;
   height: 100%;
 }
-
 .mode-button.active {
   background-color: #ffffff0d;
   color: #60a5fa;
 }
-
-
 .mode-button:hover {
   background-color: #ffffff0d;
 }</style>

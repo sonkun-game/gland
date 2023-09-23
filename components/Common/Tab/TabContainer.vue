@@ -1,5 +1,5 @@
 <template>
-    <div :id="id" class="px-2">
+    <div :id="id" class="px-2" :class="{'text-white':theme==='dark'}">
       <slot></slot>
     </div>
   </template>
@@ -11,6 +11,10 @@
       id: {
         type: String,
         default: "TabContainerId"
+      },
+      theme: {
+        type: String,
+        default: 'light',
       }
     }
   }

@@ -285,7 +285,7 @@ export default {
                 id: script.id,
                 name: script.name,
                 icon: "fa-solid fa-list-check",
-                link: "#",
+                link: "/main_v2/total/list-department/mission?id=" + script.id,
                 departmentId: script.departmentId,
                 department: script.department
               })
