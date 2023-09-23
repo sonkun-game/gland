@@ -55,10 +55,9 @@ export default {
     },
     methods: {
         loginForm() {
-          console.log("https://ap.gland84.io.vn:8445/gland/api-authen/signing --->");
             axios({
                 method: 'post',
-                url: 'https://gland84.io.vn:8447/gland/api-authen/signing',
+                url: 'https://api.gland84.io.vn:8447/gland/api-authen/signing',
                 responseType: 'json',
                 data: {
                     username: this.username,
