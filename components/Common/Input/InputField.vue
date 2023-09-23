@@ -3,7 +3,7 @@
     <!-- Select Option -->
     <template v-if="typeInput == 'select'">
       <label :for="id" class="text-normal float-left">{{ label }}</label>
-      <select :id="id" class="h-8 bg-white w-full border border-gray-300 text-gray-900 text-sm rounded-lg py-1.5 px-2.5">
+      <select :id="id" class="h-8 bg-white w-full border border-gray-300 text-gray-900 text-normal rounded-lg py-1.5 px-2.5">
         <option class="text-ellipsis" v-for="(optionItem, optionIndex) in selectOption" :key="optionIndex"
           :value="optionItem.value">
           {{ optionItem.name }}
@@ -11,25 +11,25 @@
       </select>
     </template>
     <template v-else-if="typeInput == 'textarea'">
-      <label :for="id" class="text-sm font-semibold float-left">{{ label }}</label>
-      <textarea class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5" :id="id"
+      <label :for="id" class="text-normal font-semibold float-left">{{ label }}</label>
+      <textarea class="bg-white border border-gray-300 text-gray-900 text-normal rounded-lg block w-full p-1.5" :id="id"
         :placeholder="placeholder" :value="value"></textarea>
     </template>
     <template v-else-if="typeInput == 'checkbox'">
       <input :id="id" type="checkbox" :checked="isChecked" @change="toggleCheckBoxInput()"
         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-      <label :for="id" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ label }}</label>
+      <label :for="id" class="ml-2 text-normal font-medium text-gray-900 dark:text-gray-300">{{ label }}</label>
     </template>
     <!-- Default Text Option -->
     <template v-else>
       <div v-if="isDark">
-        <label :for="id" class="text-sm font-semibold float-left py-2 text-white">{{ label }}</label>
-        <input class="bg-transparent text-gray-300 text-sm rounded-lg block w-full p-1.5 "
+        <label :for="id" class="text-normal font-semibold float-left py-2 text-white">{{ label }}</label>
+        <input class="bg-transparent text-gray-300 text-normal rounded-lg block w-full p-1.5 "
           :placeholder="placeholder" :value="value" type="text" :id="id" :required="required" />
       </div>
       <div v-else>
-        <label :for="id" class="text-sm font-semibold float-left py-2">{{ label }}</label>
-        <input class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 "
+        <label :for="id" class="text-normal font-semibold float-left py-2">{{ label }}</label>
+        <input class="bg-white border border-gray-300 text-gray-900 text-normal rounded-lg block w-full p-1.5 "
           :placeholder="placeholder" :value="value" type="text" :id="id" :required="required" />
       </div>
     </template>

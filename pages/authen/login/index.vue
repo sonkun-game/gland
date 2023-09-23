@@ -43,7 +43,6 @@
 
 <script>
 import axios from 'axios'
-import { sendPostApi } from '../../../plugins/api'
 
 export default {
     name: "LoginPage",

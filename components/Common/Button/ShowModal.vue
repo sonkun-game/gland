@@ -14,18 +14,18 @@
       </a>
     </template>
     <template v-else-if="type == 'custom' && !isModalIdNullOrEmpty">
-      <button :data-modal-target="modalId" :data-modal-toggle="modalId" :class="customClass" @click="toggleModal()">
+      <button :class="customClass" @click="toggleModal()">
         <span :style="titleStyle">{{ title }}</span>
       </button>
     </template>
     <template v-else-if="type == 'custom-with-icon' && !isModalIdNullOrEmpty">
-      <button :data-modal-target="modalId" :data-modal-toggle="modalId" :class="customClass">
+      <button :class="customClass" @click="toggleModal()">
         <i :class="iconClass"></i>
         <span :style="titleStyle">{{ title }}</span>
       </button>
     </template>
     <template v-else-if="type == 'html' && !isModalIdNullOrEmpty">
-      <button :data-modal-target="modalId" :data-modal-toggle="modalId" :class="customClass">
+      <button :class="customClass" @click="toggleModal()">
         <div v-html="title"></div>
       </button>
     </template>
