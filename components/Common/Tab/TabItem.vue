@@ -1,6 +1,8 @@
 <template>
-  <div class="hidden p-4 rounded-lg" :id="id" role="tabpanel" :aria-labelledby="toTab(labelledby)">
-    <slot></slot>
+  <div>
+    <div class="p-4 rounded-lg" :class="{'hidden':isHidden}" :id="id" role="tabpanel" :aria-labelledby="toTab(labelledby)">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -15,6 +17,10 @@ export default {
     labelledby: { // this is not really required
       type: String,
       default: "labelledby"
+    },
+    isHidden: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {

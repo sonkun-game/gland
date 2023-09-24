@@ -12,10 +12,10 @@
                     <InputField :isDark="theme === 'dark'" styleClass="p-2" id="scriptName" label="Tên kịch bản"
                         placeholder="Tên kịch bản" />
                     <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
-                        <button data-modal-hide="createScriptBtnId"
+                        <button @click="Common.toggleModal('createScriptBtnId')"
                             class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
                             Hủy bỏ</button>
-                        <button data-modal-hide="createScriptBtnId" type="button" @click="createScript()"
+                        <button type="button" @click="createScript()"
                             class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
                     </div>
                 </ModalContainer>
@@ -38,46 +38,49 @@
                     <Cell styleClass="px-6 py-4">{{ item.createdBy }}</Cell>
                     <Cell styleClass="px-6 py-4">{{ item.createdAt }}</Cell>
                     <Cell styleClass="px-2 py-3 flex">
-                        <ShowModal type="custom-with-icon" modalId="editScriptModal" iconClass="fa-solid fa-pen"
+                        <ShowModal type="custom-with-icon" :modalId="'editScriptModal' + index" iconClass="fa-solid fa-pen"
                             customClass="block w-8 mr-2 text-blue-700 bg-blue-100 hover:bg-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-                            <ModalContainer modalId="editScriptModal" size="2xl" :hasBackDrop="true"
+                            <ModalContainer :modalId="'editScriptModal' + index" size="2xl" :hasBackDrop="true"
                                 :isDark="theme === 'dark'">
-                                <ModalHeader :isDark="theme === 'dark'" modalId="editScriptModal" head="Chỉnh sửa kịch bản">
+                                <ModalHeader :isDark="theme === 'dark'" :modalId="'editScriptModal' + index"
+                                    head="Chỉnh sửa kịch bản">
                                 </ModalHeader>
-                                <div class="px-4 py-2">
-                                    <div class="rounded-lg border-bottom" :class="{ 'bg-gray-900': theme === 'dark' }">
-                                        <InputField :isDark="theme === 'dark'" styleClass="p-4" :id="'editScript' + index"
-                                            label="Tên kịch bản" :placeholder="item.name"></InputField>
-                                    </div>
-                                    <div class="pt-4">
+                                <div>
+                                    <InputField :isDark="theme === 'dark'" styleClass="p-4" :id="'editScript' + index"
+                                        label="Tên kịch bản" :value="item.name" />
+                                    <div class="p-4">
                                         <button type="button"
-                                            class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-normal px-5 py-2.5 text-center">Lưu
+                                            class="btn btn-info text-white bg-blue-600 hover:bg-blue-400 border-none font-medium rounded-lg text-normal px-5 py-2.5 text-center">Lưu
                                             thay đổi</button>
                                         <button
-                                            class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-normal font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
-                                            Hủy bỏ</button>
+                                            class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-normal font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Quay
+                                            lại</button>
                                     </div>
                                 </div>
-
                             </ModalContainer>
                         </ShowModal>
                         <div>
-                            <button data-popover-target="popover-decent" data-modal-target="decentModal"
-                                data-modal-toggle="decentModal"
-                                class="block w-8 mr-2 text-green-700 bg-green-100 hover:bg-green-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-sm rounded-lg text-xs px-2 py-1.5 text-center"
-                                type="button">
-                                <i class="fa-solid fa-user"></i>
-                            </button>
-                            <div data-popover id="popover-decent" role="tooltip"
-                                class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400  dark:bg-gray-800">
-                                <div class="px-3 py-2">
-                                    <p>Phân quyền</p>
-                                </div>
-                                <div data-popper-arrow></div>
-                            </div>
-                            <div id="decentModal" tabindex="-1" aria-hidden="true"
-                                class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                            </div>
+                            <ShowModal type="custom-with-icon" :modalId="'authenScriptModal' + index"
+                                iconClass="fa-solid fa-user"
+                                customClass="block w-8 mr-2 text-green-700 bg-green-100 hover:bg-green-700 hover:text-white font-sm rounded-lg text-xs px-2 py-1.5 text-center">
+                                <ModalContainer :modalId="'authenScriptModal' + index" size="4xl" :hasBackDrop="true"
+                                    :isDark="theme === 'dark'">
+                                    <div>
+                                        <TabListHeader type='modal' :data="getAuthenScriptTabList(index)" @active-tablist="showScriptTab"></TabListHeader>
+                                        <TabContainer :theme="theme" :id="getAuthenScriptTabList(index).dataTabsToggle">
+                                            <TabItem :id="getAuthenScriptTabList(index).list[0].id" labelledby="job" :isHidden="configActive !== 0">
+                                                <ConfigJob :theme="theme" />
+                                            </TabItem>
+                                            <TabItem :id="getAuthenScriptTabList(index).list[1].id" labelledby="status" :isHidden="configActive !== 1">
+                                                <ConfigStatus/>
+                                            </TabItem>
+                                            <TabItem :id="getAuthenScriptTabList(index).list[2].id" labelledby="info" :isHidden="configActive !== 2">
+                                                <ConfigInfo />
+                                            </TabItem>
+                                        </TabContainer>
+                                    </div>
+                                </ModalContainer>
+                            </ShowModal>
                         </div>
                     </Cell>
                 </Row>
@@ -87,17 +90,25 @@
 </template>
 
 <script>
-
 import { createScript, getAllScripts } from "../../../../../static/script/script";
+import { Common } from "../../../../../plugins/common";
+import ConfigJob from '../../../../../components/Custom/Script/ConfigJob.vue';
+import ConfigStatus from '../../../../../components/Custom/Script/ConfigStatus.vue';
+import ConfigInfo from '../../../../../components/Custom/Script/ConfigInfo.vue';
+
 export default {
     name: "ListDepartmentScriptPageV2",
     layout: "main_v2",
+    components: {
+        ConfigJob, ConfigStatus, ConfigInfo
+    },
     async fetch() {
         try {
             var response = await getAllScripts(this.pageNum, this.id);
             this.table.body = response.value;
             this.totalPage = response.totalPage;
-        } catch (error) {
+        }
+        catch (error) {
             console.error('Lỗi:', error);
         }
     },
@@ -109,6 +120,9 @@ export default {
             set(newValue) {
                 this.theme = newValue;
             },
+        },
+        Common() {
+            return Common;
         }
     },
     data() {
@@ -118,6 +132,7 @@ export default {
             pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
             totalPage: 0,
             currentPage: 1,
+            configActive: 0,
             table: {
                 head: [
                     {
@@ -143,7 +158,7 @@ export default {
                 ],
                 body: [],
             },
-        }
+        };
     },
     methods: {
         async createScript() {
@@ -151,8 +166,32 @@ export default {
             this.table.body = response.data.value;
             this.totalPage = response.data.totalPage;
             this.$store.dispatch('updateIncreMenuKey');
+            Common.toggleModal('createScriptBtnId');
+        },
+        getAuthenScriptTabList(index) {
+            return {
+                id: "authenScriptTab" + index,
+                dataTabsToggle: "authenScript" + index,
+                list: [
+                    {
+                        id: "jobConfig" + index,
+                        name: "Cấu hình công việc",
+                    },
+                    {
+                        id: "statusConfig" + index,
+                        name: "Cấu hình trạng thái",
+                    },
+                    {
+                        id: "infoConfig" + index,
+                        name: "Cấu hình thông tin",
+                    },
+                ],
+            }
+        },
+        showScriptTab(active) {
+            this.configActive = active;
         }
-    }
+    },
 }
 </script>
 

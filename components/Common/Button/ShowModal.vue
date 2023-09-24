@@ -102,7 +102,6 @@ export default {
         this.isShowing = false;
         this.$emit("modal-toggle", this.isShowing);
       }
-      console.log("ShowModal:" + this.modalId + " is Showing : " + this.isShowing);
     }
   }
 }

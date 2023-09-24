@@ -68,12 +68,19 @@ export const Common = {
   },
 
   /**
-  * 
-  */
-  setCookie(name, value, option) {
-    Cookies.set(name, value, { expires: option.expires, path: option.path });
-  },
-  getCookie(name) {
-    return Cookies.get(name)
+   * Close / open modal
+   */
+  toggleModal(modalId) {
+    var modal = document.getElementById(modalId);
+    if(modal) {
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove("hidden");
+      } else {
+        modal.classList.add("hidden");
+      }
+    } else {
+      console.error("common.js : Modal with id " + modalId + " is not defined");
+    }
+
   }
 }
