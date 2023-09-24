@@ -66,9 +66,16 @@ export default {
                     password: encodedPass,
                 }
             }).then(function (response) {
+              if(response.data.status ===401){
+                alert(response.data.message)
+              } else {
                 localStorage.setItem("jwt", response.data.accessToken);
                 console.log(response);
                 window.location = "https://gland84.io.vn/main_v2/total/staff";
+
+              }
+            }).catch(error => {
+              console.log(error)
             });
         }
     }
