@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const defaulToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjkwOTUzNzI2LCJleHAiOjE3NTE0MzM3MjZ9.pvVOd6xKmwSYalPlO9SUyumsWJeimJaENY5X3a15wCHcqfqseImWXCE0DHRqdpMvPLX8iRUUCaUILG-iiCG6Yw';
+
 const defaultData = {
     url: "",
     header: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjkwOTUzNzI2LCJleHAiOjE3NTE0MzM3MjZ9.pvVOd6xKmwSYalPlO9SUyumsWJeimJaENY5X3a15wCHcqfqseImWXCE0DHRqdpMvPLX8iRUUCaUILG-iiCG6Yw'
+        'Authorization': 'Bearer ' + defaulToken 
     }
 }
 
@@ -22,6 +24,21 @@ const validateAPI = function (url, header) {
         message: message,
     };
 }
+
+const checkJwT = function() {
+    const jwt = localStorage.getItem('jwt');
+    if(jwt) {
+        let data = {
+            url: "",
+            header: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + jwt 
+            }
+        }
+        return data;
+    }
+    return defaultData;
+}
 /**
  * Send a GET api for collecting data
  * @param {*} url
@@ -29,13 +46,13 @@ const validateAPI = function (url, header) {
  * @returns
  */
 export const sendGetApi = async function (url, header) {
-
     const test = validateAPI(url, header);
+    let dataAuthen = checkJwT();
     // send api
     if (test.check) {
         try {
             const response = await axios.get(url, {
-                headers: defaultData.header
+                headers: dataAuthen.header
             });
             return response.data;
         } catch (error) {
@@ -54,15 +71,15 @@ export const sendGetApi = async function (url, header) {
  * @returns
  */
 export const sendPostApi = async function (url, header, data) {
-
     const test = validateAPI(url, header);
+    let dataAuthen = checkJwT();
     if (test.check) {
         axios({
             method: 'post',
-            url: url ? url : defaultData.url,
+            url: url ? url : dataAuthen.url,
             responseType: 'json',
             data: data,
-            headers: defaultData.header
+            headers: dataAuthen.header
         }).then(function (response) {
             console.log(response);
             return response;
@@ -80,14 +97,14 @@ export const sendPostApi = async function (url, header, data) {
 
 
 export const sendPutApi = async function (url, header) {
-
     const test = validateAPI(url, header);
+    let dataAuthen = checkJwT();
     if (test.check) {
         axios({
             method: 'put',
-            url: url ? url : defaultData.url,
+            url: url ? url : dataAuthen.url,
             responseType: 'json',
-            headers: defaultData.header
+            headers: dataAuthen.header
         }).then(function (response) {
             console.log(response);
             return response;
@@ -104,14 +121,14 @@ export const sendPutApi = async function (url, header) {
 };
 
 export const sendDeleteApi = async function (url, header) {
-
     const test = validateAPI(url, header);
+    let dataAuthen = checkJwT();
     if (test.check) {
         axios({
             method: 'delete',
-            url: url ? url : defaultData.url,
+            url: url ? url : dataAuthen.url,
             responseType: 'json',
-            headers: defaultData.header
+            headers: dataAuthen.header
         }).then(function (response) {
             console.log(response);
             return response;
