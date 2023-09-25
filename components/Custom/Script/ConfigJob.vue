@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="flex justify-between pb-4">
+        <div class="flex justify-between pb-2">
             <span class="text-xl font-bold">Cấu hình công việc</span>
             <ShowModal modalId="createTypeJobId" type="custom"
                 customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold" title="Tạo loại công việc">
@@ -19,7 +19,7 @@
                 </ModalContainer>
             </ShowModal>
         </div>
-        <CrudTabel style-class="w-full text-sm text-left text-gray-500">
+        <CrudTable style-class="w-full text-sm text-left text-gray-500" :theme="theme">
             <thead>
                 <Row class="bg-gray-900">
                     <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3"
@@ -58,7 +58,7 @@
                     </Cell>
                 </Row>
             </tbody>
-        </CrudTabel>
+        </CrudTable>
     </div>
 </template>
   

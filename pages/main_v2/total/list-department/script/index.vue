@@ -72,10 +72,10 @@
                                                 <ConfigJob :theme="theme" />
                                             </TabItem>
                                             <TabItem :id="getAuthenScriptTabList(index).list[1].id" labelledby="status" :isHidden="configActive !== 1">
-                                                <ConfigStatus/>
+                                                <ConfigStatus :theme="theme" :dataIndex="index"/>
                                             </TabItem>
                                             <TabItem :id="getAuthenScriptTabList(index).list[2].id" labelledby="info" :isHidden="configActive !== 2">
-                                                <ConfigInfo />
+                                                <ConfigInfo :theme="theme" />
                                             </TabItem>
                                         </TabContainer>
                                     </div>

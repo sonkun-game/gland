@@ -11,7 +11,8 @@
     </div>
     <!-- Table -->
     <div class="relative overflow-x-hidden overflow-y-hidden mx-2 shadow-md sm:rounded-lg">
-      <table class="w-full text-sm text-left text-gray-900 bg-gray-300 dark:text-gray-400 shadow-md">
+      <table class="w-full text-sm text-left  dark:text-gray-400 shadow-md" 
+      :class="{'text-gray-900 bg-gray-300':theme==='light','text-white bg-gray-900':theme==='dark'}">
         <slot></slot>
       </table>
     </div>
@@ -50,6 +51,10 @@ export default {
     cookiesName: {
       type: String,
       default: ""
+    },
+    theme: {
+      type: String,
+      default: "light"
     }
   },
   methods: {
