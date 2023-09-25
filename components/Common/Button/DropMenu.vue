@@ -1,9 +1,12 @@
 <template>
     <div>
-        <button @click="Common.toggleModal(keyId)"
+      <InputField id="selectJob" typeInput="select" label="Công việc"
+        :selectOption="[]"/>
+
+
+        <!-- <button @click="Common.toggleModal(keyId)"
             class="text-white w-100 bg-gland font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center border border-gray-50"
             type="button">Dropdown hover</button>
-        <!-- Dropdown menu -->
         <div :id="keyId"
             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
@@ -12,7 +15,7 @@
                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </div>
 </template>
 

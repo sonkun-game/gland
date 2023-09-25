@@ -81,6 +81,13 @@ export const Common = {
     } else {
       console.error("common.js : Modal with id " + modalId + " is not defined");
     }
+  },
 
+  /**
+   * Check if value is empty or null or undefinded
+   * @param {*} value
+   */
+  isNullOrEmpty(value) {
+    return value===null || value===undefined || value==="";
   }
 }

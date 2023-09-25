@@ -3,7 +3,7 @@
     <!-- Select Option -->
     <template v-if="typeInput == 'select'">
       <label :for="id" class="text-normal float-left">{{ label }}</label>
-      <select :id="id" class="h-8 bg-white w-full border border-gray-300 text-gray-900 text-normal rounded-lg py-1.5 px-2.5">
+      <select :id="id" class="h-8 w-full border border-gray-300 text-normal rounded-lg py-1.5 px-2.5" :class="{'bg-gray-900 text-white':isDark}">
         <option class="text-ellipsis" v-for="(optionItem, optionIndex) in selectOption" :key="optionIndex"
           :value="optionItem.value">
           {{ optionItem.name }}
