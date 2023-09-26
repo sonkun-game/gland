@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-between pb-2">
+    <div class="flex justify-between">
       <span class="text-xl font-bold">Cấu hình thông tin</span>
       <ShowModal modalId="createConfigInfo" type="custom" customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold"
         title="Tạo loại thông tin">

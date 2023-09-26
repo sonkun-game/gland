@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-between pb-2">
+    <div class="flex justify-between">
       <span class="text-xl font-bold">Cấu hình trạng thái</span>
       <ShowModal modalId="createConfigStatusId" type="custom" customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold"
         title="Tạo loại trạng thái">
@@ -42,40 +42,40 @@
           <Cell styleClass="px-6 py-3">{{ item.job }}</Cell>
           <Cell styleClass="px-6 py-3">{{ item.person }}</Cell>
           <Cell styleClass="px-6 py-3 flex">
-            <ShowModal type="custom-with-icon" :modalId="'up_' + item.id + index" iconClass="fa-solid fa-up-long"
+            <ShowModal type="custom-with-icon" :modalId="getUpStatusActionId(index,item.id)" iconClass="fa-solid fa-up-long"
               customClass="block w-8 mr-2 text-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-              <ModalContainer :modalId="'up_' + item.id + index" size="2xl" :hasBackDrop="true"
+              <ModalContainer :modalId="getUpStatusActionId(index,item.id)" size="2xl" :hasBackDrop="true"
                 :isDark="theme === 'dark'">
-                <ModalHeader :isDark="theme === 'dark'" :modalId="item.id + index" head="Cấu hình trạng thái">
+                <ModalHeader :isDark="theme === 'dark'" :modalId="getUpStatusActionId(index,item.id)" head="Cấu hình trạng thái">
                 </ModalHeader>
                 <div>
                 </div>
               </ModalContainer>
             </ShowModal>
-            <ShowModal type="custom-with-icon" :modalId="'down_' + item.id + index" iconClass="fa-solid fa-down-long"
+            <ShowModal type="custom-with-icon" :modalId="getDownStatusActionId(index,item.id)" iconClass="fa-solid fa-down-long"
               customClass="block w-8 mr-2 text-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-              <ModalContainer :modalId="'down_' + item.id + index" size="2xl" :hasBackDrop="true"
+              <ModalContainer :modalId="getDownStatusActionId(index,item.id)" size="2xl" :hasBackDrop="true"
                 :isDark="theme === 'dark'">
-                <ModalHeader :isDark="theme === 'dark'" :modalId="item.id + index" head="Cấu hình trạng thái">
+                <ModalHeader :isDark="theme === 'dark'" :modalId="getDownStatusActionId(index,item.id)" head="Cấu hình trạng thái">
                 </ModalHeader>
                 <div>
                 </div>
               </ModalContainer>
             </ShowModal>
-            <ShowModal type="custom-with-icon" :modalId="'edit_' + item.id + index" iconClass="fa-solid fa-pen"
+            <ShowModal type="custom-with-icon" :modalId="getEditStatusActionId(index,item.id)" iconClass="fa-solid fa-pen"
               customClass="block w-8 mr-2 text-blue-700 bg-blue-100 hover:bg-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-              <ModalContainer :modalId="'edit_' + item.id + index" size="2xl" :hasBackDrop="true"
+              <ModalContainer :modalId="getEditStatusActionId(index,item.id)" size="2xl" :hasBackDrop="true"
                 :isDark="theme === 'dark'">
-                <ModalHeader :isDark="theme === 'dark'" :modalId="item.id + index" head="Cấu hình trạng thái">
+                <ModalHeader :isDark="theme === 'dark'" :modalId="getEditStatusActionId(index,item.id)" head="Cấu hình trạng thái">
                 </ModalHeader>
                 <div>
                 </div>
               </ModalContainer>
             </ShowModal>
-            <ShowModal type="custom-with-icon" :modalId="item.id + index" iconClass="fa-solid fa-trash"
+            <ShowModal type="custom-with-icon" :modalId="getDeleteStatusActionId(index,item.id)" iconClass="fa-solid fa-trash"
               customClass="block w-8 mr-2 text-red-700 bg-red-100 hover:bg-red-700 hover:text-white font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-              <ModalContainer :modalId="item.id + index" size="2xl" :hasBackDrop="true" :isDark="theme === 'dark'">
-                <ModalHeader :isDark="theme === 'dark'" :modalId="item.id + index" head="Cấu hình trạng thái">
+              <ModalContainer :modalId="getDeleteStatusActionId(index,item.id)" size="2xl" :hasBackDrop="true" :isDark="theme === 'dark'">
+                <ModalHeader :isDark="theme === 'dark'" :modalId="getDeleteStatusActionId(index,item.id)" head="Cấu hình trạng thái">
                 </ModalHeader>
                 <div>
                 </div>
@@ -175,7 +175,19 @@ export default {
         return `${prefix} border-gray-400 text-gray-200 bg-gray-900`;
       }
       return `${prefix} border-${color}-400 text-${color}-200 bg-${color}-900`
-    }
+    },
+    getUpStatusActionId(index, id) {
+      return 'upStatusConfigAction_' + id + index;
+    },
+    getDownStatusActionId(index, id) {
+      return 'downStatusConfigAction_' + id + index;
+    },
+    getEditStatusActionId(index, id) {
+      return 'editStatusConfigAction_' + id + index;
+    },
+    getDeleteStatusActionId(index, id) {
+      return 'deleteStatusConfigAction_' + id + index;
+    },
   },
 }
 </script>

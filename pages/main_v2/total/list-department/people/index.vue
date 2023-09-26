@@ -16,10 +16,10 @@
                     </div>
 
                 <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
-                    <button data-modal-hide="createStaffBtnId"
+                    <button @click="Common.toggleModal('createStaffBtnId')"
                     class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
                     Hủy bỏ</button>
-                    <button data-modal-hide="createStaffBtnId" type="button" @click="createStaff()"
+                    <button type="button" @click="createStaff()"
                     class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
                 </div>
                 </ModalContainer>
@@ -90,6 +90,7 @@
 
 <script>
 import {createStaffsAll, getAllStaffsPaging} from "../../../../../static/account/staff";
+import { Common } from "../../../../../plugins/common";
 
 export default {
     name: "ListDepartmentPeoplePageV2",
@@ -102,6 +103,9 @@ export default {
             set(newValue) {
                 this.theme = newValue;
             },
+        },
+        Common() {
+            return Common;
         }
     },
   async fetch() {
@@ -151,6 +155,7 @@ export default {
         var response = await createStaffsAll(this.storeId, this.id);
         this.table.body = response.data.value;
         this.totalPage = response.data.totalPage;
+        Common.toggleModal('createStaffBtnId');
       }
     }
 }

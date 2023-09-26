@@ -195,4 +195,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.tab-list-height {
+    height: 80vh;
+    overflow-y: auto;
+}
+</style>
