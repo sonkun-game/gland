@@ -1,6 +1,6 @@
 
 <template>
-    <div class="flex items-start justify-between p-4 rounded" :class="{'bg-gray-900':isDark, 'bg-white':!isDark}">
+    <div class="flex items-start justify-between p-4 rounded" :class="{ 'bg-gray-900': isDark, 'bg-white': !isDark }">
         <div class="text-xl font-semibold text-white" v-if="isDark">
             {{ head }}
         </div>
@@ -21,8 +21,12 @@ export default {
     },
     methods: {
         closeModal() {
-            this.$emit('modal-header-close')
-        }
+            this.$emit('modal-header-close');
+            var modal = document.getElementById(`${this.modalId}`);
+            if (!modal.classList.contains('hidden')) {
+                modal.classList.add("hidden");
+            }
+        },
     }
 }
 </script>

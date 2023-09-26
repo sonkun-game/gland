@@ -1,12 +1,12 @@
 <template>
   <div class="flex item-center justify-center">
-    <img class="w-full h-full opacity-50" alt="no image" src="~/assets/img/test2.jpg" />
+    <div class="w-100 h-100 text-center text-8xl text-white" style="font-family: Arial, Helvetica, sans-serif;">Welcome</div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'IndexPage',
-  layout: 'main'
+  layout: 'main_v2'
 }
 </script>
