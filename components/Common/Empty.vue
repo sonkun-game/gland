@@ -7,9 +7,21 @@
 
   <script>
   export default {
-    setup() {
+    name: "",
+    computed: {
 
     },
+    data() {
+      return {
+
+      }
+    },
+    props: {
+
+    },
+    methods: {
+
+    }
   }
   </script>
 

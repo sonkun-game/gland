@@ -1,6 +1,6 @@
 <template>
   <div>
-    JobByOther 
+    JobByOther
   </div>
 </template>
 
@@ -9,10 +9,15 @@
 export default {
   name: "JobByOtherComp",
   data() {
-
+    return {
+      
+    }
   },
   props: {
-    
+    theme: {
+      type: String,
+      default: 'light'
+    }
   },
   methods: {
 
@@ -23,6 +28,4 @@ export default {
 
 
 
-<style>
-
-</style>
+<style></style>

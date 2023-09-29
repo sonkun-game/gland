@@ -5,10 +5,10 @@
             <TabListHeader :data="data.tabList"></TabListHeader>
             <TabContainer :theme="theme" :id="data.tabList.dataTabsToggle">
                 <TabItem :id="data.tabList.list[0].id" labelledby="staff">
-                    <JobByMe />
+                    <JobByMe :theme="theme" />
                 </TabItem>
                 <TabItem :id="data.tabList.list[1].id" labelledby="staff">
-                    <JobByOther />
+                    <JobByOther :theme="theme" />
                 </TabItem>
             </TabContainer>
         </div>
