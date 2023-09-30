@@ -69,13 +69,13 @@
                                         <TabListHeader type='modal' :data="getAuthenScriptTabList(index)" @active-tablist="showScriptTab"></TabListHeader>
                                         <TabContainer :theme="theme" :id="getAuthenScriptTabList(index).dataTabsToggle">
                                             <TabItem :id="getAuthenScriptTabList(index).list[0].id" labelledby="job" :isHidden="configActive !== 0">
-                                                <ConfigJob :theme="theme" />
+                                                <ConfigJob :theme="theme" :id="item.id" />
                                             </TabItem>
                                             <TabItem :id="getAuthenScriptTabList(index).list[1].id" labelledby="status" :isHidden="configActive !== 1">
-                                                <ConfigStatus :theme="theme" :dataIndex="index"/>
+                                                <ConfigStatus :theme="theme" :dataIndex="index" :id="item.id"/>
                                             </TabItem>
                                             <TabItem :id="getAuthenScriptTabList(index).list[2].id" labelledby="info" :isHidden="configActive !== 2">
-                                                <ConfigInfo :theme="theme" />
+                                                <ConfigInfo :theme="theme" :id="item.id" />
                                             </TabItem>
                                         </TabContainer>
                                     </div>
