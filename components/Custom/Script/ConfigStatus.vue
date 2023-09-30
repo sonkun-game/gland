@@ -159,6 +159,7 @@ export default {
     }
   },
   props: {
+    id: "",
     theme: {
       type: String,
       default: 'light'

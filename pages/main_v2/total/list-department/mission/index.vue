@@ -5,10 +5,10 @@
             <TabListHeader :data="data.tabList"></TabListHeader>
             <TabContainer :theme="theme" :id="data.tabList.dataTabsToggle">
                 <TabItem :id="data.tabList.list[0].id" labelledby="staff">
-                    jobByMe
+                    <JobByMe :theme="theme" />
                 </TabItem>
                 <TabItem :id="data.tabList.list[1].id" labelledby="staff">
-                    JobByOther
+                    <JobByOther :theme="theme" />
                 </TabItem>
             </TabContainer>
         </div>
@@ -16,9 +16,16 @@
 </template>
 
 <script>
+import JobByMe from '../../../../../components/Custom/Mission/JobByMe.vue';
+import JobByOther from '../../../../../components/Custom/Mission/JobByOther.vue';
+
 export default {
     name: "MissionDepartmentPage",
     layout: "main_v2",
+    components: {
+        JobByMe, 
+        JobByOther
+    },
     computed: {
         theme: {
             get() {
