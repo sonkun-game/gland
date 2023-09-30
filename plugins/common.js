@@ -89,5 +89,12 @@ export const Common = {
    */
   isNullOrEmpty(value) {
     return value===null || value===undefined || value==="";
+  },
+  /**
+   * Get Data only if this data is avariable, else return empty String
+   * @param {*} data 
+   */
+  getAvaiable(data) {
+    return data ? data : "";
   }
 }

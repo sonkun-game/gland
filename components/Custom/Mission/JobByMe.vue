@@ -23,14 +23,47 @@
         </ModalContainer>
       </ShowModal>
     </nav>
+    <div class="mt-4 justify-center flex">
+        <StatusBar :theme="theme" />
+    </div>
+
+    <CrudTable tyle-class="w-full text-sm text-left text-gray-500" :theme="theme"> 
+      <thead>
+        <Row styleClass="text-sm text-gray-900 bg-gray-100">
+          <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3" cellType="title">
+            {{ item.name }}
+          </Cell>
+        </Row>
+      </thead>
+      <tbody>
+        <Row styleClass=" border-b" v-for="(item, index) in table.body" :key="index">
+          <Cell styleClass="px-6 py-4">{{ index + 1 }}</Cell>
+          <Cell styleClass="px-6 py-4">{{ Common.getAvaiable(item.title) }}</Cell>
+          <Cell styleClass="px-6 py-4">{{ Common.getAvaiable(item.deadline)  }}</Cell>
+          <Cell styleClass="px-6 py-4">{{ Common.getAvaiable(item.videoSubject)  }}</Cell>
+          <Cell styleClass="px-6 py-4">{{ Common.getAvaiable(item.length)  }}</Cell>
+          <Cell styleClass="px-6 py-4">{{ Common.getAvaiable(item.job)  }}</Cell>
+          <Cell styleClass="px-6 py-4">{{ Common.getAvaiable(item.createBy)  }}</Cell>
+          <Cell styleClass="px-6 py-4">{{ Common.getAvaiable(item.giveTo)  }}</Cell>
+          <Cell styleClass="px-6 py-4">{{ Common.getAvaiable(item.status)  }}</Cell>
+          <Cell styleClass="px-6 py-4"></Cell>
+        </Row>
+      </tbody>
+
+    </CrudTable>
+
   </div>
 </template>
 
 <script>
 import { Common } from '../../../plugins/common';
+import StatusBar from '../../Common/Button/StatusBar.vue';
 
 export default {
   name: "JobByMeComp",
+  components: {
+    StatusBar
+  },
   data() {
     return {
       data: {
@@ -40,7 +73,34 @@ export default {
             name: 'Quay video'
           }
         ]
-      }
+      },
+      table: {
+        head: [
+          { name: "STT" },
+          { name: "Tiêu đề" },
+          { name: "Thời hạn" },
+          { name: "Chủ đề video" },
+          { name: "Độ dài" },
+          { name: "Công việc" },
+          { name: "Tạo bởi" },
+          { name: "Giao cho" },
+          { name: "Trạng thái" },
+          { name: "Thao tác" },
+        ],
+        body: [
+          {
+            id: 'title',
+            title: 'Giam beo',
+            deadline: "2023-09-14 17:00:00",
+            videoSubject: 'Abc',
+            length: '12',
+            job: 'Sản xuất video',
+            createBy: 'GNguyen',
+            giveTo: '',
+            status: ''
+          },
+        ],
+      },
     }
   },
   computed: {
