@@ -13,13 +13,13 @@
                         <button @click="Common.toggleModal(createConfigJobId)"
                             class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
                             Hủy bỏ</button>
-                        <button type="button"
+                        <button type="button" @click="createTypeJob()"
                             class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
                     </div>
                 </ModalContainer>
             </ShowModal>
         </div>
-        <CrudTable style-class="w-full text-sm text-left text-gray-500" :theme="theme">
+        <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left text-gray-500" :theme="theme">
             <thead>
                 <Row class="bg-gray-900">
                     <Cell styleClass="px-4">
@@ -67,14 +67,28 @@
         </CrudTable>
     </div>
 </template>
-  
+
 <script>
 import { Common } from '../../../plugins/common';
+import {createTypeJob, getAllTypeJobs} from "../../../static/job/api";
 
 export default {
     name: "ConfigJobComponent",
+  async fetch() {
+    try {
+      var response = await getAllTypeJobs(this.pageNum, this.id);
+      this.table.body = response.value;
+      this.totalPage = response.totalPage;
+    }
+    catch (error) {
+      console.error('Lỗi:', error);
+    }
+  },
     data() {
         return {
+          //id: this.$route.query.id,
+          pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
+          totalPage: 0,
             createConfigJobId: "createTypeJobId",
             table: {
                 head: [
@@ -108,12 +122,16 @@ export default {
         },
         getDeleteId(index, id) {
             return 'delete_' + id + index;
-        }
+        },
+      async createTypeJob() {
+        var response = await createTypeJob(this.id);
+        this.table.body = response.data.value;
+        this.totalPage = response.data.totalPage;
+      }
     }
 }
 </script>
-  
-  
-  
+
+
+
 <style></style>
-  

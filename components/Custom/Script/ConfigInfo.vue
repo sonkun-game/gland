@@ -7,20 +7,22 @@
         <ModalContainer modalId="createConfigInfo" size="xl" :isDark="theme === 'dark'">
           <ModalHeader :isDark="theme === 'dark'" head="Tạo loại thông tin" modalId="createConfigInfo">
           </ModalHeader>
-          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="jobTypeName" label=""
+          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="infoTypeName" label=""
             placeholder="Tên thông tin" />
+          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="infoConfigType" label="" type-input="select" :select-option="selectOption"
+            placeholder="Kiểu dữ liệu" />
           <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
             <button @click="Common.toggleModal('createConfigInfo')"
               class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
               Hủy bỏ</button>
-            <button type="button"
+            <button type="button" @click="createConfigInfo()"
               class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
           </div>
         </ModalContainer>
       </ShowModal>
     </div>
     <div class="p-4">
-      <InputField id="selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'"/>
+      <InputField id="info_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'"/>
     </div>
     <CrudTable style-class="w-full text-sm text-left" :theme="theme">
       <thead>
@@ -35,7 +37,7 @@
         <Row v-for="(item, index) in table.body" :key="index">
           <Cell styleClass="px-4"><InputField typeInput="checkbox" label="" :id="`selectItem-${index}`" /></Cell>
           <Cell styleClass="px-6 py-3" style="width: 30vw;">{{ item.name }}</Cell>
-          <Cell styleClass="px-6 py-3" style="width: 30vw;">{{ item.type }}</Cell>
+          <Cell styleClass="px-6 py-3" style="width: 30vw;">{{ item.dataType }}</Cell>
           <Cell styleClass="px-6 py-3 flex">
             <ShowModal type="custom-with-icon" :modalId="getUpInfoActionId(index,item.id)" iconClass="fa-solid fa-up-long"
               customClass="block w-8 mr-2 text-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
@@ -86,35 +88,54 @@
 <script>
 import { Common } from '../../../plugins/common';
 import DropMenu from '../../Common/Button/DropMenu.vue';
+import {createTypeJob, getAllTypeJobs} from "../../../static/job/api";
+import {createConfigInfo, getAllConfigInfo} from "../../../static/configurationv2/api";
 
 export default {
   name: "ConfigInfoComponent",
   components: {
     DropMenu
   },
+  async fetch() {
+    try {
+      var response = await getAllTypeJobs(-1, this.id);
+      this.jobSelectOption = response.value;
+
+      var responseInfo = await getAllConfigInfo(this.pageNum);
+      this.table.body = responseInfo.value;
+      this.totalPage = responseInfo.data.totalPage;
+    }
+    catch (error) {
+      console.error('Lỗi:', error);
+    }
+  },
   data() {
     return {
+      pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
+      totalPage: 0,
+      selectOption:[
+        {
+          name:"Chuỗi kí tự",
+          value:"text"
+        },
+        {
+          name:"Thời gian",
+          value:"date"
+        },
+        {
+          name:"Số",
+          value:"number"
+        }
+      ],
       table: {
         head: [
           { name: "Trường" },
           { name: "Kiểu" },
           { name: "Thao tác" },
         ],
-        body: [
-          {
-            id: 'title',
-            name: 'Tiêu đề',
-            type: "Chữ",
-          },
-        ],
+        body: [],
       },
-      jobSelectOption: [
-        {
-          name: "Sản xuất video",
-          value: "sxv",
-          iconClass: "",
-        }
-      ]
+      jobSelectOption: [ ]
     }
   },
   computed: {
@@ -134,6 +155,11 @@ export default {
     }
   },
   methods: {
+    async createConfigInfo() {
+      var response = await createConfigInfo(this.id);
+      this.table.body = response.data.value;
+      this.totalPage = response.data.totalPage;
+    },
     getUpInfoActionId(index, id) {
       return 'upInfoConfigAction_' + id + index;
     },

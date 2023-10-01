@@ -18,6 +18,23 @@ export async function createScript(departmentId) {
   });
 }
 
+export async function editScript(id, index) {
+  var scriptName = document.getElementById("editScript"+index).value;
+
+  return axios({
+    method: 'PUT',
+    url: 'https://api.gland84.io.vn:8447/gland/api-script/'+id,
+    responseType: 'json',
+    data: {
+      name: scriptName
+    },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+    }
+  });
+}
+
 export async function getAllScripts(pageNum, departmentId) {
   let url = "https://api.gland84.io.vn:8447/gland/api-script/all?departmentId="+departmentId+"&pageNum="+pageNum;
   try {
