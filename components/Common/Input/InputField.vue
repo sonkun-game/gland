@@ -3,10 +3,13 @@
     <!-- Select Option -->
     <template v-if="typeInput == 'select'">
       <label :for="id" class="text-normal float-left">{{ label }}</label>
-      <select :id="id" class="h-full w-full border border-gray-300 text-normal rounded-lg py-1.5 px-2.5" :class="{'bg-gray-900 text-white':isDark}">
+      <select :id="id" @change="selectValueChange"
+      class="h-full w-full border border-gray-300 text-normal rounded-lg py-1.5 px-2.5" :class="{'bg-gray-900 text-white':isDark}" >
         <option class="text-ellipsis" v-for="(optionItem, optionIndex) in selectOption" :key="optionIndex"
           :value="optionItem.value ?optionItem.value: optionItem.id">
-          {{ optionItem.name }}
+          <span :class="optionItem.optionClass?optionItem.optionClass:''">
+            {{ optionItem.name }}
+          </span> 
         </option>
       </select>
     </template>
@@ -78,23 +81,29 @@ export default {
       type: String,
       default: ""
     },
+    // select
     selectOption: [],
+    // value of input
     value: {
       type: String,
       default: ""
     },
+    // type input
     typeInput: {
       type: String,
       default: "text"
     },
+    // is input required 
     required: {
       type: Boolean,
       default: false
     },
+    // index the input
     inputIndex: {
       type: Number,
       default: 1
     },
+    // input theme
     isDark: {
       type: Boolean,
       default: false,
@@ -108,6 +117,9 @@ export default {
         index: this.inputIndex
       }
       this.$emit("click-checkbox", data);
+    },
+    selectValueChange(event) {
+      this.$emit('select-change',event.target.value);
     }
   }
 }

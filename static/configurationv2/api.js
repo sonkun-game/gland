@@ -24,7 +24,7 @@ export async function createConfigInfo() {
 
 export async function getAllConfigInfo(pageNum, typeTask) {
 
-  let url = "https://api.gland84.io.vn:8447/gland/config-api/all?typeTask="+1+"&pageNum="+pageNum;
+  let url = "https://api.gland84.io.vn:8447/gland/config-api/all?typeTask="+typeTask+"&pageNum="+pageNum;
   try {
     const response = await axios.get(url, {
       headers: {

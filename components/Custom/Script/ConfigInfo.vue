@@ -22,7 +22,7 @@
       </ShowModal>
     </div>
     <div class="p-4">
-      <InputField id="info_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'"/>
+      <InputField id="info_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'" @select-change="handleChangeJobValue"/>
     </div>
     <CrudTable style-class="w-full text-sm text-left" :theme="theme">
       <thead>
@@ -33,7 +33,7 @@
           </Cell>
         </Row>
       </thead>
-      <tbody>
+      <tbody :key="Tbodykey">
         <Row v-for="(item, index) in table.body" :key="index">
           <Cell styleClass="px-4"><InputField typeInput="checkbox" label="" :id="`selectItem-${index}`" /></Cell>
           <Cell styleClass="px-6 py-3" style="width: 30vw;">{{ item.name }}</Cell>
@@ -90,6 +90,7 @@ import { Common } from '../../../plugins/common';
 import DropMenu from '../../Common/Button/DropMenu.vue';
 import {createTypeJob, getAllTypeJobs} from "../../../static/job/api";
 import {createConfigInfo, getAllConfigInfo} from "../../../static/configurationv2/api";
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: "ConfigInfoComponent",
@@ -101,9 +102,11 @@ export default {
       var response = await getAllTypeJobs(-1, this.id);
       this.jobSelectOption = response.value;
 
-      var responseInfo = await getAllConfigInfo(this.pageNum);
-      this.table.body = responseInfo.value;
-      this.totalPage = responseInfo.data.totalPage;
+      var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType);
+      if(responseInfo) {
+        this.table.body = responseInfo.value;
+        if(responseInfo.data) this.totalPage = responseInfo.data.totalPage;
+      }
     }
     catch (error) {
       console.error('Lỗi:', error);
@@ -113,6 +116,8 @@ export default {
     return {
       pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
       totalPage: 0,
+      taskType: 1,
+      Tbodykey: "key",
       selectOption:[
         {
           name:"Chuỗi kí tự",
@@ -135,8 +140,11 @@ export default {
         ],
         body: [],
       },
-      jobSelectOption: [ ]
+      jobSelectOption: []
     }
+  },
+  mounted() {
+    this.Tbodykey = uuidv4();
   },
   computed: {
     Common() {
@@ -172,6 +180,18 @@ export default {
     getDeleteInfoActionId(index, id) {
       return 'deleteInfoConfigAction_' + id + index;
     },
+    async handleChangeJobValue(value) {
+      if(value) {
+        this.taskType = value;
+        var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType);
+        if(responseInfo) {
+          console.log(responseInfo.data);
+          this.table.body = responseInfo.value;
+          if(responseInfo.data) this.totalPage = responseInfo.data.totalPage;
+          this.Tbodykey = uuidv4();
+        }
+      }
+    }
   },
 }
 </script>

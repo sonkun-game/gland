@@ -9,6 +9,8 @@
           </ModalHeader>
           <InputField :isDark="theme === 'dark'" styleClass="p-2" id="jobTypeName" label=""
             placeholder="Tên trạng thái" />
+          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="jobTypeColor" label="" typeInput="select" :selectOption="jobColorSelection"
+          placeholder="Chọn màu" />
           <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
             <button @click="Common.toggleModal('createConfigStatusId')"
               class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
@@ -149,6 +151,18 @@ export default {
           name: "Sản xuất video",
           value: "sxv",
           iconClass: "",
+        }
+      ],
+      jobColorSelection: [
+        {
+          name: "Màu Đỏ",
+          value: "color-1",
+          optionClass: "bg-red-300 text-red-700"
+        },
+        {
+          name: "Màu Xanh Nước Biển",
+          value: "color-2",
+          optionClass: "bg-blue-300 text-blue-700"
         }
       ]
     }

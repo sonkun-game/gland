@@ -164,7 +164,7 @@ export default {
         async createScript() {
             var response = await createScript(this.id);
             this.table.body = response.data.value;
-            this.totalPage = response.data.totalPage;
+            this.totalPage = response.data.totalPage ? response.data.totalPage : 0;
             this.$store.dispatch('updateIncreMenuKey');
             Common.toggleModal('createScriptBtnId');
         },
