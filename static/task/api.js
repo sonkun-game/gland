@@ -1,27 +1,7 @@
 import axios from "axios";
-import { v4 as uuidv4 } from 'uuid';
-import { sendPostApi } from "../../plugins/api";
-
-export async function getTaskList(storeId) {
-  let url = process.env.API_URL + 'api-mission/?storeId=' + 1;
-  try {
-    const response = await axios.get(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem("jwt")
-      }
-    });
-
-    var resp = response.data;
-    return resp;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    throw error;
-  }
-}
 
 export async function getTaskListPaging(department, pageNum,assignee, creator) {
-  let url = "http://localhost:8082/task-api/all?pageNum=" + pageNum;
+  let url = "https://api.gland84.io.vn:8447/gland/task-api/all?pageNum=" + pageNum;
   if(department!=null){
     url+= "&department="+department
     if(assignee!=null){

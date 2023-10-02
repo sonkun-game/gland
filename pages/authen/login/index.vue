@@ -54,18 +54,27 @@ export default {
     },
     methods: {
         loginForm() {
+          const buffer = Buffer.from(this.password);
+          const encodedPass = buffer.toString("base64")
             axios({
                 method: 'post',
                 url: 'https://api.gland84.io.vn:8447/gland/api-authen/signing',
                 responseType: 'json',
                 data: {
                     username: this.username,
-                    password: this.password,
+                    password: encodedPass,
                 }
             }).then(function (response) {
+              if(response.data.status ===401){
+                alert(response.data.message)
+              } else {
                 localStorage.setItem("jwt", response.data.accessToken);
                 console.log(response);
                 window.location = "https://gland84.io.vn/main_v2/total/staff";
+
+              }
+            }).catch(error => {
+              console.log(error)
             });
         }
     }

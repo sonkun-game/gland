@@ -1,3 +1,4 @@
+/*
 import axios from "axios";
 
 export async function getAllConfigPagingForDepart(department, pageNum, type) {
@@ -39,3 +40,4 @@ export async function createConfigForDepartment(type, departmentKey) {
     }
   });
 }
+*/

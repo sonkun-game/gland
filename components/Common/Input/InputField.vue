@@ -5,7 +5,7 @@
       <label :for="id" class="text-normal float-left">{{ label }}</label>
       <select :id="id" class="h-full w-full border border-gray-300 text-normal rounded-lg py-1.5 px-2.5" :class="{'bg-gray-900 text-white':isDark}">
         <option class="text-ellipsis" v-for="(optionItem, optionIndex) in selectOption" :key="optionIndex"
-          :value="optionItem.value">
+          :value="optionItem.value ?optionItem.value: optionItem.id">
           {{ optionItem.name }}
         </option>
       </select>
@@ -17,7 +17,7 @@
     </template>
     <template v-else-if="typeInput == 'textarea'">
       <label :for="id" class="text-normal font-semibold float-left">{{ label }}</label>
-      <textarea class="border border-gray-300 text-normal rounded-lg block w-full p-1.5" :id="id" 
+      <textarea class="border border-gray-300 text-normal rounded-lg block w-full p-1.5" :id="id"
         :class="{'bg-white text-gray-900':!isDark,'bg-gray-900 text-white':isDark}"
         :placeholder="placeholder" :value="value"></textarea>
     </template>

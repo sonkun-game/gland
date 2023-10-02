@@ -49,7 +49,7 @@
                                     <InputField :isDark="theme === 'dark'" styleClass="p-4" :id="'editScript' + index"
                                         label="Tên kịch bản" :value="item.name" />
                                     <div class="p-4">
-                                        <button type="button"
+                                        <button type="button" @click="editScrip(item.id, index)"
                                             class="btn btn-info text-white bg-blue-600 hover:bg-blue-400 border-none font-medium rounded-lg text-normal px-5 py-2.5 text-center">Lưu
                                             thay đổi</button>
                                         <button
@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { createScript, getAllScripts } from "../../../../../static/script/script";
+import {createScript, editScript, getAllScripts} from "../../../../../static/script/script";
 import { Common } from "../../../../../plugins/common";
 import ConfigJob from '../../../../../components/Custom/Script/ConfigJob.vue';
 import ConfigStatus from '../../../../../components/Custom/Script/ConfigStatus.vue';
@@ -190,6 +190,13 @@ export default {
         },
         showScriptTab(active) {
             this.configActive = active;
+        },
+        async editScrip(id, index) {
+          var response = await editScript(id, index);
+          this.table.body = response.data.value;
+          if(response.status === 200)
+            alert("Cập nhật thành công")
+          else alert("Có lỗi xảy ra")
         }
     },
 }
