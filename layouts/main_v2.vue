@@ -60,8 +60,8 @@
               </div>
             </li>
             <li class="hover:bg-blue-300 p-2 rounded-lg">
-              <a class="font-medium text-base" :class="{ 'text-white': theme === 'dark', 'text-gray-900': theme === 'light' }">
-                <i class="fa-solid fa-right-from-bracket"></i> 
+              <a href="https://gland84.io.vn/authen/login" class="font-medium text-base" :class="{ 'text-white': theme === 'dark', 'text-gray-900': theme === 'light' }">
+                <i class="fa-solid fa-right-from-bracket"></i>
                 <span>Đăng xuất</span>
               </a>
             </li>
@@ -131,7 +131,7 @@ export default {
     }
     this.theme = localStorage.getItem("theme");
     this.$store.dispatch('updateTheme', this.theme);
-   
+
   },
   methods: {
     isMainPage() {

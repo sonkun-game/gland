@@ -7,24 +7,24 @@
         <ModalContainer modalId="createConfigStatusId" size="xl" :isDark="theme === 'dark'">
           <ModalHeader :isDark="theme === 'dark'" head="Tạo loại trạng thái" modalId="createConfigStatusId">
           </ModalHeader>
-          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="jobTypeName" label=""
+          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="statusConfigName" label=""
             placeholder="Tên trạng thái" />
-          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="jobTypeColor" label="" typeInput="select" :selectOption="jobColorSelection"
+          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="statusConfigColor" label="" typeInput="select" :selectOption="jobColorSelection"
           placeholder="Chọn màu" />
           <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
             <button @click="Common.toggleModal('createConfigStatusId')"
               class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
               Hủy bỏ</button>
-            <button type="button"
+            <button type="button" @click="createConfigStatus()"
               class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
           </div>
         </ModalContainer>
       </ShowModal>
     </div>
     <div class="p-4">
-      <InputField id="selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'"/>
+      <InputField id="status_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'"/>
     </div>
-    <CrudTable style-class="w-full text-sm text-left" :theme="theme">
+    <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left" :theme="theme">
       <thead>
         <Row class="bg-gray-900">
           <Cell styleClass="px-4"><InputField typeInput="checkbox" label="" id="selectAll" /></Cell>
@@ -37,7 +37,7 @@
         <Row v-for="(item, index) in table.body" :key="index">
           <Cell styleClass="px-4"><InputField typeInput="checkbox" label="" :id="`selectItem-${index}`" /></Cell>
           <Cell styleClass="px-6 py-3">
-            <div :class="getColorClass(item.color)">
+            <div :class="getColorClass(item.colorCode)">
               {{ item.status }}
             </div>
           </Cell>
@@ -93,14 +93,34 @@
 <script>
 import { Common } from '../../../plugins/common';
 import DropMenu from '../../Common/Button/DropMenu.vue';
+import {getAllTypeJobs} from "../../../static/job/api";
+import {createConfigInfo, createConfigStatus, getAllConfigInfo} from "../../../static/configurationv2/api";
 
 export default {
   name: "ConfigStatusComponent",
   components: {
     DropMenu
   },
+  async fetch() {
+    try {
+      var response = await getAllTypeJobs(-1, this.id);
+      this.jobSelectOption = response.value;
+
+      var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType);
+      if(responseInfo) {
+        this.table.body = responseInfo.value;
+        this.totalPage = responseInfo.totalPage;
+      }
+    }
+    catch (error) {
+      console.error('Lỗi:', error);
+    }
+  },
   data() {
     return {
+      pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
+      totalPage: 0,
+      taskType: 2,
       table: {
         head: [
           { name: "Trạng thái" },
@@ -108,60 +128,18 @@ export default {
           { name: "Người được thao tác" },
           { name: "Thao tác" },
         ],
-        body: [
-          {
-            id: 'media',
-            job: 'Quay video',
-            status: "Mới",
-            person: "",
-            color: "gray",
-          },
-          {
-            id: 'media',
-            job: 'Quay video',
-            status: "Đang làm",
-            person: "",
-            color: "blue"
-          },
-          {
-            id: 'media',
-            job: 'Quay video',
-            status: "Quá hạn",
-            person: "",
-            color: "orange"
-          },
-          {
-            id: 'media',
-            job: 'Quay video',
-            status: "Done",
-            person: "",
-            color: "green"
-          },
-          {
-            id: 'media',
-            job: 'Quay video',
-            status: "Fail",
-            person: "",
-            color: "red"
-          },
-        ],
+        body: [],
       },
-      jobSelectOption: [
-        {
-          name: "Sản xuất video",
-          value: "sxv",
-          iconClass: "",
-        }
-      ],
+      jobSelectOption: [],
       jobColorSelection: [
         {
           name: "Màu Đỏ",
-          value: "color-1",
+          value: "red",
           optionClass: "bg-red-300 text-red-700"
         },
         {
           name: "Màu Xanh Nước Biển",
-          value: "color-2",
+          value: "blue",
           optionClass: "bg-blue-300 text-blue-700"
         }
       ]
@@ -184,6 +162,11 @@ export default {
     }
   },
   methods: {
+    async createConfigStatus() {
+      var response = await createConfigStatus();
+      this.table.body = response.data.value;
+      this.totalPage = response.data.totalPage;
+    },
     getColorClass(color) {
       var prefix = "rounded-lg text-center p-1 border";
       if(Common.isNullOrEmpty(color)) {
