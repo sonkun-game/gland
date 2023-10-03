@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="flex justify-between">
       <span class="text-xl font-bold">Cấu hình thông tin</span>
       <ShowModal modalId="createConfigInfo" type="custom" customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold"
@@ -198,5 +198,9 @@ export default {
 <style scoped>
 .bg-gland {
   background-color: #1d2432;
+}
+.container {
+  height: 60vh;
+  overflow-y: auto;
 }
 </style>

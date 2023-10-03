@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="flex justify-between">
             <span class="text-xl font-bold">Cấu hình công việc</span>
             <ShowModal :modalId="createConfigJobId" type="custom"
@@ -131,7 +131,9 @@ export default {
     }
 }
 </script>
-
-
-
-<style></style>
+<style scoped>
+.container {
+  height: 60vh;
+  overflow-y: auto;
+}
+</style>
