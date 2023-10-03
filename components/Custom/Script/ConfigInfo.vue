@@ -102,7 +102,7 @@ export default {
       var response = await getAllTypeJobs(-1, this.id);
       this.jobSelectOption = response.value;
 
-      var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType);
+      var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType, 2);
       if(responseInfo) {
         this.table.body = responseInfo.value;
         this.totalPage = responseInfo.totalPage;
@@ -183,7 +183,7 @@ export default {
     async handleChangeJobValue(value) {
       if(value) {
         this.taskType = value;
-        var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType);
+        var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType, 2);
         if(responseInfo) {
           console.log(responseInfo.data);
           this.table.body = responseInfo.value;

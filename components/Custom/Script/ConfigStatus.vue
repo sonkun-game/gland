@@ -106,7 +106,7 @@ export default {
       var response = await getAllTypeJobs(-1, this.id);
       this.jobSelectOption = response.value;
 
-      var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType);
+      var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType, 1);
       if(responseInfo) {
         this.table.body = responseInfo.value;
         this.totalPage = responseInfo.totalPage;
