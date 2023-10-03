@@ -23,7 +23,7 @@ export default {
     name: "MissionDepartmentPage",
     layout: "main_v2",
     components: {
-        JobByMe, 
+        JobByMe,
         JobByOther
     },
     computed: {
@@ -49,11 +49,11 @@ export default {
                     list: [
                         {
                             id: "jobByMe",
-                            name: "Nhiệm vụ của tôi",
+                            name: "Công việc của tôi",
                         },
                         {
                             id: "JobByOther",
-                            name: "Nhiệm vụ được giao",
+                            name: "Công việc được giao",
                         },
                     ],
                 }

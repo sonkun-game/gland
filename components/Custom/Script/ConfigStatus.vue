@@ -22,7 +22,7 @@
       </ShowModal>
     </div>
     <div class="p-4">
-      <InputField id="status_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'"/>
+      <InputField id="status_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'" @select-change="handleChangeStatusValue"/>
     </div>
     <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left" :theme="theme">
       <thead>
@@ -33,16 +33,16 @@
           </Cell>
         </Row>
       </thead>
-      <tbody>
+      <tbody :key="Tbodykey">
         <Row v-for="(item, index) in table.body" :key="index">
           <Cell styleClass="px-4"><InputField typeInput="checkbox" label="" :id="`selectItem-${index}`" /></Cell>
           <Cell styleClass="px-6 py-3">
             <div :class="getColorClass(item.colorCode)">
-              {{ item.status }}
+              {{ item.name }}
             </div>
           </Cell>
-          <Cell styleClass="px-6 py-3">{{ item.job }}</Cell>
-          <Cell styleClass="px-6 py-3">{{ item.person }}</Cell>
+          <Cell styleClass="px-6 py-3"> Công việc </Cell>
+          <Cell styleClass="px-6 py-3">{{ item.createdBy }}</Cell>
           <Cell styleClass="px-6 py-3 flex">
             <ShowModal type="custom-with-icon" :modalId="getUpStatusActionId(index,item.id)" iconClass="fa-solid fa-up-long"
               customClass="block w-8 mr-2 text-blue-700 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
@@ -92,15 +92,12 @@
 
 <script>
 import { Common } from '../../../plugins/common';
-import DropMenu from '../../Common/Button/DropMenu.vue';
 import {getAllTypeJobs} from "../../../static/job/api";
 import {createConfigInfo, createConfigStatus, getAllConfigInfo} from "../../../static/configurationv2/api";
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: "ConfigStatusComponent",
-  components: {
-    DropMenu
-  },
   async fetch() {
     try {
       var response = await getAllTypeJobs(-1, this.id);
@@ -120,7 +117,8 @@ export default {
     return {
       pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
       totalPage: 0,
-      taskType: 2,
+      taskType: 1,
+      Tbodykey: "key",
       table: {
         head: [
           { name: "Trạng thái" },
@@ -144,6 +142,9 @@ export default {
         }
       ]
     }
+  },
+  mounted() {
+    this.Tbodykey = uuidv4();
   },
   computed: {
     Common() {
@@ -186,6 +187,18 @@ export default {
     getDeleteStatusActionId(index, id) {
       return 'deleteStatusConfigAction_' + id + index;
     },
+    async handleChangeStatusValue(value) {
+      if(value) {
+        this.taskType = value;
+        var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType, 1);
+        if(responseInfo) {
+          console.log(responseInfo.data);
+          this.table.body = responseInfo.value;
+          if(responseInfo.data) this.totalPage = responseInfo.data.totalPage;
+          this.Tbodykey = uuidv4();
+        }
+      }
+    }
   },
 }
 </script>
