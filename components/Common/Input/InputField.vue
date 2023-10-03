@@ -4,12 +4,12 @@
     <template v-if="typeInput == 'select'">
       <label :for="id" class="text-normal float-left">{{ label }}</label>
       <select :id="id" @change="selectValueChange"
-      class="h-full w-full border border-gray-300 text-normal rounded-lg py-1.5 px-2.5" :class="{'bg-gray-900 text-white':isDark}" >
+      class="h-full w-full border border-gray-300 text-normal rounded-lg py-1.5 px-2.5" :class="{'bg-gray-900 text-white':isDark, 'bg-gray-50 text-gray-900': !isDark}" >
         <option class="text-ellipsis" v-for="(optionItem, optionIndex) in selectOption" :key="optionIndex"
           :value="optionItem.value ?optionItem.value: optionItem.id">
           <span :class="optionItem.optionClass?optionItem.optionClass:''">
             {{ optionItem.name }}
-          </span> 
+          </span>
         </option>
       </select>
     </template>
@@ -93,7 +93,7 @@ export default {
       type: String,
       default: "text"
     },
-    // is input required 
+    // is input required
     required: {
       type: Boolean,
       default: false

@@ -34,12 +34,12 @@ export default {
       {
         src: 'https://code.jquery.com/jquery-3.7.0.min.js',
       },
-      {
-        src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
-        integrity:
-          'sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz',
-        crossorigin: 'anonymous',
-      },
+      // {
+      //   src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
+      //   integrity:
+      //     'sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz',
+      //   crossorigin: 'anonymous',
+      // },
       {
         src: 'https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js',
       },

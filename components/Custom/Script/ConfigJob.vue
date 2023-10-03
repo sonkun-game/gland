@@ -19,9 +19,9 @@
                 </ModalContainer>
             </ShowModal>
         </div>
-        <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left text-gray-500" :theme="theme">
+        <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left" :theme="theme">
             <thead>
-                <Row class="bg-gray-900">
+                <Row :class="{'bg-gray-900 text-white': theme==='dark', 'bg-gray-100 text-gray-900': theme==='light'}">
                     <Cell styleClass="px-4">
                         <InputField typeInput="checkbox" label="" id="selectAll" />
                     </Cell>

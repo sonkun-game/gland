@@ -26,7 +26,7 @@
     </div>
     <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left" :theme="theme">
       <thead>
-        <Row class="bg-gray-900">
+        <Row :class="{'bg-gray-900 text-white': theme==='dark', 'bg-gray-100 text-gray-900': theme==='light'}">
           <Cell styleClass="px-4"><InputField typeInput="checkbox" label="" id="selectAll" /></Cell>
           <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3" cellType="title">
             {{ item.name }}
@@ -40,7 +40,7 @@
           <Cell styleClass="px-6 py-3" style="width: 30vw;">{{ item.dataType }}</Cell>
           <Cell styleClass="px-6 py-3 flex">
             <ShowModal type="custom-with-icon" :modalId="getUpInfoActionId(index,item.id)" iconClass="fa-solid fa-up-long"
-              customClass="block w-8 mr-2 text-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
+              customClass="block w-8 mr-2 text-blue-700 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
               <ModalContainer :modalId="getUpInfoActionId(index,item.id)" size="2xl" :hasBackDrop="true"
                 :isDark="theme === 'dark'">
                 <ModalHeader :isDark="theme === 'dark'" :modalId="getUpInfoActionId(index,item.id)" head="Cấu hình thông tin">
@@ -50,7 +50,7 @@
               </ModalContainer>
             </ShowModal>
             <ShowModal type="custom-with-icon" :modalId="getDownInfoActionId(index,item.id)" iconClass="fa-solid fa-down-long"
-              customClass="block w-8 mr-2 text-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
+              customClass="block w-8 mr-2 text-blue-700 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
               <ModalContainer :modalId="getDownInfoActionId(index,item.id)" size="2xl" :hasBackDrop="true"
                 :isDark="theme === 'dark'">
                 <ModalHeader :isDark="theme === 'dark'" :modalId="getDownInfoActionId(index,item.id)" head="Cấu hình thông tin">
@@ -60,7 +60,7 @@
               </ModalContainer>
             </ShowModal>
             <ShowModal type="custom-with-icon" :modalId="getEditInfoActionId(index,item.id)" iconClass="fa-solid fa-pen"
-              customClass="block w-8 mr-2 text-blue-700 bg-blue-100 hover:bg-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
+              customClass="block w-8 mr-2 text-blue-700 bg-blue-100 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
               <ModalContainer :modalId="getEditInfoActionId(index,item.id)" size="2xl" :hasBackDrop="true"
                 :isDark="theme === 'dark'">
                 <ModalHeader :isDark="theme === 'dark'" :modalId="getEditInfoActionId(index,item.id)" head="Cấu hình thông tin">
@@ -70,7 +70,7 @@
               </ModalContainer>
             </ShowModal>
             <ShowModal type="custom-with-icon" :modalId="getDeleteInfoActionId(index,item.id)" iconClass="fa-solid fa-trash"
-              customClass="block w-8 mr-2 text-red-700 bg-red-100 hover:bg-red-700 hover:text-white font-sm rounded-lg text-xs px-2 py-1.5 text-center">
+              customClass="block w-8 mr-2 text-red-700 bg-red-100 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
               <ModalContainer :modalId="getDeleteInfoActionId(index,item.id)" size="2xl" :hasBackDrop="true" :isDark="theme === 'dark'">
                 <ModalHeader :isDark="theme === 'dark'" :modalId="getDeleteInfoActionId(index,item.id)" head="Cấu hình thông tin">
                 </ModalHeader>
