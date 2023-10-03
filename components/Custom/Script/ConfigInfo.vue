@@ -87,16 +87,12 @@
 
 <script>
 import { Common } from '../../../plugins/common';
-import DropMenu from '../../Common/Button/DropMenu.vue';
 import {createTypeJob, getAllTypeJobs} from "../../../static/job/api";
 import {createConfigInfo, getAllConfigInfo} from "../../../static/configurationv2/api";
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: "ConfigInfoComponent",
-  components: {
-    DropMenu
-  },
   async fetch() {
     try {
       var response = await getAllTypeJobs(-1, this.id);
