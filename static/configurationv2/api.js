@@ -44,9 +44,9 @@ export async function createConfigStatus() {
   });
 }
 
-export async function getAllConfigInfo(pageNum, typeTask) {
+export async function getAllConfigInfo(pageNum, typeTask, type) {
 
-  let url = "https://api.gland84.io.vn:8447/gland/config-api/all?typeTask="+typeTask+"&pageNum="+pageNum;
+  let url = "https://api.gland84.io.vn:8447/gland/config-api/all?typeTask="+typeTask+"&type="+type+"&pageNum="+pageNum;
   try {
     const response = await axios.get(url, {
       headers: {
