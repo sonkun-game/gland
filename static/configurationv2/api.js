@@ -22,6 +22,28 @@ export async function createConfigInfo() {
   });
 }
 
+export async function createConfigStatus() {
+  var statusConfigName = document.getElementById("statusConfigName").value;
+  var statusConfigColor = document.getElementById("statusConfigColor").value;
+  var typeTaskId = document.getElementById("status_selectJob").value;
+
+  return axios({
+    method: 'post',
+    url: 'https://api.gland84.io.vn:8447/gland/config-api/create',
+    responseType: 'json',
+    data: {
+      name: statusConfigName,
+      type: 1,
+      colorCode:statusConfigColor,
+      typeTaskId: typeTaskId
+    },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+    }
+  });
+}
+
 export async function getAllConfigInfo(pageNum, typeTask) {
 
   let url = "https://api.gland84.io.vn:8447/gland/config-api/all?typeTask="+typeTask+"&pageNum="+pageNum;

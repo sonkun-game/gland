@@ -24,7 +24,7 @@
     <div class="p-4">
       <InputField id="info_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'" @select-change="handleChangeJobValue"/>
     </div>
-    <CrudTable style-class="w-full text-sm text-left" :theme="theme">
+    <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left" :theme="theme">
       <thead>
         <Row class="bg-gray-900">
           <Cell styleClass="px-4"><InputField typeInput="checkbox" label="" id="selectAll" /></Cell>
@@ -105,7 +105,7 @@ export default {
       var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType);
       if(responseInfo) {
         this.table.body = responseInfo.value;
-        if(responseInfo.data) this.totalPage = responseInfo.data.totalPage;
+        this.totalPage = responseInfo.totalPage;
       }
     }
     catch (error) {
