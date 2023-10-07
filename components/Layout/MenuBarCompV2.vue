@@ -178,7 +178,7 @@ export default {
           {
             icon: "fa-solid fa-lock",
             name: "Tổng",
-            link: "/main_v2/total/staff",
+            link: "/main/total/staff",
             id: "dropdown-menu-1",
             isTotal: true,
             subList: [
@@ -186,14 +186,14 @@ export default {
                 id: "people",
                 name: "Nhân sự",
                 icon: "fa-regular fa-user",
-                link: "/main_v2/total/staff",
+                link: "/main/total/staff",
                 selected: false,
               },
               {
                 id: "department",
                 name: "Phòng ban",
                 icon: "fa-solid fa-house",
-                link: "/main_v2/total/department",
+                link: "/main/total/department",
                 selected: false,
               },
             ],
@@ -239,8 +239,6 @@ export default {
       return host.includes("/main/total/all");
     },
     fetchDpt() {
-      console.log("fetch Dpt --");
-      // let url = process.env.API_URL + "api-department?storeId=1";
       let url = "https://api.gland84.io.vn:8447/gland/api-department/all?storeId=" + this.storeId + "&pageNum=" + this.pageNum;
       let resp = sendGetApi(url, null);
       let path = window.location.href;
@@ -265,14 +263,14 @@ export default {
                 id: "people" + subkeyId,
                 name: "Nhân sự",
                 icon: "fa-regular fa-user",
-                link: "/main_v2/total/list-department/people?id=" + item.id,
+                link: "/main/total/list-department/people?id=" + item.id,
                 selected: checkPeople,
               },
               {
                 id: "script" + subkeyId,
                 name: "Kịch bản",
                 icon: "fa-solid fa-scroll",
-                link: "/main_v2/total/list-department/script?id=" + item.id,
+                link: "/main/total/list-department/script?id=" + item.id,
                 selected: checkScript,
               },
             ],
@@ -285,7 +283,7 @@ export default {
                 id: script.id,
                 name: script.name,
                 icon: "fa-solid fa-list-check",
-                link: "/main_v2/total/list-department/mission?id=" + script.id,
+                link: "/main/total/list-department/mission?id=" + script.id,
                 departmentId: script.departmentId,
                 department: script.department
               })

@@ -1,4 +1,5 @@
 
+<!--#authen_login-->
 <template>
   <div class="login-container rounded-lg shadow-xl dark:shadow-gray-800">
 
@@ -70,7 +71,7 @@ export default {
               } else {
                 localStorage.setItem("jwt", response.data.accessToken);
                 console.log(response);
-                window.location = "https://gland84.io.vn/main_v2/total/staff";
+                window.location = "https://gland84.io.vn/main/total/staff";
 
               }
             }).catch(error => {
