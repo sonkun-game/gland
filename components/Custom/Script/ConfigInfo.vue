@@ -39,26 +39,6 @@
           <Cell styleClass="px-6 py-3" style="width: 30vw;">{{ item.name }}</Cell>
           <Cell styleClass="px-6 py-3" style="width: 30vw;">{{ item.dataType }}</Cell>
           <Cell styleClass="px-6 py-3 flex">
-            <ShowModal type="custom-with-icon" :modalId="getUpInfoActionId(index,item.id)" iconClass="fa-solid fa-up-long"
-              customClass="block w-8 mr-2 text-blue-700 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-              <ModalContainer :modalId="getUpInfoActionId(index,item.id)" size="2xl" :hasBackDrop="true"
-                :isDark="theme === 'dark'">
-                <ModalHeader :isDark="theme === 'dark'" :modalId="getUpInfoActionId(index,item.id)" head="Cấu hình thông tin">
-                </ModalHeader>
-                <div>
-                </div>
-              </ModalContainer>
-            </ShowModal>
-            <ShowModal type="custom-with-icon" :modalId="getDownInfoActionId(index,item.id)" iconClass="fa-solid fa-down-long"
-              customClass="block w-8 mr-2 text-blue-700 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-              <ModalContainer :modalId="getDownInfoActionId(index,item.id)" size="2xl" :hasBackDrop="true"
-                :isDark="theme === 'dark'">
-                <ModalHeader :isDark="theme === 'dark'" :modalId="getDownInfoActionId(index,item.id)" head="Cấu hình thông tin">
-                </ModalHeader>
-                <div>
-                </div>
-              </ModalContainer>
-            </ShowModal>
             <ShowModal type="custom-with-icon" :modalId="getEditInfoActionId(index,item.id)" iconClass="fa-solid fa-pen"
               customClass="block w-8 mr-2 text-blue-700 bg-blue-100 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
               <ModalContainer :modalId="getEditInfoActionId(index,item.id)" size="2xl" :hasBackDrop="true"
