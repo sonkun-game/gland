@@ -17,13 +17,13 @@
           <div class="p-2 flex accordion-container no-scrollbar">
             <div class="w-full mb-8">
               <p class="text-lg font-bold">Công việc của tôi</p>
-              <Accordion :loadedDepartment="jobModal.loadedDepartment" :theme="theme">
-              </Accordion>
+              <LoadedDepartment :loadedDepartment="jobModal.loadedDepartment" :theme="theme">
+              </LoadedDepartment>
             </div>
             <div class="w-full mb-8">
               <p class="text-lg font-bold">Công việc được giao</p>
-              <Accordion :loadedDepartment="jobModal.loadedDepartment" :theme="theme">
-              </Accordion>
+              <LoadedDepartment :loadedDepartment="jobModal.loadedDepartment" :theme="theme">
+              </LoadedDepartment>
             </div>
           </div>
         </div>
@@ -52,14 +52,14 @@
 </style>
 
 <script>
-import Accordion from '../../../Common/Button/Accordion.vue';
+import LoadedDepartment from '../../Department/LoadedDepartment.vue';
 import { sendGetApi } from "../../../../plugins/api";
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: "",
   components: {
-    Accordion
+    LoadedDepartment
   },
   data() {
     return {
