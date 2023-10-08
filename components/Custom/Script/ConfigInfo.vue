@@ -2,15 +2,15 @@
   <div class="container">
     <div class="flex justify-between">
       <span class="text-xl font-bold">Cấu hình thông tin</span>
-      <ShowModal modalId="createConfigInfo" type="custom" customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold"
+      <ShowModal modalId="createConfigInfo" type="custom" customClass="bg-blue-500 text-white rounded-lg px-4 py-1 text-lg font-bold"
         title="Tạo loại thông tin">
         <ModalContainer modalId="createConfigInfo" size="xl" :isDark="theme === 'dark'">
           <ModalHeader :isDark="theme === 'dark'" head="Tạo loại thông tin" modalId="createConfigInfo">
           </ModalHeader>
           <InputField :isDark="theme === 'dark'" styleClass="p-2" id="infoTypeName" label=""
             placeholder="Tên thông tin" />
-          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="infoConfigType" label="" type-input="select" :select-option="selectOption"
-            placeholder="Kiểu dữ liệu" />
+          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="infoConfigType" label="" type-input="select"
+            :select-option="selectOption" placeholder="Kiểu dữ liệu" />
           <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
             <button @click="Common.toggleModal('createConfigInfo')"
               class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
@@ -22,12 +22,15 @@
       </ShowModal>
     </div>
     <div class="p-4">
-      <InputField id="info_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'" @select-change="handleChangeJobValue"/>
+      <InputField id="info_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption"
+        :isDark="theme === 'dark'" @select-change="handleChangeJobValue" />
     </div>
     <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left" :theme="theme">
       <thead>
-        <Row :class="{'bg-gray-900 text-white': theme==='dark', 'bg-gray-100 text-gray-900': theme==='light'}">
-          <Cell styleClass="px-4"><InputField typeInput="checkbox" label="" id="selectAll" /></Cell>
+        <Row :class="{ 'bg-gray-900 text-white': theme === 'dark', 'bg-gray-100 text-gray-900': theme === 'light' }">
+          <Cell styleClass="px-4">
+            <InputField typeInput="checkbox" label="" id="selectAll" />
+          </Cell>
           <Cell v-for="(item, index) in table.head" :key="index" styleClass="px-6 py-3" cellType="title">
             {{ item.name }}
           </Cell>
@@ -35,51 +38,47 @@
       </thead>
       <tbody :key="Tbodykey">
         <Row v-for="(item, index) in table.body" :key="index">
-          <Cell styleClass="px-4"><InputField typeInput="checkbox" label="" :id="`selectItem-${index}`" /></Cell>
+          <Cell styleClass="px-4">
+            <InputField typeInput="checkbox" label="" :id="`selectItem-${index}`" />
+          </Cell>
           <Cell styleClass="px-6 py-3" style="width: 30vw;">{{ item.name }}</Cell>
           <Cell styleClass="px-6 py-3" style="width: 30vw;">{{ item.dataType }}</Cell>
           <Cell styleClass="px-6 py-3 flex">
-            <ShowModal type="custom-with-icon" :modalId="getEditInfoActionId(index,item.id)" iconClass="fa-solid fa-pen"
+            <ShowModal type="custom-with-icon" modalId="editInfoConfigAction" iconClass="fa-solid fa-pen"
               customClass="block w-8 mr-2 text-blue-700 bg-blue-100 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-              <ModalContainer :modalId="getEditInfoActionId(index,item.id)" size="2xl" :hasBackDrop="true"
-                :isDark="theme === 'dark'">
-                <ModalHeader :isDark="theme === 'dark'" :modalId="getEditInfoActionId(index,item.id)" head="Cấu hình thông tin">
-                </ModalHeader>
-                <div>
-                </div>
-              </ModalContainer>
             </ShowModal>
-            <ShowModal type="custom-with-icon" :modalId="getDeleteInfoActionId(index,item.id)" iconClass="fa-solid fa-trash"
+            <ShowModal type="custom-with-icon" modalId="deleteInfoConfigAction" iconClass="fa-solid fa-trash"
               customClass="block w-8 mr-2 text-red-700 bg-red-100 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-              <ModalContainer :modalId="getDeleteInfoActionId(index,item.id)" size="2xl" :hasBackDrop="true" :isDark="theme === 'dark'">
-                <ModalHeader :isDark="theme === 'dark'" :modalId="getDeleteInfoActionId(index,item.id)" head="Cấu hình thông tin">
-                </ModalHeader>
-                <div>
-                </div>
-              </ModalContainer>
             </ShowModal>
           </Cell>
         </Row>
       </tbody>
     </CrudTable>
+
+    <!-- Every Modal -->
+    <InfoModal :theme="theme" />
   </div>
 </template>
 
 <script>
 import { Common } from '../../../plugins/common';
-import {createTypeJob, getAllTypeJobs} from "../../../static/job/api";
-import {createConfigInfo, getAllConfigInfo} from "../../../static/configurationv2/api";
+import { createTypeJob, getAllTypeJobs } from "../../../static/job/api";
+import { createConfigInfo, getAllConfigInfo } from "../../../static/configurationv2/api";
+import InfoModal from './Modal/InfoModal.vue';
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: "ConfigInfoComponent",
+  components: {
+    InfoModal
+  },
   async fetch() {
     try {
       var response = await getAllTypeJobs(-1, this.id);
       this.jobSelectOption = response.value;
 
-      var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType, 2);
-      if(responseInfo) {
+      var responseInfo = await getAllConfigInfo(this.pageNum, this.taskType, 2);
+      if (responseInfo) {
         this.table.body = responseInfo.value;
         this.totalPage = responseInfo.totalPage;
       }
@@ -94,18 +93,18 @@ export default {
       totalPage: 0,
       taskType: 1,
       Tbodykey: "key",
-      selectOption:[
+      selectOption: [
         {
-          name:"Chuỗi kí tự",
-          value:"text"
+          name: "Chuỗi kí tự",
+          value: "text"
         },
         {
-          name:"Thời gian",
-          value:"date"
+          name: "Thời gian",
+          value: "date"
         },
         {
-          name:"Số",
-          value:"number"
+          name: "Số",
+          value: "number"
         }
       ],
       table: {
@@ -157,13 +156,13 @@ export default {
       return 'deleteInfoConfigAction_' + id + index;
     },
     async handleChangeJobValue(value) {
-      if(value) {
+      if (value) {
         this.taskType = value;
-        var responseInfo = await getAllConfigInfo(this.pageNum,this.taskType, 2);
-        if(responseInfo) {
+        var responseInfo = await getAllConfigInfo(this.pageNum, this.taskType, 2);
+        if (responseInfo) {
           console.log(responseInfo.data);
           this.table.body = responseInfo.value;
-          if(responseInfo.data) this.totalPage = responseInfo.data.totalPage;
+          if (responseInfo.data) this.totalPage = responseInfo.data.totalPage;
           this.Tbodykey = uuidv4();
         }
       }
@@ -175,8 +174,8 @@ export default {
 .bg-gland {
   background-color: #1d2432;
 }
+
 .container {
   height: 60vh;
   overflow-y: auto;
-}
-</style>
+}</style>

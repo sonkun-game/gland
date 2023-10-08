@@ -2,7 +2,7 @@
   <div class="container">
     <div class="flex justify-between">
       <span class="text-xl font-bold">Cấu hình trạng thái</span>
-      <ShowModal modalId="createConfigStatusId" type="custom" customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold"
+      <ShowModal modalId="createConfigStatusId" type="custom" customClass="bg-blue-500 text-white rounded-lg px-4 py-1 text-lg font-bold"
         title="Tạo loại trạng thái">
         <ModalContainer modalId="createConfigStatusId" size="xl" :isDark="theme === 'dark'">
           <ModalHeader :isDark="theme === 'dark'" head="Tạo loại trạng thái" modalId="createConfigStatusId">

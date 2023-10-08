@@ -1,4 +1,3 @@
-<!--#main_department-->
 <template>
     <div class="p-8 text-white">
         <nav class="flex justify-between">

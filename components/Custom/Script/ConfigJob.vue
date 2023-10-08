@@ -3,7 +3,7 @@
         <div class="flex justify-between">
             <span class="text-xl font-bold">Cấu hình công việc</span>
             <ShowModal :modalId="createConfigJobId" type="custom"
-                customClass="bg-blue-500 rounded-lg px-4 py-1 text-lg font-bold" title="Tạo loại công việc">
+                customClass="bg-blue-500 text-white rounded-lg px-4 py-1 text-lg font-bold" title="Tạo loại công việc">
                 <ModalContainer :modalId="createConfigJobId" size="xl" :isDark="theme === 'dark'">
                     <ModalHeader :isDark="theme === 'dark'" head="Tạo loại công việc" :modalId="createConfigJobId">
                     </ModalHeader>
@@ -37,43 +37,34 @@
                     </Cell>
                     <Cell styleClass="px-6 py-3" style="width: 70vw;">{{ item.name }}</Cell>
                     <Cell styleClass="px-6 py-3 flex">
-                        <ShowModal type="custom-with-icon" :modalId="getEditId(index, item.id)"
+                        <ShowModal type="custom-with-icon" modalId="authenJobConfigAction"
                             iconClass="fa-solid fa-wrench"
                             customClass="block w-8 mr-2 text-blue-700 bg-blue-100 hover:bg-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-                            <ModalContainer :modalId="getEditId(index, item.id)" size="2xl" :hasBackDrop="true"
-                                :isDark="theme === 'dark'">
-                                <ModalHeader :isDark="theme === 'dark'" :modalId="getEditId(index, item.id)"
-                                    head="Cấu hình công việc">
-                                </ModalHeader>
-                                <div>
-                                </div>
-                            </ModalContainer>
                         </ShowModal>
-                        <ShowModal type="custom-with-icon" :modalId="getDeleteId(index, item.id)"
+                        <ShowModal type="custom-with-icon" modalId="deleteJobConfigAction"
                             iconClass="fa-solid fa-trash"
                             customClass="block w-8 mr-2 text-red-700 bg-red-100 hover:bg-red-700 hover:text-white font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-                            <ModalContainer :modalId="getDeleteId(index, item.id)" size="2xl" :hasBackDrop="true"
-                                :isDark="theme === 'dark'">
-                                <ModalHeader :isDark="theme === 'dark'" :modalId="getDeleteId(index, item.id)"
-                                    head="Xóa công việc">
-                                </ModalHeader>
-                                <div>
-                                </div>
-                            </ModalContainer>
                         </ShowModal>
                     </Cell>
                 </Row>
             </tbody>
         </CrudTable>
+
+        <!-- All modal -->
+        <JobModal :theme="theme" />
     </div>
 </template>
 
 <script>
 import { Common } from '../../../plugins/common';
 import {createTypeJob, getAllTypeJobs} from "../../../static/job/api";
+import JobModal from './Modal/JobModal.vue';
 
 export default {
     name: "ConfigJobComponent",
+    components: {
+        JobModal
+    },
   async fetch() {
     try {
       var response = await getAllTypeJobs(this.pageNum, this.id);
@@ -113,7 +104,7 @@ export default {
         id: "",
         theme: {
             type: String,
-            default: 'light'
+            default: 'dark'
         }
     },
     methods: {

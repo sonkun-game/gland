@@ -26,20 +26,20 @@
     </template>
     <template v-else-if="typeInput == 'checkbox'">
       <input :id="id" type="checkbox" :checked="isChecked" @change="toggleCheckBoxInput()"
-        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-      <label :for="id" class="ml-2 text-normal font-medium text-gray-900 dark:text-gray-300">{{ label }}</label>
+        class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+      <label :for="id" class="ml-2 text-normal font-medium">{{ label }}</label>
     </template>
     <!-- Default Text Option -->
     <template v-else>
       <div v-if="isDark">
         <label :for="id" class="text-normal font-semibold float-left py-2 text-white">{{ label }}</label>
         <input class="bg-transparent text-gray-300 text-normal rounded-lg block w-full p-1.5"
-          :placeholder="placeholder" :value="value" type="text" :id="id" :required="required" />
+          :placeholder="placeholder" :value="value" :type="typeInput" :id="id" :required="required" />
       </div>
       <div v-else>
         <label :for="id" class="text-normal font-semibold float-left py-2">{{ label }}</label>
         <input class="bg-white border border-gray-300 text-gray-900 text-normal rounded-lg block w-full p-1.5"
-          :placeholder="placeholder" :value="value" type="text" :id="id" :required="required" />
+          :placeholder="placeholder" :value="value" :type="typeInput" :id="id" :required="required" />
       </div>
     </template>
   </div>
