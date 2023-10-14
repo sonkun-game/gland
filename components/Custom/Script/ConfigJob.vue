@@ -19,9 +19,10 @@
                 </ModalContainer>
             </ShowModal>
         </div>
-        <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left" :theme="theme">
+        <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left"
+            :theme="theme">
             <thead>
-                <Row :class="{'bg-gray-900 text-white': theme==='dark', 'bg-gray-100 text-gray-900': theme==='light'}">
+                <Row :class="{ 'bg-gray-900 text-white': theme === 'dark', 'bg-gray-100 text-gray-900': theme === 'light' }">
                     <Cell styleClass="px-4">
                         <InputField typeInput="checkbox" label="" id="selectAll" />
                     </Cell>
@@ -37,12 +38,10 @@
                     </Cell>
                     <Cell styleClass="px-6 py-3" style="width: 70vw;">{{ item.name }}</Cell>
                     <Cell styleClass="px-6 py-3 flex">
-                        <ShowModal type="custom-with-icon" modalId="authenJobConfigAction"
-                            iconClass="fa-solid fa-wrench"
+                        <ShowModal type="custom-with-icon" modalId="authenJobConfigAction" iconClass="fa-solid fa-wrench"
                             customClass="block w-8 mr-2 text-blue-700 bg-blue-100 hover:bg-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
                         </ShowModal>
-                        <ShowModal type="custom-with-icon" modalId="deleteJobConfigAction"
-                            iconClass="fa-solid fa-trash"
+                        <ShowModal type="custom-with-icon" modalId="deleteJobConfigAction" iconClass="fa-solid fa-trash"
                             customClass="block w-8 mr-2 text-red-700 bg-red-100 hover:bg-red-700 hover:text-white font-sm rounded-lg text-xs px-2 py-1.5 text-center">
                         </ShowModal>
                     </Cell>
@@ -57,30 +56,31 @@
 
 <script>
 import { Common } from '../../../plugins/common';
-import {createTypeJob, getAllTypeJobs} from "../../../static/job/api";
+import { createTypeJob, getAllTypeJobs } from "../../../static/job/api";
 import JobModal from './Modal/JobModal.vue';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
     name: "ConfigJobComponent",
     components: {
         JobModal
     },
-  async fetch() {
-    try {
-      var response = await getAllTypeJobs(this.pageNum, this.id);
-      this.table.body = response.value;
-      this.totalPage = response.totalPage;
-    }
-    catch (error) {
-      console.error('Lỗi:', error);
-    }
-  },
+    async fetch() {
+        try {
+            var response = await getAllTypeJobs(this.pageNum, this.id);
+            this.table.body = response.value;
+            this.totalPage = response.totalPage;
+        }
+        catch (error) {
+            console.error('Lỗi:', error);
+        }
+    },
     data() {
         return {
-          //id: this.$route.query.id,
-          pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
-          totalPage: 0,
-            createConfigJobId: "createTypeJobId",
+            //id: this.$route.query.id,
+            pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
+            totalPage: 0,
+            createConfigJobId: "createTypeJobId" + uuidv4(),
             table: {
                 head: [
                     { name: "Tên công việc" },
@@ -114,17 +114,17 @@ export default {
         getDeleteId(index, id) {
             return 'delete_' + id + index;
         },
-      async createTypeJob() {
-        var response = await createTypeJob(this.id);
-        this.table.body = response.data.value;
-        this.totalPage = response.data.totalPage;
-      }
+        async createTypeJob() {
+            var response = await createTypeJob(this.id);
+            this.table.body = response.data.value;
+            this.totalPage = response.data.totalPage;
+        }
     }
 }
 </script>
 <style scoped>
 .container {
-  height: 60vh;
-  overflow-y: auto;
+    height: 60vh;
+    overflow-y: auto;
 }
 </style>

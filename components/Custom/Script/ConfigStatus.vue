@@ -2,17 +2,17 @@
   <div class="container">
     <div class="flex justify-between">
       <span class="text-xl font-bold">Cấu hình trạng thái</span>
-      <ShowModal modalId="createConfigStatusId" type="custom" customClass="bg-blue-500 text-white rounded-lg px-4 py-1 text-lg font-bold"
+      <ShowModal :modalId="createConfigStatusId" type="custom" customClass="bg-blue-500 text-white rounded-lg px-4 py-1 text-lg font-bold"
         title="Tạo loại trạng thái">
-        <ModalContainer modalId="createConfigStatusId" size="xl" :isDark="theme === 'dark'">
-          <ModalHeader :isDark="theme === 'dark'" head="Tạo loại trạng thái" modalId="createConfigStatusId">
+        <ModalContainer :modalId="createConfigStatusId" size="xl" :isDark="theme === 'dark'">
+          <ModalHeader :isDark="theme === 'dark'" head="Tạo loại trạng thái" :modalId="createConfigStatusId">
           </ModalHeader>
           <InputField :isDark="theme === 'dark'" styleClass="p-2" id="statusConfigName" label=""
             placeholder="Tên trạng thái" />
           <InputField :isDark="theme === 'dark'" styleClass="p-2" id="statusConfigColor" label="" typeInput="select" :selectOption="jobColorSelection"
           placeholder="Chọn màu" />
           <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
-            <button @click="Common.toggleModal('createConfigStatusId')"
+            <button @click="Common.toggleModal(createConfigStatusId)"
               class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
               Hủy bỏ</button>
             <button type="button" @click="createConfigStatus()"
@@ -97,6 +97,7 @@ export default {
     return {
       pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
       totalPage: 0,
+      createConfigStatusId: "createTypeStatusId" + uuidv4(),
       taskType: 1,
       Tbodykey: "key",
       table: {

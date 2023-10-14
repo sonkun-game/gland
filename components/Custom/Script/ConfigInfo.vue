@@ -2,17 +2,17 @@
   <div class="container">
     <div class="flex justify-between">
       <span class="text-xl font-bold">Cấu hình thông tin</span>
-      <ShowModal modalId="createConfigInfo" type="custom" customClass="bg-blue-500 text-white rounded-lg px-4 py-1 text-lg font-bold"
+      <ShowModal :modalId="createConfigInfoId" type="custom" customClass="bg-blue-500 text-white rounded-lg px-4 py-1 text-lg font-bold"
         title="Tạo loại thông tin">
-        <ModalContainer modalId="createConfigInfo" size="xl" :isDark="theme === 'dark'">
-          <ModalHeader :isDark="theme === 'dark'" head="Tạo loại thông tin" modalId="createConfigInfo">
+        <ModalContainer :modalId="createConfigInfoId" size="xl" :isDark="theme === 'dark'">
+          <ModalHeader :isDark="theme === 'dark'" head="Tạo loại thông tin" :modalId="createConfigInfoId">
           </ModalHeader>
           <InputField :isDark="theme === 'dark'" styleClass="p-2" id="infoTypeName" label=""
             placeholder="Tên thông tin" />
           <InputField :isDark="theme === 'dark'" styleClass="p-2" id="infoConfigType" label="" type-input="select"
             :select-option="selectOption" placeholder="Kiểu dữ liệu" />
           <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
-            <button @click="Common.toggleModal('createConfigInfo')"
+            <button @click="Common.toggleModal(createConfigInfoId)"
               class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
               Hủy bỏ</button>
             <button type="button" @click="createConfigInfo()"
@@ -91,6 +91,7 @@ export default {
     return {
       pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
       totalPage: 0,
+      createConfigInfoId: "createTypeInfoId" + uuidv4(),
       taskType: 1,
       Tbodykey: "key",
       selectOption: [
