@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export async function createConfigInfo() {
-  var infoTypeName = document.getElementById("infoTypeName").value;
-  var infoConfigType = document.getElementById("infoConfigType").value;
-  var typeTaskId = document.getElementById("info_selectJob").value;
+export async function createConfigInfo(infoTypeName, infoConfigType, info_selectJob) {
+  var infoTypeName = document.getElementById(infoTypeName).value;
+  var infoConfigType = document.getElementById(infoConfigType).value;
+  var typeTaskId = document.getElementById(info_selectJob).value;
 
   return axios({
     method: 'post',
@@ -22,10 +22,10 @@ export async function createConfigInfo() {
   });
 }
 
-export async function createConfigStatus() {
-  var statusConfigName = document.getElementById("statusConfigName").value;
-  var statusConfigColor = document.getElementById("statusConfigColor").value;
-  var typeTaskId = document.getElementById("status_selectJob").value;
+export async function createConfigStatus(statusConfigName, statusConfigColor, status_selectJob) {
+  var statusConfigName = document.getElementById(statusConfigName).value;
+  var statusConfigColor = document.getElementById(statusConfigColor).value;
+  var typeTaskId = document.getElementById(status_selectJob).value;
 
   return axios({
     method: 'post',

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="p-4 rounded-lg" :class="{'hidden':isHidden}" :id="id" role="tabpanel" :aria-labelledby="toTab(labelledby)">
+    <div class="p-4 rounded-lg" :class="{'hidden':isHidden}" :id="id" role="tabpanel">
       <slot></slot>
     </div>
   </div>

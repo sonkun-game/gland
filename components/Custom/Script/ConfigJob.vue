@@ -7,13 +7,13 @@
                 <ModalContainer :modalId="createConfigJobId" size="xl" :isDark="theme === 'dark'">
                     <ModalHeader :isDark="theme === 'dark'" head="Tạo loại công việc" :modalId="createConfigJobId">
                     </ModalHeader>
-                    <InputField :isDark="theme === 'dark'" styleClass="p-2" id="jobTypeName" label=""
+                    <InputField :isDark="theme === 'dark'" styleClass="p-2" :id="jobTypeNameId" label=""
                         placeholder="Tên công việc" />
                     <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
                         <button @click="Common.toggleModal(createConfigJobId)"
                             class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
                             Hủy bỏ</button>
-                        <button type="button" @click="createTypeJob()"
+                        <button type="button" @click="createTypeJob(id, jobTypeNameId)"
                             class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
                     </div>
                 </ModalContainer>
@@ -22,7 +22,8 @@
         <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left"
             :theme="theme">
             <thead>
-                <Row :class="{ 'bg-gray-900 text-white': theme === 'dark', 'bg-gray-100 text-gray-900': theme === 'light' }">
+                <Row
+                    :class="{ 'bg-gray-900 text-white': theme === 'dark', 'bg-gray-100 text-gray-900': theme === 'light' }">
                     <Cell styleClass="px-4">
                         <InputField typeInput="checkbox" label="" id="selectAll" />
                     </Cell>
@@ -81,6 +82,7 @@ export default {
             pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
             totalPage: 0,
             createConfigJobId: "createTypeJobId" + uuidv4(),
+            jobTypeNameId: "jobTypeName" + uuidv4(), 
             table: {
                 head: [
                     { name: "Tên công việc" },
@@ -101,7 +103,10 @@ export default {
         },
     },
     props: {
-        id: "",
+        id: {
+            type: String | Number,
+            default: ''
+        },
         theme: {
             type: String,
             default: 'dark'
@@ -114,10 +119,15 @@ export default {
         getDeleteId(index, id) {
             return 'delete_' + id + index;
         },
-        async createTypeJob() {
-            var response = await createTypeJob(this.id);
-            this.table.body = response.data.value;
-            this.totalPage = response.data.totalPage;
+        async createTypeJob(id, jobTypeNameId) {
+            console.log(`id : [${id}]`);
+            if (id) {
+                var response = await createTypeJob(id, jobTypeNameId);
+                this.table.body = response.data.value;
+                this.totalPage = response.data.totalPage;
+            } else {
+                console.error("Id null, empty or undefined !")
+            }
         }
     }
 }

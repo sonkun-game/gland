@@ -61,20 +61,21 @@
                         </ShowModal>
                         <div>
                             <ShowModal type="custom-with-icon" :modalId="'authenScriptModal' + index"
+                                @click="handleToggleAuthenScriptModal()"
                                 iconClass="fa-solid fa-user"
                                 customClass="block w-8 mr-2 text-green-700 bg-green-100 hover:bg-green-700 hover:text-white font-sm rounded-lg text-xs px-2 py-1.5 text-center">
-                                <ModalContainer :modalId="'authenScriptModal' + index" size="4xl" :hasBackDrop="true"
+                                <ModalContainer :modalId="'authenScriptModal' + index" size="4xl" :hasBackDrop="true" 
                                     :isDark="theme === 'dark'">
                                     <div>
                                         <TabListHeader type='modal' :data="getAuthenScriptTabList(index)" @active-tablist="showScriptTab"></TabListHeader>
                                         <TabContainer :theme="theme" :id="getAuthenScriptTabList(index).dataTabsToggle">
-                                            <TabItem :id="getAuthenScriptTabList(index).list[0].id" labelledby="job" :isHidden="configActive !== 0">
+                                            <TabItem :id="getAuthenScriptTabList(index).list[0].id" :isHidden="configActive !== 0">
                                                 <ConfigJob :theme="theme" :id="item.id" />
                                             </TabItem>
-                                            <TabItem :id="getAuthenScriptTabList(index).list[1].id" labelledby="status" :isHidden="configActive !== 1">
+                                            <TabItem :id="getAuthenScriptTabList(index).list[1].id" :isHidden="configActive !== 1">
                                                 <ConfigStatus :theme="theme" :dataIndex="index" :id="item.id"/>
                                             </TabItem>
-                                            <TabItem :id="getAuthenScriptTabList(index).list[2].id" labelledby="info" :isHidden="configActive !== 2">
+                                            <TabItem :id="getAuthenScriptTabList(index).list[2].id" :isHidden="configActive !== 2">
                                                 <ConfigInfo :theme="theme" :id="item.id" />
                                             </TabItem>
                                         </TabContainer>
@@ -95,6 +96,7 @@ import { Common } from "../../../../../plugins/common";
 import ConfigJob from '../../../../../components/Custom/Script/ConfigJob.vue';
 import ConfigStatus from '../../../../../components/Custom/Script/ConfigStatus.vue';
 import ConfigInfo from '../../../../../components/Custom/Script/ConfigInfo.vue';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
     name: "ListDepartmentScriptPageV2",
@@ -169,20 +171,21 @@ export default {
             Common.toggleModal('createScriptBtnId');
         },
         getAuthenScriptTabList(index) {
+            let key = uuidv4();
             return {
-                id: "authenScriptTab" + index,
-                dataTabsToggle: "authenScript" + index,
+                id: "authenScriptTab" + index + key,
+                dataTabsToggle: "authenScript" + index + key,
                 list: [
                     {
-                        id: "jobConfig" + index,
+                        id: "jobConfig" + index + key,
                         name: "Cấu hình công việc",
                     },
                     {
-                        id: "statusConfig" + index,
+                        id: "statusConfig" + index + key,
                         name: "Cấu hình trạng thái",
                     },
                     {
-                        id: "infoConfig" + index,
+                        id: "infoConfig" + index + key,
                         name: "Cấu hình thông tin",
                     },
                 ],
@@ -190,6 +193,9 @@ export default {
         },
         showScriptTab(active) {
             this.configActive = active;
+        },
+        handleToggleAuthenScriptModal() {
+            this.configActive = 0;
         },
         async editScrip(id, index) {
           var response = await editScript(id, index);

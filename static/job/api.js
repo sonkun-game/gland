@@ -1,21 +1,29 @@
 import axios from "axios";
 
-export async function createTypeJob(scriptId) {
-  var name = document.getElementById("jobTypeName").value;
+export async function createTypeJob(scriptId, jobTypeNameId) {
 
-  return axios({
-    method: 'post',
-    url: 'https://api.gland84.io.vn:8447/gland/api-type-task/create',
-    responseType: 'json',
-    data: {
-      name: name,
-      scriptId: scriptId
-    },
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem("jwt")
-    }
-  });
+  console.log(scriptId);
+  console.log(jobTypeNameId);
+  if(scriptId && jobTypeNameId) {
+  var name = document.getElementById(jobTypeNameId).value;
+  
+    return axios({
+      method: 'post',
+      url: 'https://api.gland84.io.vn:8447/gland/api-type-task/create',
+      responseType: 'json',
+      data: {
+        name: name,
+        scriptId: scriptId
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+      }
+    });
+  } else {
+    console.error(`${jobTypeNameId} or ${scriptId}  is not defined !`);
+  }
+  
 }
 
 export async function getAllTypeJobs(pageNum, scriptId) {

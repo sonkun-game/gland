@@ -7,22 +7,22 @@
         <ModalContainer :modalId="createConfigStatusId" size="xl" :isDark="theme === 'dark'">
           <ModalHeader :isDark="theme === 'dark'" head="Tạo loại trạng thái" :modalId="createConfigStatusId">
           </ModalHeader>
-          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="statusConfigName" label=""
+          <InputField :isDark="theme === 'dark'" styleClass="p-2" :id="statusConfigName" label=""
             placeholder="Tên trạng thái" />
-          <InputField :isDark="theme === 'dark'" styleClass="p-2" id="statusConfigColor" label="" typeInput="select" :selectOption="jobColorSelection"
+          <InputField :isDark="theme === 'dark'" styleClass="p-2" :id="statusConfigColor" label="" typeInput="select" :selectOption="jobColorSelection"
           placeholder="Chọn màu" />
           <div class="flex items-center p-6 space-x-2 justify-end border-gray-200 rounded-b dark:border-gray-600">
             <button @click="Common.toggleModal(createConfigStatusId)"
               class="text-gray-500 bg-tranparent hover:bg-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
               Hủy bỏ</button>
-            <button type="button" @click="createConfigStatus()"
+            <button type="button" @click="createConfigStatus(statusConfigName, statusConfigColor, status_selectJob)"
               class="btn btn-info text-white bg-blue-700 hover:bg-blue-400 border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Lưu</button>
           </div>
         </ModalContainer>
       </ShowModal>
     </div>
     <div class="p-4">
-      <InputField id="status_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'" @select-change="handleChangeStatusValue"/>
+      <InputField :id="status_selectJob" typeInput="select" label="Công việc" :selectOption="jobSelectOption" :isDark="theme==='dark'" @select-change="handleChangeStatusValue"/>
     </div>
     <CrudTable :total-page="this.totalPage" :current-page="pageNum" style-class="w-full text-sm text-left" :theme="theme">
       <thead>
@@ -98,6 +98,9 @@ export default {
       pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
       totalPage: 0,
       createConfigStatusId: "createTypeStatusId" + uuidv4(),
+      statusConfigName: "statusConfigName" + uuidv4(),
+      statusConfigColor: "statusConfigColor" + uuidv4(),
+      status_selectJob: "status_selectJob" + uuidv4(),
       taskType: 1,
       Tbodykey: "key",
       table: {
@@ -144,8 +147,8 @@ export default {
     }
   },
   methods: {
-    async createConfigStatus() {
-      var response = await createConfigStatus();
+    async createConfigStatus(statusConfigName, statusConfigColor, status_selectJob) {
+      var response = await createConfigStatus(statusConfigName, statusConfigColor, status_selectJob);
       this.table.body = response.data.value;
       this.totalPage = response.data.totalPage;
     },

@@ -93,14 +93,18 @@ export default {
   methods: {
     toggleModal() {
       var modal = document.getElementById(`${this.modalId}`);
+      const data = {
+        isShowing: this.isShowing,
+        modalId: this.modalId,
+      };
       if (modal.classList.contains('hidden')) {
         modal.classList.remove("hidden");
         this.isShowing = true;
-        this.$emit("modal-toggle", this.isShowing);
+        this.$emit("modal-toggle", data);
       } else {
         modal.classList.add("hidden");
         this.isShowing = false;
-        this.$emit("modal-toggle", this.isShowing);
+        this.$emit("modal-toggle", data);
       }
     }
   }
