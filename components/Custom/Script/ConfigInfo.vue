@@ -2,8 +2,8 @@
   <div class="container">
     <div class="flex justify-between">
       <span class="text-xl font-bold">Cấu hình thông tin</span>
-      <ShowModal :modalId="createConfigInfoId" type="custom" customClass="bg-blue-500 text-white rounded-lg px-4 py-1 text-lg font-bold"
-        title="Tạo loại thông tin">
+      <ShowModal :modalId="createConfigInfoId" type="custom"
+        customClass="bg-blue-500 text-white rounded-lg px-4 py-1 text-lg font-bold" title="Tạo loại thông tin">
         <ModalContainer :modalId="createConfigInfoId" size="xl" :isDark="theme === 'dark'">
           <ModalHeader :isDark="theme === 'dark'" head="Tạo loại thông tin" :modalId="createConfigInfoId">
           </ModalHeader>
@@ -75,12 +75,12 @@ export default {
   async fetch() {
     try {
       var response = await getAllTypeJobs(-1, this.id);
-      this.jobSelectOption = response.value;
-
+      if (Common.isNullOrEmpty(response)) return false;
+      this.jobSelectOption = Common.returnDefaultIfNull(response.value, []);
       var responseInfo = await getAllConfigInfo(this.pageNum, this.taskType, 2);
-      if (responseInfo) {
-        this.table.body = responseInfo.value;
-        this.totalPage = responseInfo.totalPage;
+      if (!Common.isNullOrEmpty(responseInfo)) {
+        this.table.body = Common.returnDefaultIfNull(responseInfo.value, []);
+        this.totalPage = Common.returnDefaultIfNull(responseInfo.totalPage, 0);
       }
     }
     catch (error) {
@@ -181,4 +181,5 @@ export default {
 .container {
   height: 60vh;
   overflow-y: auto;
-}</style>
+}
+</style>

@@ -69,8 +69,11 @@ export default {
     async fetch() {
         try {
             var response = await getAllTypeJobs(this.pageNum, this.id);
-            this.table.body = response.value;
-            this.totalPage = response.totalPage;
+            if (!Common.isNullOrEmpty(response)) {
+                this.table.body = Common.returnDefaultIfNull(response.value, []);
+                this.totalPage = Common.returnDefaultIfNull(response.totalPage, 0);
+            }
+
         }
         catch (error) {
             console.error('Lỗi:', error);
@@ -82,7 +85,7 @@ export default {
             pageNum: this.$route.query.pageNum ? this.$route.query.pageNum : 0,
             totalPage: 0,
             createConfigJobId: "createTypeJobId" + uuidv4(),
-            jobTypeNameId: "jobTypeName" + uuidv4(), 
+            jobTypeNameId: "jobTypeName" + uuidv4(),
             table: {
                 head: [
                     { name: "Tên công việc" },
@@ -101,16 +104,15 @@ export default {
         Common() {
             return Common;
         },
+        theme() {
+            return this.$store.state.theme;
+        }
     },
     props: {
         id: {
             type: String | Number,
-            default: ''
+            default: ""
         },
-        theme: {
-            type: String,
-            default: 'dark'
-        }
     },
     methods: {
         getEditId(index, id) {

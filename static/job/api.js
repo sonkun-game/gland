@@ -27,6 +27,9 @@ export async function createTypeJob(scriptId, jobTypeNameId) {
 }
 
 export async function getAllTypeJobs(pageNum, scriptId) {
+
+  if(!scriptId) return null;
+  pageNum = pageNum ? pageNum : 0;
   let url = "https://api.gland84.io.vn:8447/gland/api-type-task/all?scriptId="+scriptId+"&pageNum="+pageNum;
   try {
     const response = await axios.get(url, {

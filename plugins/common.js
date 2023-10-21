@@ -82,7 +82,7 @@ export const Common = {
       console.error("common.js : Modal with id " + modalId + " is not defined");
     }
   },
-
+// HANDLE NULL POINTER ---------------->
   /**
    * Check if value is empty or null or undefinded
    * @param {*} value
@@ -96,5 +96,11 @@ export const Common = {
    */
   getAvaiable(data) {
     return data ? data : "";
+  },
+  returnDefaultIfNull(data, defaultValue = "") {
+    if(data === null || data === undefined) {
+      return defaultValue;
+    }
+    return data;
   }
 }
