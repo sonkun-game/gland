@@ -49,7 +49,8 @@
           <Cell styleClass="px-6 py-3"> Công việc </Cell>
           <Cell styleClass="px-6 py-3">{{ item.createdBy }}</Cell>
           <Cell styleClass="px-6 py-3 flex">
-            <ShowModal type="custom-with-icon" :modalId="getEditStatusActionId(index, item.id)" iconClass="fa-solid fa-pen"
+            <ShowModal type="custom-with-icon" :modalId="getEditStatusActionId(index, item.id)"
+              iconClass="fa-solid fa-pen"
               customClass="block w-8 mr-2 text-blue-700 bg-blue-100 font-sm rounded-lg text-xs px-2 py-1.5 text-center">
               <ModalContainer :modalId="getEditStatusActionId(index, item.id)" size="2xl" :hasBackDrop="true"
                 :isDark="theme === 'dark'">
@@ -89,13 +90,24 @@ export default {
   name: "ConfigStatusComponent",
   async fetch() {
     try {
+      console.log("-- Config Status fetch data --");
       var response = await getAllTypeJobs(-1, this.id);
       if (Common.isNullOrEmpty(response)) return false;
       this.jobSelectOption = Common.returnDefaultIfNull(response.value, []);
-      var responseInfo = await getAllConfigInfo(this.pageNum, this.taskType, 1);
-      if (!Common.isNullOrEmpty(responseInfo)) {
+      this.jobSelectOption.unshift({
+            "id": 0,
+            "name": "-- Lựa chọn --",
+            "scriptId": 1
+      })
+
+
+      if (!Common.isNullOrEmpty(responseInfo) && !this.taskType===0) {
+        var responseInfo = await getAllConfigInfo(this.pageNum, this.taskType, 1);
         this.table.body = Common.returnDefaultIfNull(responseInfo.value, []);
         this.totalPage = Common.returnDefaultIfNull(responseInfo.totalPage, 0);
+      } else {
+        this.table.body = [];
+        this.totalPage = 0;
       }
     }
     catch (error) {
@@ -110,7 +122,7 @@ export default {
       statusConfigName: "statusConfigName" + uuidv4(),
       statusConfigColor: "statusConfigColor" + uuidv4(),
       status_selectJob: "status_selectJob" + uuidv4(),
-      taskType: 1,
+      taskType: 0,
       Tbodykey: "key",
       table: {
         head: [
@@ -168,12 +180,6 @@ export default {
       }
       return `${prefix} border-${color}-400 text-${color}-200 bg-${color}-900`
     },
-    getUpStatusActionId(index, id) {
-      return 'upStatusConfigAction_' + id + index;
-    },
-    getDownStatusActionId(index, id) {
-      return 'downStatusConfigAction_' + id + index;
-    },
     getEditStatusActionId(index, id) {
       return 'editStatusConfigAction_' + id + index;
     },
@@ -181,6 +187,7 @@ export default {
       return 'deleteStatusConfigAction_' + id + index;
     },
     async handleChangeStatusValue(value) {
+      console.log("handleChangeStatusValue -->");
       if (value) {
         this.taskType = value;
         var responseInfo = await getAllConfigInfo(this.pageNum, this.taskType, 1);
@@ -195,10 +202,13 @@ export default {
   },
 }
 </script>
-<style scoped>.bg-gland {
+<style scoped>
+.bg-gland {
   background-color: #1d2432;
 }
+
 .container {
   height: 60vh;
   overflow-y: auto;
-}</style>
+}
+</style>

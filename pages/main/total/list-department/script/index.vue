@@ -77,13 +77,13 @@
                 <TabListHeader type='modal' :data="getAuthenScriptTabList()" @active-tablist="showScriptTab" ref="configTabListHeader" ></TabListHeader>
                 <TabContainer :theme="theme" :id="getAuthenScriptTabList().dataTabsToggle">
                     <TabItem :id="getAuthenScriptTabList().list[0].id" :isHidden="configTabActive !== 0">
-                        <ConfigJob :theme="theme" :id="authenScriptModal.id" :key="key.configJob"/>
+                        <ConfigJob ref="configJobRef" :theme="theme" :id="authenScriptModal.id" :key="key.configJob"/>
                     </TabItem>
                     <TabItem :id="getAuthenScriptTabList().list[1].id" :isHidden="configTabActive !== 1">
-                        <ConfigStatus :theme="theme" :id="authenScriptModal.id" :key="key.configStatus"/>
+                        <ConfigStatus ref="configStatusRef" :theme="theme" :id="authenScriptModal.id" :key="key.configStatus"/>
                     </TabItem>
                     <TabItem :id="getAuthenScriptTabList().list[2].id" :isHidden="configTabActive !== 2">
-                        <ConfigInfo :theme="theme" :id="authenScriptModal.id" :key="key.configInfo" />
+                        <ConfigInfo ref="configInfoRef" :theme="theme" :id="authenScriptModal.id" :key="key.configInfo" />
                     </TabItem>
                 </TabContainer>
             </div>
@@ -209,7 +209,6 @@ export default {
             this.key.configInfo++;
             this.key.configJob++;
             this.key.configStatus++;
-
         },
         async editScrip(id, index) {
           var response = await editScript(id, index);

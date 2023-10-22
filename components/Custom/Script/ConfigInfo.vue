@@ -77,8 +77,14 @@ export default {
       var response = await getAllTypeJobs(-1, this.id);
       if (Common.isNullOrEmpty(response)) return false;
       this.jobSelectOption = Common.returnDefaultIfNull(response.value, []);
-      var responseInfo = await getAllConfigInfo(this.pageNum, this.taskType, 2);
-      if (!Common.isNullOrEmpty(responseInfo)) {
+      this.jobSelectOption.unshift({
+            "id": 0,
+            "name": "-- Lựa chọn --",
+            "scriptId": 1
+      });
+
+      if (!Common.isNullOrEmpty(responseInfo) && !this.taskType===0) {
+        var responseInfo = await getAllConfigInfo(this.pageNum, this.taskType, 2);
         this.table.body = Common.returnDefaultIfNull(responseInfo.value, []);
         this.totalPage = Common.returnDefaultIfNull(responseInfo.totalPage, 0);
       }
