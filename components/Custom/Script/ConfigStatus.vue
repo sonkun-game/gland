@@ -90,7 +90,6 @@ export default {
   name: "ConfigStatusComponent",
   async fetch() {
     try {
-      console.log("-- Config Status fetch data --");
       var response = await getAllTypeJobs(-1, this.id);
       if (Common.isNullOrEmpty(response)) return false;
       this.jobSelectOption = Common.returnDefaultIfNull(response.value, []);

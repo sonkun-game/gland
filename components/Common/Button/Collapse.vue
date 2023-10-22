@@ -25,7 +25,6 @@ export default {
     },
     props: {
         name: "",
-        list: [],
         isShow: {
             type: Boolean,
             default: true,

@@ -100,7 +100,7 @@ export default {
     },
     // index the input
     inputIndex: {
-      type: Number,
+      type: Number | String,
       default: 1
     },
     // input theme

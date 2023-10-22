@@ -152,12 +152,6 @@ export default {
       this.table.body = response.data.value;
       this.totalPage = response.data.totalPage;
     },
-    getUpInfoActionId(index, id) {
-      return 'upInfoConfigAction_' + id + index;
-    },
-    getDownInfoActionId(index, id) {
-      return 'downInfoConfigAction_' + id + index;
-    },
     getEditInfoActionId(index, id) {
       return 'editInfoConfigAction_' + id + index;
     },
