@@ -10,7 +10,14 @@
       <div :id="toId('accordion-collapse-body', index)" class="hidden">
         <div v-if="item.subList !== undefined && item.subList !== null">
           <div v-for="(item,index) in item.subList" :key="key + index">
-            <InputField :label="item.name" :id="item.id" styleClass="px-5 py-2" typeInput="checkbox" :isDark="theme==='dark'" />
+            <InputField v-if="index > 1" 
+              @click-checkbox="handleCheckBoxTick" 
+              :inputIndex="item.id" 
+              :label="item.name" 
+              :id="item.id" 
+              styleClass="px-5 py-2" 
+              typeInput="checkbox" 
+              :isDark="theme==='dark'"/>
           </div>
         </div>
       </div>
@@ -46,6 +53,9 @@ export default {
     },
     openCollapse(id) {
       Common.toggleModal(id);
+    },
+    handleCheckBoxTick(data) {
+      this.$emit("click-checkbox", data);
     }
   }
 }

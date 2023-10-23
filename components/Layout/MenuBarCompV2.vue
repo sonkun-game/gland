@@ -12,18 +12,21 @@
 
     <div id="layout-menu-body">
       <div class="overflow-auto px-2 py-4 overflow-y-auto no-scrollbar" style="max-height: 91vh;">
-        <ul class="space-y-2 font-medium" :key="menuKey" :class="{ 'text-white': theme === 'dark', 'text-gray-900': theme === 'light' }">
+        <ul class="space-y-2 font-medium" :key="menuKey"
+          :class="{ 'text-white': theme === 'dark', 'text-gray-900': theme === 'light' }">
           <li v-for="(item, index) in leftSideBar" :key="'menuList-total' + index">
             <Collapse :name="item.name" :isShow="true">
-              <a v-for="(subItem, subIndex) in item.subList" :key="'subList' + subIndex" :href="subItem.link"
-                class="menu-button-department flex items-center w-full transition duration-100 rounded-lg"
-                :class="{ 'menu-active': (urlPageV2.includes(subItem.link) && item.isTotal) || subItem.selected }">
-                <i :class="subItem.icon"></i>
-                <span class="flex-1 ml-3 text-left whitespace-nowrap"> {{ subItem.name }}</span>
-              </a>
+              <ul v-if="item.subList">
+                <li v-for="(subItem, subIndex) in item.subList" :key="'subList' + subIndex" class="menu-button-department flex items-center w-full transition duration-100 rounded-lg">
+                  <a :href="subItem.link"
+                    :class="{ 'menu-active': ((getActiveSublist(subItem.id, subItem.link))), 'ml-4': subIndex > 1 }">
+                    <i :class="subItem.icon"></i>
+                    <span class="flex-1 ml-3 text-left whitespace-nowrap"> {{ subItem.name }}</span>
+                  </a>
+                </li>
+              </ul>
             </Collapse>
           </li>
-
         </ul>
       </div>
     </div>
@@ -129,10 +132,10 @@ export default {
       return this.isMainPage();
     },
     urlPage() {
-      return window.location.path;
-    },
-    urlPageV2() {
       return this.$route.path;
+    },
+    urlID() {
+      return this.$route.query.id;
     },
     leftSideBar: {
       get() {
@@ -238,6 +241,18 @@ export default {
       var host = this.$route.path
       return host.includes("/main/total/all");
     },
+    getActiveSublist(subItemId, subItemLink) {
+      try {
+        if(this.urlPage.includes("/script") || this.urlPage.includes("/people")) {
+          
+          return this.urlPage.includes(subItemLink) && (parseInt(this.urlID) === parseInt(subItemId));
+        } else {
+          return parseInt(this.urlID) === parseInt(subItemId)
+        }
+
+      } catch(error) {}
+        return false
+    },
     fetchDpt() {
       let url = "https://api.gland84.io.vn:8447/gland/api-department/all?storeId=" + this.storeId + "&pageNum=" + this.pageNum;
       let resp = sendGetApi(url, null);
@@ -276,7 +291,7 @@ export default {
             ],
           });
 
-          if(item.scripts) {
+          if (item.scripts) {
             // item.scripts
             item.scripts.forEach(script => {
               convertFeArr[index].subList.push({
