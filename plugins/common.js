@@ -1,11 +1,9 @@
-
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 /**
  * Phần này sử dụng để lưu các hàm js sử dụng lại
  * tác giả: Sơn
  * ngày : 26/08/2023
  */
-
 
 export const Common = {
   /**
@@ -47,7 +45,7 @@ export const Common = {
       let host = window.location.host
       return protocol + '//' + host + '/' + url
     } else {
-      console.log("Window is undefined !");
+      console.log('Window is undefined !')
     }
     return ''
   },
@@ -56,51 +54,71 @@ export const Common = {
    * đối với show = true thì sẽ trả về 1 còn lại là 0
    */
   getTableShowColumn(tableHead) {
-    var data = "";
-    tableHead.forEach(item => {
+    var data = ''
+    tableHead.forEach((item) => {
       if (item.show) {
-        data = data.concat("1");
+        data = data.concat('1')
       } else {
-        data = data.concat("2");
+        data = data.concat('2')
       }
-    });
-    return data;
+    })
+    return data
   },
 
   /**
    * Close / open modal
    */
   toggleModal(modalId) {
-    var modal = document.getElementById(modalId);
-    if(modal) {
+    var modal = document.getElementById(modalId)
+    if (modal) {
       if (modal.classList.contains('hidden')) {
-        modal.classList.remove("hidden");
+        modal.classList.remove('hidden')
       } else {
-        modal.classList.add("hidden");
+        modal.classList.add('hidden')
       }
     } else {
-      console.error("common.js : Modal with id " + modalId + " is not defined");
+      console.error('common.js : Modal with id ' + modalId + ' is not defined')
     }
   },
-// HANDLE NULL POINTER ---------------->
+
+  // HANDLE EFFECT AND NOTIFICATION -------------------->
+  showSuccess(msg) {
+    if(msg) $('#global-notify-success > div > span').html(msg)
+    else $('#global-notify-success > div > span').html("Thao tác thành công");
+    $('#global-notify-success').css({ top: 50 })
+    setTimeout(() => {
+      $('#global-notify-success').css({ top: -50 })
+    }, 1000)
+  },
+
+  showError(msg) {
+    if(msg) $('#global-notify-fail > div > span').html(msg)
+    else $('#global-notify-fail > div > span').html("Thao tác thất bại");
+    $('#global-notify-fail').css({ top: 50 })
+    setTimeout(() => {
+      $('#global-notify-fail').css({ top: -50 })
+    }, 1000)
+  },
+
+  // HANDLE NULL POINTER ---------------->
   /**
    * Check if value is empty or null or undefinded
    * @param {*} value
    */
   isNullOrEmpty(value) {
-    return value===null || value===undefined || value==="";
+    return value === null || value === undefined || value === ''
   },
   /**
    * Get Data only if this data is avariable, else return empty String
-   * @param {*} data 
+   * @param {*} data
    */
   getAvaiable(data) {
-    return data ? data : "";
+    return data ? data : ''
   },
-  returnDefaultIfNull(data, defaultValue = "") {
-    if(data === null || data === undefined) {
-      return defaultValue;
+  returnDefaultIfNull(data, defaultValue = '') {
+    if (data === null || data === undefined) {
+      return defaultValue
     }
-    return data;
-  }
+    return data
+  },
 }

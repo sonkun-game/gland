@@ -1,8 +1,9 @@
 <template>
   <div class="p-8">
 
-    <button class="text-white p-4">Click</button>
-    <br>
+    <button class="text-white bg-lime-700 p-2 rounded-lg" @click="showSuccess('fdf')">Click showSuccess</button>
+    <br><br>
+    <button class="text-white bg-red-700 p-2 rounded-lg" @click="showError('Hello World')">Click showError</button>
 
     <!-- <div name="global-notify" class="w-fit px-2 py-1 text-white bg-gray-600 rounded-lg">
       <i class="fa-solid fa-check bg-lime-500 p-1 rounded-lg "></i>
@@ -40,6 +41,12 @@ export default {
         return '#' + id + '-' + index
       }
       return id + '-' + index;
+    },
+    showSuccess(msg) {
+      Common.showSuccess(msg);
+    },
+    showError(msg) {
+      Common.showError(msg)
     }
   }
 }
