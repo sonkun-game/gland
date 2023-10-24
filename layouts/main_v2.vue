@@ -70,6 +70,8 @@
       </div>
     </nav>
 
+    <Notification />
+
     <div class="flex">
       <!-- Menu Bar -->
       <MenuBarCompV2Vue :theme="theme"></MenuBarCompV2Vue>
@@ -96,10 +98,11 @@
 
 <script>
 import MenuBarCompV2Vue from '../components/Layout/MenuBarCompV2.vue';
+import Notification from '../components/Layout/Notification.vue';
 
 export default {
   name: 'mainV2Layout',
-  components: { MenuBarCompV2Vue },
+  components: { MenuBarCompV2Vue, Notification },
   data() {
     return {
       isMenuOpen: false,
