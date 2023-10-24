@@ -80,7 +80,7 @@
         <div>
           <client-only>
             <template #placeholder>
-              <div class="w-screen h-screen fixed flex overflow-hidden">
+              <div class="w-screen h-screen fixed flex overflow-hidden" :class="{ 'bg-gray-900':getTheme==='dark'}">
                 <div class="text-blue-500 text-4xl my-auto" style="margin-left: 30%">
                   <img class="w-64 h-64" src="~/static/img/loading.png" alt="loading..." />
                 </div>
@@ -107,7 +107,7 @@ export default {
     return {
       isMenuOpen: false,
       authenURL: "",
-      theme: "",
+      theme: "dark",
       shopList: [
         {
           link: "#shop1",
@@ -120,9 +120,14 @@ export default {
       ]
     }
   },
-  mounted() {
-    let protocol = window.location.protocol;
-    let host = window.location.host;
+  computed: {
+    getTheme() {
+      return this.$store.state.theme;
+    }
+  },
+  beforeMount() {
+    let protocol = this.$route.protocol;
+    let host = this.$route.host;
     this.authenURL = protocol + "//" + host + "/authen/profile";
 
     // set theme
@@ -134,7 +139,6 @@ export default {
     }
     this.theme = localStorage.getItem("theme");
     this.$store.dispatch('updateTheme', this.theme);
-
   },
   methods: {
     isMainPage() {

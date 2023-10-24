@@ -244,7 +244,7 @@ export default {
     getActiveSublist(subItemId, subItemLink) {
       try {
         if(this.urlPage.includes("/script") || this.urlPage.includes("/people")) {
-          
+
           return this.urlPage.includes(subItemLink) && (parseInt(this.urlID) === parseInt(subItemId));
         } else {
           return parseInt(this.urlID) === parseInt(subItemId)
@@ -256,7 +256,7 @@ export default {
     fetchDpt() {
       let url = "https://api.gland84.io.vn:8447/gland/api-department/all?storeId=" + this.storeId + "&pageNum=" + this.pageNum;
       let resp = sendGetApi(url, null);
-      let path = window.location.href;
+      let path = this.$route.path;
 
       resp.then((resp) => {
         let data = resp.value;
