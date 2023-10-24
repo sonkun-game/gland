@@ -11,12 +11,14 @@
           <div class="p-2 flex accordion-container no-scrollbar">
             <div class="w-full mb-8">
               <p class="text-lg font-bold">Công việc của tôi</p>
-              <LoadedDepartment :loadedDepartment="jobModal.loadedDepartmentByMe" :theme="theme" @click-checkbox="enrollTaskByMe">
+              <LoadedDepartment typeJob="byMe" :loadedDepartment="jobModal.loadedDepartmentByMe" :theme="theme"
+                @click-checkbox="enrollTaskByMe">
               </LoadedDepartment>
             </div>
             <div class="w-full mb-8">
               <p class="text-lg font-bold">Công việc được giao</p>
-              <LoadedDepartment :loadedDepartment="jobModal.loadedDepartmentByOther" :theme="theme" @click-checkbox="enrollTaskByOther">
+              <LoadedDepartment typeJob="byOther" :loadedDepartment="jobModal.loadedDepartmentByOther" :theme="theme"
+                @click-checkbox="enrollTaskByOther">
               </LoadedDepartment>
             </div>
           </div>
@@ -73,67 +75,60 @@ export default {
       type: String,
       default: 'dark'
     },
+    typeTaskId: {
+      type: Number,
+      required: false,
+      default: 1
+    }
   },
   mounted() {
     this.fetchDpt();
   },
+  watch: {
+    typeTaskId(newVal, oldVal) {
+      this.fetchDpt();
+    }
+  },
   methods: {
     fetchDpt() {
-      let url = "https://api.gland84.io.vn:8447/gland/api-department/all?storeId=" + this.storeId + "&pageNum=" + this.pageNum;
+      if (this.typeTaskId === 0) return;
+      let url = "https://api.gland84.io.vn:8447/gland/api-department?storeId=" + this.storeId + "&typeTaskId=" + this.typeTaskId;
+      console.log("url : " + url);
       let resp = sendGetApi(url, null);
       let path = window.location.href;
-      let convertFeArr = [];
       let convertFeArrByMe = [];
       let convertFeArrByOther = [];
 
       resp.then((resp) => {
         let data = resp.value;
+
         data.forEach((item, index) => {
-          let subkeyId = uuidv4();
           let checkPeople = path.includes("people?id=" + item.id);
           let checkScript = path.includes("script?id=" + item.id);
 
           // push array
-          convertFeArr.push({
+          convertFeArrByMe.push({
             selected: checkPeople || checkScript,
             icon: "fa-solid fa-address-card",
             name: item.name,
             link: "/main/total/departments?id=" + item.id,
             id: "department" + item.id,
-            subList: [
-              {
-                id: "people" + subkeyId,
-                name: "Nhân sự",
-                icon: "fa-regular fa-user",
-                link: "/main/total/list-department/people?id=" + item.id,
-                selected: checkPeople,
-              },
-              {
-                id: "script" + subkeyId,
-                name: "Kịch bản",
-                icon: "fa-solid fa-scroll",
-                link: "/main/total/list-department/script?id=" + item.id,
-                selected: checkScript,
-              },
-            ],
+            subList: [],
           });
 
-          convertFeArrByMe = convertFeArr;
-          convertFeArrByOther = convertFeArr;
+          convertFeArrByOther.push({
+            selected: checkPeople || checkScript,
+            icon: "fa-solid fa-address-card",
+            name: item.name,
+            link: "/main/total/departments?id=" + item.id,
+            id: "department" + item.id,
+            subList: [],
+          });
 
-          if(item.scripts) {
+          if (item.scripts) {
+            let i = 0;
             // item.scripts
             item.scripts.forEach(script => {
-
-              // convertFeArr[index].subList.push({
-              //   id: script.id,
-              //   name: script.name,
-              //   icon: "fa-solid fa-list-check",
-              //   link: "/main/total/list-department/mission?id=" + script.id,
-              //   departmentId: script.departmentId,
-              //   department: script.department
-              // });
-
               convertFeArrByMe[index].subList.push({
                 id: script.id,
                 name: script.name,
@@ -142,43 +137,46 @@ export default {
                 departmentId: script.departmentId,
                 department: script.department,
               });
-
-              if(!Common.isNullOrEmpty(script.roleTask)) {
-                convertFeArrByMe[index].subList.roleTask = {
-                  id: Common.returnDefaultIfNull(script.roleTask.id) ,
+              convertFeArrByOther[index].subList.push({
+                id: script.id,
+                name: script.name,
+                icon: "fa-solid fa-list-check",
+                link: "/main/total/list-department/mission?id=" + script.id,
+                departmentId: script.departmentId,
+                department: script.department
+              });
+              if (!Common.isNullOrEmpty(script.roleTask)) {
+                convertFeArrByMe[index].subList[i].roleTask = {
+                  id: Common.returnDefaultIfNull(script.roleTask.id),
                   scriptId: Common.returnDefaultIfNull(script.roleTask.scriptId),
                   typeTaskId: Common.returnDefaultIfNull(script.roleTask.typeTaskId),
                   myJob: Common.returnDefaultIfNull(script.roleTask.myJob, false)
                 }
+                convertFeArrByOther[index].subList[i].roleTask = {
+                  id: Common.returnDefaultIfNull(script.roleTask.id),
+                  scriptId: Common.returnDefaultIfNull(script.roleTask.scriptId),
+                  typeTaskId: Common.returnDefaultIfNull(script.roleTask.typeTaskId),
+                  assignedJob: Common.returnDefaultIfNull(script.roleTask.assignedJob, false)
+                }
+              } else {
+                convertFeArrByMe[index].subList[i].roleTask = null;
+                convertFeArrByOther[index].subList[i].roleTask = null;
               }
-
-              // convertFeArrByOther[index].subList.push({
-              //   id: script.id,
-              //   name: script.name,
-              //   icon: "fa-solid fa-list-check",
-              //   link: "/main/total/list-department/mission?id=" + script.id,
-              //   departmentId: script.departmentId,
-              //   department: script.department,
-              //   roleTask: {
-              //     id: Common.returnDefaultIfNull(script.roleTask.id) ,
-              //     scriptId: Common.returnDefaultIfNull(script.roleTask.scriptId),
-              //     typeTaskId: Common.returnDefaultIfNull(script.roleTask.typeTaskId),
-              //     assignedJob:  Common.returnDefaultIfNull(script.roleTask.assignedJob, false)
-              //   }
-              // });
-
-            })
+              i++;
+            });
 
           }
         });
 
+        console.log("convertFeArrByMe : ", convertFeArrByMe);
+        console.log("convertFeArrByOther : ", convertFeArrByOther);
         // set data
         this.jobModal.loadedDepartmentByMe = convertFeArrByMe;
         this.jobModal.loadedDepartmentByOther = convertFeArrByOther;
       });
     },
     enrollTaskByMe(data) {
-      if(Common.isNullOrEmpty(data.myJob) || data.myJob === false) {
+      if (Common.isNullOrEmpty(data.myJob) || data.myJob === false) {
         data.myJob = true;
       } else {
         data.myJob = false;

@@ -40,6 +40,7 @@
                     <Cell styleClass="px-6 py-3" style="width: 70vw;">{{ item.name }}</Cell>
                     <Cell styleClass="px-6 py-3 flex">
                         <ShowModal type="custom-with-icon" modalId="authenJobConfigAction" iconClass="fa-solid fa-wrench"
+                            @modal-toggle="setAuthenJobConfigActionData(item.id)"
                             customClass="block w-8 mr-2 text-blue-700 bg-blue-100 hover:bg-blue-700 hover:text-white  font-sm rounded-lg text-xs px-2 py-1.5 text-center">
                         </ShowModal>
                         <ShowModal type="custom-with-icon" modalId="deleteJobConfigAction" iconClass="fa-solid fa-trash"
@@ -51,7 +52,7 @@
         </CrudTable>
 
         <!-- All modal -->
-        <JobModal :theme="theme" />
+        <JobModal :theme="theme" :type-task-id="jobModal.typeTaskId"/>
     </div>
 </template>
 
@@ -86,6 +87,9 @@ export default {
             totalPage: 0,
             createConfigJobId: "createTypeJobId" + uuidv4(),
             jobTypeNameId: "jobTypeName" + uuidv4(),
+            jobModal: {
+                typeTaskId: 0
+            },
             table: {
                 head: [
                     { name: "Tên công việc" },
@@ -120,6 +124,9 @@ export default {
         },
         getDeleteId(index, id) {
             return 'delete_' + id + index;
+        },
+        setAuthenJobConfigActionData(id) {
+            this.jobModal.typeTaskId = id;
         },
         async createTypeJob(id, jobTypeNameId) {
             console.log(`id : [${id}]`);

@@ -10,11 +10,12 @@
       <div :id="toId('accordion-collapse-body', index)" class="hidden">
         <div v-if="item.subList !== undefined && item.subList !== null">
           <div v-for="(item,index) in item.subList" :key="key + index">
-            <InputField v-if="index > 1" 
+            <InputField
               @click-checkbox="handleCheckBoxTick" 
               :inputIndex="item.id" 
               :label="item.name" 
               :id="item.id" 
+              :isCheck="getChecked(item.roleTask)"
               styleClass="px-5 py-2" 
               typeInput="checkbox" 
               :isDark="theme==='dark'"/>
@@ -39,6 +40,10 @@ export default {
   },
   props: {
     loadedDepartment: [],
+    typeJob: {
+      type: String,
+      required: true
+    },
     theme: {
       type: String,
       default: "dark",
@@ -56,6 +61,15 @@ export default {
     },
     handleCheckBoxTick(data) {
       this.$emit("click-checkbox", data);
+    },
+    getChecked(roleTask) {
+      if(Common.isNullOrEmpty(roleTask)) return false;
+      if(this.typeJob==="byMe") {
+        return !Common.isNullOrEmpty(roleTask.myJob) ? roleTask.myJob : false;
+      } else if (this.typeJob==="byOther") {
+        return !Common.isNullOrEmpty(roleTask.assignedJob) ? roleTask.assignedJob : false;
+      }
+      return false;
     }
   }
 }

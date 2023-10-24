@@ -4,10 +4,11 @@
     <template v-if="typeInput == 'select'">
       <label :for="id" class="text-normal float-left">{{ label }}</label>
       <select :id="id" @change="selectValueChange"
-      class="h-full w-full border border-gray-300 text-normal rounded-lg py-1.5 px-2.5" :class="{'bg-gray-900 text-white':isDark, 'bg-gray-50 text-gray-900': !isDark}" >
+        class="h-full w-full border border-gray-300 text-normal rounded-lg py-1.5 px-2.5"
+        :class="{ 'bg-gray-900 text-white': isDark, 'bg-gray-50 text-gray-900': !isDark }">
         <option class="text-ellipsis" v-for="(optionItem, optionIndex) in selectOption" :key="optionIndex"
-          :value="optionItem.value ?optionItem.value: optionItem.id">
-          <span :class="optionItem.optionClass?optionItem.optionClass:''">
+          :value="optionItem.value ? optionItem.value : optionItem.id">
+          <span :class="optionItem.optionClass ? optionItem.optionClass : ''">
             {{ optionItem.name }}
           </span>
         </option>
@@ -15,14 +16,14 @@
     </template>
     <template v-else-if="typeInput == 'date'">
       <label :for="id" class="text-normal font-semibold float-left py-2 text-white">{{ label }}</label>
-      <input :id="id" type="date" :checked="isChecked" @change="toggleCheckBoxInput()"
+      <input :id="id" type="date" @change="toggleCheckBoxInput()"
         class="bg-transparent text-gray-300 text-normal rounded-lg block w-full p-1.5 ">
     </template>
     <template v-else-if="typeInput == 'textarea'">
       <label :for="id" class="text-normal font-semibold float-left">{{ label }}</label>
       <textarea class="border border-gray-300 text-normal rounded-lg block w-full p-1.5" :id="id"
-        :class="{'bg-white text-gray-900':!isDark,'bg-gray-900 text-white':isDark}"
-        :placeholder="placeholder" :value="value"></textarea>
+        :class="{ 'bg-white text-gray-900': !isDark, 'bg-gray-900 text-white': isDark }" :placeholder="placeholder"
+        :value="value"></textarea>
     </template>
     <template v-else-if="typeInput == 'checkbox'">
       <input :id="id" type="checkbox" :checked="isChecked" @change="toggleCheckBoxInput()"
@@ -33,8 +34,8 @@
     <template v-else>
       <div v-if="isDark">
         <label :for="id" class="text-normal font-semibold float-left py-2 text-white">{{ label }}</label>
-        <input class="bg-transparent text-gray-300 text-normal rounded-lg block w-full p-1.5"
-          :placeholder="placeholder" :value="value" :type="typeInput" :id="id" :required="required" />
+        <input class="bg-transparent text-gray-300 text-normal rounded-lg block w-full p-1.5" :placeholder="placeholder"
+          :value="value" :type="typeInput" :id="id" :required="required" />
       </div>
       <div v-else>
         <label :for="id" class="text-normal font-semibold float-left py-2">{{ label }}</label>
@@ -53,18 +54,8 @@ export default {
       isChecked: false,
     }
   },
-  computed: {
-    isCheckBoxChecked: {
-      get() {
-        return this.isChecked;
-      },
-      set(value) {
-        this.isChecked = Boolean(value);
-      }
-    },
-  },
   mounted() {
-    this.isCheckBoxChecked = this.isCheck;
+    this.isChecked = this.isCheck;
   },
   props: {
     id: "",
@@ -119,7 +110,7 @@ export default {
       this.$emit("click-checkbox", data);
     },
     selectValueChange(event) {
-      this.$emit('select-change',event.target.value);
+      this.$emit('select-change', event.target.value);
     }
   }
 }
