@@ -45,7 +45,7 @@
 <script>
 import { Common } from '../../../../plugins/common';
 import LoadedDepartment from '../../Department/LoadedDepartment.vue';
-import { sendGetApi } from "../../../../plugins/api";
+import { sendGetApi, sendPostApi } from "../../../../plugins/api";
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
@@ -176,15 +176,28 @@ export default {
       });
     },
     enrollTaskByMe(data) {
-      if (Common.isNullOrEmpty(data.myJob) || data.myJob === false) {
+      let url = "https://api.gland84.io.vn:8447/gland/role-task/update";
+      const response = sendPostApi(url, null, data);
+      
+      response.then((resp) => {
+        console.log("response : " + resp);
+      });
+      // if (Common.isNullOrEmpty(data.myJob) || data.myJob === false) {
+      //   data.myJob = true;
+      // } else {
+      //   data.myJob = false;
+      // }
+      // console.log(data);
+      // Common.showSuccess("Update nhiệm vụ thành công !");
+    },
+    enrollTaskByOther(data) {
+      if (Common.isNullOrEmpty(data.assignedJob) || data.assignedJob === false) {
         data.myJob = true;
       } else {
         data.myJob = false;
       }
-      console.log(data);
-    },
-    enrollTaskByOther(data) {
-      console.log(data);
+      // console.log(data);
+      // Common.showSuccess("Update nhiệm vụ thành công !");
     }
   }
 }

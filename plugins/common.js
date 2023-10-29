@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie'
 /**
  * Phần này sử dụng để lưu các hàm js sử dụng lại
  * tác giả: Sơn
@@ -85,19 +84,19 @@ export const Common = {
   showSuccess(msg) {
     if(msg) $('#global-notify-success > div > span').html(msg)
     else $('#global-notify-success > div > span').html("Thao tác thành công");
-    $('#global-notify-success').css({ top: 50 })
+    $('#global-notify-success').css({ top: 20 })
     setTimeout(() => {
       $('#global-notify-success').css({ top: -50 })
-    }, 1000)
+    }, 2000)
   },
 
   showError(msg) {
     if(msg) $('#global-notify-fail > div > span').html(msg)
     else $('#global-notify-fail > div > span').html("Thao tác thất bại");
-    $('#global-notify-fail').css({ top: 50 })
+    $('#global-notify-fail').css({ top: 20 })
     setTimeout(() => {
       $('#global-notify-fail').css({ top: -50 })
-    }, 1000)
+    }, 2000)
   },
 
   // HANDLE NULL POINTER ---------------->

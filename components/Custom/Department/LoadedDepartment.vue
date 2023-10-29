@@ -9,16 +9,12 @@
       </h3>
       <div :id="toId('accordion-collapse-body', index)" class="hidden">
         <div v-if="item.subList !== undefined && item.subList !== null">
-          <div v-for="(item,index) in item.subList" :key="key + index">
-            <InputField
-              @click-checkbox="handleCheckBoxTick" 
-              :inputIndex="item.id" 
-              :label="item.name" 
-              :id="item.id" 
-              :isCheck="getChecked(item.roleTask)"
-              styleClass="px-5 py-2" 
-              typeInput="checkbox" 
-              :isDark="theme==='dark'"/>
+          <div v-for="(subItem, subIndex) in item.subList" :key="subItem.id + index">
+
+            <InputField @click-checkbox="handleCheckBoxTick(subItem.roleTask)" :inputIndex="subItem.id"
+              :label="subItem.name" :id="subItem.id" :isCheck="getChecked(subItem.roleTask)" styleClass="px-5 py-2"
+              typeInput="checkbox" :isDark="theme === 'dark'" />
+
           </div>
         </div>
       </div>
@@ -59,14 +55,29 @@ export default {
     openCollapse(id) {
       Common.toggleModal(id);
     },
-    handleCheckBoxTick(data) {
-      this.$emit("click-checkbox", data);
+    handleCheckBoxTick(roleTask) {
+      if (roleTask) {
+        console.log("scriptId : ", roleTask.scriptId);
+        console.log("typeTaskId : ", roleTask.typeTaskId);
+        const data = {
+          scriptId: roleTask.scriptId,
+          typeTaskId: roleTask.scriptId,
+        };
+        console.log("this.typeJob : ", this.typeJob);
+        if (this.typeJob === "byMe") {
+          data.myJob = !roleTask.myJob;
+        } else if (this.typeJob === "byOther") {
+          data.assignedJob = !roleTask.assignedJob;
+        }
+        console.log("data : ", data);
+        this.$emit("click-checkbox", data);
+      }
     },
     getChecked(roleTask) {
-      if(Common.isNullOrEmpty(roleTask)) return false;
-      if(this.typeJob==="byMe") {
+      if (Common.isNullOrEmpty(roleTask)) return false;
+      if (this.typeJob === "byMe") {
         return !Common.isNullOrEmpty(roleTask.myJob) ? roleTask.myJob : false;
-      } else if (this.typeJob==="byOther") {
+      } else if (this.typeJob === "byOther") {
         return !Common.isNullOrEmpty(roleTask.assignedJob) ? roleTask.assignedJob : false;
       }
       return false;
