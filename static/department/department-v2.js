@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getAllDepartPagingV2(storeId, pageNum) {
-  let url = "https://api.gland84.io.vn:8447/gland/api-department/all?storeId="+storeId+"&pageNum="+pageNum;
+  let url = "https://api.smshub.io.vn:8447/gland/api-department/all?storeId="+storeId+"&pageNum="+pageNum;
   try {
     const response = await axios.get(url, {
       headers: {
@@ -22,7 +22,7 @@ export async function createDepartmentsAll(storeId) {
 
   return axios({
     method: 'post',
-    url: 'https://api.gland84.io.vn:8447/gland/api-department/create',
+    url: 'https://api.smshub.io.vn:8447/gland/api-department/create',
     responseType: 'json',
     data: {
       name: departmentName,

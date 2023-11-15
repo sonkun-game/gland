@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getTaskListPaging(department, pageNum,assignee, creator) {
-  let url = "https://api.gland84.io.vn:8447/gland/task-api/all?pageNum=" + pageNum;
+  let url = "https://api.smshub.io.vn:8447/gland/task-api/all?pageNum=" + pageNum;
   if(department!=null){
     url+= "&department="+department
     if(assignee!=null){
@@ -32,7 +32,7 @@ export async function createTaskForDepartment(departmentKey) {
 
   return axios({
     method: 'post',
-    url: 'https://api.gland84.io.vn:8447/Spa/task-api/create',
+    url: 'https://api.smshub.io.vn:8447/Spa/task-api/create',
     responseType: 'json',
     data: {
       name: name,

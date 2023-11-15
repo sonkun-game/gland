@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getAllMissionPagingForDepart(storeId, department) {
-  let url = "https://api.gland84.io.vn:8447/Spa/api-mission/all?pageNum=0&storeId=" + storeId+"&department="+department;
+  let url = "https://api.smshub.io.vn:8447/Spa/api-mission/all?pageNum=0&storeId=" + storeId+"&department="+department;
   try {
     const response = await axios.get(url, {
       headers: {

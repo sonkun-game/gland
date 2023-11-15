@@ -9,7 +9,7 @@ export async function createTypeJob(scriptId, jobTypeNameId) {
   
     return axios({
       method: 'post',
-      url: 'https://api.gland84.io.vn:8447/gland/api-type-task/create',
+      url: 'https://api.smshub.io.vn:8447/gland/api-type-task/create',
       responseType: 'json',
       data: {
         name: name,
@@ -30,7 +30,7 @@ export async function getAllTypeJobs(pageNum, scriptId) {
 
   if(!scriptId) return null;
   pageNum = pageNum ? pageNum : 0;
-  let url = "https://api.gland84.io.vn:8447/gland/api-type-task/all?scriptId="+scriptId+"&pageNum="+pageNum;
+  let url = "https://api.smshub.io.vn:8447/gland/api-type-task/all?scriptId="+scriptId+"&pageNum="+pageNum;
   try {
     const response = await axios.get(url, {
       headers: {

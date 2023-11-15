@@ -92,7 +92,7 @@ export default {
   methods: {
     fetchDpt() {
       if (this.typeTaskId === 0) return;
-      let url = "https://api.gland84.io.vn:8447/gland/api-department?storeId=" + this.storeId + "&typeTaskId=" + this.typeTaskId;
+      let url = "https://api.smshub.io.vn:8447/gland/api-department?storeId=" + this.storeId + "&typeTaskId=" + this.typeTaskId;
       console.log("url : " + url);
       let resp = sendGetApi(url, null);
       let path = window.location.href;
@@ -176,7 +176,7 @@ export default {
       });
     },
     enrollTaskByMe(data) {
-      let url = "https://api.gland84.io.vn:8447/gland/role-task/update";
+      let url = "https://api.smshub.io.vn:8447/gland/role-task/update";
       const response = sendPostApi(url, null, data);
       
       response.then((resp) => {

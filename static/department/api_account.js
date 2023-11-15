@@ -28,7 +28,7 @@ export async function createAccountsForDepartment(storeId, departmentKey) {
   var position = document.getElementById("editPositionValue").value;
   axios({
     method: 'post',
-    url: 'https://api.gland84.io.vn:8447/Spa/api-authen/register?storeId=' + storeId,
+    url: 'https://api.smshub.io.vn:8447/Spa/api-authen/register?storeId=' + storeId,
     responseType: 'json',
     data: {
       username: username,
@@ -51,7 +51,7 @@ export async function createAccountsForDepartment(storeId, departmentKey) {
 }
 
 export async function getAllAccountsPagingForDepartment(storeId,pageNum, department) {
-  let url = "https://api.gland84.io.vn:8447/Spa/api-account/all"+"?storeId=1&pageNum="+pageNum+"&department="+department;
+  let url = "https://api.smshub.io.vn:8447/Spa/api-account/all"+"?storeId=1&pageNum="+pageNum+"&department="+department;
   try {
     const response = await axios.get(url, {
       headers: {
