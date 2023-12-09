@@ -93,7 +93,8 @@ export default {
     fetchDpt() {
       if (this.typeTaskId === 0) return;
       let url = "https://api.smshub.io.vn:8447/gland/api-department?storeId=" + this.storeId + "&typeTaskId=" + this.typeTaskId;
-      console.log("url : " + url);
+
+      // handle get data
       let resp = sendGetApi(url, null);
       let path = window.location.href;
       let convertFeArrByMe = [];
@@ -106,7 +107,7 @@ export default {
           let checkPeople = path.includes("people?id=" + item.id);
           let checkScript = path.includes("script?id=" + item.id);
 
-          // push array
+          // add data -------------------
           convertFeArrByMe.push({
             selected: checkPeople || checkScript,
             icon: "fa-solid fa-address-card",
@@ -125,6 +126,7 @@ export default {
             subList: [],
           });
 
+          // add scripts data -----------
           if (item.scripts) {
             let i = 0;
             // item.scripts
@@ -167,37 +169,36 @@ export default {
 
           }
         });
-
-        console.log("convertFeArrByMe : ", convertFeArrByMe);
-        console.log("convertFeArrByOther : ", convertFeArrByOther);
         // set data
         this.jobModal.loadedDepartmentByMe = convertFeArrByMe;
         this.jobModal.loadedDepartmentByOther = convertFeArrByOther;
       });
     },
     enrollTaskByMe(data) {
-      let url = "https://api.smshub.io.vn:8447/gland/role-task/update";
-      const response = sendPostApi(url, null, data);
-      
-      response.then((resp) => {
-        console.log("response : " + resp);
-      });
-      // if (Common.isNullOrEmpty(data.myJob) || data.myJob === false) {
-      //   data.myJob = true;
-      // } else {
-      //   data.myJob = false;
-      // }
-      // console.log(data);
-      // Common.showSuccess("Update nhiệm vụ thành công !");
+      if (data.myJob!==undefined || data.assignedJob!==undefined) {
+        data.typeTaskId = this.typeTaskId;
+        let url = "https://api.smshub.io.vn:8447/gland/role-task/update";
+        const response = sendPostApi(url, null, data);
+        response.then((resp) => {
+          console.log(resp);
+        });
+        Common.showSuccess("Update nhiệm vụ thành công !");
+      } else {
+        Common.showError("Update nhiệm vụ thất bại !");
+      }
     },
     enrollTaskByOther(data) {
-      if (Common.isNullOrEmpty(data.assignedJob) || data.assignedJob === false) {
-        data.myJob = true;
+      if (data.myJob!==undefined || data.assignedJob!==undefined) {
+        data.typeTaskId = this.typeTaskId;
+        let url = "https://api.smshub.io.vn:8447/gland/role-task/update";
+        const response = sendPostApi(url, null, data);
+        response.then((resp) => {
+          console.log(resp);
+        });
+        Common.showSuccess("Update nhiệm vụ thành công !");
       } else {
-        data.myJob = false;
+        Common.showError("Update nhiệm vụ thất bại !");
       }
-      // console.log(data);
-      // Common.showSuccess("Update nhiệm vụ thành công !");
     }
   }
 }

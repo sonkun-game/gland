@@ -56,7 +56,6 @@ export async function createAccountsAll(storeId) {
       'Authorization': 'Bearer ' + localStorage.getItem("jwt")
     }
   }).then(function (response) {
-    console.log(response);
     alert(response.data.message);
     location.reload()
   });

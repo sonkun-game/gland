@@ -11,7 +11,7 @@
         <div v-if="item.subList !== undefined && item.subList !== null">
           <div v-for="(subItem, subIndex) in item.subList" :key="subItem.id + index">
 
-            <InputField @click-checkbox="handleCheckBoxTick(subItem.roleTask)" :inputIndex="subItem.id"
+            <InputField @click-checkbox="handleCheckBoxTick(subItem.roleTask, subItem)" :inputIndex="subItem.id"
               :label="subItem.name" :id="subItem.id" :isCheck="getChecked(subItem.roleTask)" styleClass="px-5 py-2"
               typeInput="checkbox" :isDark="theme === 'dark'" />
 
@@ -55,23 +55,28 @@ export default {
     openCollapse(id) {
       Common.toggleModal(id);
     },
-    handleCheckBoxTick(roleTask) {
+    handleCheckBoxTick(roleTask, subItem) {
+      var data = {
+        scriptId: subItem.id
+      };
+      // đã có RoleTask
       if (roleTask) {
-        console.log("scriptId : ", roleTask.scriptId);
-        console.log("typeTaskId : ", roleTask.typeTaskId);
-        const data = {
-          scriptId: roleTask.scriptId,
-          typeTaskId: roleTask.scriptId,
-        };
-        console.log("this.typeJob : ", this.typeJob);
         if (this.typeJob === "byMe") {
-          data.myJob = !roleTask.myJob;
+          roleTask.myJob = data.myJob = !roleTask.myJob;
         } else if (this.typeJob === "byOther") {
-          data.assignedJob = !roleTask.assignedJob;
+          roleTask.assignedJob = data.assignedJob = !roleTask.assignedJob;
         }
-        console.log("data : ", data);
-        this.$emit("click-checkbox", data);
       }
+      // chưa có roleTask
+      else {
+        subItem.roleTask = {};
+        if (this.typeJob === "byMe") {
+          subItem.roleTask.myJob = data.myJob = true;
+        } else if (this.typeJob === "byOther") {
+          subItem.roleTask.assignedJob = data.assignedJob = true;
+        }
+      }
+      this.$emit("click-checkbox", data);
     },
     getChecked(roleTask) {
       if (Common.isNullOrEmpty(roleTask)) return false;

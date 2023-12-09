@@ -186,12 +186,10 @@ export default {
       return 'deleteStatusConfigAction_' + id + index;
     },
     async handleChangeStatusValue(value) {
-      console.log("handleChangeStatusValue -->");
       if (value) {
         this.taskType = value;
         var responseInfo = await getAllConfigInfo(this.pageNum, this.taskType, 1);
         if (responseInfo) {
-          console.log(responseInfo.data);
           this.table.body = responseInfo.value;
           if (responseInfo.data) this.totalPage = responseInfo.data.totalPage;
           this.Tbodykey = uuidv4();

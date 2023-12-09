@@ -132,9 +132,7 @@ export default {
 
     // set theme
     let theme = localStorage.getItem("theme");
-    if (theme) {
-      console.log("theme : ", theme);
-    } else {
+    if (theme) {} else {
       localStorage.setItem('theme', 'dark')
     }
     this.theme = localStorage.getItem("theme");
@@ -151,7 +149,6 @@ export default {
       this.$store.dispatch('updateTheme', mode);
     },
     refreshMenuList() {
-      console.log("refresh menu --");
       this.$refs.menu.fetchDpt();
     },
   }

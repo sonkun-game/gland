@@ -2,8 +2,6 @@ import axios from "axios";
 
 export async function createTypeJob(scriptId, jobTypeNameId) {
 
-  console.log(scriptId);
-  console.log(jobTypeNameId);
   if(scriptId && jobTypeNameId) {
   var name = document.getElementById(jobTypeNameId).value;
   

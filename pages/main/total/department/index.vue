@@ -142,7 +142,6 @@ export default {
     },
     methods: {
         async createDepartment() {
-            console.log("createDepartment --");
             var response = await createDepartmentsAll(this.storeId);
             this.table.body = response.data.value;
             this.totalPage = response.data.totalPage;

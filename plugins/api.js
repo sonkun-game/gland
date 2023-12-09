@@ -81,7 +81,6 @@ export const sendPostApi = async function (url, header, data) {
             data: data,
             headers: dataAuthen.header
         }).then(function (response) {
-            console.log(response);
             return response;
         }).catch((error) => {
             console.error(error)
@@ -106,7 +105,6 @@ export const sendPutApi = async function (url, header) {
             responseType: 'json',
             headers: dataAuthen.header
         }).then(function (response) {
-            console.log(response);
             return response;
         }).catch((error) => {
             console.error(error)
@@ -130,7 +128,6 @@ export const sendDeleteApi = async function (url, header) {
             responseType: 'json',
             headers: dataAuthen.header
         }).then(function (response) {
-            console.log(response);
             return response;
         }).catch((error) => {
             console.error(error)

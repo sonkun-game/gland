@@ -44,7 +44,6 @@ export async function createAccountsForDepartment(storeId, departmentKey) {
       'Authorization': 'Bearer ' + localStorage.getItem("jwt")
     }
   }).then(function (response) {
-    console.log(response);
     alert(response.data.message);
     location.reload()
   });

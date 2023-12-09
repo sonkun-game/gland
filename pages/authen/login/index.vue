@@ -69,8 +69,7 @@ export default {
                 alert(response.data.message)
               } else {
                 localStorage.setItem("jwt", response.data.accessToken);
-                console.log(response);
-                window.location = "https://gland84.io.vn/main/total/staff";
+                window.location = "/main/total/staff";
 
               }
             }).catch(error => {

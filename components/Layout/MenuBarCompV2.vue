@@ -227,7 +227,6 @@ export default {
   },
   methods: {
     openMenu: () => {
-      console.log(this);
       var pos = $("#menu-side-bar").position();
       if (pos.left <= -240) {
         $("#menu-side-bar").css({ left: 0 });
