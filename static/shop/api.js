@@ -3,7 +3,7 @@ export async function getShopsFromApi(status, name) {
   console.log("getShopsFromApi is being commented !!")
   if (false) {
     try {
-      const response = await axios.get('https://api.smshub.io.vn:8447/Total/api-store/all?status=' + status + '&name=' + name, {
+      const response = await axios.get('https://api.random-otp.io.vn:8450/Total/api-store/all?status=' + status + '&name=' + name, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem("jwt")

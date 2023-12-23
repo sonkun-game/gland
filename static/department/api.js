@@ -19,7 +19,7 @@ export async function getAllDepartment(storeId) {
   }
 }
 export async function getAllDepartPaging() {
-  let url = "https://api.smshub.io.vn:8447/gland/api-department/all?storeId=1&pageNum=0";
+  let url = "https://api.random-otp.io.vn:8450/gland/api-department/all?storeId=1&pageNum=0";
   try {
     const response = await axios.get(url, {
       headers: {

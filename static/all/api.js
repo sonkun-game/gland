@@ -19,7 +19,7 @@ export async function getAllAccounts(pageNum, storeId) {
   }
 }
 export async function getAllAccountsPaging() {
-  let url = "https://api.smshub.io.vn:8447/Spa/api-account/all?storeId=1&pageNum=0";
+  let url = "https://api.random-otp.io.vn:8450/Spa/api-account/all?storeId=1&pageNum=0";
   try {
     const response = await axios.get(url, {
       headers: {
@@ -42,7 +42,7 @@ export async function createAccountsAll(storeId) {
   var email = document.getElementById("editEmailValue").value;
   axios({
     method: 'post',
-    url: 'https://api.smshub.io.vn:8447/Spa/api-authen/register?storeId=' + storeId,
+    url: 'https://api.random-otp.io.vn:8450/Spa/api-authen/register?storeId=' + storeId,
     responseType: 'json',
     data: {
       username: username,

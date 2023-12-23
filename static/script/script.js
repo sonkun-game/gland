@@ -5,7 +5,7 @@ export async function createScript(departmentId) {
 
   return axios({
     method: 'post',
-    url: 'https://api.smshub.io.vn:8447/gland/api-script/create?storeId=1',
+    url: 'https://api.random-otp.io.vn:8450/gland/api-script/create?storeId=1',
     responseType: 'json',
     data: {
       name: scriptName,
@@ -23,7 +23,7 @@ export async function editScript(id, index) {
 
   return axios({
     method: 'PUT',
-    url: 'https://api.smshub.io.vn:8447/gland/api-script/'+id,
+    url: 'https://api.random-otp.io.vn:8450/gland/api-script/'+id,
     responseType: 'json',
     data: {
       name: scriptName
@@ -36,7 +36,7 @@ export async function editScript(id, index) {
 }
 
 export async function getAllScripts(pageNum, departmentId) {
-  let url = "https://api.smshub.io.vn:8447/gland/api-script/all?departmentId="+departmentId+"&pageNum="+pageNum;
+  let url = "https://api.random-otp.io.vn:8450/gland/api-script/all?departmentId="+departmentId+"&pageNum="+pageNum;
   try {
     const response = await axios.get(url, {
       headers: {

@@ -7,7 +7,7 @@ export async function createConfigInfo(infoTypeName, infoConfigType, info_select
 
   return axios({
     method: 'post',
-    url: 'https://api.smshub.io.vn:8447/gland/config-api/create',
+    url: 'https://api.random-otp.io.vn:8450/gland/config-api/create',
     responseType: 'json',
     data: {
       name: infoTypeName,
@@ -29,7 +29,7 @@ export async function createConfigStatus(statusConfigName, statusConfigColor, st
 
   return axios({
     method: 'post',
-    url: 'https://api.smshub.io.vn:8447/gland/config-api/create',
+    url: 'https://api.random-otp.io.vn:8450/gland/config-api/create',
     responseType: 'json',
     data: {
       name: statusConfigName,
@@ -46,7 +46,7 @@ export async function createConfigStatus(statusConfigName, statusConfigColor, st
 
 export async function getAllConfigInfo(pageNum, typeTask, type) {
 
-  let url = "https://api.smshub.io.vn:8447/gland/config-api/all?typeTask="+typeTask+"&type="+type+"&pageNum="+pageNum;
+  let url = "https://api.random-otp.io.vn:8450/gland/config-api/all?typeTask="+typeTask+"&type="+type+"&pageNum="+pageNum;
   try {
     const response = await axios.get(url, {
       headers: {

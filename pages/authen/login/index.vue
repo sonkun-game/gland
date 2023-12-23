@@ -58,7 +58,7 @@ export default {
           const encodedPass = buffer.toString("base64")
             axios({
                 method: 'post',
-                url: 'https://api.smshub.io.vn:8447/gland/api-authen/signing',
+                url: 'https://api.random-otp.io.vn:8450/gland/api-authen/signing',
                 responseType: 'json',
                 data: {
                     username: this.username,

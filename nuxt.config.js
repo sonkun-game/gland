@@ -74,8 +74,8 @@ export default {
   },
 
   env: {
-    API_URL: 'https://api.smshub.io.vn:8447/Spa/',
-    API_TOTAL: 'https://api.smshub.io.vn:8447/Total/',
+    API_URL: 'https://api.random-otp.io.vn:8450/Spa/',
+    API_TOTAL: 'https://api.random-otp.io.vn:8450/Total/',
     API_JWT: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjkwOTUzNzI2LCJleHAiOjE3NTE0MzM3MjZ9.pvVOd6xKmwSYalPlO9SUyumsWJeimJaENY5X3a15wCHcqfqseImWXCE0DHRqdpMvPLX8iRUUCaUILG-iiCG6Yw'
   },
 }

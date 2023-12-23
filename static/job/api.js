@@ -4,10 +4,10 @@ export async function createTypeJob(scriptId, jobTypeNameId) {
 
   if(scriptId && jobTypeNameId) {
   var name = document.getElementById(jobTypeNameId).value;
-  
+
     return axios({
       method: 'post',
-      url: 'https://api.smshub.io.vn:8447/gland/api-type-task/create',
+      url: 'https://api.random-otp.io.vn:8450/gland/api-type-task/create',
       responseType: 'json',
       data: {
         name: name,
@@ -21,14 +21,14 @@ export async function createTypeJob(scriptId, jobTypeNameId) {
   } else {
     console.error(`${jobTypeNameId} or ${scriptId}  is not defined !`);
   }
-  
+
 }
 
 export async function getAllTypeJobs(pageNum, scriptId) {
 
   if(!scriptId) return null;
   pageNum = pageNum ? pageNum : 0;
-  let url = "https://api.smshub.io.vn:8447/gland/api-type-task/all?scriptId="+scriptId+"&pageNum="+pageNum;
+  let url = "https://api.random-otp.io.vn:8450/gland/api-type-task/all?scriptId="+scriptId+"&pageNum="+pageNum;
   try {
     const response = await axios.get(url, {
       headers: {

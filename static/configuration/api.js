@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export async function getAllConfigPagingForDepart(department, pageNum, type) {
-  let url = "https://api.smshub.io.vn:8447/Spa/config-api/all?pageNum=" + pageNum + "&department=" + department;
+  let url = "https://api.random-otp.io.vn:8450/Spa/config-api/all?pageNum=" + pageNum + "&department=" + department;
   if (type != null) url += "&type=" + type;
   try {
     const response = await axios.get(url, {
@@ -25,7 +25,7 @@ export async function createConfigForDepartment(type, departmentKey) {
 
   return axios({
     method: 'post',
-    url: 'https://api.smshub.io.vn:8447/Spa/config-api/create',
+    url: 'https://api.random-otp.io.vn:8450/Spa/config-api/create',
     responseType: 'json',
     data: {
       name: name,

@@ -253,7 +253,7 @@ export default {
         return false
     },
     fetchDpt() {
-      let url = "https://api.smshub.io.vn:8447/gland/api-department/all?storeId=" + this.storeId + "&pageNum=" + this.pageNum;
+      let url = "https://api.random-otp.io.vn:8450/gland/api-department/all?storeId=" + this.storeId + "&pageNum=" + this.pageNum;
       let resp = sendGetApi(url, null);
       let path = this.$route.path;
 
