@@ -92,7 +92,7 @@ export default {
   methods: {
     fetchDpt() {
       if (this.typeTaskId === 0) return;
-      let url = "https://api.smshub.io.vn:8447/gland/api-department?storeId=" + this.storeId + "&typeTaskId=" + this.typeTaskId;
+      let url = "https://api.random-otp.io.vn:8450/gland/api-department?storeId=" + this.storeId + "&typeTaskId=" + this.typeTaskId;
 
       // handle get data
       let resp = sendGetApi(url, null);
@@ -177,7 +177,7 @@ export default {
     enrollTaskByMe(data) {
       if (data.myJob!==undefined || data.assignedJob!==undefined) {
         data.typeTaskId = this.typeTaskId;
-        let url = "https://api.smshub.io.vn:8447/gland/role-task/update";
+        let url = "https://api.random-otp.io.vn:8450/gland/role-task/update";
         const response = sendPostApi(url, null, data);
         response.then((resp) => {
           console.log(resp);
@@ -190,7 +190,7 @@ export default {
     enrollTaskByOther(data) {
       if (data.myJob!==undefined || data.assignedJob!==undefined) {
         data.typeTaskId = this.typeTaskId;
-        let url = "https://api.smshub.io.vn:8447/gland/role-task/update";
+        let url = "https://api.random-otp.io.vn:8450/gland/role-task/update";
         const response = sendPostApi(url, null, data);
         response.then((resp) => {
           console.log(resp);
